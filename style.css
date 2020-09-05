@@ -1,0 +1,54 @@
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0;
+  width: 125px;
+  height: 175px;
+  border-spacing: 20px;
+}
+
+th {
+    position: relative;
+}
+
+input[type=checkbox] {
+    width: 125px;
+    height: 175px;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+th input, th img {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+th input {
+    z-index: 2;
+    appearance: none;
+    
+}
+
+th input:hover {
+    background-color: rgba(50,50,50,0.5);
+}
+
+th input:active {
+    background-color: rgba(250,250,250,0.5);
+}
+
+th input:focus {
+    border-color: yellow;
+}
+
+th input:checked {
+    background-image: url(https://www.iconspng.com/uploads/food-bean-plain/food-bean-plain.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
