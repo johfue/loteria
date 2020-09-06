@@ -4,15 +4,16 @@ var io = require('socket.io')(http);
 var path = require('path');
 var express = express();
 
-express.use(express.static(path.join(__dirname, 'public')));
+// express.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
-express.get('/', function(req, res){
-    res.render('home.html');
-});
-
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html');
+// express.get('/', function(req, res){
+//     res.render('home.html');
 // });
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
 io.on('connection', (socket) => {
   console.log('a user connected');
