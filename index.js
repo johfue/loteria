@@ -7,7 +7,7 @@ var express = express();
 express.use(express.static(path.join(__dirname, 'public')));
 
 express.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+    res.render('home.html');
 });
 
 // app.get('/', (req, res) => {
