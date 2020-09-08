@@ -1,18 +1,15 @@
+
+var express2 = require('express')();
 var express = require('express');
-var app = express();
-var http = require('http').createServer(app);
+//var app = express2;
+var http = require('http').Server(express2);
 var io = require('socket.io')(http);
-// var path = require('path');
 
-// app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static('public'));
-// app.use(express.static(path.resolve(__dirname, 'public')));
+express2.use(express.static('public'));
 
-
-app.get('/', function(req,res){
-    res.sendFile(__dirname + '/index.html');
+express2.get('/', function(req, res) {
+    res.sendfile(__dirname + '/public/index.html');
 });
-
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -24,6 +21,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(3000, () => {
-  console.log('listening on *:3000');
+http.listen(3000, function() {
+   console.log('listening on localhost:3000');
 });
