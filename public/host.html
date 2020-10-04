@@ -1,0 +1,43 @@
+<div id="gridWrap">
+
+<form id="hostConsole">
+    <img src="images/blank.png" id="currentCard">
+    <button id="deck"  disabled><img src="images/CAAR.jpeg"><span>Draw</span></button>
+    <div id="cardReview" class="invisible">
+        <button id="closeReview">Close</button>
+        <ul id="cardReviewList"></ul>
+    </div>
+    <div id="allegedWinner" class="invisible">
+        <button id="confirm" value="newGame">New Game</button>
+        <button id="deny" value="keepPlaying">Keep Playing</button>
+        <div id="boardHold"></div>
+    </div>
+</form>
+
+<form id="gameSettings">
+    <h2>Room: <span id="roomNumber"></span></h2>
+    <h3>Pick a Rule</h3>
+    <div><input type="radio" id="win1" name="winCondition" value="row">
+    <label for="row">Rows</label>
+    </div>
+    <div><input type="radio" id="Any Column" name="winCondition" value="column">
+    <label for="column">Columns</label>
+    </div>
+    <div><input type="radio" id="win3" name="winCondition" value="diagonal">
+    <label for="diagonal">Diagonals</label>
+    </div>
+    <div><input type="radio" id="win4" name="winCondition" value="corner">
+    <label for="diagonal">Corners</label>
+    </div>
+    <div><input type="radio" id="win5" name="winCondition" value="center">
+    <label for="center">Center</label>
+    </div>
+    <div><input type="radio" id="win6" name="winCondition" value="blackOut">
+    <label for="center">Black Out</label>
+    </div>
+    <button type="submit" id="start" disabled>Start Game</button>
+</form>
+<div id="playerGraph">
+    <h2>Players</h2>
+</div>
+</div>

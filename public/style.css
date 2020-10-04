@@ -1,54 +1,592 @@
-table, th, td {
+@font-face {
+    font-family: 'lobster';
+    src: url('fonts/lobster_1.3-webfont.woff2') format('woff2'),
+         url('fonts/lobster_1.3-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'poppinsblack';
+    src: url('fonts/poppins-black-webfont.woff2') format('woff2'),
+         url('fonts/poppins-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'poppinsbold';
+    src: url('fonts/poppins-bold-webfont.woff2') format('woff2'),
+         url('fonts/poppins-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'poppins';
+    src: url('fonts/poppins-medium-webfont.woff2') format('woff2'),
+         url('fonts/poppins-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    background-color: #F2D750;
+    margin: 0;
+    padding: 0;
+    background-image: url(images/background.png);
+    /*position: relative;*/
+    /*overflow: hidden;*/
+}
+
+/*body::before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 200%;*/
+/*    height: 200%;*/
+/*    top: -50%;*/
+/*    left: -50%;*/
+/*    z-index: -1;*/
+/*    transform: rotate(30deg);*/
+/*}*/
+
+h1, h2, h3, p, li, label, input, button {
+    font-family: poppins;
+    color: #111155;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    background-color: #D96B2B;
+    padding: 0.5vh 0;
+    margin: 0;
+    border-bottom: 8px solid black;
+    font-family: Lobster;
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    display: inline-block;
+}
+
+h2, h3 {
+    font-family: poppinsblack;
+}
+
+button, input[type=text] {
+    border: 8px solid #111155;
+    height: 60px;
+    font-size: 24px;
+}
+
+.invisible {
+    display: none;
+}
+
+#popItIn {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#popItIn form > span {
+    margin: 5em auto 0;
+    display: block;
+    width: 594px;
+    margin-bottom: 2em;
+}
+#host, #player, #roomSearch {
+    font-size: 36px;
+}
+#player, #roomSearch {
+    box-sizing: border-box;
+    width: 295px;
+    padding: 15px 25px;
+    display: inline-block;
+}
+
+#host {
+    margin: 0 auto;
+    display: block;
+    width: 590px;
+}
+
+#player, #deny, #deck span {
+    background-color: #A2DED6;
+}
+
+#announceWin {
+    width: 57vmin;
+    margin: 0 auto;
+}
+
+#host, #start, #confirm, #newBoard, #announceWin {
+    background-color: #97BF3F;
+}
+
+#host:hover, #start:hover, #confirm:hover, #newBoard:hover, #announceWin:hover {
+    background-color: #A8DF4F;
+}
+#player:hover, #deny:hover, #deck:hover span {
+    background-color: #B3EFE7;
+}
+
+#gridWrap button:disabled, #deck:disabled span {
+    background-color: #dddddd;
+    border-color: #999999;
+    color: #999999;
+}
+
+#gridWrap {
+    display: grid;
+    grid-template-rows: 15vh 48vh 18vh;
+    grid-gap: 1em;
+    margin-top: 0.5em;
+    height: 85vh;
+}
+
+#gameSettings {
+    grid-row: 1/2;
+}
+#hostConsole, #playerGraph, #gameSettings, #gameInfo, #playerGame {
+    grid-column: 1/2;
+    display: grid;
+}
+
+#hostConsole {
+    grid-row: 2/3;
+    justify-items: center;
+    position: relative;
+}
+#playerGraph {
+    grid-row: 3/4;
+}
+
+#gameSettings h3, #playerGraph h3, #gameSettings h2, #playerGraph h2 {
+    grid-column: 1/2;
+    text-align: left;
+}
+
+#start {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    display: block;
+}
+
+#gameInfo {
+    grid-template-columns: min-content min-content 1fr min-content 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+#gameInfo h3 {
+    grid-column: 2/3;
+}
+#gameInfo h3:nth-child(4) {
+    grid-column: 4/5;
+}
+#gameInfo h2 {
+    grid-row: 1/3;
+    grid-column: 1/2;
+}
+#deck, #currentCard, #deck img, #winConditionInfo {
+    height: 18vmin;
+    width: 14vmin;
+}
+
+#board th, #board td {
+  padding: 0;
+  width: 9vh;
+  height: 10vh;
+  border-spacing: 20px;
+}
+
+#newBoard {
+    height: 60px;
+    width: 100px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+#boardSelect h2 {
+    display: none;
+}
+#playerGraph h1 {
+    grid-column: 1/6;
+}
+
+#playerGraph td {
+    background-color: #A2DED6;
+    height: 20px;
+    width: 25px;
+    position: relative;
+}
+
+@media(min-width:845px) {
+    #boardSelect h2 {
+        display: block;
+    }
+    button, input[type=text] {
+        height: 75px;
+    }
+    #gridWrap {
+        grid-template-rows: 1fr;
+        grid-template-columns: minmax(min-content, 1fr) 3fr minmax(min-content, 2fr);
+        grid-gap: 2em;
+        margin-top: 2em;
+    }
+    #gameSettings {
+        grid-column: 1/2;
+    }
+    #hostConsole, #playerGraph, #gameSettings, #gameInfo, #playerGame {
+        grid-row: 1/2;
+        display: grid;
+    }
+    
+    #hostConsole, #playerGame {
+        grid-column: 2/3;
+    }
+    #playerGraph {
+        grid-column: 3/4;
+    }
+    #gameSettings h3, #playerGraph h3, #gameSettings h2, #playerGraph h2 {
+        grid-column: span 2;
+        text-align: initial;
+    }
+    #gameInfo {
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+    }
+    #gameInfo h3, #gameInfo h3:nth-child(4),#gameInfo h2 {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    #start {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    #deck, #currentCard, #deck img, #winConditionInfo {
+        height: 35vmin;
+        width: 25vmin;
+    }
+    #board th, #board td {
+      width: 13vmin;
+      height: 18vmin;
+    }
+    #newBoard {
+        margin-bottom: 20px;
+        height: 75px;
+    }
+    #playerGraph td {
+        height: 50px;
+    }
+}
+
+#gameInfo, #gameSettings, #playerGame, #playerGraph, #hostConsole {
+    box-sizing: border-box;
+    background-color: #D9984A;
+    padding: 16px;
+    vertical-align: top;
+    border: 5px solid black;
+    overflow-y: scroll;
+}
+
+#playerGraph.player table:nth-child(2) {
+    display: none;
+}
+#gameSettings, #playerGraph {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: max-content;
+    grid-gap: 12px
+}
+
+#playerGame {
+    position: relative;
+}
+#playerGraph table {
+    position: relative;
+}
+
+#playerGraph input[type=checkbox] {
+    appearance: none;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#playerGraph input:checked {
+    background-color: #D96B2B;
+}
+
+table, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-th, td {
-  padding: 0;
-  width: 125px;
-  height: 175px;
-  border-spacing: 20px;
+#board {
+    margin: 0 auto;
 }
 
-th {
+#board td {
     position: relative;
 }
 
-input[type=checkbox] {
-    width: 125px;
-    height: 175px;
+#board input[type=checkbox] {
     padding: 0;
     margin: 0;
     border: none;
 }
 
-th input, th img {
+#board td input, #board td img {
     position: absolute;
     top: 0;
     right: 0;
+    width: 100%;
+    height: 100%;
 }
 
-th input {
+#board td input {
     z-index: 2;
     appearance: none;
     
 }
 
-th input:hover {
+#board td input:hover, #boardSelectOptions li > input:hover {
     background-color: rgba(50,50,50,0.5);
 }
 
-th input:active {
+#board td input:active, #boardSelectOptions li > input:active {
     background-color: rgba(250,250,250,0.5);
 }
 
-th input:focus {
+#board td input:focus, #boardSelectOptions li > input:focus {
     border-color: yellow;
 }
 
-th input:checked {
-    background-image: url(https://www.iconspng.com/uploads/food-bean-plain/food-bean-plain.png);
-    background-size: contain;
+#board td input:checked, #allegedWinner input:checked, #boardSelectOptions li > input:checked {
+    background-size: 65%;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+#board td input:checked, #allegedWinner input:checked {
+    background-image: url(images/bean.png);
+}
+
+#boardSelectOptions li > input:checked {
+    background-image: url(images/check.png);
+}
+
+#boardSelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: antiquewhite;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+#deck {
+    display: inline-block;
+    position: relative;
+    margin-top: 70px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);
+    bottom: 54px;
+}
+
+#deck img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#deck span {
+    color: #111155;
+    font-size: 36px;
+    position: relative;
+    display: inline-block;
+    padding: 5vmin;
+    border: 8px solid #111155;
+    box-sizing: border-box;
+}
+
+#deck:active span {
+    background-color: #A4FFF8;
+}
+
+#gameSettings input{
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 140px;
+    width: 100px;
+    appearance: none;
+    display: block;
+}
+
+#gameSettings input[value=row]{
+    background-image: url(images/row.png);
+}
+#gameSettings input[value=column]{
+    background-image: url(images/column.png);
+}
+
+#gameSettings input[value=diagonal]{
+    background-image: url(images/diagonal.png);
+}
+#gameSettings input[value=corner]{
+    background-image: url(images/corner.png);
+}
+#gameSettings input[value=center]{
+    background-image: url(images/center.png);
+}
+#gameSettings input[value=blackOut]{
+    background-image: url(images/blackOut.png);
+}
+#gameSettings input:checked {
+    border: 3px solid green;
+}
+
+#gameSettings input:hover {
+    border: 3px solid blue;
+}
+
+#gameSettings input:disabled:hover {
+    border: none;
+}
+
+#gameSettings label {
+    padding-left: 10px;
+}
+
+#cardReview {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+#cardReview ul {
+    width: max-content;
+}
+
+#cardReview li {
+    display: inline-block;
+}
+
+
+#cardReview li img {
+    height: 40vmin;
+}
+
+#closeReview {
+    position: absolute;
+}
+
+#boardSelectOptions td img, #allegedWinner td img{
+    height: 100%;
+    width: 100%;
+}
+
+#boardSelectOptions td, #allegedWinner td {
+    position: relative;
+    height: 60px;
+    width: 50px;
+}
+
+#boardSelectOptions {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 12px;
+    overflow-y: scroll;
+    height: 82%;
+    padding: 0;
+    width: 90%;
+    margin: 0 auto;
+}
+
+td input, td img {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#boardSelectOptions td input, #allegedWinner td input {
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    display: block;
+    z-index: 2;
+}
+
+#boardSelectOptions li, #allegedWinner li {
+    position: relative;
+}
+
+#boardSelectOptions li > input, #allegedWinner li > input {
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+}
+
+#allegedWinner {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 52%;
+    background-color: antiquewhite;
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+#allegedWinner table {
+    margin: 0 auto;
+}
+
+#confirm, #deny {
+    
+}
+
+.winnerGlow {
+    border: 5px solid white;
+}
+
+.winnerGlow:hover {
+    background-color: white;
+}
+
+#playerGraph table.winnerGlow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url(images/loteria.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+}
+
+.landing {
+    max-width: 80vw;
+}
+
+#host, #player, #roomSearch {
+    height: 100px;
 }

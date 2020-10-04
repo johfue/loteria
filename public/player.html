@@ -1,0 +1,47 @@
+<div id="gridWrap">
+<div id="gameInfo">
+    <h2>Room: <span id="roomNumber"></span></h2>
+    <h3>Current Card</h3>
+    <img id="currentCard" src="images/blank.png">
+    <h3>How to win</h3>
+    <img id="winConditionInfo" src="images/blank.png">
+</div>
+<form id="playerGame">
+    <table id="board">
+        <tr>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+            <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
+        </tr>
+    </table>
+    <div id="boardSelect">
+    <h2>Choose your board</h2>
+    <button id="newBoard" disabled="true">Select</button>
+    
+    <ul id="boardSelectOptions"></ul>
+    </div>
+    <button type="submit" id="announceWin">Loteria!</button>
+    </form>
+    <div id="playerGraph" class="player">
+        <h2>Players</h2>
+    </div>
+</div>
