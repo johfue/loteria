@@ -61,7 +61,7 @@
 }
 
 body {
-    background-color: var(--neutral-300);
+    background-color: var(--neutral-500);
     margin: 0;
     padding: 0;
     /*background-image: url(images/background.png);*/
@@ -82,7 +82,7 @@ body {
 
 h1, h2, h3, p, li, label, input, button {
     font-family: poppins;
-    color: var(--neutral-200);
+    color: var(--neutral-100);
     margin: 0;
 }
 
@@ -106,7 +106,7 @@ h2, h3 {
 }
 
 button, input[type=text] {
-    border: 8px solid var(--neutral-200);
+    border: 8px solid var(--neutral-100);
     height: 60px;
     font-size: 24px;
 }
@@ -437,12 +437,12 @@ table, td {
 }
 
 #deck span {
-    color: var(--neutral-200);
+    color: var(--neutral-100);
     font-size: 36px;
     position: relative;
     display: inline-block;
     padding: 5vmin;
-    border: 8px solid var(--neutral-200);
+    border: 8px solid var(--neutral-100);
     box-sizing: border-box;
 }
 
