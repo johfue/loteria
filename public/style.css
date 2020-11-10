@@ -121,16 +121,13 @@ button {
 }
 
 #popItIn > form {
-    display: grid;
+display: grid;
     grid-template-columns: 1fr 1fr;
+    width: min-content;
+    margin: 5em auto 0;
+    grid-gap: 1em;
 }
 
-/*#popItIn form > span {*/
-/*    margin: 5em auto 0;*/
-/*    display: block;*/
-/*    width: 594px;*/
-/*    margin-bottom: 2em;*/
-/*}*/
 #host, #player, #roomSearch {
     font-size: 2em;
 }
@@ -144,8 +141,7 @@ button {
 #host {
     margin: 0 auto;
     display: block;
-    width: 590px;
-    grid-row: 2
+    grid-column: span 2
 }
 
 #player, #deny, #deck span {
