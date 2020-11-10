@@ -131,9 +131,10 @@ button {
 #host, #player, #roomSearch {
     font-size: 2em;
 }
+
 #player, #roomSearch {
     box-sizing: border-box;
-    width: 295px;
+    width: auto;
     padding: 15px 25px;
     display: inline-block;
 }
@@ -141,13 +142,16 @@ button {
 #host {
     margin: 0 auto;
     display: block;
-    width: 590px;
+    width: auto;
     grid-column: span 1;
 }
 
 @media(min-width:760px) {
     #popItIn > form {
         grid-template-columns: 1fr 1fr;
+    }
+    #player, #roomSearch {
+        width: 295px;
     }
     #host {
         width: calc(590px + 1rem);
