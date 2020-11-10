@@ -121,8 +121,8 @@ button {
 }
 
 #popItIn > form {
-display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr;
     width: min-content;
     margin: 5em auto 0;
     grid-gap: 1rem;
@@ -141,8 +141,18 @@ display: grid;
 #host {
     margin: 0 auto;
     display: block;
-    width: calc(590px + 1rem);
-    grid-column: span 2
+    width: 590px;
+    grid-column: span 1;
+}
+
+@media(min-width:760px) {
+    #popItIn > form {
+        grid-template-columns: 1fr 1fr;
+    }
+    #host {
+        width: calc(590px + 1rem);
+        grid-column: span 2;
+    }
 }
 
 #player, #deny, #deck span {
