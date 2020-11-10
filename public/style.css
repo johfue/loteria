@@ -142,7 +142,7 @@ button {
 #host {
     margin: 0 auto;
     display: block;
-    width: auto;
+    width: 100%;
     grid-column: span 1;
 }
 
