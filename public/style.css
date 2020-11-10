@@ -31,11 +31,40 @@
 
 }
 
+:root {
+    --primary-base: #FFE464;
+    --primary-light: #FFF3C0;
+    --primary-dark-: #FFD41D;
+    --secondary-base: #FFC0C4;
+    --secondary-light: #FFE6EA;
+    --secondary-dark: #EF8B97;
+    --confirm-base: #86AC3B;
+    --confirm-light: #DFE87F;
+    --confirm-dark: #447A11;
+    --confirm-disabled: #D6D6B2;
+    --action-base: #86B9C9;
+    --action-light: #D1EDDC;
+    --action-dark: #3F88A8;
+    --action-disabled: #D4DDD7;
+    --deny-base: #FA5A32;
+    --deny-light: #FF8A50;
+    --deny-dark: #CC1F38;
+    --deny-disabled: #EFD3CB;
+    --accent-base: #F9A140;
+    --accent-light: #FFC392;
+    --neutral-100: #534537;
+    --neutral-200: #6E634E;
+    --neutral-300: #AFA0A5;
+    --neutral-500: #F0B96F;
+    --neutral-700: #FDF6E4;
+    --neutral-900: #FAFBFC;
+}
+
 body {
-    background-color: #F2D750;
+    background-color: --neutral-300;
     margin: 0;
     padding: 0;
-    background-image: url(images/background.png);
+    /*background-image: url(images/background.png);*/
     /*position: relative;*/
     /*overflow: hidden;*/
 }
@@ -53,13 +82,13 @@ body {
 
 h1, h2, h3, p, li, label, input, button {
     font-family: poppins;
-    color: #111155;
+    color: --neutral-200;
     margin: 0;
 }
 
 h1 {
     text-align: center;
-    background-color: #D96B2B;
+    background-color: --primary-base;
     padding: 0.5vh 0;
     margin: 0;
     border-bottom: 8px solid black;
@@ -77,7 +106,7 @@ h2, h3 {
 }
 
 button, input[type=text] {
-    border: 8px solid #111155;
+    border: 8px solid --neutral-200;
     height: 60px;
     font-size: 24px;
 }
@@ -114,7 +143,7 @@ button, input[type=text] {
 }
 
 #player, #deny, #deck span {
-    background-color: #A2DED6;
+    background-color: --secondary-base;
 }
 
 #announceWin {
@@ -123,14 +152,14 @@ button, input[type=text] {
 }
 
 #host, #start, #confirm, #newBoard, #announceWin {
-    background-color: #97BF3F;
+    background-color: --confirm-base;
 }
 
 #host:hover, #start:hover, #confirm:hover, #newBoard:hover, #announceWin:hover {
-    background-color: #A8DF4F;
+    background-color: --confirm-light;
 }
 #player:hover, #deny:hover, #deck:hover span {
-    background-color: #B3EFE7;
+    background-color: -action-light;
 }
 
 #gridWrap button:disabled, #deck:disabled span {
@@ -216,7 +245,7 @@ button, input[type=text] {
 }
 
 #playerGraph td {
-    background-color: #A2DED6;
+    background-color: --secondary-base;
     height: 20px;
     width: 25px;
     position: relative;
@@ -284,7 +313,7 @@ button, input[type=text] {
 
 #gameInfo, #gameSettings, #playerGame, #playerGraph, #hostConsole {
     box-sizing: border-box;
-    background-color: #D9984A;
+    background-color: --neutral-500;
     padding: 16px;
     vertical-align: top;
     border: 5px solid black;
@@ -317,7 +346,7 @@ button, input[type=text] {
 }
 
 #playerGraph input:checked {
-    background-color: #D96B2B;
+    background-color: --secondary-dark;
 }
 
 table, td {
@@ -408,12 +437,12 @@ table, td {
 }
 
 #deck span {
-    color: #111155;
+    color: --neutral-200;
     font-size: 36px;
     position: relative;
     display: inline-block;
     padding: 5vmin;
-    border: 8px solid #111155;
+    border: 8px solid --neutral-200;
     box-sizing: border-box;
 }
 
