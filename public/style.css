@@ -125,7 +125,7 @@ display: grid;
     grid-template-columns: 1fr 1fr;
     width: min-content;
     margin: 5em auto 0;
-    grid-gap: 1em;
+    grid-gap: 1rem;
 }
 
 #host, #player, #roomSearch {
@@ -141,6 +141,7 @@ display: grid;
 #host {
     margin: 0 auto;
     display: block;
+    width: calc(590px + 1rem);
     grid-column: span 2
 }
 
