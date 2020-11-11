@@ -117,9 +117,12 @@ button:before {
   position: absolute;
   z-index: -1;
   height: calc(100% + 24px);
-  height: calc(100% + 24px);
-  top: 12px;
-  left: 12px;
+  width: calc(100% + 24px);
+  top: -12px;
+  left: -12px;
+}
+
+button:before, button:hover:before, button:active:before, button:disabled:before {
   background-color: inherit;
 }
 
@@ -176,17 +179,17 @@ button:before {
     margin: 0 auto;
 }
 
-.primaryBtn, .primaryBtn:before {
+.primaryBtn {
     background-color: var(--confirm-base);
 }
 
-.primaryBtn:hover, .primaryBtn:hover:before {
+.primaryBtn:hover{
     background-color: var(--confirm-light);
 }
-.primaryBtn:active, .primaryBtn:active:before {
+.primaryBtn:active {
     background-color: var(--confirm-dark);
 }
-.secondaryBtn, .secondaryBtn:before {
+.secondaryBtn {
     background-color: var(--action-base);
 }
 .secondaryBtn:hover, .secondaryBtn:hover span {
