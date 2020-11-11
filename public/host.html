@@ -2,14 +2,14 @@
 
 <form id="hostConsole">
     <img src="images/blank.png" id="currentCard">
-    <button id="deck"  disabled><img src="images/CAAR.jpeg"><span>Draw</span></button>
+    <button class="secondaryBtn" id="deck"  disabled><img src="images/CAAR.jpeg"><span>Draw</span></button>
     <div id="cardReview" class="invisible">
-        <button id="closeReview">Close</button>
+        <button class="denyBtn" id="closeReview">Close</button>
         <ul id="cardReviewList"></ul>
     </div>
     <div id="allegedWinner" class="invisible">
-        <button id="confirm" value="newGame">New Game</button>
-        <button id="deny" value="keepPlaying">Keep Playing</button>
+        <button class="primaryBtn" id="confirm" value="newGame">New Game</button>
+        <button class="denyBtn" id="deny" value="keepPlaying">Keep Playing</button>
         <div id="boardHold"></div>
     </div>
 </form>
@@ -35,7 +35,7 @@
     <div><input type="radio" id="win6" name="winCondition" value="blackOut">
     <label for="center">Black Out</label>
     </div>
-    <button type="submit" id="start" disabled>Start Game</button>
+    <button type="submit" class="primaryBtn" id="start" disabled>Start Game</button>
 </form>
 <div id="playerGraph">
     <h2>Players</h2>

@@ -109,6 +109,20 @@ button {
     border: 6px dashed var(--neutral-100);
     height: 60px;
     font-size: 24px;
+    position: relative;
+}
+
+button:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  height: calc(100% + 12px);
+  height: calc(100% + 12px);
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background-color: inherit;
 }
 
 .invisible {
@@ -168,20 +182,23 @@ button {
     margin: 0 auto;
 }
 
-#host, #start, #confirm, #newBoard, #announceWin {
+.primaryBtn, .primaryBtn:before {
     background-color: var(--confirm-base);
 }
 
-#host:hover, #start:hover, #confirm:hover, #newBoard:hover, #announceWin:hover {
+.primaryBtn:hover, .primaryBtn:hover:before {
     background-color: var(--confirm-light);
 }
-#host:active, #start:active, #confirm:active, #newBoard:active, #announceWin:active {
+.primaryBtn:active, .primaryBtn:active:before {
     background-color: var(--confirm-dark);
 }
-#player:hover, #deny:hover, #deck:hover span {
+.secondaryBtn, .secondaryBtn:before {
+    background-color: var(--action-base);
+}
+.secondaryBtn:hover, .secondaryBtn:hover span {
     background-color: var(--action-light);
 }
-#player:active, #deny:active, #deck:active span {
+.secondaryBtn:active, .secondaryBtn:active span {
     background-color: var(--action-dark);
 }
 
