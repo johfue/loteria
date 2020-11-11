@@ -112,18 +112,18 @@ button {
     position: relative;
 }
 
-button:before {
-  content: " ";
-  position: absolute;
-  z-index: -1;
-  height: calc(100% + 12px);
-  height: calc(100% + 12px);
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  background-color: inherit;
-}
+/*button:before {*/
+/*  content: " ";*/
+/*  position: absolute;*/
+/*  z-index: -1;*/
+/*  height: calc(100% + 12px);*/
+/*  height: calc(100% + 12px);*/
+/*  top: 5px;*/
+/*  left: 5px;*/
+/*  right: 5px;*/
+/*  bottom: 5px;*/
+/*  background-color: inherit;*/
+/*}*/
 
 .invisible {
     display: none;
