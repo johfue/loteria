@@ -173,10 +173,6 @@ button {
     }
 }
 
-#player, #deny, #deck span {
-    background-color: var(--action-base);
-}
-
 #announceWin {
     width: 57vmin;
     margin: 0 auto;
