@@ -99,7 +99,8 @@ h1 {
 h1:before {
     content: "";
     position: absolute;
-    height: calc(100%+12px);
+    height: calc(100% + 12px);
+    width: 100%;
     top: 0;
     left: 0;
     background-color: inherit;
@@ -193,14 +194,14 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 .primaryBtn {
     background-color: var(--confirm-base);
 }
-
 .primaryBtn:hover{
     background-color: var(--confirm-light);
 }
 .primaryBtn:active {
     background-color: var(--confirm-dark);
 }
-.secondaryBtn {
+
+.secondaryBtn, .secondaryBtn span {
     background-color: var(--action-base);
 }
 .secondaryBtn:hover, .secondaryBtn:hover span {
@@ -209,6 +210,18 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 .secondaryBtn:active, .secondaryBtn:active span {
     background-color: var(--action-dark);
 }
+
+.denyBtn {
+    background-color: var(--deny-base);
+}
+
+.denyBtn:hover{
+    background-color: var(--deny-light);
+}
+.denyBtn:active {
+    background-color: var(--deny-dark);
+}
+
 
 #gridWrap button:disabled, #deck:disabled span {
     background-color: #dddddd;
@@ -492,10 +505,6 @@ table, td {
     padding: 5vmin;
     border: 8px solid var(--neutral-100);
     box-sizing: border-box;
-}
-
-#deck:active span {
-    background-color: #A4FFF8;
 }
 
 #gameSettings input{
