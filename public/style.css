@@ -328,21 +328,11 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         height: 75px;
     }
     #gridWrap {
-        grid-template-rows: 1fr;
-        grid-template-columns: minmax(min-content, 1fr) 3fr minmax(min-content, 2fr);
         grid-gap: 2em;
         margin-top: 2em;
     }
     #hostConsole, #playerGraph, #gameInfo, #playerGame {
-        grid-row: 1/2;
         display: grid;
-    }
-    
-    #hostConsole, #playerGame {
-        grid-column: 2/3;
-    }
-    #playerGraph {
-        grid-column: 3/4;
     }
     #playerGraph h3, #playerGraph h2 {
         grid-column: span 2;
