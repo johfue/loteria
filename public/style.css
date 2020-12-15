@@ -233,7 +233,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 .gridWrap-host {
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .gridWrap-player {
@@ -261,7 +261,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     position: relative;
-    grid-row: 2/3;
+    grid-row: 3/4;
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
