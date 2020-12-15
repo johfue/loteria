@@ -138,10 +138,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
   background-color: inherit;
 }
 
-.invisible {
-    display: none;
-}
-
 #popItIn {
     width: 90%;
     margin: 0 auto;
@@ -244,18 +240,28 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-template-rows: 15vh 48vh 18vh;
 }
 
-
 .gameSettings {
     display: grid;
+    margin: 0 auto;
+    height: auto;
+    width: 85vw;
+    padding: 1em;
+    position: absolute;
+    grid-template-rows: max-content 1fr max-content;
+    grid-template-columns: auto;
 }
+
 #gameInfo, #playerGame {
     grid-column: 1/2;
     display: grid;
 }
 
 #hostConsole {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-items: center;
     position: relative;
+    grid-row: 2/3;
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
@@ -327,7 +333,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         grid-gap: 2em;
         margin-top: 2em;
     }
-    #hostConsole, #playerGraph, #gameInfo, #playerGame {
+    #playerGraph, #gameInfo, #playerGame {
         display: grid;
     }
     #playerGraph h3, #playerGraph h2 {
@@ -666,4 +672,8 @@ td input, td img {
 
 #host, #player, #roomSearch {
     height: 100px;
+}
+
+.invisible {
+    display: none;
 }
