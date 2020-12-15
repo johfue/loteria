@@ -245,21 +245,17 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 
-#gameSettings {
+.gameSettings {
     display: grid;
 }
-#hostConsole, #playerGraph, #gameInfo, #playerGame {
+#gameInfo, #playerGame {
     grid-column: 1/2;
     display: grid;
 }
 
 #hostConsole {
-    grid-row: 2/3;
     justify-items: center;
     position: relative;
-}
-#playerGraph {
-    grid-row: 3/4;
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
