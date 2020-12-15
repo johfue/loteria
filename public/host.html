@@ -1,4 +1,4 @@
-<div id="gridWrap">
+<div id="gridWrap" class="gridWrap-host">
 
 <form id="hostConsole">
     <img src="images/blank.png" id="currentCard">
@@ -15,8 +15,7 @@
 </form>
 
 <form id="gameSettings">
-    <h2>Room: <span id="roomNumber"></span></h2>
-    <h3>Pick a Rule</h3>
+    <h3>Choose a Goal</h3>
     <div><input type="radio" id="win1" name="winCondition" value="row">
     <label for="row">Rows</label>
     </div>
@@ -38,6 +37,11 @@
     <button type="submit" class="primaryBtn" id="start" disabled>Start Game</button>
 </form>
 <div id="playerGraph">
+    <div class="gameInfo-host">
+        <h2>Room: <span id="roomNumber"></span></h2>
+        <h3>Goal</h3>
+        <img id="winConditionInfo" src="images/blank.png">
+    </div>
     <h2>Players</h2>
 </div>
 </div>
