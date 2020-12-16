@@ -683,3 +683,7 @@ td input, td img {
 .invisible {
     display: none;
 }
+
+.doubleWide {
+    grid-column: 1/-1;
+}
