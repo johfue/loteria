@@ -43,7 +43,7 @@ function boardConstruct(seed) {
 }
 
 function host() {
-    const deck = _("deck");
+    const deck = _("drawBtn");
     const currentCard = _("currentCard");
     const winCondition = document.querySelectorAll('input[name="winCondition"]');
     const start = _("start");

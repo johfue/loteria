@@ -219,7 +219,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 
-#gridWrap button:disabled, #deck:disabled span {
+#gridWrap button:disabled {
     background-color: #dddddd;
     border-color: #999999;
     color: #999999;
@@ -297,7 +297,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-row: 1/3;
     grid-column: 1/2;
 }
-#deck, #currentCard, #deck img, #winConditionInfo {
+#deck, #currentCard, #deck, #winConditionInfo {
     height: 100%;
 }
 
@@ -359,7 +359,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         grid-column: span 2;
         grid-row: span 1;
     }
-    #deck, #currentCard, #deck img, #winConditionInfo {
+    #deck, #currentCard, #deck, #winConditionInfo {
         height: 100%;
     }
     #board th, #board td {
@@ -494,21 +494,15 @@ table, td {
     bottom: 54px;
 }
 
-#deck img {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#deck span {
-    color: var(--neutral-100);
-    font-size: 36px;
-    position: relative;
-    display: inline-block;
-    padding: 5vmin;
-    border: 8px solid var(--neutral-100);
-    box-sizing: border-box;
-}
+/*#deck span {*/
+/*    color: var(--neutral-100);*/
+/*    font-size: 36px;*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*    padding: 5vmin;*/
+/*    border: 8px solid var(--neutral-100);*/
+/*    box-sizing: border-box;*/
+/*}*/
 
 .winConditionOptions {
     display: flex;

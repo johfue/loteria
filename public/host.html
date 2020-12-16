@@ -1,10 +1,14 @@
 <div id="gridWrap" class="gridWrap-host">
 
 <form id="hostConsole">
-    <img src="images/blank.png">
-    <button class="secondaryBtn" id="currentCard">Review</button>
-    <img src="images/CAAR.jpeg">
-    <button class="primaryBtn" id="deck" disabled>Draw</button>
+    <div>
+        <img src="images/blank.png" id="currentCard">
+        <button class="secondaryBtn">Review</button>
+    </div>
+    <div>
+        <img src="images/CAAR.jpeg" id="deck">
+        <button id="drawBtn" class="primaryBtn" disabled>Draw</button>
+    </div>
     <div id="cardReview" class="invisible">
         <button class="denyBtn" id="closeReview">Close</button>
         <ul id="cardReviewList"></ul>
