@@ -233,7 +233,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 .gridWrap-host {
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
 }
 
 .gridWrap-player {
@@ -281,7 +281,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-rows: 2/3;
 }
 .gameInfo-host {
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: 0 auto;
 }
 .gameInfo-player {
@@ -338,7 +338,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         height: 75px;
     }
     #gridWrap {
-        grid-gap: 2em;
+        grid-gap: 1em;
         margin-top: 2em;
     }
     #playerGraph, #gameInfo, #playerGame {
@@ -361,8 +361,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         grid-row: span 1;
     }
     #deck, #currentCard, #deck img, #winConditionInfo {
-        height: 35vmin;
-        width: 25vmin;
+        height: 100%;
+        padding-bottom: 75%);
     }
     #board th, #board td {
       width: 13vmin;
