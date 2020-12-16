@@ -16,23 +16,25 @@
 
 <form id="gameSettings" class="gameSettings invisible">
     <h3 class="doubleWide">Choose a Goal</h3>
-    <div><input type="radio" id="win1" name="winCondition" value="row">
-    <label for="row">Rows</label>
-    </div>
-    <div><input type="radio" id="Any Column" name="winCondition" value="column">
-    <label for="column">Columns</label>
-    </div>
-    <div><input type="radio" id="win3" name="winCondition" value="diagonal">
-    <label for="diagonal">Diagonals</label>
-    </div>
-    <div><input type="radio" id="win4" name="winCondition" value="corner">
-    <label for="diagonal">Corners</label>
-    </div>
-    <div><input type="radio" id="win5" name="winCondition" value="center">
-    <label for="center">Center</label>
-    </div>
-    <div><input type="radio" id="win6" name="winCondition" value="blackOut">
-    <label for="center">Black Out</label>
+    <div class="winConditionOptions">
+        <div><input type="radio" id="win1" name="winCondition" value="row">
+        <label for="row">Rows</label>
+        </div>
+        <div><input type="radio" id="Any Column" name="winCondition" value="column">
+        <label for="column">Columns</label>
+        </div>
+        <div><input type="radio" id="win3" name="winCondition" value="diagonal">
+        <label for="diagonal">Diagonals</label>
+        </div>
+        <div><input type="radio" id="win4" name="winCondition" value="corner">
+        <label for="diagonal">Corners</label>
+        </div>
+        <div><input type="radio" id="win5" name="winCondition" value="center">
+        <label for="center">Center</label>
+        </div>
+        <div><input type="radio" id="win6" name="winCondition" value="blackOut">
+        <label for="center">Black Out</label>
+        </div>
     </div>
     <button type="submit" class="primaryBtn doubleWide" id="start" disabled>Start Game</button>
 </form>
