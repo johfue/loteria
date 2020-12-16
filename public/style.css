@@ -251,17 +251,18 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-template-columns: auto;
 }
 
-#gameInfo, #playerGame {
+#playerGame {
     grid-column: 1/2;
     display: grid;
 }
 
 #hostConsole {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: max-content max-content;
     justify-items: center;
     position: relative;
     grid-row: 3/4;
+    margin: 0 auto;
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
@@ -280,7 +281,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-rows: 2/3;
 }
 .gameInfo-host {
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 0 auto;
 }
 .gameInfo-player {
     grid-template-columns: 1fr 1fr;
@@ -508,6 +510,11 @@ table, td {
     padding: 5vmin;
     border: 8px solid var(--neutral-100);
     box-sizing: border-box;
+}
+
+.winConditionOptions {
+    display: flex;
+    grid-gap: 1em;
 }
 
 #gameSettings input{
