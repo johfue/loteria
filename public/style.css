@@ -275,9 +275,15 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     display: block;
 }
 
-#gameInfo {
-    grid-template-columns: min-content min-content 1fr min-content 1fr;
+.gameInfo {
+    display: grid;
+    grid-rows: 2/3;
+}
+.gameInfo-host {
     grid-template-rows: 1fr 1fr;
+}
+.gameInfo-player {
+    grid-template-columns: 1fr 1fr;
 }
 #gameInfo h3 {
     grid-column: 2/3;
