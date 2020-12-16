@@ -259,17 +259,11 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #hostConsole {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr max-content;
     justify-items: center;
     position: relative;
     grid-row: 3/4;
     margin: 0 auto;
-}
-
-.hostConsoleBtnWrap {
-    height: 100%;
-    display: grid;
-    grid-template-rows: 1fr max-content;
-    grid-template-columns: 1fr 1fr
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
