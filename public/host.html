@@ -1,8 +1,10 @@
 <div id="gridWrap" class="gridWrap-host">
 
 <form id="hostConsole">
-    <img src="images/blank.png" id="currentCard">
-    <button class="secondaryBtn" id="deck"  disabled><img src="images/CAAR.jpeg"><span>Draw</span></button>
+    <img src="images/blank.png">
+    <button class="secondaryBtn" id="currentCard">Review</button>
+    <img src="images/CAAR.jpeg">
+    <button class="primaryBtn" id="deck" disabled>Draw</button>
     <div id="cardReview" class="invisible">
         <button class="denyBtn" id="closeReview">Close</button>
         <ul id="cardReviewList"></ul>
@@ -40,8 +42,10 @@
 </form>
 <div class="gameInfo gameInfo-host">
     <h2>Room: <span id="roomNumber"></span></h2>
+    <div>
     <h3>Goal</h3>
     <img id="winConditionInfo" src="images/blank.png">
+    </div>
 </div>
 <div id="playerGraph">
     <h2>Players</h2>

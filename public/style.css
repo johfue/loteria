@@ -298,8 +298,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-column: 1/2;
 }
 #deck, #currentCard, #deck img, #winConditionInfo {
-    height: 18vmin;
-    width: 14vmin;
+    height: 100%;
 }
 
 #board th, #board td {
@@ -362,7 +361,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     }
     #deck, #currentCard, #deck img, #winConditionInfo {
         height: 100%;
-        padding-bottom: 75%);
     }
     #board th, #board td {
       width: 13vmin;
