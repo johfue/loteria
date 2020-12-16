@@ -265,6 +265,12 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     margin: 0 auto;
 }
 
+.hostConsoleBtnWrap {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr max-content;
+}
+
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
     grid-column: 1/2;
     text-align: left;
