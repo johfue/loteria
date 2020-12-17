@@ -322,7 +322,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 
 #reviewBtn {
     grid-row: 2/3;
-    grid-column: 7/8;
+    grid-column: 5/6;
 }
 
 #deck, #currentCard, #deck, #winConditionInfo {
