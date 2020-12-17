@@ -233,7 +233,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 .gridWrap-host {
-    grid-template-rows: 1fr 1fr 50vh;
+    grid-template-rows: 1fr 1fr 40vh;
 }
 
 .gridWrap-player {
@@ -259,14 +259,14 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #hostConsole {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr max-content;
+    grid-template-rows: 30vh 1fr;
     justify-items: center;
-    position: relative;
     grid-row: 3/4;
     margin: 0 auto;
+    width: 100%;
 }
 
-#draw {
+#deck {
     grid-column: 1/2;
     grid-row: 1/2;
 }
@@ -312,6 +312,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    display: block;
 }
 
 #board th, #board td {
