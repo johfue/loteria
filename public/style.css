@@ -260,10 +260,9 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #hostConsole {
     display: grid;
     grid-template-columns: 1fr 1fr max-content 1fr 1fr;
-    grid-template-rows: 20vh 40vh 20vh;
+    grid-template-rows: 15vh 40vh max-content 15vh;
     justify-items: center;
     row-gap: 1em;
-    column-gap: 5em;
     margin: 5vh auto;
     width: 100%;
     height: 100%;
@@ -271,7 +270,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 
 #drawBtn {
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: 3/4;
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
@@ -321,7 +320,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 #reviewBtn {
-    grid-row: 2/3;
+    grid-row: 3/4;
     grid-column: 4/5;
 }
 
@@ -424,7 +423,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-gap: 12px
 }
 .playerGraph-host {
-    grid-row: 3/4;
+    grid-row: 4/5;
     grid-column: span 5;
 }
 #playerGame {
