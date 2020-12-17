@@ -1,22 +1,6 @@
-<div id="gridWrap" class="gridWrap-host">
+<div id="gridWrap gridWrap-host">
 
-<form id="hostConsole">
-        <img src="images/blank.png" id="currentCard">
-        <button class="secondaryBtn">Review</button>
-        <img src="images/CAAR.jpeg" id="deck">
-        <button id="drawBtn" class="primaryBtn" disabled>Draw</button>
-    <div id="cardReview" class="invisible">
-        <button class="denyBtn" id="closeReview">Close</button>
-        <ul id="cardReviewList"></ul>
-    </div>
-    <div id="allegedWinner" class="invisible">
-        <button class="primaryBtn" id="confirm" value="newGame">New Game</button>
-        <button class="denyBtn" id="deny" value="keepPlaying">Keep Playing</button>
-        <div id="boardHold"></div>
-    </div>
-</form>
-
-<form id="gameSettings" class="gameSettings invisible">
+    <form id="gameSettings" class="gameSettings invisible">
     <h3 class="doubleWide">Choose a Goal</h3>
     <div class="winConditionOptions">
         <div><input type="radio" id="win1" name="winCondition" value="row">
@@ -40,14 +24,34 @@
     </div>
     <button type="submit" class="primaryBtn doubleWide" id="start" disabled>Start Game</button>
 </form>
-<div class="gameInfo gameInfo-host">
-    <h2>Room: <span id="roomNumber"></span></h2>
-    <div>
-    <h3>Goal</h3>
-    <img id="winConditionInfo" src="images/blank.png">
+
+    <div id="hostConsole">
+        <img src="images/blank.png" id="currentCard">
+        <button id="reviewBtn" class="secondaryBtn">Review</button>
+        
+        <img src="images/CAAR.jpeg" id="deck">
+        <button id="drawBtn" class="primaryBtn" disabled>Draw</button>
+        <h2>Room: <span id="roomNumber"></span></h2>
+
+        <div class="gameInfo gameInfo-host">
+            <h3>Goal</h3>
+            <img id="winConditionInfo" src="images/blank.png">
+        </div>
+    
+        <div id="playerGraph" class="playerGraph-host">
+            <h2>Players</h2>
+        </div>
     </div>
-</div>
-<div id="playerGraph">
-    <h2>Players</h2>
-</div>
+    
+    <div id="cardReview" class="invisible">
+        <button class="denyBtn" id="closeReview">Close</button>
+        <ul id="cardReviewList"></ul>
+    </div>
+    
+    <div id="allegedWinner" class="invisible">
+        <button class="primaryBtn" id="confirm" value="newGame">New Game</button>
+        <button class="denyBtn" id="deny" value="keepPlaying">Keep Playing</button>
+        <div id="boardHold"></div>
+    </div>
+
 </div>
