@@ -258,8 +258,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 
 #hostConsole {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 25vh 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     justify-items: center;
     grid-row: 3/4;
     grid-gap: 1em;
