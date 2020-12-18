@@ -58,7 +58,9 @@ function host() {
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
+            console.log(1);
             start.disabled = false;
+            console.log(2);
         });
     }
     
