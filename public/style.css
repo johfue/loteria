@@ -584,17 +584,16 @@ table, td {
 
 #cardReview {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    overflow-x: scroll;
+    top: 30vh;
+    left: 15vw;
+    width: 70vw;
 }
 
 #cardReview ul {
 width: 100%;
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, 145px);
 }
 
 #cardReview li {
@@ -609,7 +608,9 @@ width: 100%;
 }
 
 #closeReview {
-    position: absolute;
+    width: 33%;
+    margin: 0 auto;
+    display: block;
 }
 
 #boardSelectOptions td img, #allegedWinner td img{
