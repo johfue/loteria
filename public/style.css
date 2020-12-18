@@ -249,7 +249,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     position: absolute;
     grid-template-rows: max-content 1fr max-content;
     grid-template-columns: auto;
-    display: none;
 }
 
 #playerGame {
