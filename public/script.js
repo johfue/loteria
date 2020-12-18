@@ -74,7 +74,7 @@ function host() {
         shuffleDeck();
         deck.disabled = false;
         start.disabled = true;
-        _(start).classList.add("invisible");
+        start.classList.add("invisible");
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
         socket.emit('game state', true, roomNumber);
         socket.emit('win condition', currentWinCondition, roomNumber);
@@ -125,7 +125,7 @@ function host() {
         }
         drawnCards = [];
         currentCard.src="images/blank.png";
-        _(start).classList.remove("invisible");
+        start.classList.remove("invisible");
         opponentTiles = _("playerGraph").getElementsByTagName('input');
         losers = _("playerGraph").querySelectorAll(".winnerGlow");
         for (u=0; u < losers.length; u++) {
