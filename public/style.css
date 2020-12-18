@@ -322,6 +322,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 #reviewBtn {
+    grid-row: 3/4;
+    grid-column: 4/5;
     width: 100%;
 }
 
@@ -589,7 +591,10 @@ table, td {
 }
 
 #cardReview ul {
-    width: max-content;
+width: 100%;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, 200px);
 }
 
 #cardReview li {
@@ -598,7 +603,9 @@ table, td {
 
 
 #cardReview li img {
-    height: 40vmin;
+width: 100%;
+    display: block;
+    object-fit: contain;
 }
 
 #closeReview {
