@@ -240,15 +240,19 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-template-rows: 15vh 48vh 18vh;
 }
 
-.gameSettings {
+#gameSettings {
     display: grid;
+    background-color: var(--neutral-900);
     margin: 0 auto;
     height: auto;
     width: 85vw;
     padding: 1em;
     position: absolute;
+    top: 30vh;
     grid-template-rows: max-content 1fr max-content;
-    grid-template-columns: auto;
+    justify-items: center;
+    row-gap: 2em;
+    z-index: 2;
 }
 
 #playerGame {
@@ -273,14 +277,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     width: 100%;
 }
 
-#gameSettings h3, #playerGraph h3, #playerGraph h2 {
-    grid-column: 1/2;
-    text-align: left;
-}
-
 #start {
-    grid-column: 1/2;
-    grid-row: 2/3;
+    width: 33%;
     display: block;
 }
 
@@ -541,8 +539,10 @@ table, td {
 #gameSettings input{
     background-size: contain;
     background-repeat: no-repeat;
-    height: 140px;
-    width: 100px;
+    height: 240px;
+    width: 172px;
+    max-height: 14vw;
+    max-width: 12vw;
     appearance: none;
     display: block;
 }
