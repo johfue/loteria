@@ -255,7 +255,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     z-index: 2;
 }
 
-#gridSettings.invisble {
+#gridSettings.invisible {
     display: none;
 }
 
