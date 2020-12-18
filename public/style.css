@@ -322,8 +322,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 #reviewBtn {
-    grid-row: 3/4;
-    grid-column: 4/5;
     width: 100%;
 }
 
