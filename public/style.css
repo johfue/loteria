@@ -259,8 +259,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 
 #hostConsole {
     display: grid;
-    grid-template-columns: 1fr 1fr max-content 1fr 1fr;
-    grid-template-rows: 15vh 40vh max-content 15vh;
+    grid-template-columns: 1fr max-content max-content max-content 1fr;
+    grid-template-rows: 20vh 40vh max-content 15vh;
     justify-items: center;
     row-gap: 1em;
     margin: 5vh auto;
@@ -271,6 +271,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #drawBtn {
     grid-column: 2/3;
     grid-row: 3/4;
+    width: 100%;
 }
 
 #gameSettings h3, #playerGraph h3, #playerGraph h2 {
@@ -322,6 +323,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #reviewBtn {
     grid-row: 3/4;
     grid-column: 4/5;
+    width: 100%;
 }
 
 #deck, #currentCard, #deck, #winConditionInfo {
@@ -354,7 +356,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #playerGraph td {
     background-color: var(--secondary-base);
     height: 20px;
-    width: 25px;
+    width: 15px;
     position: relative;
 }
 
@@ -400,7 +402,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         height: 75px;
     }
     #playerGraph td {
-        height: 50px;
+        height: 20px;
     }
 }
 
@@ -417,10 +419,10 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     display: none;
 }
 #playerGraph {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: max-content;
-    grid-gap: 12px
+    display: flex;
+    grid-gap: 12px;
+    max-width: 90%;
+    overflow-x: scroll;
 }
 .playerGraph-host {
     grid-row: 4/5;
