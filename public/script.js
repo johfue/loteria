@@ -166,7 +166,7 @@ function host() {
         console.log(checked);
     });
     
-    currentCard.addEventListener('click', function() {
+    _("review").addEventListener('click', function() {
         _("cardReviewList").innerHTML = "";
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
