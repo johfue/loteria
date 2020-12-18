@@ -78,6 +78,7 @@ function host() {
         start.disabled = true;
         _("gameSettings").classList.add("invisible");
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
+        _("winConditionInfo").src =  "images/" + currentWinCondition + ".png";
         socket.emit('game state', true, roomNumber);
         socket.emit('win condition', currentWinCondition, roomNumber);
         for (n=0; n<winCondition.length; n++) {

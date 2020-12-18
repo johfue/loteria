@@ -590,7 +590,9 @@ table, td {
 }
 
 #cardReview ul {
-width: 100%;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fill, 145px);
@@ -620,8 +622,8 @@ width: 100%;
 
 #boardSelectOptions td, #allegedWinner td {
     position: relative;
-    height: 60px;
-    width: 50px;
+    height: 120px;
+    width: 100px;
 }
 
 #boardSelectOptions {
