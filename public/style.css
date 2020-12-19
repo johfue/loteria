@@ -589,7 +589,7 @@ table, td {
     width: 70vw;
 }
 
-#cardReview ul {
+#cardReviewList {
     width: 100%;
     height: 200px;
     overflow-y: scroll;
@@ -598,13 +598,17 @@ table, td {
     grid-template-columns: repeat(auto-fill, 145px);
 }
 
+#cardReviewList--alleged {
+    
+}
+
 #cardReview li {
     display: inline-block;
 }
 
 
 #cardReview li img {
-width: 100%;
+    width: 100%;
     display: block;
     object-fit: contain;
 }
