@@ -116,8 +116,16 @@ function host() {
         for (q=0; q < disableThis.length; q++) {
             disableThis[q].disabled = true;
         }
-        _("allegedWinner").classList.remove("invisible");
+        _("cardReviewList--alleged").innerHTML = "";
+        for (c=0; c < drawnCards.length; c++) {
+            var li = document.createElement("li");
+            var img = document.createElement("img");
+            img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
+            li.appendChild(img);
+            _("cardReviewList--alleged").appendChild(li);
+        }
         _("boardHold").appendChild(allegedBoard);
+        _("allegedWinner").classList.remove("invisible");
     }
     
     function endGame() {
