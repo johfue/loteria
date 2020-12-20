@@ -720,7 +720,7 @@ td input, td img {
     height: 100px;
 }
 
-.invisible, #gameSettings.invisible, #cardReview.invisible, #allegedWinne {
+.invisible, #gameSettings.invisible, #cardReview.invisible, #allegedWinner.invisible {
     display: none;
 }
 
