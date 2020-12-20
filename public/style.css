@@ -589,7 +589,7 @@ table, td {
     width: 70vw;
 }
 
-#cardReviewList {
+.cardReviewList {
     width: 100%;
     height: 200px;
     overflow-y: scroll;
@@ -602,12 +602,12 @@ table, td {
     
 }
 
-#cardReview li {
+.cardReviewList li {
     display: inline-block;
 }
 
 
-#cardReview li img {
+.cardReviewList li img {
     width: 100%;
     display: block;
     object-fit: contain;
