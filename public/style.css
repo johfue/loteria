@@ -591,7 +591,6 @@ table, td {
 
 .cardReviewList {
     width: 100%;
-    height: 200px;
     overflow-y: scroll;
     display: grid;
     grid-gap: 1rem;
@@ -599,7 +598,8 @@ table, td {
 }
 
 #cardReviewList--alleged {
-    
+    height: 60vh;
+    grid-auto-rows: min-content;
 }
 
 .cardReviewList li {
@@ -622,12 +622,14 @@ table, td {
 #boardSelectOptions td img, #allegedWinner td img{
     height: 100%;
     width: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 #boardSelectOptions td, #allegedWinner td {
     position: relative;
-    height: 120px;
-    width: 100px;
+    height: 220px;
+    width: 150px;
 }
 
 #boardSelectOptions {
@@ -673,11 +675,13 @@ td input, td img {
 }
 
 #allegedWinner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr max-content;
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 52%;
-    background-color: antiquewhite;
+    top: 15vh;
+    width: 75vw;
+    background-color: var(--neutral-900);
     box-sizing: border-box;
     padding: 12px;
 }
