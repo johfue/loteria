@@ -116,6 +116,7 @@ function host() {
         for (q=0; q < disableThis.length; q++) {
             disableThis[q].disabled = true;
         }
+        console.log(_("cardReviewList--alleged"));
         _("cardReviewList--alleged").innerHTML = "";
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
