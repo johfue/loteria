@@ -255,10 +255,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     z-index: 2;
 }
 
-#gameSettings.invisible {
-    display: none;
-}
-
 #playerGame {
     grid-column: 1/2;
     display: grid;
@@ -724,7 +720,7 @@ td input, td img {
     height: 100px;
 }
 
-.invisible {
+.invisible, #gameSettings.invisible, #cardReview.invisible, #allegedWinne {
     display: none;
 }
 
