@@ -597,6 +597,7 @@ table, td {
     height: 60vh;
     grid-auto-rows: min-content;
     grid-template-columns: repeat(auto-fill, 115px);
+    grid-row: 2/3;
 }
 
 .cardReviewList li {
@@ -614,6 +615,10 @@ table, td {
     width: 33%;
     margin: 0 auto;
     display: block;
+}
+
+#boardHold {
+    grid-row: 2/3;
 }
 
 #boardSelectOptions td img, #allegedWinner td img{
@@ -673,14 +678,15 @@ td input, td img {
 
 #allegedWinner {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr max-content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr max-content;
     position: absolute;
     top: 15vh;
-    width: 75vw;
+    width: 65vw;
     background-color: var(--neutral-900);
     box-sizing: border-box;
     padding: 12px;
+    left: 17.5vw;
 }
 
 #allegedWinner table {
@@ -688,7 +694,7 @@ td input, td img {
 }
 
 #confirm, #deny {
-    
+    width: 50%;
 }
 
 .winnerGlow {
