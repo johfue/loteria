@@ -596,6 +596,7 @@ table, td {
 #cardReviewList--alleged {
     height: 60vh;
     grid-auto-rows: min-content;
+    grid-template-columns: repeat(auto-fill, 115px);
 }
 
 .cardReviewList li {
@@ -624,8 +625,8 @@ table, td {
 
 #boardSelectOptions td, #allegedWinner td {
     position: relative;
-    height: 220px;
-    width: 150px;
+    height: 145px;
+    width: 100px;
 }
 
 #boardSelectOptions {
@@ -672,7 +673,7 @@ td input, td img {
 
 #allegedWinner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr max-content;
     position: absolute;
     top: 15vh;
