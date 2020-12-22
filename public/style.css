@@ -237,7 +237,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 .gridWrap-player {
-    grid-template-rows: 15vh 48vh 18vh;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
 }
 
 #gameSettings {
@@ -256,7 +257,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 #playerGame {
-    grid-column: 1/2;
+    grid-column: 2/3;
     display: grid;
 }
 
@@ -301,9 +302,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #gameInfo h3:nth-child(4) {
     grid-column: 4/5;
 }
-#gameInfo h2 {
-    grid-row: 1/2;
-    grid-column: 8/9;
+.gridWrap-player h2 {
+    grid-row: span 1/4;
 }
 
 #hostConsole h2 {
@@ -408,16 +408,19 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     overflow-y: scroll;
 }
 
-#playerGraph.player table:nth-child(2) {
+.playerGraph-player {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-y: scroll;
+}
+.playerGraph-player table:nth-child(1) {
     display: none;
 }
-#playerGraph {
+.playerGraph-host {
     display: flex;
     grid-gap: 12px;
     max-width: 90%;
     overflow-x: scroll;
-}
-.playerGraph-host {
     grid-row: 4/5;
     grid-column: span 5;
 }
