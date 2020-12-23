@@ -238,7 +238,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 
 .gridWrap-player {
     grid-template-rows: min-content 1fr;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: auto 2fr 1fr;
 }
 
 #gameSettings {
@@ -295,6 +295,9 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 .gameInfo-player {
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-self: center;
+    grid-gap: 1em
 }
 #gameInfo h3 {
     grid-row: 2/3;
@@ -324,7 +327,11 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     display: block;
 }
 
-.currentCard--player {
+.currentCard-player {
+    height: 35vh;
+}
+
+.currentCard-host {
     grid-column: 4/5;
     grid-row: 2/3;
 }
