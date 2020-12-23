@@ -307,29 +307,33 @@ button:disabled {
     height: 100%;
 }
 
-#drawBtn {
-    grid-column: 2/3;
-    grid-row: 3/4;
-    width: 100%;
-}
-
-/*.gameInfo-host {*/
-/*    grid-row: 1/2;*/
-/*    grid-column: 3/4;*/
-/*    grid-template-rows: min-content 1fr;*/
-/*    justify-items: center;*/
-/*    justify-self: start;*/
-/*}*/
-
-.currentCard-host {
-    grid-column: 4/5;
-    grid-row: 2/3;
-}
-
 .hostConsole h2 {
     grid-row: 1/2;
     grid-column: 5/6;
     justify-items: center;
+}
+
+.winConditionWrap-host {
+    grid-row: 1/2;
+    grid-column: 3/4;
+    grid-template-rows: min-content 1fr;
+    justify-items: center;
+    justify-self: start;
+}
+
+.drawWrap {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
+}
+
+#drawBtn {
+    width: 100%;
+}
+
+.currentCardWrap {
+    grid-column: 4/5;
+    grid-row: 2/3;
 }
 
 #reviewBtn {
@@ -347,11 +351,7 @@ button:disabled {
     grid-column: span 5;
 }
 
-#deck {
-    grid-column: 2/3;
-    grid-row: 2/3;
-    /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
-}
+
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
@@ -471,9 +471,6 @@ button:disabled {
 }
 
 .currentCardWrap-player {
-    grid-column: 1/2;
-}
-.winConditionWrap {
     grid-column: 1/2;
     grid-row: 3/4;
 }
