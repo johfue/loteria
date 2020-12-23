@@ -299,12 +299,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     align-self: center;
     grid-gap: 1em
 }
-#gameInfo h3 {
-    grid-row: 2/3;
-}
-#gameInfo:nth-child(4) {
-    grid-row: 4/5;
-}
+
 .gridWrap-player h2 {
     grid-column: span 1/4;
 }
@@ -381,9 +376,15 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         grid-template-rows: 40vh min-content 40vh min-content;
         grid-template-columns: auto;
     }
-    #gameInfo h3, #gameInfo h3:nth-child(4),#gameInfo h2 {
+    #gameInfo, #gameInfo h2 {
         grid-column: span 1;
         grid-row: span 1;
+    }
+    #gameInfo h3 {
+    grid-row: 2/3;
+    }
+    #gameInfo h3:nth-child(2) {
+        grid-row: 4/5;
     }
     #deck, #deck {
         height: 100%;
