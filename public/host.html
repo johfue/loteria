@@ -22,30 +22,33 @@
     </div>
     <button type="submit" class="primaryBtn" id="start" disabled>Start Game</button>
 </form>
-<div id="hostConsole">
-    <img src="images/blank.png" id="currentCard" class="currentCard-host">
-    <button id="reviewBtn" class="secondaryBtn">Review</button>
-    
-    <img src="images/CAAR.jpeg" id="deck">
-    <button id="drawBtn" class="primaryBtn" disabled>Draw</button>
+<div id="hostConsole" class="hostConsole">
     <h2>Room: <span id="roomNumber"></span></h2>
-    <div class="gameInfo gameInfo-host">
+    <div class="currentCardWrap">
+        <img src="images/blank.png" id="currentCard" class="currentCard currentCard-host">
+        <button id="reviewBtn" class="secondaryBtn">Review</button>
+    </div>
+    <div class="drawWrap">
+        <img src="images/CAAR.jpeg" id="deck">
+        <button id="drawBtn" class="primaryBtn" disabled>Draw</button>
+    </div>
+    <div class="winConditionWrap winConditionWrap-host">
         <h3>Goal</h3>
-        <img id="winConditionInfo" src="images/blank.png">
+        <img id="winConditionInfo" class="winConditionInfo winConditionInfo-host" src="images/blank.png">
     </div>
 
-    <div id="playerGraph" class="playerGraph-host">
+    <div id="playerGraph" class="playerGraph playerGraph-host">
     </div>
 </div>
 
-<div id="cardReview" class="invisible">
+<div id="cardReview" class="cardReview invisible">
         <ul id="cardReviewList" class="cardReviewList"></ul>
         <button class="denyBtn" id="closeReview">Close</button>
 </div>
 
-<div id="allegedWinner" class="invisible">
+<div id="allegedWinner" class="allegedWinner invisible">
         <h3>Drawn Cards</h3>
-        <ul id="cardReviewList--alleged" class="cardReviewList"></ul>
+        <ul id="cardReviewList" class="cardReviewList cardReviewList-alleged"></ul>
         <h3><span id="allegedWinnerName"></span> Board</h3>
         <div id="boardHold"></div>
         <button class="primaryBtn" id="confirm" value="newGame">New Game</button>

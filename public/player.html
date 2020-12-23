@@ -1,10 +1,12 @@
 <div id="gridWrap" class="gridWrap-player">
 <h2>Room: <span id="roomNumber"></span></h2>
-<div id="gameInfo">
+<div class="currentCardWrap currentCardWrap-player">
     <h3>Current Card</h3>
-    <img id="currentCard" class="currentCard-player" src="images/blank.png">
+    <img id="currentCard" class="currentCard currentCard-player" src="images/blank.png">
+</div>
+<div class="winConditionWrap">
     <h3>Goal</h3>
-    <img id="winConditionInfo" class="winConditionInfo-player" src="images/blank.png">
+    <img id="winConditionInfo" class="winConditionInfo winConditionInfo-player" src="images/blank.png">
 </div>
 <form id="playerGame">
     <table id="board">
@@ -40,6 +42,6 @@
     </div>
     <button type="submit" class="primaryBtn" id="announceWin">Loteria!</button>
 </form>
-    <div id="playerGraph" class="playerGraph-player player">
+    <div id="playerGraph" class="playerGraph playerGraph-player">
     </div>
 </div>

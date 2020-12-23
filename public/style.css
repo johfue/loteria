@@ -138,6 +138,48 @@ button:before, button:hover:before, button:active:before, button:disabled:before
   background-color: inherit;
 }
 
+.primaryBtn {
+    background-color: var(--confirm-base);
+}
+.primaryBtn:hover{
+    background-color: var(--confirm-light);
+}
+.primaryBtn:active {
+    background-color: var(--confirm-dark);
+}
+
+.secondaryBtn, .secondaryBtn span {
+    background-color: var(--action-base);
+}
+.secondaryBtn:hover, .secondaryBtn:hover span {
+    background-color: var(--action-light);
+}
+.secondaryBtn:active, .secondaryBtn:active span {
+    background-color: var(--action-dark);
+}
+
+.denyBtn {
+    background-color: var(--deny-base);
+}
+
+.denyBtn:hover{
+    background-color: var(--deny-light);
+}
+.denyBtn:active {
+    background-color: var(--deny-dark);
+}
+
+button:disabled {
+    background-color: #dddddd;
+    border-color: #999999;
+    color: #999999;
+}
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+
 #popItIn {
     width: 90%;
     margin: 0 auto;
@@ -182,66 +224,18 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     }
 }
 
-#announceWin {
-    width: 57vmin;
-    margin: 0 auto;
-}
-
-.primaryBtn {
-    background-color: var(--confirm-base);
-}
-.primaryBtn:hover{
-    background-color: var(--confirm-light);
-}
-.primaryBtn:active {
-    background-color: var(--confirm-dark);
-}
-
-.secondaryBtn, .secondaryBtn span {
-    background-color: var(--action-base);
-}
-.secondaryBtn:hover, .secondaryBtn:hover span {
-    background-color: var(--action-light);
-}
-.secondaryBtn:active, .secondaryBtn:active span {
-    background-color: var(--action-dark);
-}
-
-.denyBtn {
-    background-color: var(--deny-base);
-}
-
-.denyBtn:hover{
-    background-color: var(--deny-light);
-}
-.denyBtn:active {
-    background-color: var(--deny-dark);
-}
-
-
-#gridWrap button:disabled {
-    background-color: #dddddd;
-    border-color: #999999;
-    color: #999999;
-}
-
-#gridWrap {
-    display: grid;
-    margin-top: 0.5em;
-    height: 95vh;
-    grid-gap: 1em;
-}
-
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
 .gridWrap-host {
     display: block;
 }
-
-.gridWrap-player {
-    grid-template-rows: min-content 1fr;
-    grid-template-columns: auto 2fr 1fr;
-}
-
-#gameSettings {
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+.gameSettings {
     display: grid;
     background-color: var(--neutral-900);
     margin: 0 auto;
@@ -255,13 +249,54 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     row-gap: 2em;
     z-index: 2;
 }
-
-#playerGame {
-    grid-column: 2/3;
-    display: grid;
+.winConditionOptions {
+    display: flex;
+    grid-gap: 1em;
 }
 
-#hostConsole {
+.gameSettings input{
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 240px;
+    width: 172px;
+    max-height: 14vw;
+    max-width: 12vw;
+    appearance: none;
+    display: block;
+}
+
+.gameSettings input[value=row]{background-image: url(images/row.png);}
+.gameSettings input[value=column]{background-image: url(images/column.png);}
+
+.gameSettings input[value=diagonal]{background-image: url(images/diagonal.png);}
+.gameSettings input[value=corner]{background-image: url(images/corner.png);}
+.gameSettings input[value=center]{background-image: url(images/center.png);}
+.gameSettings input[value=blackOut]{background-image: url(images/blackOut.png);}
+
+.gameSettings input:checked {
+    border: 3px solid green;
+}
+
+.gameSettings input:hover {
+    border: 3px solid blue;
+}
+
+.gameSettings input:disabled:hover {
+    border: none;
+}
+
+.gameSettings label {
+    padding-left: 10px;
+}
+
+#start {
+    width: 33%;
+    display: block;
+}
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+.hostConsole {
     display: grid;
     grid-template-columns: 1fr max-content max-content max-content 1fr;
     grid-template-rows: 20vh 40vh max-content 15vh;
@@ -278,20 +313,179 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     width: 100%;
 }
 
-#start {
-    width: 33%;
+/*.gameInfo-host {*/
+/*    grid-row: 1/2;*/
+/*    grid-column: 3/4;*/
+/*    grid-template-rows: min-content 1fr;*/
+/*    justify-items: center;*/
+/*    justify-self: start;*/
+/*}*/
+
+.currentCard-host {
+    grid-column: 4/5;
+    grid-row: 2/3;
+}
+
+.hostConsole h2 {
+    grid-row: 1/2;
+    grid-column: 5/6;
+    justify-items: center;
+}
+
+#reviewBtn {
+    grid-row: 3/4;
+    grid-column: 4/5;
+    width: 100%;
+}
+
+.playerGraph-host {
+    display: flex;
+    grid-gap: 12px;
+    max-width: 90%;
+    overflow-x: scroll;
+    grid-row: 4/5;
+    grid-column: span 5;
+}
+
+#deck {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
+}
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+.cardReview {
+    position: absolute;
+    top: 30vh;
+    left: 15vw;
+    width: 70vw;
+    background-color: var(--neutral-900);
+}
+
+.cardReviewList {
+    width: 100%;
+    height: 450px;
+    overflow-y: scroll;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, 145px);
+}
+
+.cardReviewList-alleged {
+    height: 60vh;
+    grid-auto-rows: min-content;
+    grid-template-columns: repeat(auto-fill, 90px);
+    grid-row: 2/3;
+}
+
+.cardReviewList li {
+    display: inline-block;
+}
+
+.cardReviewList li img {
+    width: 100%;
     display: block;
+    object-fit: contain;
+}
+
+#closeReview {
+    width: 33%;
+    margin: 0 auto;
+    display: block;
+}
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+.allegedWinner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr max-content;
+    position: absolute;
+    top: 12vh;
+    width: 65vw;
+    background-color: var(--neutral-900);
+    box-sizing: border-box;
+    padding: 12px;
+    left: 17.5vw;
+}
+
+.allegedWinner table {
+    margin: 0 auto;
+}
+
+#confirm, #deny {
+    width: 50%;
+}
+
+#confirm {
+    justfiy-self: end;
+}
+
+#deny {
+    justify-self: start;
+}
+
+.winnerGlow {
+    border: 5px solid white;
+}
+
+.winnerGlow:hover {
+    background-color: white;
+}
+
+.playerGraph table.winnerGlow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url(images/loteria.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+}
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+
+#announceWin {
+    width: 57vmin;
+    margin: 0 auto;
+}
+
+#gridWrap {
+    display: grid;
+    margin-top: 0.5em;
+    height: 95vh;
+    grid-gap: 1em;
+}
+
+.gridWrap-player {
+    grid-template-rows: min-content 1fr 1fr;
+    grid-template-columns: repeat(3, max-content);
+}
+
+.currentCardWrap-player {
+    grid-column: 1/2;
+}
+.winConditionWrap {
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+#playerGame {
+    grid-column: 2/3;
+    grid-row: span 2;
+    display: grid;
 }
 
 .gameInfo {
     display: grid;
-}
-.gameInfo-host {
-    grid-row: 1/2;
-    grid-column: 3/4;
-    grid-template-rows: min-content 1fr;
-    justify-items: center;
-    justify-self: start;
 }
 .gameInfo-player {
     grid-template-columns: 1fr 1fr;
@@ -304,28 +498,11 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-column: span 1/4;
 }
 
-#hostConsole h2 {
-    grid-row: 1/2;
-    grid-column: 5/6;
-    justify-items: center;
-}
-
-#reviewBtn {
-    grid-row: 3/4;
-    grid-column: 4/5;
-    width: 100%;
-}
-
-#deck, #currentCard, #deck, #winConditionInfo {
+#deck, .currentCard, .winConditionInfo {
     max-width: 100%;
     object-fit: contain;
     display: block;
     height: 100%;
-}
-
-.currentCard-host {
-    grid-column: 4/5;
-    grid-row: 2/3;
 }
 
 #board th, #board td {
@@ -345,11 +522,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #boardSelect h2 {
     display: none;
 }
-#playerGraph h1 {
-    grid-column: 1/6;
-}
 
-#playerGraph td {
+.playerGraph td {
     background-color: var(--secondary-base);
     height: 20px;
     width: 15px;
@@ -366,28 +540,28 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     #gridWrap {
         grid-gap: 1em;
     }
-    #playerGraph, #gameInfo, #playerGame {
+    .playerGraph, .gameInfo, #playerGame {
         display: grid;
     }
-    #playerGraph h3, #playerGraph h2 {
+    .playerGraph h3, .playerGraph h2 {
         grid-column: span 2;
         text-align: initial;
     }
-    #gameInfo {
+    .gameInfo {
         grid-template-rows: 40vh min-content 40vh min-content;
         grid-template-columns: auto;
     }
-    #gameInfo, #gameInfo h2 {
+    .gameInfo, .gameInfo h2 {
         grid-column: span 1;
         grid-row: span 1;
     }
-    #gameInfo h3 {
-    grid-row: 2/3;
+    .gameInfo h3 {
+        grid-row: 2/3;
     }
-    #gameInfo h3:nth-child(3) {
+    .gameInfo h3:nth-child(3) {
         grid-row: 4/5;
     }
-    #deck, #deck {
+    #deck {
         height: 100%;
     }
     .currentCard-player, .winConditionInfo-player {
@@ -401,12 +575,12 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         margin-bottom: 20px;
         height: 75px;
     }
-    #playerGraph td {
+    .playerGraph td {
         height: 30px;
     }
 }
 
-#gameInfo, #gameSettings, #playerGame, #playerGraph, #hostConsole {
+.gameInfo, .gameSettings, #playerGame, .playerGraph, #hostConsole {
     box-sizing: border-box;
     background-color: var(--neutral-700);
     padding: 16px;
@@ -418,6 +592,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 .playerGraph-player {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-columns: span 2;
     overflow-y: scroll;
     grid-auto-rows: max-content;
     grid-gap: 1em;
@@ -425,22 +600,15 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 .playerGraph-player table:nth-child(1) {
     display: none;
 }
-.playerGraph-host {
-    display: flex;
-    grid-gap: 12px;
-    max-width: 90%;
-    overflow-x: scroll;
-    grid-row: 4/5;
-    grid-column: span 5;
-}
+
 #playerGame {
     position: relative;
 }
-#playerGraph table {
+.playerGraph table {
     position: relative;
 }
 
-#playerGraph input[type=checkbox] {
+.playerGraph input[type=checkbox] {
     appearance: none;
     height: 100%;
     width: 100%;
@@ -448,7 +616,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     padding: 0;
 }
 
-#playerGraph input:checked {
+.playerGraph input:checked {
     background-color: var(--secondary-dark);
 }
 
@@ -526,114 +694,6 @@ table, td {
     grid-gap: 2em;
 }
 
-#deck {
-    grid-column: 2/3;
-    grid-row: 2/3;
-    /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
-}
-
-/*#deck span {*/
-/*    color: var(--neutral-100);*/
-/*    font-size: 36px;*/
-/*    position: relative;*/
-/*    display: inline-block;*/
-/*    padding: 5vmin;*/
-/*    border: 8px solid var(--neutral-100);*/
-/*    box-sizing: border-box;*/
-/*}*/
-
-.winConditionOptions {
-    display: flex;
-    grid-gap: 1em;
-}
-
-#gameSettings input{
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 240px;
-    width: 172px;
-    max-height: 14vw;
-    max-width: 12vw;
-    appearance: none;
-    display: block;
-}
-
-#gameSettings input[value=row]{
-    background-image: url(images/row.png);
-}
-#gameSettings input[value=column]{
-    background-image: url(images/column.png);
-}
-
-#gameSettings input[value=diagonal]{
-    background-image: url(images/diagonal.png);
-}
-#gameSettings input[value=corner]{
-    background-image: url(images/corner.png);
-}
-#gameSettings input[value=center]{
-    background-image: url(images/center.png);
-}
-#gameSettings input[value=blackOut]{
-    background-image: url(images/blackOut.png);
-}
-#gameSettings input:checked {
-    border: 3px solid green;
-}
-
-#gameSettings input:hover {
-    border: 3px solid blue;
-}
-
-#gameSettings input:disabled:hover {
-    border: none;
-}
-
-#gameSettings label {
-    padding-left: 10px;
-}
-
-#cardReview {
-    position: absolute;
-    top: 30vh;
-    left: 15vw;
-    width: 70vw;
-    background-color: var(--neutral-900);
-}
-
-.cardReviewList {
-    width: 100%;
-    height: 450px;
-    overflow-y: scroll;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, 145px);
-}
-
-#cardReviewList--alleged {
-    height: 60vh;
-    grid-auto-rows: min-content;
-    grid-template-columns: repeat(auto-fill, 90px);
-    grid-row: 2/3;
-}
-
-.cardReviewList li {
-    display: inline-block;
-}
-
-
-.cardReviewList li img {
-    width: 100%;
-    display: block;
-    object-fit: contain;
-}
-
-#closeReview {
-    width: 33%;
-    margin: 0 auto;
-    display: block;
-}
-
 #boardHold {
     grid-row: 2/3;
 }
@@ -697,57 +757,6 @@ td input, td img {
     z-index: 3;
 }
 
-#allegedWinner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content 1fr max-content;
-    position: absolute;
-    top: 12vh;
-    width: 65vw;
-    background-color: var(--neutral-900);
-    box-sizing: border-box;
-    padding: 12px;
-    left: 17.5vw;
-}
-
-#allegedWinner table {
-    margin: 0 auto;
-}
-
-#confirm, #deny {
-    width: 50%;
-}
-
-#confirm {
-    justfiy-self: end;
-}
-
-#deny {
-    justify-self: start;
-}
-
-.winnerGlow {
-    border: 5px solid white;
-}
-
-.winnerGlow:hover {
-    background-color: white;
-}
-
-#playerGraph table.winnerGlow::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background-image: url(images/loteria.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 2;
-}
-
 .landing {
     max-width: 80vw;
 }
@@ -756,7 +765,7 @@ td input, td img {
     height: 100px;
 }
 
-.invisible, #gameSettings.invisible, #cardReview.invisible, #allegedWinner.invisible, #chooseBoard.invisible {
+.invisible, .gameSettings.invisible, #cardReview.invisible, #allegedWinner.invisible, #boardSelect.invisible {
     display: none;
 }
 
