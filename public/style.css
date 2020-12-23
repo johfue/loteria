@@ -228,7 +228,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #gridWrap {
     display: grid;
     margin-top: 0.5em;
-    height: 90vh;
+    height: 95vh;
     grid-gap: 1em;
 }
 
@@ -297,10 +297,10 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-template-columns: 1fr 1fr;
 }
 #gameInfo h3 {
-    grid-column: 2/3;
+    grid-row: 2/3;
 }
-#gameInfo h3:nth-child(4) {
-    grid-column: 4/5;
+#gameInfo:nth-child(4) {
+    grid-row: 4/5;
 }
 .gridWrap-player h2 {
     grid-column: span 1/4;
@@ -322,6 +322,11 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     max-width: 100%;
     object-fit: contain;
     display: block;
+}
+
+.currentCard--player {
+    grid-column: 4/5;
+    grid-row: 2/3;
 }
 
 #board th, #board td {
@@ -508,6 +513,9 @@ table, td {
     z-index: 2;
     box-sizing: border-box;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 2em;
 }
 
 #deck {
@@ -635,10 +643,14 @@ table, td {
     width: 100px;
 }
 
+#boardSelectOptions td {
+    height: 54px;
+}
+
 #boardSelectOptions {
     list-style-type: none;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 12px;
     overflow-y: scroll;
     height: 82%;
