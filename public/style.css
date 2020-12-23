@@ -327,10 +327,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     display: block;
 }
 
-.currentCard-player {
-    height: 35vh;
-}
-
 .currentCard-host {
     grid-column: 4/5;
     grid-row: 2/3;
@@ -389,8 +385,11 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         grid-column: span 1;
         grid-row: span 1;
     }
-    #deck, #currentCard, #deck, #winConditionInfo {
+    #deck, #deck {
         height: 100%;
+    }
+    .currentCard-player, .winConditionInfo-player {
+        height: 35vh;
     }
     #board th, #board td {
       width: 13vmin;
