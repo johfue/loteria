@@ -383,7 +383,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     #gameInfo h3 {
     grid-row: 2/3;
     }
-    #gameInfo h3:nth-child(2) {
+    #gameInfo h3:nth-child(3) {
         grid-row: 4/5;
     }
     #deck, #deck {
