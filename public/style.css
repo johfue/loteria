@@ -228,7 +228,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 #gridWrap {
     display: grid;
     margin-top: 0.5em;
-    height: 85vh;
+    height: 90vh;
     grid-gap: 1em;
 }
 
@@ -303,18 +303,13 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     grid-column: 4/5;
 }
 .gridWrap-player h2 {
-    grid-row: span 1/4;
+    grid-column: span 1/4;
 }
 
 #hostConsole h2 {
     grid-row: 1/2;
     grid-column: 5/6;
     justify-items: center;
-}
-
-#currentCard {
-    grid-row: 2/3;
-    grid-column: 4/5;
 }
 
 #reviewBtn {
@@ -337,10 +332,10 @@ button:before, button:hover:before, button:active:before, button:disabled:before
 }
 
 #newBoard {
+    display: block;
     height: 60px;
-    width: 100px;
-    margin-bottom: 10px;
-    float: right;
+    width: 45%;
+    margin: 0 auto;
 }
 
 #boardSelect h2 {
@@ -366,7 +361,6 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     }
     #gridWrap {
         grid-gap: 1em;
-        margin-top: 2em;
     }
     #playerGraph, #gameInfo, #playerGame {
         display: grid;
@@ -376,7 +370,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         text-align: initial;
     }
     #gameInfo {
-        grid-template-rows: auto;
+        grid-template-rows: 40vh min-content 40vh min-content;
         grid-template-columns: auto;
     }
     #gameInfo h3, #gameInfo h3:nth-child(4),#gameInfo h2 {
@@ -395,7 +389,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
         height: 75px;
     }
     #playerGraph td {
-        height: 20px;
+        height: 30px;
     }
 }
 
@@ -412,6 +406,8 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow-y: scroll;
+    grid-auto-rows: max-content;
+    grid-gap: 1em;
 }
 .playerGraph-player table:nth-child(1) {
     display: none;
