@@ -320,6 +320,7 @@ button:before, button:hover:before, button:active:before, button:disabled:before
     max-width: 100%;
     object-fit: contain;
     display: block;
+    height: 100%;
 }
 
 .currentCard-host {
@@ -755,7 +756,7 @@ td input, td img {
     height: 100px;
 }
 
-.invisible, #gameSettings.invisible, #cardReview.invisible, #allegedWinner.invisible {
+.invisible, #gameSettings.invisible, #cardReview.invisible, #allegedWinner.invisible, #chooseBoard.invisible {
     display: none;
 }
 
