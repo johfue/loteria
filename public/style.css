@@ -229,6 +229,13 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+
+.deck, .currentCard, .winConditionInfo {
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
 .gridWrap-host {
     display: block;
 }
@@ -322,15 +329,22 @@ button:disabled {
     justify-self: start;
 }
 
+.winConditionInfo-host {
+    height: calc(100% - 1em);
+}
+
 .drawWrap, .currentCardWrap {
-    display: grid;
-    grid-template-rows: 1fr max-content;
+    height: 100%;
 }
 
 .drawWrap {
     grid-column: 2/3;
     grid-row: 2/3;
     /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
+}
+
+.deck, .currentCard-host {
+    height: 30vh;
 }
 
 #drawBtn, #reviewBtn {
@@ -347,7 +361,7 @@ button:disabled {
     grid-gap: 12px;
     max-width: 90%;
     overflow-x: scroll;
-    grid-row: 4/5;
+    grid-row: 3/4;
     grid-column: span 5;
 }
 
@@ -495,13 +509,6 @@ button:disabled {
     grid-column: span 1/4;
 }
 
-#deck, .currentCard, .winConditionInfo {
-    max-width: 100%;
-    object-fit: contain;
-    display: block;
-    height: 100%;
-}
-
 #board th, #board td {
   padding: 0;
   width: 9vh;
@@ -557,9 +564,6 @@ button:disabled {
     }
     .gameInfo h3:nth-child(3) {
         grid-row: 4/5;
-    }
-    #deck {
-        height: 100%;
     }
     .currentCard-player, .winConditionInfo-player {
         height: 35vh;
