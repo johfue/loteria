@@ -392,7 +392,7 @@ button:disabled {
     width: 100%;
 }
 
-.currentCardWrap {
+.currentCardWrap-host {
     grid-column: 1/4;
     grid-row: 3/4;
 }
@@ -410,7 +410,7 @@ button:disabled {
     .drawWrap {
         grid-column: 2/3;
     }
-    .currentCardWrap {
+    .currentCardWrap-host {
         grid-column: 4/5;
         grid-row: 2/3;
     }
@@ -665,12 +665,14 @@ button:disabled {
     overflow-y: scroll;
 }
 
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+
 .playerGraph-player {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row: 2/4;
-    overflow-y: scroll;
-    grid-auto-rows: max-content;
+    display: flex;
+    grid-row: 3/4;
+    overflow-x: scroll;
     grid-gap: 1rem;
 }
 .playerGraph-player table:nth-child(1) {
@@ -695,6 +697,20 @@ button:disabled {
 .playerGraph input:checked {
     background-color: var(--secondary-dark);
 }
+@media(min-width:845px) {
+    .playerGraph-player {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row: 2/4;
+        overflow-x: auto;
+        overflow-y: scroll;
+        grid-auto-rows: max-content;
+    }
+}
+
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
 
 table, td {
   border: 1px solid black;
@@ -750,6 +766,10 @@ table, td {
 .board td input:checked, .allegedWinner input:checked {
     background-image: url(images/bean.png);
 }
+
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
 
 .boardSelectOptions li > input:checked {
     background-image: url(images/check.png);
@@ -808,6 +828,10 @@ td input, td img {
     top: 0;
     right: 0;
 }
+
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
 
 .boardSelectOptions td input, .allegedWinner td input {
     background-size: contain;
