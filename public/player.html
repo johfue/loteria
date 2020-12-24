@@ -9,7 +9,7 @@
     <img id="winConditionInfo" class="winConditionInfo winConditionInfo-player" src="images/blank.png">
 </div>
 <form id="playerGame">
-    <table id="board">
+    <table id="board" class="board">
         <tr>
             <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
             <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
@@ -35,9 +35,9 @@
             <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
         </tr>
     </table>
-    <div id="boardSelect">
+    <div id="boardSelect" class="boardSelect">
         <h2>Choose your board</h2>
-        <ul id="boardSelectOptions"></ul>
+        <ul id="boardSelectOptions" class="boardSelectOptions"></ul>
         <button id="newBoard" class="primaryBtn" disabled="true">Select</button>
     </div>
     <button type="submit" class="primaryBtn" id="announceWin">Loteria!</button>
