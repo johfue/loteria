@@ -671,7 +671,7 @@ button:disabled {
 
 .playerGraph-player {
     display: flex;
-    grid-row: 3/4;
+    grid-row: 4/5;
     overflow-x: scroll;
     grid-gap: 1rem;
 }
