@@ -122,7 +122,7 @@ function host() {
             var img = document.createElement("img");
             img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
             li.appendChild(img);
-            _("cardReviewList--alleged").appendChild(li);
+            _("cardReviewListAlleged").appendChild(li);
         }
         _("boardHold").appendChild(allegedBoard);
         _("allegedWinner").classList.remove("invisible");
