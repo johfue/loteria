@@ -236,9 +236,6 @@ button:disabled {
     display: block;
 }
 
-.gridWrap-host {
-    display: block;
-}
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
@@ -259,7 +256,7 @@ button:disabled {
 
 .winConditionOptions {
     display: grid;
-    grid-template-columns: repeat(2, minmax(1fr, 30vw));
+    grid-template-columns: 1fr 1fr);
     grid-gap: 1rem;
 }
 
@@ -268,8 +265,8 @@ button:disabled {
     background-repeat: no-repeat;
     height: 240px;
     width: 172px;
-    max-height: 14vw;
-    max-width: 12vw;
+    max-height: 30vw;
+    max-width: 20vw;
     appearance: none;
     display: block;
 }
@@ -284,10 +281,8 @@ button:disabled {
     }
     
     .gameSettings input{
-        height: 240px;
-        width: 172px;
-        max-height: 20vw;
-        max-width: 30vw;
+        max-height: 14vw;
+        max-width: 12vw;
     }
 }
 
@@ -539,27 +534,24 @@ button:disabled {
     margin: 0 auto;
 }
 
-#gridWrap {
+.playerWrap {
     display: grid;
     margin-top: 0.5em;
     height: 95vh;
     grid-gap: 1rem;
-}
-
-.gridWrap-player {
-    grid-template-rows: min-content 1fr 1fr;
-    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: min-content max-content 1fr;
+    grid-template-columns: repeat(3, 1fr);
     margin: 0 auto;
     width: fit-content;
 }
 
-.gridWrap-player h2 {
-    grid-column: span 1/4;
+.playerWrap h2 {
+    grid-column: 1/2;
 }
 
 .playerGame {
-    grid-column: 2/3;
-    grid-row: 2/4;
+    grid-column: 1/4;
+    grid-row: 3/4;
     display: grid;
 }
 
@@ -572,13 +564,34 @@ button:disabled {
 }
 
 .currentCardWrap-player {
-    grid-row: 2/3;
+    grid-column: 2/3;
 }
 
 .winConditionWrap-player {
-    grid-row: 3/4;
+    grid-column: 3/4;
 }
 
+@media(min-width:845px) {
+    .playerWrap {
+        grid-template-rows: min-content 1fr 1fr;
+        grid-template-columns: repeat(3, max-content);
+    }
+    .playerWrap h2 {
+        grid-column: span 1/4;
+    }
+    .playerGame {
+        grid-column: 2/3;
+        grid-row: 2/4;
+    }
+    .currentCardWrap-player {
+        grid-row: 2/3;
+        grid-column: span 1;
+    }
+    .winConditionWrap-player {
+        grid-row: 3/4;
+        grid-column: span 1;
+    }
+}
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
@@ -593,14 +606,15 @@ button:disabled {
 #newBoard {
     display: block;
     height: 60px;
-    width: 45%;
+    width: 66%;
     margin: 0 auto;
 }
 
-.boardSelect h2 {
-    display: none;
+@media(min-width:845px) {
+    #newBoard {
+        width: 45%;
+    }
 }
-
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
@@ -613,13 +627,10 @@ button:disabled {
 }
 
 @media(min-width:845px) {
-    .boardSelect h2 {
-        display: block;
-    }
     button, input[type=text] {
         height: 75px;
     }
-    #gridWrap {
+    .playerWrap {
         grid-gap: 1rem;
     }
     .playerGraph, .gameInfo, #playerGame {
