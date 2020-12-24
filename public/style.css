@@ -298,8 +298,8 @@ button:disabled {
 /*/--------------------------------------------/*/
 .hostConsole {
     display: grid;
-    grid-template-columns: 1fr max-content max-content max-content 1fr;
-    grid-template-rows: 20vh 40vh max-content;
+    grid-template-columns: 1fr 15vw max-content 15vw 1fr;
+    grid-template-rows: 20vh 40vh 20vh;
     justify-items: center;
     row-gap: 1em;
     margin: 5vh auto;
@@ -314,6 +314,7 @@ button:disabled {
 }
 
 .winConditionWrap-host {
+    display: grid;
     grid-row: 1/2;
     grid-column: 3/4;
     grid-template-rows: min-content 1fr;
@@ -332,7 +333,7 @@ button:disabled {
     /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
 }
 
-#drawBtn, #drawBtn {
+#drawBtn, #reviewBtn {
     width: 100%;
 }
 
