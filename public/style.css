@@ -777,11 +777,11 @@ table, td {
 
 .boardSelect {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: antiquewhite;
-    height: 100%;
-    width: 100%;
+    top: 10vh;
+    left: 10vw;
+    background-color: var(--neutral-900);
+    height: 80vh;
+    width: 80vw;
     z-index: 2;
     box-sizing: border-box;
     padding: 16px;
