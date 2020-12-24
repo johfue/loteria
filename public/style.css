@@ -248,7 +248,7 @@ button:disabled {
     margin: 0 auto;
     height: auto;
     width: 85vw;
-    padding: 1em;
+    padding: 1rem;
     position: absolute;
     top: 30vh;
     grid-template-rows: max-content 1fr max-content;
@@ -258,7 +258,7 @@ button:disabled {
 }
 .winConditionOptions {
     display: flex;
-    grid-gap: 1em;
+    grid-gap: 1rem;
 }
 
 .gameSettings input{
@@ -305,13 +305,19 @@ button:disabled {
 /*/--------------------------------------------/*/
 .hostConsole {
     display: grid;
-    grid-template-columns: 1fr 15vw max-content 15vw 1fr;
-    grid-template-rows: 20vh 45vh 20vh;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 15vh 30vh 30vh 15vh;
     justify-items: center;
-    row-gap: 1em;
+    row-gap: 1rem;
     margin: 5vh auto;
     width: 100%;
     height: 100%;
+}
+@media(min-width:845px) {
+    .hostConsole {
+        grid-template-columns: 1fr 15vw max-content 15vw 1fr;
+        grid-template-rows: 20vh 45vh 20vh;
+    }
 }
 
 .hostConsole h2 {
@@ -320,28 +326,40 @@ button:disabled {
     justify-items: center;
 }
 
+@media(min-width:845px) {
+    .hostConsole h2 {
+        grid-column: 1/2;
+    }
+}
+
 .winConditionWrap-host {
     display: grid;
-    grid-gap: 1em;
+    grid-gap: 1rem;
     grid-row: 1/2;
-    grid-column: 3/4;
+    grid-column: 2/3;
     grid-template-rows: min-content 1fr;
     justify-items: center;
     justify-self: start;
 }
 
+@media(min-width:845px) {
+    .winConditionWrap-host {
+        grid-column: 3/4;
+    }
+}
+
 .winConditionInfo-host {
-    height: calc(100% - 1em);
+    height: calc(100% - 1rem);
 }
 
 .drawWrap, .currentCardWrap-host {
     display: grid;
-    grid-gap: 1em;
+    grid-gap: 1rem;
     height: 100%;
 }
 
 .drawWrap {
-    grid-column: 2/3;
+    grid-column: 1/4;
     grid-row: 2/3;
     /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
 }
@@ -355,8 +373,8 @@ button:disabled {
 }
 
 .currentCardWrap {
-    grid-column: 4/5;
-    grid-row: 2/3;
+    grid-column: 1/4;
+    grid-row: 3/4;
 }
 
 .playerGraph-host {
@@ -368,10 +386,24 @@ button:disabled {
     grid-column: span 5;
 }
 
+@media(min-width:845px) {
+    .drawWrap {
+        grid-column: 2/3;
+    }
+    .currentCardWrap {
+        grid-column: 4/5;
+        grid-row: 2/3;
+    }
+    .playerGraph-host {
+        grid-row: 4/5;
+        grid-column: 1/4;
+    }
+}
 
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+
 .cardReview {
     position: absolute;
     top: 30vh;
@@ -427,6 +459,13 @@ button:disabled {
     left: 17.5vw;
 }
 
+@media(min-width:845px) {
+    .allegedWinner {
+        grid-template-columns: auto;
+        grid-template-rows: 1fr 20vh max-content;
+    }
+}
+
 .allegedWinner table {
     margin: 0 auto;
 }
@@ -479,7 +518,7 @@ button:disabled {
     display: grid;
     margin-top: 0.5em;
     height: 95vh;
-    grid-gap: 1em;
+    grid-gap: 1rem;
 }
 
 .gridWrap-player {
@@ -504,7 +543,7 @@ button:disabled {
     grid-column: 1/2;
     justify-items: center;
     align-self: center;
-    grid-gap: 1em
+    grid-gap: 1rem
 }
 
 .currentCardWrap-player {
@@ -556,7 +595,7 @@ button:disabled {
         height: 75px;
     }
     #gridWrap {
-        grid-gap: 1em;
+        grid-gap: 1rem;
     }
     .playerGraph, .gameInfo, #playerGame {
         display: grid;
@@ -564,20 +603,6 @@ button:disabled {
     .playerGraph h3, .playerGraph h2 {
         grid-column: span 2;
         text-align: initial;
-    }
-    .gameInfo {
-        grid-template-rows: 40vh min-content 40vh min-content;
-        grid-template-columns: auto;
-    }
-    .gameInfo, .gameInfo h2 {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-    .gameInfo h3 {
-        grid-row: 2/3;
-    }
-    .gameInfo h3:nth-child(3) {
-        grid-row: 4/5;
     }
     .currentCard-player, .winConditionInfo-player {
         height: 35vh;
@@ -610,7 +635,7 @@ button:disabled {
     grid-row: 2/4;
     overflow-y: scroll;
     grid-auto-rows: max-content;
-    grid-gap: 1em;
+    grid-gap: 1rem;
 }
 .playerGraph-player table:nth-child(1) {
     display: none;
@@ -780,6 +805,6 @@ td input, td img {
     height: 100px;
 }
 
-.invisible, .gameSettings.invisible, #cardReview.invisible, #allegedWinner.invisible, .boardSelect.invisible {
+.invisible {
     display: none;
 }
