@@ -427,25 +427,18 @@ button:disabled {
 .cardReview {
     position: absolute;
     top: 30vh;
-    left: 15vw;
-    width: 70vw;
+    left: 7.5vw;
+    width: 88vw;
     background-color: var(--neutral-900);
 }
 
 .cardReviewList {
     width: 100%;
-    height: 450px;
+    height: 70vh;
     overflow-y: scroll;
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fill, 145px);
-}
-
-.cardReviewList-alleged {
-    height: 60vh;
-    grid-auto-rows: min-content;
-    grid-template-columns: repeat(auto-fill, 90px);
-    grid-row: 2/3;
 }
 
 .cardReviewList li {
@@ -463,27 +456,43 @@ button:disabled {
     margin: 0 auto;
     display: block;
 }
+
+@media(min-width:845px) {
+    .cardReview {
+        position: absolute;
+        top: 30vh;
+        left: 15vw;
+        width: 70vw;
+        background-color: var(--neutral-900);
+    }
+    .cardReviewList {
+        height: 450px;
+    }
+}
+
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 .allegedWinner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content 1fr max-content;
+    grid-template-rows: 1fr min-content max-content;
     position: absolute;
     top: 12vh;
-    width: 65vw;
+    width: 85vw;
     background-color: var(--neutral-900);
     box-sizing: border-box;
     padding: 12px;
-    left: 17.5vw;
+    left: 7.5vw;
 }
 
-@media(min-width:845px) {
-    .allegedWinner {
-        grid-template-columns: auto;
-        grid-template-rows: 1fr 20vh max-content;
-    }
+.cardReviewList-alleged {
+    display: flex
+    grid-row: 2/3;
+    overflow-x: scroll;
+    height: auto;
+    width: auto;
+    overflow-y: auto;
 }
 
 .allegedWinner table {
@@ -491,7 +500,7 @@ button:disabled {
 }
 
 #confirm, #deny {
-    width: 50%;
+    width: 100%;
 }
 
 #confirm {
@@ -522,6 +531,28 @@ button:disabled {
     background-repeat: no-repeat;
     background-position: center;
     z-index: 2;
+}
+
+@media(min-width:845px) {
+    .allegedWinner {
+        width: 65vw;
+        left: 17.5vw;
+        grid-template-columns: auto;
+        grid-template-rows: 1fr 20vh max-content;
+    }
+    .cardReviewList-alleged {
+        display: grid;
+        height: 60vh;
+        grid-auto-rows: min-content;
+        grid-template-columns: repeat(auto-fill, 90px);
+        grid-row: 2/3;
+        overflow-x: auto;
+        overflow-y: scroll;
+        height: 450px;
+    }
+    #confirm, #deny {
+        width: 50%;
+    }
 }
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
