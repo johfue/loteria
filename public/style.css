@@ -493,7 +493,7 @@ button:disabled {
 }
 
 .cardReviewList-alleged {
-    display: flex
+    display: flex;
     grid-row: 2/3;
     overflow-x: scroll;
     height: auto;
@@ -510,7 +510,7 @@ button:disabled {
 }
 
 #confirm {
-    justfiy-self: end;
+    justify-self: end;
 }
 
 #deny {
