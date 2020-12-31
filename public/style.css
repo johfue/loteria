@@ -481,8 +481,8 @@ button:disabled {
 /*/--------------------------------------------/*/
 .allegedWinner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr min-content max-content;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 20vh max-content;
     position: absolute;
     top: 12vh;
     width: 85vw;
@@ -543,8 +543,8 @@ button:disabled {
     .allegedWinner {
         width: 65vw;
         left: 17.5vw;
-        grid-template-columns: auto;
-        grid-template-rows: 1fr 20vh max-content;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr min-content max-content;
     }
     .cardReviewList-alleged {
         display: grid;
