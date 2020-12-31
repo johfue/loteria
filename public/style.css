@@ -359,9 +359,11 @@ button:disabled {
         grid-template-columns: 1fr max-content max-content 1fr;
         grid-template-rows: 20vh 45vh 20vh;
     }
+    
     .hostConsole h2 {
         grid-column: 4/5;
     }
+    
     .winConditionWrap-host {
         grid-column: 2/4;
         grid-row: 1/2;
