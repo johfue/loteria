@@ -454,6 +454,7 @@ button:disabled {
 
 .cardReviewList li img {
     width: 100%;
+    min-width: 65px;
     display: block;
     object-fit: contain;
 }
@@ -483,8 +484,8 @@ button:disabled {
 .allegedWinner {
     display: grid;
     grid-gap: 1em;
-    grid-template-columns: auto;
-    grid-template-rows: 1fr 20vh max-content;
+    grid-template-columns: 1fr;
+    min-content 1fr min-content 20vh max-content;
     position: absolute;
     top: 12vh;
     width: 85vw;
@@ -494,7 +495,7 @@ button:disabled {
     left: 7.5vw;
 }
 
-.cardReviewList h3:nth-child(1) {
+.allegedWinner h3:nth-child(1) {
     grid-row: 3/4;
 }
 
@@ -502,7 +503,8 @@ button:disabled {
     display: flex;
     grid-row: 4/5;
     overflow-x: scroll;
-    height: auto;
+    height: 100%;
+    margin: 0;
     width: auto;
     overflow-y: auto;
 }
@@ -512,7 +514,8 @@ button:disabled {
 }
 
 #confirm, #deny {
-    width: 100%;
+    grid-row: 5/6;
+    grid-column: 1/2;
 }
 
 #confirm {
@@ -564,6 +567,8 @@ button:disabled {
     }
     #confirm, #deny {
         width: 50%;
+        grid-row: span 1;
+        grid-column: span 1;
     }
 }
 /*/--------------------------------------------/*/
