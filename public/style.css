@@ -325,7 +325,7 @@ button:disabled {
 /*/--------------------------------------------/*/
 .hostConsole {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: max-content max-content;
     grid-template-rows: max-content 15vh 45vh 20vh;
     justify-items: center;
     row-gap: 0.5rem;
@@ -381,6 +381,7 @@ button:disabled {
 }
 
 .drawWrap {
+    justify-self: start;
     grid-column: 2/3;
     grid-row: 3/4;
     /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
@@ -395,6 +396,7 @@ button:disabled {
 }
 
 .currentCardWrap-host {
+    justify-self: end;
     grid-column: 1/2;
     grid-row: 3/4;
 }
@@ -514,6 +516,7 @@ button:disabled {
 }
 
 #confirm, #deny {
+    width: 48%;
     grid-row: 5/6;
     grid-column: 1/2;
 }
@@ -608,7 +611,7 @@ button:disabled {
     grid-column: 1/2;
     justify-items: center;
     align-self: center;
-    grid-gap: 1rem
+    grid-gap: 0.5rem
 }
 
 .currentCardWrap-player {
@@ -630,6 +633,9 @@ button:disabled {
     .playerGame {
         grid-column: 2/3;
         grid-row: 2/4;
+    }
+    .currentCardWrap-player, .winConditionWrap-player {
+        grid-gap: 1rem
     }
     .currentCardWrap-player {
         grid-row: 2/3;
@@ -705,7 +711,6 @@ button:disabled {
     box-sizing: border-box;
     background-color: var(--neutral-700);
     padding: 16px;
-    vertical-align: top;
     /*border: 5px solid black;*/
     overflow-y: scroll;
 }
@@ -719,6 +724,7 @@ button:disabled {
     grid-row: 4/5;
     overflow-x: scroll;
     grid-gap: 1rem;
+    grid-column: 1/4
 }
 .playerGraph-player table:nth-child(1) {
     display: none;
@@ -827,7 +833,7 @@ table, td {
     background-color: var(--neutral-900);
     height: 80vh;
     width: 80vw;
-    z-index: 2;
+    z-index: 3;
     box-sizing: border-box;
     padding: 16px;
     display: flex;
