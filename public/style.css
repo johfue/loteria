@@ -88,12 +88,9 @@ h1, h2, h3, p, li, label, input, button {
 
 h1 {
     text-align: center;
-    background-color: var(--primary-base);
-    padding: 0.5vh 0;
-    margin: 0;
-    border-bottom: 6px dashed var(--neutral-100);
+    margin-top: 3rem;
     font-family: Lobster;
-    position: relative;
+    font-size: 5em;
 }
 
 h1:before {
@@ -185,13 +182,13 @@ button:disabled {
     margin: 0 auto;
 }
 
-/*#popItIn > form {*/
-/*    display: grid;*/
-/*    grid-template-columns: 1fr;*/
-/*    width: min-content;*/
-/*    margin: 5em auto 0;*/
-/*    grid-gap: 2rem;*/
-/*}*/
+.welcome {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: fit-content;
+    margin: 5em auto 0;
+    grid-gap: 1.5rem;
+}
 
 #host, #player, #roomSearch {
     font-size: 2em;
@@ -211,10 +208,11 @@ button:disabled {
     grid-column: span 1;
 }
 
+
 @media(min-width:760px) {
-    /*#popItIn > form {*/
-    /*    grid-template-columns: 1fr 1fr;*/
-    /*}*/
+    .welcome {
+        grid-template-columns: 1fr 1fr;
+    }
     #player, #roomSearch {
         width: 295px;
     }
