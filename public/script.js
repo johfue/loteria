@@ -217,9 +217,8 @@ function host() {
         drawnCards.push(cardDrawn);
         
         deckList = deckList.filter(function(card) {
-                return card !== cardDrawn;
-            };
-        );
+            return card !== cardDrawn;
+        });
         
         if (deckList.length <= 0) {
             endGame();
