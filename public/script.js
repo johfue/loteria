@@ -192,7 +192,7 @@ function host() {
 
     function endGame() {
         drawBtn.disabled = true;
-        drawBtn.onclick(startGame);
+        drawBtn.onClick = startGame;
         winConditionBtn.disabled = false;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
@@ -256,7 +256,7 @@ function host() {
         chooseWinCondition();
     });
 
-    drawBtn.onclick(startGame);
+    drawBtn.onclick = startGame;
     
     socket.on ("new player", function(id) {
         if (currentWinCondition === null ) {
