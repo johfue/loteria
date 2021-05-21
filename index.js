@@ -15,9 +15,6 @@ var roomList =[];
 io.on('connection', (socket) => {
     
     console.log('a user connected');
-    // var currentCard = "";
-    // var gameState= "";
-    // var winCondition = "";
     
     socket.on('new room', (r) => {
         roomListCheck = roomList.length;
@@ -72,8 +69,10 @@ io.on('connection', (socket) => {
 
     });
     socket.on('announce win', (board, checked, roomNumber) => {
-        console.log(checked);
         io.to(roomNumber).emit('check win', board, checked, socket.id);
+    });
+    socket.on('board checked', (bool, id) => {
+        io.to(id).emit('check win', bool);
     });
 });
 

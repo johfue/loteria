@@ -9,6 +9,10 @@ var opponentList = [];
 
 content = document.getElementById("popItIn");
 
+function changeAlert(string) {
+    return string;
+}
+
 function boardConstruct(seed) {
     // creates a <table> element
     Math.seedrandom(seed.toString());
@@ -19,38 +23,83 @@ function boardConstruct(seed) {
         var row = document.createElement("tr");
 	    // create cells in row
         for (j = 0; j < 4; j++) {
-                //iterate through columns
-                //columns would be accessed using the "col" variable assigned in the for loop
             cardOnBoardCheck = cardOnBoard.length;
             var cell = document.createElement("td");
             var img = document.createElement("img");
             var input = document.createElement("input");
             input.setAttribute("type", "checkbox");
             while (cardOnBoard.length === cardOnBoardCheck ) {
-            card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
-            if (cardOnBoard.includes(card) === false) {
-                cardOnBoard.push(card);
-                img.src = "images/CAAR/" + card + '.jpeg';
-                cell.appendChild(input);
-                cell.appendChild(img);
-                row.appendChild(cell);
+                card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
+                if (cardOnBoard.includes(card) === false) {
+                    cardOnBoard.push(card);
+                    img.src = "images/CAAR/" + card + '.jpeg';
+                    cell.appendChild(input);
+                    cell.appendChild(img);
+                    row.appendChild(cell);
+                }
             }
-        }
         }
         tbl.appendChild(row);
     }
     return tbl;
 }
 
-function host() {
-    const deck = _("drawBtn");
-    const currentCard = _("currentCard");
-    const winCondition = document.querySelectorAll('input[name="winCondition"]');
-    const start = _("start");
-    const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    var drawnCards = [];
+function newPlayer(id) {
     
-    socket.emit('new room', (roomNumber));
+    if (!opponentList.includes(id)) {
+        var opponent = document.createElement("table");
+        opponent.setAttribute("id", id);
+        opponentList.push(id);
+    
+        for (r = 0; r < 4; r++) {
+            var row = document.createElement("tr");
+            for (j = 0; j < 4; j++) {
+                var cell = document.createElement("td");
+                var input = document.createElement("input");
+                input.setAttribute("type", "checkbox");
+                input.disabled = true;
+                cell.appendChild(input);
+                row.appendChild(cell);
+            }
+            opponent.appendChild(row);
+        }
+        
+        _("playerGraph").appendChild(opponent);
+    }
+
+}
+
+function host() {
+    const drawBtn = _("drawBtn");
+    const currentCard = _("currentCard");
+    const winConditionBtn = _("winConditionBtn");
+    const winCondition = document.querySelectorAll('input[name="winCondition"]');
+    let currentWinCondition = null;
+    const gameSettings = _("gameSettings");
+    const winConditionInfo = _("winConditionInfo");
+    const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    const boardHold = _("boardHold");
+    const allegedWinner = _("allegedWinner");
+    const cardReview = _("cardReview");
+    const cardReviewList = _("cardReviewList");
+    let drawnCards = [];
+    let allegedWinnerID = null;
+    
+    var gameInfo = {
+        gameState: false,
+        pickedBoards: [],
+        playerChecks: [],
+
+    };
+    
+    var players = {
+        id: null,
+        nickname: "",
+        board: null,
+        boardChecked: [],
+    };
+    
+    socket.emit('new room', roomNumber);
 
     socket.on('room clear', function(r){
         _("roomNumber").innerHTML = r;
@@ -58,9 +107,7 @@ function host() {
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
-            console.log(1);
-            start.disabled = false;
-            console.log(2);
+            winConditionBtn.disabled = false;
         });
     }
     
@@ -71,25 +118,36 @@ function host() {
         }
     }
     
-    function startGame() {
-        currentCard.src = "images/blank.png";
-        shuffleDeck();
-        deck.disabled = false;
-        start.disabled = true;
-        _("gameSettings").classList.add("invisible");
+    function chooseWinCondition() {
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
-        _("winConditionInfo").src =  "images/" + currentWinCondition + ".png";
-        socket.emit('game state', true, roomNumber);
+        winConditionInfo.src =  "images/" + currentWinCondition + ".png";
         socket.emit('win condition', currentWinCondition, roomNumber);
+        gameSettings.classList.add("invisible");
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = true;
         }
+    }
+    
+    function startGame() {
+        currentCard.src = "images/blank.png";
+        shuffleDeck();
+        drawBtn.disabled = false;
+        winConditionBtn.disabled = true;
         socket.emit('game state', true, roomNumber);
     }
     
+    function boardChecked(bool) {
+        socket.emit('board checked', bool, allegedWinnerID);
+        if (bool) {
+            endGame();
+        }
+        allegedWinner.classList.add("invisible");
+    }
+    
     function checkBoard(board, checked, id) {
+        allegedWinnerID = id;
         _(id).classList.add("winnerGlow");
-        
+    
         var quick = _(id).querySelectorAll('input');
         for (z=0; z < quick.length; z++) {
             quick[z].disabled = false;
@@ -99,15 +157,14 @@ function host() {
             _(id).classList.remove("winnerGlow");
             checkBoardRender(board, checked);
             _(id).removeEventListener('click', checkBoardRender);
-    });
-        
+        });
+
     }
     
     function checkBoardRender(board, checked) {
         var allegedBoard = boardConstruct(board);
-        _("boardHold").innerHTML = "";
+        boardHold.innerHTML = "";
         
-        console.log(checked);
         for (b=0; b < checked.length; b++) {
             var currentCell = allegedBoard.rows[checked[b].y].cells[checked[b].x];
             currentCell.firstElementChild.checked = true;
@@ -124,19 +181,22 @@ function host() {
             li.appendChild(img);
             _("cardReviewListAlleged").appendChild(li);
         }
-        _("boardHold").appendChild(allegedBoard);
-        _("allegedWinner").classList.remove("invisible");
+        boardHold.appendChild(allegedBoard);
+        allegedWinner.classList.remove("invisible");
     }
-    
+
+    _("confirm").addEventListener('click', boardChecked(true));
+    _("deny").addEventListener('click', boardChecked(false));
+
     function endGame() {
-        deck.disabled = true;
-        start.disabled = false;
+        drawBtn.disabled = true;
+        winConditionBtn.disabled = false;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
         drawnCards = [];
         currentCard.src="images/blank.png";
-        _("gameSettings").classList.remove("invisible");
+        gameSettings.classList.remove("invisible");
         opponentTiles = _("playerGraph").getElementsByTagName('input');
         losers = _("playerGraph").querySelectorAll(".winnerGlow");
         for (u=0; u < losers.length; u++) {
@@ -156,11 +216,12 @@ function host() {
         currentCard.src = "images/CAAR/" + cardDrawn + ".jpeg";
         drawnCards.push(cardDrawn);
         
-        deckList = deckList.filter(function(item) {
-            return item !== cardDrawn;
-            }
-        );
-    
+        // deckList = deckList.filter(function(item) {
+        //         return item !== cardDrawn
+        //     };
+        // );
+        deckList = deckList.filter(cardDrawn !== cardDrawn);
+        
         if (deckList.length <= 0) {
             endGame();
         }
@@ -172,82 +233,60 @@ function host() {
     
     socket.on ("check win", function(board, checked, id) {
         checkBoard(board, checked, id);
-        console.log(checked);
     });
     
     _("reviewBtn").addEventListener('click', function() {
-        _("cardReviewList").innerHTML = "";
+        cardReviewList.innerHTML = "";
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
             img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
             li.appendChild(img);
-            _("cardReviewList").appendChild(li);
+            cardReviewList.appendChild(li);
         }
-        _("cardReview").classList.remove("invisible");
+        cardReview.classList.remove("invisible");
     });
     
     _("closeReview").addEventListener('click', function(event) {
         event.preventDefault();
-        _("cardReview").classList.add("invisible");
+        cardReview.classList.add("invisible");
     });
     
-    _("confirm").addEventListener('click', function(event) {
-        event.preventDefault();
-        _("allegedWinner").classList.add("invisible");
-        endGame();
-    });
-    _("deny").addEventListener('click', function(event) {
-        event.preventDefault();
-        _("allegedWinner").classList.add("invisible");
-    });
-    start.addEventListener('click', function(event) {
+    winConditionBtn.addEventListener('click', function(event) {
         event.preventDefault();
         startGame();
     });
-    
-    function newPlayer(id) {
-    var opponent = document.createElement("table");
-        opponent.setAttribute("id", id);
-        opponentList.push(id);
-        for (r = 0; r < 4; r++) {
-            var row = document.createElement("tr");
-            for (j = 0; j < 4; j++) {
-                var cell = document.createElement("td");
-                var input = document.createElement("input");
-                input.setAttribute("type", "checkbox");
-                input.disabled = true;
-                cell.appendChild(input);
-                row.appendChild(cell);
-            }
-            opponent.appendChild(row);
-        }
-        _("playerGraph").appendChild(opponent);
-    }
+
     
     socket.on ("new player", function(id) {
-        if (document.querySelector('input[name="winCondition"]:checked') === null ) {
+        if (currentWinCondition === null ) {
             socket.emit('update newcomer', "blank", currentCard.src, roomNumber, id, opponentList, false);
         }
         else {
-            socket.emit('update newcomer', document.querySelector('input[name="winCondition"]:checked').value, currentCard.src, roomNumber, id, opponentList, true);
+            socket.emit('update newcomer', currentWinCondition, currentCard.src, roomNumber, id, opponentList, true);
             
         }
         newPlayer(id);
     });
     
-    deck.onclick = drawCard;
+    drawBtn.onclick = drawCard;
     shuffleDeck();
 }
 
 function player() {
     
-    var table = _("board");
+    const table = _("board");
+    const newBoard = _("newBoard");
+    const tableCells = table.querySelectorAll('input[type="checkbox"]');
+    const currentCard = _('currentCard');
+    const winCondition = _('winConditionInfo');
+    const announceWin = _("announceWin");
+    const boardSelectOptions = _("boardSelectOptions");
+    const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
     
-    var newBoard = _("newBoard");
-    
-    var tableCells = table.querySelectorAll('input[type="checkbox"]');
-    
+    let chosenBoard = null;
+    let checkedPosition = [];
+
     function clearBeans() {
         tiles = board.getElementsByTagName('input');
         for (var i=0; i<tiles.length; i++) {
@@ -275,7 +314,23 @@ function player() {
                     if (cardOnBoard.includes(card) === false) {
                         cardOnBoard.push(card);
                         col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
-        
+                        col.addEventListener("click", function() {
+                            var cell = this.parentNode.cellIndex;
+                            var row = this.parentNode.parentNode.rowIndex;
+
+                            var coordinate = {y:row, x:cell};
+                            
+                            if (checkedPosition.includes(coordinate)) {
+                                checkedPosition.splice(chedckedPosition.indexOf(coordinate), 1);
+                            }
+                            
+                            else if (this.checked) {
+                                checkedPosition.push(coordinate);
+                            }
+
+                            socket.emit("activity", x, y, this.checked, roomNumber.innerHTML);
+                        })
+
                     }
         
                 }
@@ -283,48 +338,54 @@ function player() {
         }
         
     }
-        for (k=0; k < tableCells.length; k++) {
-            var changed = tableCells[k];
-            var x = changed.parentNode.cellIndex;
-            var y = changed.parentNode.parentNode.rowIndex;
-            var bool = changed.checked;
-            tableCells[k].addEventListener("click", function() {
-                socket.emit("activity", this.parentNode.cellIndex, this.parentNode.parentNode.rowIndex, this.checked, roomNumber.innerHTML);
-        })
-    }
-
+    //     for (k=0; k < tableCells.length; k++) {
+    //         var changed = tableCells[k];
+    //         var x = changed.parentNode.cellIndex;
+    //         var y = changed.parentNode.parentNode.rowIndex;
+    //         var bool = changed.checked;
+    //         tableCells[k].addEventListener("click", function() {
+    //             socket.emit("activity", this.parentNode.cellIndex, this.parentNode.parentNode.rowIndex, this.checked, roomNumber.innerHTML);
+    //     })
+    // }
 
     function pickBoard(evt) {
         evt.preventDefault();
-        var chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
+        chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
         Math.seedrandom(chosenBoard);
         drawTable();
         _("boardSelect").classList.add("invisible");
         table.classList.remove("invisible");
     }
     
-    function recordBoard() {
-        var checkedList = document.querySelectorAll('input[name="boardCell"]:checked');
-        var checkedPosition = [];
-        for (d=0; d < checkedList.length; d++) {
-            var row = checkedList[d].parentElement.parentElement.rowIndex;
-            var cell = checkedList[d].parentElement.cellIndex;
-            var coordinate = {y:row, x:cell};
-            checkedPosition.push(coordinate);
-        }
-        return checkedPosition;
-    }
+    // function recordBoard() {
+    //     var checkedList = document.querySelectorAll('input[name="boardCell"]:checked');
+    //     for (d=0; d < checkedList.length; d++) {
+    //         var row = checkedList[d].parentElement.parentElement.rowIndex;
+    //         var cell = checkedList[d].parentElement.cellIndex;
+    //         var coordinate = {y:row, x:cell};
+    //         checkedPosition.push(coordinate);
+    //     }
+    //     return checkedPosition;
+    // }
     
-    function announceWin(board, checked) {
-        socket.emit("announce win", board, checked, roomNumber.innerHTML);
+    // function announceWin(board, checked) {
+    //     socket.emit("announce win", board, checked, roomNumber.innerHTML);
+    // }
+    
+    function disableBoard(bool) {
+        for (k=0; k < tableCells.length; k++) {
+            tableCells[k].disabled = bool;
+        }
+        announceWin.disabled = bool;
+        changeAlert("verifying");
     }
     
     newBoard.onclick = pickBoard;
     
-    _("announceWin").addEventListener('click', function(event) {
+    announceWin.addEventListener('click', function(event) {
         event.preventDefault();
-        announceWin(document.querySelector('input[name="boardNumber"]:checked').value, recordBoard(), event);
-        console.log(recordBoard())
+        disableBoard(true);
+        socket.emit("announce win", chosenBoard, checkedPosition, roomInput);
     });
     
     function startEnd(bool) {
@@ -333,19 +394,13 @@ function player() {
         // }
         // newBoard.disabled = bool;
         if (bool) {
-            for (h=0; h < tableCells.length; h++) {
-                tableCells[h].disabled = false;
-                _("announceWin").disabled = false;
-            }
+            disableBoard(false);
         }
         else {
             clearBeans();
-            _("currentCard").src="images/blank.png";
-            _("winConditionInfo").src="images/blank.png";
-            for (h=0; h < tableCells.length; h++) {
-                tableCells[h].disabled = true;
-            }
-            _("announceWin").disabled = true;
+            currentCard.src="images/blank.png";
+            winConditionInfo.src="images/blank.png";
+            disableBoard(true);
             _("boardSelect").classList.remove("invisible");
         }
         
@@ -356,14 +411,19 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        _('currentCard').src = "images/CAAR/" + sentCard + '.jpeg';
+        currentCard.src = "images/CAAR/" + sentCard + '.jpeg';
     });
     
     socket.on('win condition', function(condition){
-        _('winConditionInfo').src = "images/" + condition + '.png';
+        winConditionInfo.src = "images/" + condition + '.png';
+    });
+    
+    socket.on('win checked', function(bool){
+        disabledBoard(false);
     });
     
     _("roomNumber").innerHTML = roomInput;
+    
     socket.emit('new player', roomNumber.innerHTML);
     
     for (o=0; o < 75; o++) {
@@ -377,45 +437,20 @@ function player() {
             label.appendChild(boardConstruct(o));
             li.appendChild(input);
             li.appendChild(label);
-            _("boardSelectOptions").appendChild(li);
+            boardSelectOptions.appendChild(li);
     }
     
-    var boardOptions = document.querySelectorAll('input[name="boardNumber"]');
     
     for (n=0; n<boardOptions.length; n++) {
         boardOptions[n].addEventListener('click', function() {
             newBoard.disabled = false;
         });
     }
-    // drawTable();
-    
 
-
-    
-    function newPlayer(id) {
-        console.log(340);
-        var opponent = document.createElement("table");
-            opponent.setAttribute("id", id);
-            opponentList.push(id);
-            for (r = 0; r < 4; r++) {
-                var row = document.createElement("tr");
-                for (j = 0; j < 4; j++) {
-                    var cell = document.createElement("td");
-                    var input = document.createElement("input");
-                    input.setAttribute("type", "checkbox");
-                    input.disabled = true;
-                    cell.appendChild(input);
-                    row.appendChild(cell);
-                }
-                opponent.appendChild(row);
-            }
-            _("playerGraph").appendChild(opponent);
-    }
-    
     socket.on('catch-up', function(condition, sentCard, id, opponentList, bool) {
         startEnd(bool);
-        _('currentCard').src = sentCard;
-        _('winConditionInfo').src = "images/" + condition + '.png';
+        currentCard.src = sentCard;
+        winConditionInfo.src = "images/" + condition + '.png';
         for (e=0; e < opponentList.length; e++) {
             newPlayer(opponentList[e]);
         }
