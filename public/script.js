@@ -437,7 +437,7 @@ function player() {
             label.appendChild(boardConstruct(o));
             li.appendChild(input);
             li.appendChild(label);
-            li..addEventListener('click', function() {
+            li.addEventListener('click', function() {
                 console.log("click on board option");
                 newBoard.disabled = false;
             });
