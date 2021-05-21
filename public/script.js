@@ -192,7 +192,7 @@ function host() {
 
     function endGame() {
         drawBtn.disabled = true;
-        drawBtn.oneclick(startGame);
+        drawBtn.onclick(startGame);
         winConditionBtn.disabled = false;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
@@ -437,17 +437,21 @@ function player() {
             label.appendChild(boardConstruct(o));
             li.appendChild(input);
             li.appendChild(label);
+            li..addEventListener('click', function() {
+                console.log("click on board option");
+                newBoard.disabled = false;
+            });
             boardSelectOptions.appendChild(li);
     }
     
     
-    for (n=0; n<boardOptions.length; n++) {
-        console.log("added event listener to boardOptions")
-        boardOptions[n].addEventListener('click', function() {
-            console.log("click on board option");
-            newBoard.disabled = false;
-        });
-    }
+    // for (n=0; n<boardOptions.length; n++) {
+    //     console.log("added event listener to boardOptions");
+    //     boardOptions[n].addEventListener('click', function() {
+    //         console.log("click on board option");
+    //         newBoard.disabled = false;
+    //     });
+    // }
 
     socket.on('catch-up', function(condition, sentCard, id, opponentList, bool) {
         startEnd(bool);
