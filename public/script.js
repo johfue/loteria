@@ -252,9 +252,13 @@ function host() {
     
     winConditionBtn.addEventListener('click', function(event) {
         event.preventDefault();
-        startGame();
+        chooseWinCondition();
     });
 
+    drawBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        startGame();
+    });
     
     socket.on ("new player", function(id) {
         if (currentWinCondition === null ) {
@@ -348,6 +352,7 @@ function player() {
 
     function pickBoard(evt) {
         evt.preventDefault();
+        console.log("pickBoard");
         chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
         Math.seedrandom(chosenBoard);
         drawTable();
