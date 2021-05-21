@@ -216,11 +216,10 @@ function host() {
         currentCard.src = "images/CAAR/" + cardDrawn + ".jpeg";
         drawnCards.push(cardDrawn);
         
-        // deckList = deckList.filter(function(item) {
-        //         return item !== cardDrawn
-        //     };
-        // );
-        deckList = deckList.filter(cardDrawn !== cardDrawn);
+        deckList = deckList.filter(function(card) {
+                return card !== cardDrawn;
+            };
+        );
         
         if (deckList.length <= 0) {
             endGame();
