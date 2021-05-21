@@ -122,17 +122,19 @@ function host() {
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
         winConditionInfo.src =  "images/" + currentWinCondition + ".png";
         socket.emit('win condition', currentWinCondition, roomNumber);
+        drawBtn.disabled = false;
         gameSettings.classList.add("invisible");
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = true;
         }
     }
     
-    function startGame() {
+    function startGame(event) {
+        event.preventDefault;
         currentCard.src = "images/blank.png";
         shuffleDeck();
-        drawBtn.disabled = false;
         winConditionBtn.disabled = true;
+        drawBtn.onclick = drawCard;
         socket.emit('game state', true, roomNumber);
     }
     
@@ -190,6 +192,7 @@ function host() {
 
     function endGame() {
         drawBtn.disabled = true;
+        drawBtn.oneclick(startGame);
         winConditionBtn.disabled = false;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
@@ -215,10 +218,8 @@ function host() {
         cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
         currentCard.src = "images/CAAR/" + cardDrawn + ".jpeg";
         drawnCards.push(cardDrawn);
-        
-        deckList = deckList.filter(function(card) {
-            return card !== cardDrawn;
-        });
+
+        deckList.splice(deckList.indexOf(cardDrawn), 1);
         
         if (deckList.length <= 0) {
             endGame();
@@ -255,10 +256,7 @@ function host() {
         chooseWinCondition();
     });
 
-    drawBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        startGame();
-    });
+    drawBtn.onclick(startGame);
     
     socket.on ("new player", function(id) {
         if (currentWinCondition === null ) {
@@ -271,7 +269,6 @@ function host() {
         newPlayer(id);
     });
     
-    drawBtn.onclick = drawCard;
     shuffleDeck();
 }
 
@@ -330,7 +327,7 @@ function player() {
                                 checkedPosition.push(coordinate);
                             }
 
-                            socket.emit("activity", x, y, this.checked, roomNumber.innerHTML);
+                            socket.emit("activity", cell, row, this.checked, roomNumber.innerHTML);
                         })
 
                     }
@@ -445,7 +442,9 @@ function player() {
     
     
     for (n=0; n<boardOptions.length; n++) {
+        console.log("added event listener to boardOptions")
         boardOptions[n].addEventListener('click', function() {
+            console.log("click on board option");
             newBoard.disabled = false;
         });
     }
