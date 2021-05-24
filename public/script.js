@@ -82,6 +82,7 @@ function host() {
     const allegedWinner = _("allegedWinner");
     const cardReview = _("cardReview");
     const cardReviewList = _("cardReviewList");
+    const alerModal = _("alertModal");
     let drawnCards = [];
     let allegedWinnerID = null;
     
@@ -96,7 +97,7 @@ function host() {
         id: null,
         nickname: "",
         board: null,
-        boardChecked: [],
+        placedBeans: [],
     };
     
     socket.emit('new room', roomNumber);
@@ -139,15 +140,22 @@ function host() {
     }
     
     function boardChecked(bool) {
-        socket.emit('board checked', bool, allegedWinnerID);
+        socket.emit('board checked', bool, allegedWinnerID, roomNumber);
         if (bool) {
-            endGame();
+            alertModal.classList.remove("invisible");
         }
+
+        _(allegedWinnerID).removeEventListener('click', function(event) {
+            this.classList.remove("winnerGlow");
+            checkBoardRender(board, checked, id);
+        });
+
         allegedWinner.classList.add("invisible");
+        allegedWinnerID = null;
+        
     }
     
     function checkBoard(board, checked, id) {
-        allegedWinnerID = id;
         _(id).classList.add("winnerGlow");
     
         var quick = _(id).querySelectorAll('input');
@@ -155,16 +163,18 @@ function host() {
             quick[z].disabled = false;
         }
 
-        _(id).addEventListener('click', function(event) {
-            _(id).classList.remove("winnerGlow");
-            checkBoardRender(board, checked);
-            _(id).removeEventListener('click', checkBoardRender);
-        });
+        console.log("checkBoard: " + id);
 
+        _(id).addEventListener('click', function(event) {
+            this.classList.remove("winnerGlow");
+            checkBoardRender(board, checked, id);
+        });
     }
     
-    function checkBoardRender(board, checked) {
+    function checkBoardRender(board, checked, id) {
+        console.log("nope 1");
         var allegedBoard = boardConstruct(board);
+        console.log("nope 2");
         boardHold.innerHTML = "";
         
         for (b=0; b < checked.length; b++) {
@@ -185,10 +195,16 @@ function host() {
         }
         boardHold.appendChild(allegedBoard);
         allegedWinner.classList.remove("invisible");
-    }
+        allegedWinnerID = id;
 
-    _("confirm").addEventListener('click', boardChecked(true));
-    _("deny").addEventListener('click', boardChecked(false));
+    }
+    
+    _("confirm").addEventListener('click', function(event) {
+        boardChecked(true);
+    });
+    _("deny").addEventListener('click', function(event) {
+        boardChecked(false);
+    });
 
     function endGame() {
         drawBtn.disabled = true;
@@ -199,12 +215,13 @@ function host() {
         }
         drawnCards = [];
         currentCard.src="images/blank.png";
+        alertModal.classList.add("invisible");
         gameSettings.classList.remove("invisible");
         opponentTiles = _("playerGraph").getElementsByTagName('input');
         losers = _("playerGraph").querySelectorAll(".winnerGlow");
         for (u=0; u < losers.length; u++) {
             losers[u].classList.remove("winnerGlow");
-            losers[u].removeEventListener('click', checkBoardRender);
+            losers[u].removeEventListener('click', checkBoardRender(board, checked));
 
         }
         for (w=0; w < opponentTiles.length; w++) {
@@ -254,6 +271,16 @@ function host() {
     winConditionBtn.addEventListener('click', function(event) {
         event.preventDefault();
         chooseWinCondition();
+    });
+
+    restartGame.addEventListener('click', function(event) {
+        event.preventDefault();
+        endGame();
+    });
+
+    continueGame.addEventListener('click', function(event) {
+        event.preventDefault();
+        alertModal.classList.add("invisible");
     });
 
     drawBtn.onclick = startGame;
@@ -314,20 +341,27 @@ function player() {
                         cardOnBoard.push(card);
                         col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
                         col.addEventListener("click", function() {
-                            var cell = this.parentNode.cellIndex;
-                            var row = this.parentNode.parentNode.rowIndex;
+                            var cell = this.cellIndex;
+                            var row = this.parentNode.rowIndex;
 
                             var coordinate = {y:row, x:cell};
                             
-                            if (checkedPosition.includes(coordinate)) {
-                                checkedPosition.splice(chedckedPosition.indexOf(coordinate), 1);
-                            }
-                            
-                            else if (this.checked) {
+                            if (this.firstElementChild.checked) {
                                 checkedPosition.push(coordinate);
                             }
+                            
+                            else if (checkedPosition.indexOf(coordinate) < 0) {
+                                console.log("checkedPosition included coordinate");
+                                checkedPosition.splice(checkedPosition.indexOf(coordinate), 1);
+                            }
+                            
+                            console.log(checkedPosition.includes(coordinate));
+                            console.log(checkedPosition.indexOf(coordinate));
+                            console.log("player " + coordinate);
+                            console.log(checkedPosition);
 
-                            socket.emit("activity", cell, row, this.checked, roomNumber.innerHTML);
+
+                            socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
                         })
 
                     }
@@ -419,7 +453,8 @@ function player() {
     });
     
     socket.on('win checked', function(bool){
-        disabledBoard(false);
+        console.log("win checked");
+        disableBoard(false);
     });
     
     _("roomNumber").innerHTML = roomInput;
@@ -492,6 +527,11 @@ function roomSearch(room, evt) {
 
 function opponentUpdate(x,y, bool, id) {
     var opponent = _(id);
+    console.log("opponetUpdate() " + y);
+    console.log("opponetUpdate() " + x);
+    console.log(opponent.rows[y].cells[x].firstElementChild);
+    console.log(opponent);
+    opponent.rows[y].cells[x].checked = bool;
     opponent.rows[y].cells[x].firstElementChild.checked = bool;
 }
 

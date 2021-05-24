@@ -71,8 +71,8 @@ io.on('connection', (socket) => {
     socket.on('announce win', (board, checked, roomNumber) => {
         io.to(roomNumber).emit('check win', board, checked, socket.id);
     });
-    socket.on('board checked', (bool, id) => {
-        io.to(id).emit('check win', bool);
+    socket.on('board checked', (bool, id, roomNumber) => {
+        io.to(id).emit('win checked', bool);
     });
 });
 

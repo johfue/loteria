@@ -41,16 +41,23 @@
     </div>
 </div>
 
-<div id="cardReview" class="cardReview invisible">
+<div id="cardReview" class="modal cardReview invisible">
         <ul id="cardReviewList" class="cardReviewList"></ul>
         <button class="denyBtn" id="closeReview">Close</button>
 </div>
 
-<div id="allegedWinner" class="allegedWinner invisible">
+<div id="allegedWinner" class="modal allegedWinner invisible">
         <h3>Drawn Cards</h3>
         <ul id="cardReviewListAlleged" class="cardReviewList cardReviewList-alleged"></ul>
         <h3><span id="allegedWinnerName"></span> Board</h3>
         <div id="boardHold"></div>
-        <button class="primaryBtn" id="confirm" value="newGame">New Game</button>
-        <button class="denyBtn" id="deny" value="keepPlaying">Keep Playing</button>
+        <button class="primaryBtn" id="confirm" value="yes">Yes</button>
+        <button class="denyBtn" id="deny" value="no">No</button>
+</div>
+
+<div id="alertModal" class="alert invisible">
+    <h3>Congratulations</h3>
+    <p>Winner's nickaname</p>
+    <button class="primaryBtn" id="restartGame" value="">New game</button>
+    <button class="primaryBtn" id="continueGame" value="">Keep playing</button>
 </div>
