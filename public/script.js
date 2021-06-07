@@ -17,32 +17,103 @@ function boardConstruct(seed) {
     // creates a <table> element
     Math.seedrandom(seed.toString());
     var tbl = document.createElement("table");
+    var tblTemp = document.createDocumentFragment();
+    
+    
     cardOnBoard = [];
-    // creating rows
     for (r = 0; r < 4; r++) {
+        
         var row = document.createElement("tr");
-	    // create cells in row
+        
         for (j = 0; j < 4; j++) {
             cardOnBoardCheck = cardOnBoard.length;
-            var cell = document.createElement("td");
-            var img = document.createElement("img");
-            var input = document.createElement("input");
-            input.setAttribute("type", "checkbox");
             while (cardOnBoard.length === cardOnBoardCheck ) {
                 card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
                 if (cardOnBoard.includes(card) === false) {
                     cardOnBoard.push(card);
-                    img.src = "images/CAAR/" + card + '.jpeg';
-                    cell.appendChild(input);
-                    cell.appendChild(img);
-                    row.appendChild(cell);
+                    
+                    // var cell = document.createElement("td");
+                    // var img = document.createElement("img");
+                    // img.src = "images/CAAR/" + card + '.jpeg';
+                    // cell.appendChild(img);
+                    // row.appendChild(cell);
                 }
             }
         }
+        
         tbl.appendChild(row);
     }
     return tbl;
 }
+
+
+function appendCell() {
+    var cell = document.createElement("td");
+    var img = document.createElement("img");
+    img.src = "images/CAAR/" + card + '.jpeg';
+    cell.appendChild(img);
+    row.appendChild(cell);
+}
+
+function drawCell() {
+    col = table.rows[i].cells[j];
+    col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
+    col.addEventListener("click", function() {
+        var cell = this.cellIndex;
+        var row = this.parentNode.rowIndex;
+        socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
+    });
+}
+
+
+function generateCardOnBoard() {
+    cardOnBoard = [];
+        for (i = 0; i < 4; i++) {
+            for (j = 0; j < 4; j++) {
+                cardOnBoardCheck = cardOnBoard.length;
+                while (cardOnBoard.length === cardOnBoardCheck ) {
+                    card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
+        
+                    if (cardOnBoard.includes(card) === false) {
+                        cardOnBoard.push(card);
+                        appendCell();
+                        drawCell();
+                    }
+                }
+            }
+        }
+}
+
+    function drawTable() {
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                cardOnBoardCheck = cardOnBoard.length;
+                    
+                while (cardOnBoard.length === cardOnBoardCheck ) {
+                    card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
+        
+                    if (cardOnBoard.includes(card) === false) {
+                        cardOnBoard.push(card);
+                        
+                        col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
+                        col.addEventListener("click", function() {
+                            var cell = this.cellIndex;
+                            var row = this.parentNode.rowIndex;
+
+                            socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
+                        })
+
+                    }
+        
+                }
+            }
+        }
+        
+    }
+
+
+
+
 
 function newPlayer(nickname, id) {
     
@@ -52,16 +123,14 @@ function newPlayer(nickname, id) {
         var opponentName = document.createElement("span");
         opponentName.innerHTML = nickname;
         opponent.setAttribute("id", id);
+        opponent.setAttribute("class", "player");
         opponentList.push(id);
     
         for (r = 0; r < 4; r++) {
             var row = document.createElement("tr");
             for (j = 0; j < 4; j++) {
                 var cell = document.createElement("td");
-                var input = document.createElement("input");
-                input.setAttribute("type", "checkbox");
-                input.disabled = true;
-                cell.appendChild(input);
+                cell.setAttribute("class", "player__cell");
                 row.appendChild(cell);
             }
             opponentTable.appendChild(row);
@@ -87,6 +156,7 @@ function host() {
     const cardReview = _("cardReview");
     const cardReviewList = _("cardReviewList");
     const alerModal = _("alertModal");
+    const cardReviewListAlleged = _("cardReviewListAlleged");
     let drawnCards = [];
     let allegedWinnerID = null;
     
@@ -194,13 +264,13 @@ function host() {
         for (q=0; q < disableThis.length; q++) {
             disableThis[q].disabled = true;
         }
-        _("cardReviewListAlleged").innerHTML = "";
+        cardReviewListAlleged.innerHTML = "";
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
             img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
             li.appendChild(img);
-            _("cardReviewListAlleged").appendChild(li);
+            cardReviewListAlleged.appendChild(li);
         }
         boardHold.appendChild(allegedBoard);
         allegedWinner.classList.remove("invisible");
@@ -247,7 +317,7 @@ function host() {
         currentCard.src="images/blank.png";
         alertModal.classList.add("invisible");
         gameSettings.classList.remove("invisible");
-        opponentTiles = _("playerGraph").getElementsByTagName('input');
+        opponentTiles = _("playerGraph").getElementsByTagName('td');
         losers = _("playerGraph").querySelectorAll(".winnerGlow");
         for (u=0; u < losers.length; u++) {
             losers[u].classList.remove("winnerGlow");
@@ -255,7 +325,7 @@ function host() {
 
         }
         for (w=0; w < opponentTiles.length; w++) {
-            opponentTiles[w].checked = false;
+            opponentTiles[w].classList.remove("beaned");
         }
         gameInfo.gameState = false;
         socket.emit('game state', false, roomNumber);
@@ -378,6 +448,18 @@ function host() {
     });
     
     shuffleDeck();
+    
+    function tabSwitch() {
+        cardReviewListAlleged.classList.toggle("invisible");
+        boardHold.classList.toggle("invisible");
+    }
+    
+    _('board-tab-btn').addEventListener("click", function(event) {
+        tabSwitch();
+    })
+    _('drawnCard-tab-btn').addEventListener("click", function(event) {
+        tabSwitch();
+    })
 }
 
 function player() {
@@ -402,9 +484,9 @@ function player() {
             }
             
         }
-        opponentTiles = _("playerGraph").getElementsByTagName('input');
+        opponentTiles = _("playerGraph").getElementsByTagName('td');
         for (w=0; w < opponentTiles.length; w++) {
-            opponentTiles[w].checked = false;
+            opponentTiles[w].classList.remove("beaned");
         }
     }
     
@@ -597,8 +679,8 @@ function roomSearch(room, evt) {
 
 function opponentUpdate(x,y, bool, id) {
     var opponent = _(id).firstElementChild;
-    opponent.rows[y].cells[x].checked = bool;
-    opponent.rows[y].cells[x].firstElementChild.checked = bool;
+    console.log(opponent);
+    opponent.rows[y].cells[x].classList.toggle("beaned");
 }
 
 socket.on ("updateActivity", function(x, y, bool, id) {

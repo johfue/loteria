@@ -1,19 +1,24 @@
 <div class="playerWrap">
-<h2>Room: <span id="roomNumber"></span></h2>
-<div class="currentCardWrap currentCardWrap-player">
-    <h3>Current Card</h3>
+
+<img src="images/bean.png" class="logo logo--player">
+
+<div class="currentCardWrap currentCardWrap--player">
     <img id="currentCard" class="currentCard currentCard-player" src="images/blank.png">
 </div>
-<div class="winConditionWrap winConditionWrap-player">
+
+<div class="winWrap winWrap--player">
+    <img id="winConditionInfo" class="winInfo winInfo--player" src="images/blank.png">
     <h3>Goal</h3>
-    <img id="winConditionInfo" class="winConditionInfo winConditionInfo-player" src="images/blank.png">
 </div>
-<div id="boardSelect" class="boardSelect">
-    <h2>Choose your board</h2>
-    <ul id="boardSelectOptions" class="boardSelectOptions"></ul>
-    <button id="newBoard" class="primaryBtn" disabled="true">Select</button>
-</div>
+
 <form id="playerGame" class="playerGame">
+    
+    <div id="boardSelect" class="modal modal--boardSelect">
+        <ul id="boardSelectOptions" class="modal__content modal__content--boardSelect"></ul>
+        <h2><span class="modal__span">Choose your </span><br>board</h2>
+        <button id="newBoard" class="primaryBtn" disabled="true">Select</button>
+    </div>
+    
     <table id="board" class="board">
         <tr>
             <td><input type="checkbox" name="boardCell" disabled><img src="" alt=""></td>
@@ -42,6 +47,10 @@
     </table>
     <button type="submit" class="primaryBtn" id="announceWin">Loteria!</button>
 </form>
-    <div id="playerGraph" class="playerGraph playerGraph-player">
-    </div>
+
+<div class="opponentWrap">
+    <h3 class="opponentWrap__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span></h3>
+    <div id="playerGraph" class="playerGraph playerGraph--player"></div>
+</div>
+
 </div>

@@ -32,17 +32,17 @@
 }
 
 :root {
-    --primary-base: #FFE464;
+    --primary-base: #FFE354;
     --primary-light: #FFF3C0;
     --primary-dark-: #FFD41D;
     --secondary-base: #FFC0C4;
     --secondary-light: #FFE6EA;
-    --secondary-dark: #EF8B97;
-    --confirm-base: #86AC3B;
+    --secondary-dark: #D87373;
+    --confirm-base: #76ED3E;
     --confirm-light: #DFE87F;
     --confirm-dark: #447A11;
     --confirm-disabled: #D6D6B2;
-    --action-base: #86B9C9;
+    --action-base: #6FE8F9;
     --action-light: #D1EDDC;
     --action-dark: #3F88A8;
     --action-disabled: #D4DDD7;
@@ -50,7 +50,7 @@
     --deny-light: #FF8A50;
     --deny-dark: #CC1F38;
     --deny-disabled: #EFD3CB;
-    --accent-base: #F9A140;
+    --accent-base: #F89120;
     --accent-light: #FFC392;
     --neutral-100: #534537;
     --neutral-200: #6E634E;
@@ -58,10 +58,12 @@
     --neutral-500: #F0B96F;
     --neutral-700: #FDF6E4;
     --neutral-900: #FAFBFC;
+    --gradient-rainbow: linear-gradient(1.15deg, #F0EA4A -6.96%, #F1BEE9 35.22%, #79D3E7 70.61%, #4A7FE6 100%);
 }
 
 body {
-    background-color: var(--neutral-500);
+    background: var(--gradient-rainbow);
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     /*background-image: url(images/background.png);*/
@@ -105,9 +107,11 @@ h1:before {
 }
 
 h2 {
-    text-align: center;
-    font-size: 28px;
+    font-size: 36px;
+    line-height: 28px;
+    justify-self: start;
     display: inline-block;
+    text-transform: uppercase;
 }
 
 h2, h3 {
@@ -115,24 +119,39 @@ h2, h3 {
 }
 
 button {
-    border: 6px dashed var(--neutral-100);
     height: 60px;
     font-size: 24px;
     position: relative;
+    border: none;
+    transition: 0.25s ease;
 }
 
-button:before {
-  content: " ";
-  position: absolute;
-  z-index: -1;
-  height: calc(100% + 24px);
-  width: calc(100% + 24px);
-  top: -12px;
-  left: -12px;
+button:hover{
+    transform: translate(0,-10px);
 }
 
-button:before, button:hover:before, button:active:before, button:disabled:before {
-  background-color: inherit;
+button:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    background-color: var(--neutral-900);
+    clip-path: polygon(95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%, 5% 0%);
+    z-index: -1;
+}
+
+button:hover:after, button:focused:before {
+    transform: translate(0, 10px);
+}
+
+button:active {
+    
+}
+
+button:active:after {
+    background-color:;
 }
 
 .primaryBtn {
@@ -228,7 +247,45 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.deck, .currentCard, .winConditionInfo {
+.modal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr max-content;
+    width: 100%;
+    height: 100%;
+    height: calc(100% - 1em);
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--neutral-900);
+    box-sizing: border-box;
+    z-index: 2;
+    justify-items: center;
+    align-items: end;
+    row-gap: 1em;
+}
+
+.modal__content {
+    grid-column: span 2;
+    height: 100%;
+    width: 100%;
+    justify-items: center;
+    align-content: end;
+    box-sizing: border-box;
+    padding-bottom: 1rem;
+    margin: 0;
+}
+
+.modal__span {
+    font-size: 18px
+}
+
+.modal__btn {
+    align-self: end;
+}
+
+.deck, .currentCard, .winInfo {
     max-width: 100%;
     height: 14vh;
     object-fit: contain;
@@ -238,31 +295,16 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
-.gameSettings {
+.modal__content--gameSettings {
     display: grid;
-    background-color: var(--neutral-900);
-    margin: 0 auto;
-    height: auto;
-    width: 85vw;
-    padding: 1rem;
-    position: absolute;
-    top: 12vh;
-    grid-template-rows: max-content 1fr max-content;
-    justify-items: center;
-    row-gap: 1em;
-    z-index: 2;
-}
-
-.winConditionOptions {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: min-content;
     grid-gap: 1rem;
-    width: 100%;
-    justify-items: center;
-    justify-content: center;
+    background-color: var(--secondary-base);
+    text-align: center;
 }
 
-.gameSettings input{
+.modal__input--gameSettings{
     background-size: contain;
     background-repeat: no-repeat;
     height: 240px;
@@ -279,33 +321,32 @@ button:disabled {
         grid-gap: 2em;
     }
     
-    .winConditionOptions {
+    .modal__content-gameSettings {
         display: flex;
     }
     
-    .gameSettings input{
+    .modal__input--gameSettings{
         max-height: 14vw;
         max-width: 12vw;
     }
 }
 
-.gameSettings input[value=row]{background-image: url(images/row.png);}
-.gameSettings input[value=column]{background-image: url(images/column.png);}
+.modal__input--gameSettings[value=row]{background-image: url(images/row.png);}
+.modal__input--gameSettings[value=column]{background-image: url(images/column.png);}
+.modal__input--gameSettings[value=diagonal]{background-image: url(images/diagonal.png);}
+.modal__input--gameSettings[value=corner]{background-image: url(images/corner.png);}
+.modal__input--gameSettings[value=center]{background-image: url(images/center.png);}
+.modal__input--gameSettings[value=blackOut]{background-image: url(images/blackOut.png);}
 
-.gameSettings input[value=diagonal]{background-image: url(images/diagonal.png);}
-.gameSettings input[value=corner]{background-image: url(images/corner.png);}
-.gameSettings input[value=center]{background-image: url(images/center.png);}
-.gameSettings input[value=blackOut]{background-image: url(images/blackOut.png);}
-
-.gameSettings input:checked {
+.modal__input--gameSettings:checked {
     border: 3px solid green;
 }
 
-.gameSettings input:hover {
+.modal__input--gameSettings:hover {
     border: 3px solid blue;
 }
 
-.gameSettings input:disabled:hover {
+.modal__input--gameSettings:disabled:hover {
     border: none;
 }
 
@@ -326,10 +367,39 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.hostInfo {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-top: 1rem;
+    position: relative;
+    z-index: 3;
+}
+
+.hostInfo__h3 {
+    justify-self: end;
+    position: relative;
+    color: var(--neutral-900);
+}
+
+
+.hostInfo__h3:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5vw;
+    /* height: 100%; */
+    width: 100%;
+    border-bottom: 2em solid var(--neutral-100);
+    border-left: 2em solid transparent;
+    box-sizing: border-box;
+    z-index: -1;
+}
+
 .hostConsole {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: max-content 15vh 45vh 20vh;
+    grid-template-rows: 45vh 20vh;
     justify-items: center;
     row-gap: 0.5rem;
     column-gap: 1rem;
@@ -338,22 +408,32 @@ button:disabled {
     height: 100%;
 }
 
-.hostConsole h2 {
-    grid-row: 1/2;
-    grid-column: 1/3;
+.winWrap--host {
     justify-self: center;
-    justify-items: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 15vh;
 }
 
-.winConditionWrap-host {
-    display: grid;
-    grid-gap: 0.5rem;
-    grid-row: 2/3;
-    grid-column: 1/3;
-    grid-template-rows: min-content 1fr;
-    justify-items: center;
-    justify-self: center;
+.winWrap--host:before, .winWrap--host:after {
+    content: "";
+    position: absolute;
+    top: auto;
+    left: auto;
+    height: 93%;
+    width: 160%;
+    background-color: var(--neutral-900);
+    transform: skew(-4deg);
+    z-index: -1;
 }
+
+.winWrap--host:after {
+    background-color: var(--neutral-100);
+    transform: rotate(45deg);
+}
+
 
 @media(min-width:845px) {
     .hostConsole {
@@ -367,17 +447,22 @@ button:disabled {
         grid-column: 4/5;
     }
     
-    .winConditionWrap-host {
+    .winWrap--host {
         grid-column: 2/4;
         grid-row: 1/2;
     }
 }
 
-.winConditionInfo-host {
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.winInfo--host {
     height: calc(100% - 1rem);
 }
 
-.drawWrap, .currentCardWrap-host {
+.drawWrap, .currentCardWrap--host {
     display: grid;
     grid-gap: 0.5rem;
     height: 100%;
@@ -385,8 +470,8 @@ button:disabled {
 
 .drawWrap {
     justify-self: start;
-    grid-column: 2/3;
-    grid-row: 3/4;
+    grid-column: 1/2;
+    grid-row: 1/2;
     /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
 }
 
@@ -398,30 +483,53 @@ button:disabled {
     width: 100%;
 }
 
-.currentCardWrap-host {
+.currentCardWrap--host {
     justify-self: end;
-    grid-column: 1/2;
-    grid-row: 3/4;
+    grid-column: 2/3;
+    grid-row: 1/2;
 }
 
-.playerGraph-host {
-    display: flex;
+.playerGraph--host {
+    display: grid;
+    grid-template-columns: repeat(auto, min-max(9ch, 1fr));
     grid-gap: 12px;
+    position: relative;
     max-width: 90%;
-    overflow-x: scroll;
-    grid-row: 4/5;
+    overflow-y: scroll;
+    grid-row: 2/3;
     grid-column: 1/3;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+.playerGraph--host:before, .playerGraph--host:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 90%;
+    width: 90%;
+    background-color: var(--neutral-900);
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    z-index: -1;
+}
+
+.playerGraph--host:after {
+    top: 15px;
+    left: 15px;
+    background-color: var(--neutral-100);
 }
 
 @media(min-width:845px) {
-    .drawWrap, .currentCardWrap-host {
+    .drawWrap, .currentCardWrap--host {
         grid-gap: 1rem;
     }
     .drawWrap {
         grid-column: 2/3;
         grid-row: 2/3
     }
-    .currentCardWrap-host {
+    .currentCardWrap--host {
         grid-column: 3/4;
         grid-row: 2/3;
     }
@@ -435,29 +543,24 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.cardReview {
-    position: absolute;
-    top: 10vh;
-    left: 7.5vw;
-    width: 88vw;
-    background-color: var(--neutral-900);
+.modal--cardReview {
 }
 
-.cardReviewList {
-    width: 100%;
-    height: 70vh;
-    padding: 0;
+.modal__content--cardReview {
     overflow-y: scroll;
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, 130px);
+    grid-template-columns: repeat(auto-fill, 50px);
+    background-color: var(--action-base);
+    align-content: start;
+    padding-top: 30vh;
 }
 
-.cardReviewList li {
+.modal__content--cardReview li {
     display: inline-block;
 }
 
-.cardReviewList li img {
+.modal__content--cardReview li img {
     width: 100%;
     min-width: 65px;
     display: block;
@@ -486,6 +589,30 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.model--alleged {
+    grid-template-rows: min-content 1fr max-content;
+}
+
+.modal__content--alleged {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr;
+    background-color: var(--primary-base);
+    padding-top: 0;
+    overflow-y: scroll;
+    align-content: start;
+    grid-gap: 1rem;
+}
+
+.modal__content--cardReview--alleged {
+    background-color: unset;
+    padding: 0 6vw 0;
+}
+
+.modal__content--boardHold {
+    width: 36vh;
+}
+
 .allegedWinner {
     display: grid;
     grid-gap: 1em;
@@ -500,8 +627,9 @@ button:disabled {
     left: 7.5vw;
 }
 
-.allegedWinner h3:nth-child(1) {
-    grid-row: 3/4;
+.alleged__h3 {
+    grid-row: 1/2;
+    padding-top: 20vh;
 }
 
 .cardReviewList-alleged {
@@ -516,6 +644,11 @@ button:disabled {
 
 .allegedWinner table {
     margin: 0 auto;
+}
+
+.alleged__btnWrap {
+    display: flex;
+    grid-gap: 1em
 }
 
 #confirm, #deny {
@@ -586,6 +719,11 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.logo--player {
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+
 
 #announceWin {
     width: 57vmin;
@@ -594,13 +732,10 @@ button:disabled {
 
 .playerWrap {
     display: grid;
-    margin-top: 0.5em;
-    height: 95vh;
     grid-gap: 1rem;
-    grid-template-rows: 18vh max-content 1fr;
-    grid-template-columns: repeat(3, 1fr);
-    margin: 0 auto;
-    width: fit-content;
+    grid-template-rows: 18vh 1fr;
+    grid-template-columns: min-content 1fr 1fr;
+    height: 100vh;
 }
 
 .playerWrap h2 {
@@ -608,25 +743,59 @@ button:disabled {
 }
 
 .playerGame {
-    position: relative;
-    grid-column: 1/4;
+    position: unset;
+    grid-column: 2/4;
     grid-row: 2/3;
     display: grid;
+    background-color: var(--neutral-900);
+    padding: 0.5em;
+    height: fit-content;
 }
 
-.currentCardWrap-player, .winConditionWrap-player {
-    display: grid;
-    grid-column: 1/2;
-    justify-items: center;
+.currentCardWrap--player, .winWrap--player {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    grid-row: 1/2;
+    align-items: center;
     align-self: center;
     grid-gap: 0.5rem
 }
 
-.currentCardWrap-player {
+.currentCardWrap--player:before, .winWrap--player:before, .currentCardWrap--player:after, .winWrap--player:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--neutral-100);
+    z-index: -1;
+    clip-path: polygon(0% 10%, 100% 100%, 100% 90%, 0% 100%);
+}
+
+.currentCardWrap--player:after, .winWrap--player:after {
+    top: 0;
+    background-color: var(--neutral-900);
+}
+
+.winWrap--player:before, .winWrap--player:after {
+    clip-path: polygon(0% 10%, 100% 0%, 100% 90%, 0% 100%);
+}
+
+.winWrap--player:before {
+    left: 5px;
+}
+
+.currentCardWrap--player:before {
+    left: -5px;
+}
+
+.currentCardWrap--player {
     grid-column: 2/3;
 }
 
-.winConditionWrap-player {
+.winConditionWrap--player {
     grid-column: 3/4;
 }
 
@@ -642,14 +811,14 @@ button:disabled {
         grid-column: 2/3;
         grid-row: 2/4;
     }
-    .currentCardWrap-player, .winConditionWrap-player {
+    .currentCardWrap--player, .winInfo--player {
         grid-gap: 1rem
     }
-    .currentCardWrap-player {
+    .currentCardWrap--player {
         grid-row: 2/3;
         grid-column: span 1;
     }
-    .winConditionWrap-player {
+    .winInfo--player {
         grid-row: 3/4;
         grid-column: span 1;
     }
@@ -658,7 +827,7 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.board th, .board td {
+.board td {
   padding: 0;
   width: 9vh;
   height: 10vh;
@@ -681,11 +850,14 @@ button:disabled {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.playerGraph td {
+.player td {
     background-color: var(--secondary-base);
-    height: 20px;
-    width: 15px;
-    position: relative;
+    height: 12px;
+    width: 12px;
+}
+
+.player span {
+    color: var(--neutral-100);
 }
 
 @media(min-width:845px) {
@@ -699,7 +871,7 @@ button:disabled {
         grid-column: span 2;
         text-align: initial;
     }
-    .currentCard-player, .winConditionInfo-player {
+    .currentCard-player, .winInfo-player {
         height: 35vh;
     }
     .board th, .board td {
@@ -716,45 +888,68 @@ button:disabled {
 }
 
 .gameInfo, .gameSettings, .playerGame, .playerGraph, .hostConsole {
-    box-sizing: border-box;
-    background-color: var(--neutral-700);
-    padding: 16px;
-    /*border: 5px solid black;*/
     overflow-y: scroll;
 }
 
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.opponentWrap {
+    position: relative;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    padding: 2em 0.5rem;
+    box-sizing: border-box;
+    left: -5vw;}
 
-.playerGraph-player {
+.opponentWrap:before, .opponentWrap:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--neutral-100);
+    clip-path: polygon(0% 5%, 100% 0%, 100% 95%, 0% 100%);
+    z-index: -1;
+}
+
+.opponentWrap:after {
+    top: 0;
+    left: 0;
+    background-color: var(--neutral-900);
+}
+
+.opponentWrap__h3 {
+    font-size: 1em;
+    font-family: 'poppins';
+}
+
+.playerGraph--player {
     display: flex;
-    grid-row: 3/4;
-    overflow-x: scroll;
-    grid-gap: 1rem;
-    grid-column: 1/4
+    flex-direction: column;
+    overflow-y: scroll;
+    grid-gap: 0.25rem;
+    align-items: center;
 }
-.playerGraph-player table:nth-child(1) {
-    display: none;
-}
+/*.playerGraph-player table:nth-child(1) {*/
+/*    display: none;*/
+/*}*/
 
-.playerGraph table {
+.player {
+    justify-content: center;
     position: relative;
 }
 
-.playerGraph input[type=checkbox] {
-    appearance: none;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+.player__cell {
+    border: 1px solid var(--secondary-dark);
 }
 
-.playerGraph input:checked {
+.player__cell.beaned {
     background-color: var(--secondary-dark);
 }
 @media(min-width:845px) {
-    .playerGraph-player {
+    .playerGraph--player {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-row: 2/4;
@@ -770,8 +965,8 @@ button:disabled {
 /*/--------------------------------------------/*/
 
 table, td {
-  border: 1px solid black;
-  border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .board {
@@ -802,19 +997,19 @@ table, td {
     
 }
 
-.board td input:hover, .boardSelectOptions li > input:hover {
+.board td input:hover, .modal__content--boardSelect li > input:hover {
     background-color: rgba(50,50,50,0.5);
 }
 
-.board td input:active, .boardSelectOptions li > input:active {
+.board td input:active, .modal__content--boardSelect li > input:active {
     background-color: rgba(250,250,250,0.5);
 }
 
-.board td input:focus, .boardSelectOptions li > input:focus {
+.board td input:focus, .modal__content--boardSelect li > input:focus {
     border-color: yellow;
 }
 
-.board td input:checked, #allegedWinner input:checked, .boardSelectOptions li > input:checked {
+.board td input:checked, #allegedWinner input:checked, .modal__content--boardSelect li > input:checked {
     background-size: 65%;
     background-repeat: no-repeat;
     background-position: center;
@@ -828,59 +1023,33 @@ table, td {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.boardSelectOptions li > input:checked {
+.modal__content--boardSelect li > input:checked {
     background-image: url(images/check.png);
 }
 
-.boardSelect {
-    position: absolute;
-    top: 10vh;
-    left: 10vw;
-    background-color: var(--neutral-900);
-    height: 80vh;
-    width: 80vw;
-    z-index: 3;
-    box-sizing: border-box;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    grid-gap: 2em;
-}
-
-.boardHold {
-    grid-row: 2/3;
-}
-
-.boardSelectOptions td img, .allegedWinner td img{
-    height: 100%;
+.modal__content--boardSelect td img, .modal__content--boardHold td img{
     width: 100%;
-    object-fit: contain;
     display: block;
 }
 
-.boardSelectOptions td, .allegedWinner td {
+.modal__content--boardSelect td, .modal__content--boardHold td {
     position: relative;
-    height: 145px;
-    width: 100px;
+    width: 22%;
+    display: inline-block;
 }
 
-.boardSelectOptions td {
-    height: 54px;
-}
-
-.boardSelectOptions {
+.modal__content--boardSelect {
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
     overflow-y: scroll;
-    height: 82%;
-    padding: 0;
-    width: 90%;
-    margin: 0 auto;
+    padding: 1rem;
+    background-color: var(--primary-base);
+    align-content: start;
 }
 
-td input, td img {
+td input {
     position: absolute;
     top: 0;
     right: 0;
@@ -890,21 +1059,19 @@ td input, td img {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.boardSelectOptions td input, .allegedWinner td input {
+.modal__content--boardSelect td input, .modal__content--boardHold td input {
     background-size: contain;
     background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
     appearance: none;
     display: block;
     z-index: 2;
 }
 
-.boardSelectOptions li, .allegedWinner li {
+.modal__content--boardSelect li, .modal__content--boardHold li {
     position: relative;
 }
 
-.boardSelectOptions li > input, .allegedWinner li > input {
+.modal__content--boardSelect li > input, .modal__content--boardHold li > input {
     height: 100%;
     width: 100%;
     appearance: none;
