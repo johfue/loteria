@@ -1,8 +1,8 @@
-var express2 = require('express')();
-var express = require('express');
+const express2 = require('express')();
+const express = require('express');
 //var app = express2;
-var http = require('http').Server(express2);
-var io = require('socket.io')(http);
+const http = require('http').Server(express2);
+const io = require('socket.io')(http);
 
 express2.use(express.static('public'));
 
@@ -35,6 +35,9 @@ io.on('connection', (socket) => {
         if (roomList.includes(parseInt(room, 10))) {
             io.to(socket.id).emit('room join', true);
             socket.join(room);
+                    console.log(io.sockets.adapter.rooms);
+                    console.log(socket.rooms);
+
             // io.to(room).emit('new player', socket.id);
     
         }
@@ -43,40 +46,50 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('new player', (roomNumber) => {
-        io.to(roomNumber).emit('new player', socket.id);
+    socket.on('new player', (roomNumber, nickname) => {
+        socket.to(roomNumber).emit('new player', nickname, socket.id);
     });
-    socket.on('update newcomer', (winCondition, currentCard, roomNumber, id, opponentList, bool) => {
-        io.to(id).emit('catch-up', winCondition, currentCard, id, opponentList, bool);
+    socket.on('update newcomer', (gameInfo, id) => {
+        io.to(id).emit('catch-up', gameInfo);
     });
     socket.on('game state', (bool, roomNumber) => {
-        var gameState = bool;
-        io.to(roomNumber).emit('game state', bool);
+        socket.to(roomNumber).emit('game state', bool);
     });
     socket.on('playerBoard', (newBoard) => {
-        io.emit('playerBoard', newBoard);
+        socket.emit('playerBoard', newBoard);
     });
     socket.on('win condition', (condition, roomNumber) => {
-        var currentWinCondition = condition;
-        io.to(roomNumber).emit('win condition', condition);
+        socket.to(roomNumber).emit('win condition', condition);
     });
     socket.on('current card', (sentCard, roomNumber) => {
-        var currentCard = sentCard;
-        io.to(roomNumber).emit('current card', sentCard);
+        socket.to(roomNumber).emit('current card', sentCard);
     });
     socket.on('activity', (x, y, bool, roomNumber) => {
-        io.to(roomNumber).emit('updateActivity', x, y, bool, socket.id);
+        socket.to(roomNumber).emit('updateActivity', x, y, bool, socket.id);
 
     });
-    socket.on('announce win', (board, checked, roomNumber) => {
-        io.to(roomNumber).emit('check win', board, checked, socket.id);
+    socket.on('announce win', (board, roomNumber) => {
+        socket.to(roomNumber).emit('check win', board, socket.id);
     });
     socket.on('board checked', (bool, id, roomNumber) => {
         io.to(id).emit('win checked', bool);
     });
+    
+    socket.on("disconnecting", (reason) => {
+        console.log(socket.rooms);
+        
+        for (const prop in socket.rooms) {
+            console.log(prop);
+            if (prop.length == 6) {
+                io.to(prop).emit('player left', socket.id);
+                break;
+            }
+        }
+        
+  });
 });
 
-http.listen(3000, function() {
+http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });
 

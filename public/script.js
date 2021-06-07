@@ -7,7 +7,7 @@ var socket = io();
 // var currentCard;
 var opponentList = [];
 
-content = document.getElementById("popItIn");
+content = _("popItIn");
 
 function changeAlert(string) {
     return string;
@@ -44,10 +44,13 @@ function boardConstruct(seed) {
     return tbl;
 }
 
-function newPlayer(id) {
+function newPlayer(nickname, id) {
     
     if (!opponentList.includes(id)) {
-        var opponent = document.createElement("table");
+        var opponent = document.createElement("div");
+        var opponentTable = document.createElement("table");
+        var opponentName = document.createElement("span");
+        opponentName.innerHTML = nickname;
         opponent.setAttribute("id", id);
         opponentList.push(id);
     
@@ -61,9 +64,10 @@ function newPlayer(id) {
                 cell.appendChild(input);
                 row.appendChild(cell);
             }
-            opponent.appendChild(row);
+            opponentTable.appendChild(row);
         }
-        
+        opponent.appendChild(opponentTable);
+        opponent.appendChild(opponentName);
         _("playerGraph").appendChild(opponent);
     }
 
@@ -88,17 +92,13 @@ function host() {
     
     var gameInfo = {
         gameState: false,
+        card: "blank",
+        goal: "blank",
+        playerList: [],
         pickedBoards: [],
-        playerChecks: [],
-
     };
     
-    var players = {
-        id: null,
-        nickname: "",
-        board: null,
-        placedBeans: [],
-    };
+
     
     socket.emit('new room', roomNumber);
 
@@ -122,6 +122,7 @@ function host() {
     function chooseWinCondition() {
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
         winConditionInfo.src =  "images/" + currentWinCondition + ".png";
+        gameInfo.goal = currentWinCondition;
         socket.emit('win condition', currentWinCondition, roomNumber);
         drawBtn.disabled = false;
         gameSettings.classList.add("invisible");
@@ -130,53 +131,61 @@ function host() {
         }
     }
     
-    function startGame(event) {
-        event.preventDefault;
+    function startGame() {
+        console.log("game started");
         currentCard.src = "images/blank.png";
         shuffleDeck();
         winConditionBtn.disabled = true;
-        drawBtn.onclick = drawCard;
+        gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
     }
     
-    function boardChecked(bool) {
-        socket.emit('board checked', bool, allegedWinnerID, roomNumber);
-        if (bool) {
-            alertModal.classList.remove("invisible");
-        }
-
-        _(allegedWinnerID).removeEventListener('click', function(event) {
-            this.classList.remove("winnerGlow");
-            checkBoardRender(board, checked, id);
-        });
-
-        allegedWinner.classList.add("invisible");
-        allegedWinnerID = null;
-        
-    }
+    
+    
+    
+    // const onCheckBoardRender = function(checkBoardRender) {
+    //     return function actualCheckBoardRender(board, checked, id) {
+    //         console.log(event);
+    //         console.log(board, checked, id);
+    //     };
+    // };
+    // const handlers = [];
+    
+    // const startSelectNode = (checkBoardRender) => {
+    //   document.addEventListener("click", handlers[checkBoardRender] = onCheckBoardRender(checkBoardRender), true);
+    // };
+    
+    // const stopSelectNode = (checkBoardRender) => {
+    //   document.removeEventListener("click", handlers[checkBoardRender], true);
+    // };
+    
+    
+    
+    
+    
     
     function checkBoard(board, checked, id) {
+        console.log("checkBoard");
         _(id).classList.add("winnerGlow");
-    
-        var quick = _(id).querySelectorAll('input');
-        for (z=0; z < quick.length; z++) {
-            quick[z].disabled = false;
-        }
-
-        console.log("checkBoard: " + id);
-
         _(id).addEventListener('click', function(event) {
-            this.classList.remove("winnerGlow");
             checkBoardRender(board, checked, id);
         });
+        // _(id).addEventListener('click', checkBoardRender.bind(this, board, checked, id))
+            // startSelectNode(1);
+        // var quick = _(id).querySelectorAll('input');
+        // for (z=0; z < quick.length; z++) {
+        //     quick[z].disabled = false;
+        // }
     }
-    
+
+
+
     function checkBoardRender(board, checked, id) {
-        console.log("nope 1");
+        console.log("checkBoardRender");
+        _(id).classList.remove("winnerGlow");
         var allegedBoard = boardConstruct(board);
-        console.log("nope 2");
         boardHold.innerHTML = "";
-        
+
         for (b=0; b < checked.length; b++) {
             var currentCell = allegedBoard.rows[checked[b].y].cells[checked[b].x];
             currentCell.firstElementChild.checked = true;
@@ -199,6 +208,27 @@ function host() {
 
     }
     
+    function boardChecked(bool) {
+        console.log("boardChecked");
+        socket.emit('board checked', bool, allegedWinnerID, roomNumber);
+        if (bool) {
+            alertModal.classList.remove("invisible");
+        }
+        console.log(allegedWinnerID);
+        // _(allegedWinnerID).removeEventListener('click', checkBoardRender(board, checked, id));
+        _(allegedWinnerID).removeEventListener('click', function(event) {
+            checkBoardRender(board, checked, id);
+        });
+
+
+        // stopSelectNode(1);
+
+        allegedWinner.classList.add("invisible");
+        allegedWinnerID = null;
+        
+    }
+    
+    
     _("confirm").addEventListener('click', function(event) {
         boardChecked(true);
     });
@@ -206,9 +236,9 @@ function host() {
         boardChecked(false);
     });
 
+
     function endGame() {
         drawBtn.disabled = true;
-        drawBtn.onClick = startGame;
         winConditionBtn.disabled = false;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
@@ -221,33 +251,50 @@ function host() {
         losers = _("playerGraph").querySelectorAll(".winnerGlow");
         for (u=0; u < losers.length; u++) {
             losers[u].classList.remove("winnerGlow");
-            losers[u].removeEventListener('click', checkBoardRender(board, checked));
+            losers[u].removeEventListener('click', checkBoardRender(board, checked, id));
 
         }
         for (w=0; w < opponentTiles.length; w++) {
             opponentTiles[w].checked = false;
         }
+        gameInfo.gameState = false;
         socket.emit('game state', false, roomNumber);
     }
     
     function drawCard(evt) {
         evt.preventDefault();
-        cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
-        currentCard.src = "images/CAAR/" + cardDrawn + ".jpeg";
-        drawnCards.push(cardDrawn);
-
-        deckList.splice(deckList.indexOf(cardDrawn), 1);
         
-        if (deckList.length <= 0) {
-            endGame();
+        if (gameInfo.gameState) {
+            cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
+            currentCard.src = "images/CAAR/" + cardDrawn + ".jpeg";
+            gameInfo.card = cardDrawn;
+            drawnCards.push(cardDrawn);
+            
+            deckList.splice(deckList.indexOf(cardDrawn), 1);
+            
+            if (deckList.length <= 0) {
+                endGame();
+            }
+            else {
+                socket.emit('current card', cardDrawn, roomNumber);
+            }
         }
+        
         else {
-            socket.emit('current card', cardDrawn, roomNumber);
+            console.log("game started")
+            startGame();
         }
         
     }
     
-    socket.on ("check win", function(board, checked, id) {
+    socket.on ("check win", function(board, id) {
+        for (i=0; i < gameInfo.playerList.length; i++) {
+            if (gameInfo.playerList[i].ID === id) {
+                var checked = gameInfo.playerList[i].placedBeans;
+                break;
+            }
+        }
+        console.log(checked);
         checkBoard(board, checked, id);
     });
     
@@ -283,17 +330,51 @@ function host() {
         alertModal.classList.add("invisible");
     });
 
-    drawBtn.onclick = startGame;
+    drawBtn.onclick = drawCard;
     
-    socket.on ("new player", function(id) {
-        if (currentWinCondition === null ) {
-            socket.emit('update newcomer', "blank", currentCard.src, roomNumber, id, opponentList, false);
+    socket.on ("new player", function(nickname, id) {
+        socket.emit('update newcomer', gameInfo, id);
+        newPlayer(nickname, id);
+        var player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
+        gameInfo.playerList.push(player);
+    });
+    
+    socket.on ("updateActivity", function(x, y, bool, id) {
+        var coordinate = {y:y, x:x};
+        for (i=0; i < gameInfo.playerList.length; i++) {
+            if (gameInfo.playerList[i].ID === id) {
+                var checkedPosition = gameInfo.playerList[i].placedBeans;
+                
+                if (bool) {
+                    checkedPosition.push(coordinate);
+                }
+    
+                else {
+                    for (var i = 0; i < checkedPosition.length; i++) {
+                         if (coordinate.x == checkedPosition[i].x && coordinate.y == checkedPosition[i].y) {
+                             checkedPosition.splice(i,1);
+                             break;
+                         }
+                    }
+                }
+
+                break;
+
+            }
         }
-        else {
-            socket.emit('update newcomer', currentWinCondition, currentCard.src, roomNumber, id, opponentList, true);
-            
+        
+        console.log(checkedPosition);
+    });
+    
+    socket.on ("player left", function(id) {
+        console.log("host: player left");
+        for (var p = 0; p < gameInfo.playerList.length; p++) {
+             if (gameInfo.playerList.ID == id) {
+                 gameInfo.playerList.splice(p,1);
+                 break;
+             }
         }
-        newPlayer(id);
+
     });
     
     shuffleDeck();
@@ -328,7 +409,6 @@ function player() {
     }
     
     function drawTable() {
-        clearBeans();
         cardOnBoard = [];
         for (var i = 0, row; row = table.rows[i]; i++) {
             for (var j = 0, col; col = row.cells[j]; j++) {
@@ -343,23 +423,6 @@ function player() {
                         col.addEventListener("click", function() {
                             var cell = this.cellIndex;
                             var row = this.parentNode.rowIndex;
-
-                            var coordinate = {y:row, x:cell};
-                            
-                            if (this.firstElementChild.checked) {
-                                checkedPosition.push(coordinate);
-                            }
-                            
-                            else if (checkedPosition.indexOf(coordinate) < 0) {
-                                console.log("checkedPosition included coordinate");
-                                checkedPosition.splice(checkedPosition.indexOf(coordinate), 1);
-                            }
-                            
-                            console.log(checkedPosition.includes(coordinate));
-                            console.log(checkedPosition.indexOf(coordinate));
-                            console.log("player " + coordinate);
-                            console.log(checkedPosition);
-
 
                             socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
                         })
@@ -383,7 +446,6 @@ function player() {
 
     function pickBoard(evt) {
         evt.preventDefault();
-        console.log("pickBoard");
         chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
         Math.seedrandom(chosenBoard);
         drawTable();
@@ -419,7 +481,7 @@ function player() {
     announceWin.addEventListener('click', function(event) {
         event.preventDefault();
         disableBoard(true);
-        socket.emit("announce win", chosenBoard, checkedPosition, roomInput);
+        socket.emit("announce win", chosenBoard, roomInput);
     });
     
     function startEnd(bool) {
@@ -453,13 +515,12 @@ function player() {
     });
     
     socket.on('win checked', function(bool){
-        console.log("win checked");
         disableBoard(false);
     });
     
     _("roomNumber").innerHTML = roomInput;
     
-    socket.emit('new player', roomNumber.innerHTML);
+    socket.emit('new player', roomInput, nickname);
     
     for (o=0; o < 75; o++) {
             var li = document.createElement("li");
@@ -473,7 +534,6 @@ function player() {
             li.appendChild(input);
             li.appendChild(label);
             li.addEventListener('click', function() {
-                console.log("click on board option");
                 newBoard.disabled = false;
             });
             boardSelectOptions.appendChild(li);
@@ -488,16 +548,26 @@ function player() {
     //     });
     // }
 
-    socket.on('catch-up', function(condition, sentCard, id, opponentList, bool) {
-        startEnd(bool);
-        currentCard.src = sentCard;
-        winConditionInfo.src = "images/" + condition + '.png';
-        for (e=0; e < opponentList.length; e++) {
-            newPlayer(opponentList[e]);
+    socket.on('catch-up', function(gameInfo) {
+        disableBoard(!gameInfo.gameState);
+        if (!gameInfo.gameState) {
+            currentCard.src = "images/blank.png";
+        }
+        else {
+            currentCard.src = "images/CAAR/" + gameInfo.card + '.jpeg';
+        }
+        winConditionInfo.src = "images/" + gameInfo.goal + '.png';
+        for (e=0; e < gameInfo.playerList.length; e++) {
+            newPlayer(gameInfo.playerList[e].Nickname, gameInfo.playerList[e].ID);
+
+            for (b=0; b < gameInfo.playerList[e].placedBeans.length; b++) {
+                opponentUpdate(gameInfo.playerList[e].placedBeans[b].x, gameInfo.playerList[e].placedBeans[b].y, true, gameInfo.playerList[e].ID)
+            }
         }
     });
-    socket.on ("new player", function(id) {
-        newPlayer(id);
+    
+    socket.on ("new player", function(nickname, id) {
+        newPlayer(nickname, id);
     });
 }
 
@@ -526,11 +596,7 @@ function roomSearch(room, evt) {
 }
 
 function opponentUpdate(x,y, bool, id) {
-    var opponent = _(id);
-    console.log("opponetUpdate() " + y);
-    console.log("opponetUpdate() " + x);
-    console.log(opponent.rows[y].cells[x].firstElementChild);
-    console.log(opponent);
+    var opponent = _(id).firstElementChild;
     opponent.rows[y].cells[x].checked = bool;
     opponent.rows[y].cells[x].firstElementChild.checked = bool;
 }
@@ -539,8 +605,16 @@ socket.on ("updateActivity", function(x, y, bool, id) {
     opponentUpdate(x, y, bool, id);
 });
 
+socket.on ("player left", function(id) {
+    _(id).remove(_(id));
+
+        console.log("player left");
+
+});
+
 _("player").addEventListener('click', function(event) {
     roomInput = _("roomSearch").value;
+    nickname = _("nickname").value;
     roomSearch(roomInput, event);
 });
 
