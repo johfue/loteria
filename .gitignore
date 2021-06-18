@@ -2,3 +2,17 @@ node_modules
 images
 fonts
 assets
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webm
+*.svg
+*.pdf
+*.mp4
+*.ico
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.mp3

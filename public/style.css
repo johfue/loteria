@@ -1,12 +1,4 @@
 @font-face {
-    font-family: 'lobster';
-    src: url('fonts/lobster_1.3-webfont.woff2') format('woff2'),
-         url('fonts/lobster_1.3-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-@font-face {
     font-family: 'poppinsblack';
     src: url('fonts/poppins-black-webfont.woff2') format('woff2'),
          url('fonts/poppins-black-webfont.woff') format('woff');
@@ -317,7 +309,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transition: 0.25s ease;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .modal {
         height: 75%;
         top: 20%;
@@ -433,7 +425,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     color: var(--neutral-900);
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .hostConsole {
         row-gap: 2rem;
         column-gap: 2rem;
@@ -481,6 +473,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .drawWrap, .currentCardWrap--host {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     grid-gap: 0.5rem;
 }
 
@@ -543,11 +536,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     height: 100%;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .logo {
         width: 12vw;
     }
     .drawWrap, .currentCardWrap--host {
+        gap: 1rem;
         grid-gap: 1rem;
     }
     .drawWrap {
@@ -595,7 +589,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-column: 2/3;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .cardReview {
         position: absolute;
         top: 20vh;
@@ -641,7 +635,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: grid;
     grid-gap: 1em;
     grid-template-columns: 1fr;
-    min-content 1fr min-content 20vh max-content;
+    grid-template-rows: 1fr min-content 20vh max-content;
     position: absolute;
     top: 12vh;
     width: 85vw;
@@ -672,7 +666,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .alleged__btnWrap {
     display: flex;
-    grid-gap: 1em
+    gap: 1em;
+    grid-gap: 1em;
 }
 
 #confirm, #deny {
@@ -708,9 +703,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transform: translateY(-10px);
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .modal__content--alleged {
-        padZZding: 0 1rem;
+        padding: 0 1rem;
     }
     .alleged__h3 {
         padding-top: 1em;
@@ -787,6 +782,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-row: 1/2;
     align-items: center;
     align-self: center;
+    gap: 0.5rem;
     grid-gap: 0.5rem;
     padding: 1rem;
     box-sizing: border-box;
@@ -836,11 +832,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: block;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .playerWrap {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        gap: 3rem;
         grid-gap: 3rem;
         padding: 2rem 0;
         box-sizing: border-box;
@@ -886,7 +883,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
-@media(min-width:845px) {
+@media(min-width:768px) {
     button, input[type=text] {
         height: 75px;
     }
@@ -940,6 +937,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: auto;
+    gap: 0.25rem;
     grid-gap: 0.25rem;
     align-items: center;
     height: 90%;
@@ -980,7 +978,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-size: 0.6em;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .opponentWrap {
         left: 0;
         min-width: 25vh;
@@ -1096,7 +1094,20 @@ table, td {
 }
 
 .board__input:checked {
+    -webkit-animation: jump 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     animation: jump 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@-webkit-keyframes jump {
+    from {
+        -webkit-transform: translateY(0);
+    }
+    50% {
+        -webkit-transform: translateY(-10%);
+    }
+    t0 {
+        -webkit-transform: translateY(0);
+    }
 }
 
 @keyframes jump {
@@ -1125,7 +1136,7 @@ table, td {
     z-index: 4;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     .modal__content--boardSelect {
         max-height: calc(80vh - 2rem);
     }
@@ -1270,6 +1281,7 @@ td input {
 .alert__stripe--bottom {
     margin-top: 36vw;
     display: flex;
+    gap: 1rem;
     grid-gap: 1rem;
     justify-content: flex-end;
 }
@@ -1277,8 +1289,8 @@ td input {
 .alert__stripe--bottom:before {
     background-color: var(--primary-base);
     top: 75%;
-    -webkit-clip-path: polygon(7% 0%, 5% 100%, 93% 100%, 95% 0%)
-    clip-path: polygon(7% 0%, 5% 100%, 93% 100%, 95% 0%)
+    -webkit-clip-path: polygon(7% 0%, 5% 100%, 93% 100%, 95% 0%);
+    clip-path: polygon(7% 0%, 5% 100%, 93% 100%, 95% 0%);
 }
 
 .alertModal.invisible {
@@ -1286,15 +1298,24 @@ td input {
 }
 
 #alertModal.slide .alert__stripe--top, #alertModal.slide .alert__stripe--mid {
-  animation: slideright 2.5s forwards ease;
-    
+    -webkit-animation: slideright 2.5s forwards ease;
+    animation: slideright 2.5s forwards ease reverse;
 }
 
-#alertModal.slide .alert__stripe--bottom {
-  animation: slideright 2.5s forwards ease reverse;
+@-webkit-keyframes slideright {
+    from {
+        -webkit-transform: translateX(-100%);
+    }
+    15% {
+        -webkit-transform: translateX(0);
+    }
+    85% {
+        -webkit-transform: translateX(0);
+    }  to {
+        -webkit-transform: translateX(100%);
+    }
+  }
   
-    
-}
 
 @keyframes slideright {
   from {
@@ -1326,24 +1347,20 @@ td input {
     animation-play-state:paused;
 }
 
-@keyframes slide {
-  from {
-    transform: translateX(-100%);
-  }
-  15% {
-    transform: translateX(0);
-  }
-  85% {
-    transform: translateX(0);
-  }  to {
-    transform: translateX(100%);
-  }
+#maskRotate {
+    -webkit-animation: spin 2.5s steps(12) infinite;
+    animation: spin 2.5s steps(12) infinite; 
+    transform-origin: center;
 }
 
-
-#maskRotate {
-  animation: spin 2.5s steps(12) infinite;
-     transform-origin: center;
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
@@ -1368,7 +1385,7 @@ td input {
     opacity: 0.7;
 }
 
-@media(min-width:845px) {
+@media(min-width:768px) {
     #waitingModal {
         top: 12.5%;
         left: 12.5%;

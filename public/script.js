@@ -165,7 +165,6 @@ function host() {
         gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
         _("topStripe").innerHTML = "Game Start"
-        _("midStripe").innerHTML = "How to win: " + currentWinCondition;
         alertModal.classList.remove("invisible");
         shadowBox.classList.remove("invisible");
         alertModal.classList.add("slide");
@@ -507,7 +506,6 @@ function player() {
             disableBoard(false);
             console.log("game started")
             _("topStripe").innerHTML = "Game Start"
-            _("midStripe").innerHTML = "How to win: " + currentWinCondition;
             shadowBox.classList.remove("invisible");
             alertModal.classList.remove("invisible");
             window.setTimeout(function() {
