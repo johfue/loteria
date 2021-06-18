@@ -129,14 +129,17 @@ button:before {
 }
 
 button:hover:before, button:focus:before {
+    -webkit-transform: translate(0, 10px);
     transform: translate(0, 10px);
 }
 
 button:active:before {
+    -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
 }
 
 button:disabled:hover:before, button:disabled:focus:before, button:disabled:active:before {
+    -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
 }
 
@@ -342,10 +345,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .gameSettings__option:hover, .gameSettings__option:focus {
     background-color: var(--neutral-900);
+    -webkit-transform: translateY(-8%);
     transform: translateY(-8%);
 }
 
 .gameSettings__option:active {
+    -webkit-transform: translateY(-12%);
     transform: translateY(-12%);
 }
 
@@ -700,6 +705,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .player.winnerGlow:hover:before {
+    -webkit-transform: translateY(-10px);
     transform: translateY(-10px);
 }
 
