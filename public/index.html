@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en-US">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y8G3KYLR9"></script>
     <script type="text/javascript">
@@ -14,26 +14,35 @@
     </script>
     <title>Play Loteria Virtual</title>
     <meta charset="UTF-8">
+    <meta name="description" content="100% free, no sign-ups, and no ads. Play loteria with friends and family across the globe">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msapplication-TileColor" content="#FFE464">
-    <meta name="theme-color" content="#FFD41D">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#FFE354">
+    <meta name="theme-color" content="#FFE354">
     <link href="/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!--<h1><a href="">La Lotería Virtual</a></h1>-->
-
 <div id="popItIn">
     
-    <h1>Play Loteria Online</h1>
+    <img src="images/logo.svg" class="hero" alt="Play Loteria Online">
     
-    <form class="welcome">
-        <label for="roomSearch"></label>
-        <input class="landing" placeholder="Room number" type="text" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required id="roomSearch">
-        <label for="nickname"></label>
-        <input class="landing" placeholder="Nickname" type="text" inputmode="text" minlength="1" maxlength="8" required id="nickname">
-        <button class="landing secondaryBtn" type="submit" id="player">Join a game</button>
+    <form id="welcomeForm" class="welcome">
+        <label for="roomSearch">Room Number</label>
+        <input class="welcome__input" placeholder="######" type="text" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required id="roomSearch">
+        <span id="errorMsg1" class="errorMsg invisible"></span>
+        <button class="welcome__input secondaryBtn" type="submit" id="join">Join a game</button>
     </form>
-        <button class="landing primaryBtn" id="host">Host a game</button>
+    <form id="nameForm" class="nickname invisible">
+        <label for="nickname">Nickname</label>
+        <input class="welcome__input" placeholder="Name" type="text" inputmode="text" minlength="1" maxlength="8" required id="nickname">
+        <span id="errorMsg2" class="errorMsg invisible"></span>
+        <button class="welcome__input secondaryBtn" type="submit" id="player">Confirm</button>
+    </form>
+    
+        <button class="welcome__input primaryBtn" id="host">Host a game</button>
 
 </div>
 <script type="text/javascript">

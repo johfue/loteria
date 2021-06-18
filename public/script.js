@@ -3,8 +3,6 @@ function _(x) {
 }
 
 var socket = io();
-// var winCondition;
-// var currentCard;
 var opponentList = [];
 
 content = _("popItIn");
@@ -13,60 +11,7 @@ function changeAlert(string) {
     return string;
 }
 
-function boardConstruct(seed) {
-    // creates a <table> element
-    Math.seedrandom(seed.toString());
-    var tbl = document.createElement("table");
-    var tblTemp = document.createDocumentFragment();
-    
-    
-    cardOnBoard = [];
-    for (r = 0; r < 4; r++) {
-        
-        var row = document.createElement("tr");
-        
-        for (j = 0; j < 4; j++) {
-            cardOnBoardCheck = cardOnBoard.length;
-            while (cardOnBoard.length === cardOnBoardCheck ) {
-                card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
-                if (cardOnBoard.includes(card) === false) {
-                    cardOnBoard.push(card);
-                    
-                    // var cell = document.createElement("td");
-                    // var img = document.createElement("img");
-                    // img.src = "images/CAAR/" + card + '.jpeg';
-                    // cell.appendChild(img);
-                    // row.appendChild(cell);
-                }
-            }
-        }
-        
-        tbl.appendChild(row);
-    }
-    return tbl;
-}
-
-
-function appendCell() {
-    var cell = document.createElement("td");
-    var img = document.createElement("img");
-    img.src = "images/CAAR/" + card + '.jpeg';
-    cell.appendChild(img);
-    row.appendChild(cell);
-}
-
-function drawCell() {
-    col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
-    col.addEventListener("click", function() {
-        var cell = this.cellIndex;
-        var row = this.parentNode.rowIndex;
-        socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
-    });
-}
-
-
-function generateCardOnBoard() {
+function generateCardOnBoard(func, param, arg) {
     cardOnBoard = [];
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
@@ -76,43 +21,47 @@ function generateCardOnBoard() {
         
                     if (cardOnBoard.includes(card) === false) {
                         cardOnBoard.push(card);
-                        appendCell();
-                        drawCell();
+                        func(param, arg);
                     }
                 }
             }
         }
 }
 
-    function drawTable() {
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            for (var j = 0, col; col = row.cells[j]; j++) {
-                cardOnBoardCheck = cardOnBoard.length;
-                    
-                while (cardOnBoard.length === cardOnBoardCheck ) {
-                    card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
-        
-                    if (cardOnBoard.includes(card) === false) {
-                        cardOnBoard.push(card);
-                        
-                        col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
-                        col.addEventListener("click", function() {
-                            var cell = this.cellIndex;
-                            var row = this.parentNode.rowIndex;
 
-                            socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
-                        })
+function appendCell(cell, tbl) {
+    let cellT = cell.cloneNode(true);
+    cellT.firstElementChild.src = "images/CAAR/" + card + '.jpeg';
+    tbl.rows[i].appendChild(cellT);
+}
 
-                    }
-        
-                }
-            }
-        }
-        
+function drawCell(table) {
+    col = table.rows[i].cells[j];
+    col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
+    col.addEventListener("click", function() {
+        var cell = this.cellIndex;
+        var row = this.parentNode.rowIndex;
+        socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
+    });
+}
+
+function boardConstruct(seed) {
+    Math.seedrandom(seed.toString());
+    let tbl = document.createElement("table");
+    let tblRow = document.createElement("tr");
+    for (v=0; v < 4; v++) {
+        let tblRowV = tblRow.cloneNode();
+        tbl.appendChild(tblRowV);
     }
+    let cell = document.createElement("td");
+    cell.setAttribute("class", "alleged__cell");
+    let img = document.createElement("img");
+    cell.appendChild(img);
+    
+    generateCardOnBoard(appendCell, cell, tbl);
 
-
-
+    return tbl;
+}
 
 
 function newPlayer(nickname, id) {
@@ -121,19 +70,25 @@ function newPlayer(nickname, id) {
         var opponent = document.createElement("div");
         var opponentTable = document.createElement("table");
         var opponentName = document.createElement("span");
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        opponentTable.setAttribute("class", "player__table");
+        cell.setAttribute("class", "player__cell");
+
+        
         opponentName.innerHTML = nickname;
         opponent.setAttribute("id", id);
         opponent.setAttribute("class", "player");
+        opponentName.setAttribute("class", "player__span");
         opponentList.push(id);
-    
+        
+        for (j = 0; j < 4; j++) {
+            let cellJ = cell.cloneNode();
+            row.appendChild(cellJ);
+        }
         for (r = 0; r < 4; r++) {
-            var row = document.createElement("tr");
-            for (j = 0; j < 4; j++) {
-                var cell = document.createElement("td");
-                cell.setAttribute("class", "player__cell");
-                row.appendChild(cell);
-            }
-            opponentTable.appendChild(row);
+            let rowR = row.cloneNode('true');
+            opponentTable.appendChild(rowR);
         }
         opponent.appendChild(opponentTable);
         opponent.appendChild(opponentName);
@@ -155,8 +110,9 @@ function host() {
     const allegedWinner = _("allegedWinner");
     const cardReview = _("cardReview");
     const cardReviewList = _("cardReviewList");
-    const alerModal = _("alertModal");
+    const alertModal = _("alertModal");
     const cardReviewListAlleged = _("cardReviewListAlleged");
+    const shadowBox = _("shadowBox");
     let drawnCards = [];
     let allegedWinnerID = null;
     
@@ -167,8 +123,6 @@ function host() {
         playerList: [],
         pickedBoards: [],
     };
-    
-
     
     socket.emit('new room', roomNumber);
 
@@ -191,74 +145,60 @@ function host() {
     
     function chooseWinCondition() {
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
-        winConditionInfo.src =  "images/" + currentWinCondition + ".png";
+        winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
         gameInfo.goal = currentWinCondition;
         socket.emit('win condition', currentWinCondition, roomNumber);
         drawBtn.disabled = false;
         gameSettings.classList.add("invisible");
+        shadowBox.classList.add("invisible");
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = true;
         }
     }
     
     function startGame() {
-        console.log("game started");
-        currentCard.src = "images/blank.png";
+        currentCard.src = "images/blank.svg";
         shuffleDeck();
         winConditionBtn.disabled = true;
+        reviewBtn.disabled = false;
+        drawBtn.innerHTML = "Draw";
         gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
+        _("topStripe").innerHTML = "Game Start"
+        _("midStripe").innerHTML = "How to win: " + currentWinCondition;
+        alertModal.classList.remove("invisible");
+        shadowBox.classList.remove("invisible");
+        alertModal.classList.add("slide");
+        window.setTimeout(function() {
+            alertModal.classList.add("invisible");
+            shadowBox.classList.add("invisible");
+        }, 2500);
+
     }
-    
-    
-    
-    
-    // const onCheckBoardRender = function(checkBoardRender) {
-    //     return function actualCheckBoardRender(board, checked, id) {
-    //         console.log(event);
-    //         console.log(board, checked, id);
-    //     };
-    // };
-    // const handlers = [];
-    
-    // const startSelectNode = (checkBoardRender) => {
-    //   document.addEventListener("click", handlers[checkBoardRender] = onCheckBoardRender(checkBoardRender), true);
-    // };
-    
-    // const stopSelectNode = (checkBoardRender) => {
-    //   document.removeEventListener("click", handlers[checkBoardRender], true);
-    // };
-    
-    
-    
-    
-    
-    
+
     function checkBoard(board, checked, id) {
-        console.log("checkBoard");
         _(id).classList.add("winnerGlow");
         _(id).addEventListener('click', function(event) {
             checkBoardRender(board, checked, id);
         });
-        // _(id).addEventListener('click', checkBoardRender.bind(this, board, checked, id))
-            // startSelectNode(1);
-        // var quick = _(id).querySelectorAll('input');
-        // for (z=0; z < quick.length; z++) {
-        //     quick[z].disabled = false;
-        // }
-    }
-
-
+}
 
     function checkBoardRender(board, checked, id) {
-        console.log("checkBoardRender");
         _(id).classList.remove("winnerGlow");
         var allegedBoard = boardConstruct(board);
+        let allegedName = "";
+        for (n=0; n < gameInfo.playerList.length; n++) {
+            if (gameInfo.playerList[n].ID === id) {
+                _("allegedWinnerName").innerHTML = gameInfo.playerList[n].Nickname;;
+                break;
+            }
+        }
+
         boardHold.innerHTML = "";
 
         for (b=0; b < checked.length; b++) {
             var currentCell = allegedBoard.rows[checked[b].y].cells[checked[b].x];
-            currentCell.firstElementChild.checked = true;
+            currentCell.classList.add("beaned");
         }
         var disableThis = allegedBoard.querySelectorAll("input");
         for (q=0; q < disableThis.length; q++) {
@@ -273,18 +213,57 @@ function host() {
             cardReviewListAlleged.appendChild(li);
         }
         boardHold.appendChild(allegedBoard);
+        shadowBox.classList.remove("invisible");
         allegedWinner.classList.remove("invisible");
         allegedWinnerID = id;
 
     }
     
     function boardChecked(bool) {
-        console.log("boardChecked");
         socket.emit('board checked', bool, allegedWinnerID, roomNumber);
+        let continueGame = document.createElement("button");
+        let restartGame = document.createElement("button");
+        continueGame.setAttribute("class", "secondaryBtn");
+        restartGame.setAttribute("class", "primaryBtn");
+        continueGame.innerHTML = "Keep playing";
+        restartGame.innerHTML = "New game";
+
+        
+        restartGame.addEventListener('click', function(event) {
+            event.preventDefault();
+            endGame();
+            _("bottomStripe").innerHTML = "";
+            alertModal.classList.remove("paused");
+
+        });
+    
+        continueGame.addEventListener('click', function(event) {
+            event.preventDefault();
+            alertModal.classList.add("invisible");
+            shadowBox.classList.add("invisible");
+            alertModal.classList.remove("paused");
+            _("bottomStripe").innerHTML = "";
+        });
+
+
         if (bool) {
-            alertModal.classList.remove("invisible");
+            _("bottomStripe").appendChild(restartGame);
+            _("bottomStripe").appendChild(continueGame);
+            _("topStripe").innerHTML = "Winner";
+            for (n=0; n < gameInfo.playerList.length; n++) {
+                if (gameInfo.playerList[n].ID === allegedWinnerID) {
+                    _("midStripe").innerHTML = gameInfo.playerList[n].Nickname;
+                    break;
+                }
+            }            alertModal.classList.remove("invisible");
+            alertModal.classList.add("slide");
+            window.setTimeout(function() {
+                alertModal.classList.add("paused");
+            }, 2125);
         }
-        console.log(allegedWinnerID);
+        else {
+            shadowBox.classList.add("invisible");
+        }
         // _(allegedWinnerID).removeEventListener('click', checkBoardRender(board, checked, id));
         _(allegedWinnerID).removeEventListener('click', function(event) {
             checkBoardRender(board, checked, id);
@@ -309,12 +288,14 @@ function host() {
 
     function endGame() {
         drawBtn.disabled = true;
+        reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
+        drawBtn.innerHTML = "Start";
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
         drawnCards = [];
-        currentCard.src="images/blank.png";
+        currentCard.src="images/blank.svg";
         alertModal.classList.add("invisible");
         gameSettings.classList.remove("invisible");
         opponentTiles = _("playerGraph").getElementsByTagName('td');
@@ -351,7 +332,6 @@ function host() {
         }
         
         else {
-            console.log("game started")
             startGame();
         }
         
@@ -364,7 +344,6 @@ function host() {
                 break;
             }
         }
-        console.log(checked);
         checkBoard(board, checked, id);
     });
     
@@ -378,26 +357,19 @@ function host() {
             cardReviewList.appendChild(li);
         }
         cardReview.classList.remove("invisible");
+        shadowBox.classList.remove("invisible");
+    
     });
     
     _("closeReview").addEventListener('click', function(event) {
         event.preventDefault();
         cardReview.classList.add("invisible");
+        shadowBox.classList.add("invisible");
     });
     
     winConditionBtn.addEventListener('click', function(event) {
         event.preventDefault();
         chooseWinCondition();
-    });
-
-    restartGame.addEventListener('click', function(event) {
-        event.preventDefault();
-        endGame();
-    });
-
-    continueGame.addEventListener('click', function(event) {
-        event.preventDefault();
-        alertModal.classList.add("invisible");
     });
 
     drawBtn.onclick = drawCard;
@@ -470,11 +442,15 @@ function player() {
     const currentCard = _('currentCard');
     const winCondition = _('winConditionInfo');
     const announceWin = _("announceWin");
+    const boardSelect = _("boardSelect");
     const boardSelectOptions = _("boardSelectOptions");
     const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
+    const shadowBox = _("shadowBox");
+    const alertNodal = _("alertModal");
     
     let chosenBoard = null;
     let checkedPosition = [];
+    let currentWinCondition = "";
 
     function clearBeans() {
         tiles = board.getElementsByTagName('input');
@@ -491,71 +467,31 @@ function player() {
     }
     
     function drawTable() {
-        cardOnBoard = [];
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            for (var j = 0, col; col = row.cells[j]; j++) {
-                cardOnBoardCheck = cardOnBoard.length;
-                    
-                while (cardOnBoard.length === cardOnBoardCheck ) {
-                    card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
-        
-                    if (cardOnBoard.includes(card) === false) {
-                        cardOnBoard.push(card);
-                        col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
-                        col.addEventListener("click", function() {
-                            var cell = this.cellIndex;
-                            var row = this.parentNode.rowIndex;
-
-                            socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
-                        })
-
-                    }
-        
-                }
-            }
-        }
-        
+        generateCardOnBoard(drawCell, table);
     }
-    //     for (k=0; k < tableCells.length; k++) {
-    //         var changed = tableCells[k];
-    //         var x = changed.parentNode.cellIndex;
-    //         var y = changed.parentNode.parentNode.rowIndex;
-    //         var bool = changed.checked;
-    //         tableCells[k].addEventListener("click", function() {
-    //             socket.emit("activity", this.parentNode.cellIndex, this.parentNode.parentNode.rowIndex, this.checked, roomNumber.innerHTML);
-    //     })
-    // }
 
     function pickBoard(evt) {
         evt.preventDefault();
         chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
         Math.seedrandom(chosenBoard);
         drawTable();
-        _("boardSelect").classList.add("invisible");
+        boardSelect.classList.add("invisible");
         table.classList.remove("invisible");
+        shadowBox.classList.add("invisible")
     }
-    
-    // function recordBoard() {
-    //     var checkedList = document.querySelectorAll('input[name="boardCell"]:checked');
-    //     for (d=0; d < checkedList.length; d++) {
-    //         var row = checkedList[d].parentElement.parentElement.rowIndex;
-    //         var cell = checkedList[d].parentElement.cellIndex;
-    //         var coordinate = {y:row, x:cell};
-    //         checkedPosition.push(coordinate);
-    //     }
-    //     return checkedPosition;
-    // }
-    
-    // function announceWin(board, checked) {
-    //     socket.emit("announce win", board, checked, roomNumber.innerHTML);
-    // }
     
     function disableBoard(bool) {
         for (k=0; k < tableCells.length; k++) {
             tableCells[k].disabled = bool;
         }
+        if (bool) {
+            _("waitingModal").classList.remove("invisible");
+        }
+        else {
+            _("waitingModal").classList.add("invisible");
+        }
+        
         announceWin.disabled = bool;
-        changeAlert("verifying");
     }
     
     newBoard.onclick = pickBoard;
@@ -567,19 +503,28 @@ function player() {
     });
     
     function startEnd(bool) {
-        // for (n=0; n<boardOptions.length; n++) {
-        //     boardOptions[n].disabled = bool;
-        // }
-        // newBoard.disabled = bool;
         if (bool) {
             disableBoard(false);
+            console.log("game started")
+            _("topStripe").innerHTML = "Game Start"
+            _("midStripe").innerHTML = "How to win: " + currentWinCondition;
+            shadowBox.classList.remove("invisible");
+            alertModal.classList.remove("invisible");
+            window.setTimeout(function() {
+                alertModal.classList.add("invisible");
+                shadowBox.classList.add("invisible");
+                _("topStripe").innerHTML = "";
+                _("midStripe").innerHTML = "";
+            }, 2500);
+            
         }
         else {
             clearBeans();
-            currentCard.src="images/blank.png";
-            winConditionInfo.src="images/blank.png";
+            currentCard.src="images/blank.svg";
+            winConditionInfo.src="images/blank.svg";
             disableBoard(true);
-            _("boardSelect").classList.remove("invisible");
+            shadowBox.classList.add("invisible");
+            boardSelect.classList.remove("invisible");
         }
         
     }
@@ -593,10 +538,22 @@ function player() {
     });
     
     socket.on('win condition', function(condition){
-        winConditionInfo.src = "images/" + condition + '.png';
+        currentWinConditon = condition;
+        winConditionInfo.src = "images/" + condition + '.svg';
     });
     
     socket.on('win checked', function(bool){
+        if (bool) {
+                _("topStripe").innerHTML = "Congratulations";
+            shadowBox.classList.remove("invisible");
+            alertModal.classList.remove("invisible");
+            window.setTimeout(function() {
+                alertModal.classList.add("invisible");
+                shadowBox.classList.add("invisible");
+                _("topStripe").innerHTML = "";
+            }, 2500);
+    
+        }
         disableBoard(false);
     });
     
@@ -604,41 +561,37 @@ function player() {
     
     socket.emit('new player', roomInput, nickname);
     
-    for (o=0; o < 75; o++) {
-            var li = document.createElement("li");
-            var input = document.createElement("input");
-            input.setAttribute("type", "radio");
-            input.setAttribute("name", "boardNumber");
-            input.setAttribute("value", o);
-            var label = document.createElement("label");
-            label.setAttribute("for", o);
-            label.appendChild(boardConstruct(o));
-            li.appendChild(input);
-            li.appendChild(label);
-            li.addEventListener('click', function() {
-                newBoard.disabled = false;
-            });
-            boardSelectOptions.appendChild(li);
+    var boardSelectOptionsContainer = document.createDocumentFragment();
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.setAttribute("type", "radio");
+    input.setAttribute("name", "boardNumber");
+    var label = document.createElement("label");
+    li.appendChild(input);
+    li.appendChild(label);
+
+    for (o=0; o < 63; o++) {
+        let liO = li.cloneNode('true');
+        liO.children[1].setAttribute("value", o);
+        liO.children[1].setAttribute("for", o);
+        liO.children[1].appendChild(boardConstruct(o));
+        liO.addEventListener('click', function() {
+            newBoard.disabled = false;
+        });
+    
+        boardSelectOptionsContainer.appendChild(liO);
     }
-    
-    
-    // for (n=0; n<boardOptions.length; n++) {
-    //     console.log("added event listener to boardOptions");
-    //     boardOptions[n].addEventListener('click', function() {
-    //         console.log("click on board option");
-    //         newBoard.disabled = false;
-    //     });
-    // }
+    boardSelectOptions.appendChild(boardSelectOptionsContainer);
 
     socket.on('catch-up', function(gameInfo) {
         disableBoard(!gameInfo.gameState);
         if (!gameInfo.gameState) {
-            currentCard.src = "images/blank.png";
+            currentCard.src = "images/blank.svg";
         }
         else {
             currentCard.src = "images/CAAR/" + gameInfo.card + '.jpeg';
         }
-        winConditionInfo.src = "images/" + gameInfo.goal + '.png';
+        winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
         for (e=0; e < gameInfo.playerList.length; e++) {
             newPlayer(gameInfo.playerList[e].Nickname, gameInfo.playerList[e].ID);
 
@@ -669,17 +622,30 @@ function roomSearch(room, evt) {
     socket.emit("room check", (room));
     socket.on('room join', function(bool){
         if (bool) {
-            load_page("player");
+            _("welcomeForm").classList.add("invisible");
+            _("host").classList.add("invisible");
+            _("nameForm").classList.remove("invisible");
         }
         else {
-            console.log("error");
+            _("errorMsg1").classList.remove("invisible");
+            _("errorMsg1").innerHTML = "Can't find room";
         }
     });
 }
 
+function nameCheck(name, evt) {
+    evt.preventDefault();
+    if (_("nickname").value.length > 0) {
+        load_page("player");
+    }
+    else {
+        _("errorMsg2").classList.remove("invisible");
+        _("errorMsg2").innerHTML = "Enter a nickname";
+    }
+}
+
 function opponentUpdate(x,y, bool, id) {
     var opponent = _(id).firstElementChild;
-    console.log(opponent);
     opponent.rows[y].cells[x].classList.toggle("beaned");
 }
 
@@ -690,14 +656,16 @@ socket.on ("updateActivity", function(x, y, bool, id) {
 socket.on ("player left", function(id) {
     _(id).remove(_(id));
 
-        console.log("player left");
+});
 
+_("join").addEventListener('click', function(event) {
+    roomInput = _("roomSearch").value;
+    roomSearch(roomInput, event);
 });
 
 _("player").addEventListener('click', function(event) {
-    roomInput = _("roomSearch").value;
     nickname = _("nickname").value;
-    roomSearch(roomInput, event);
+    nameCheck(nickname, event);
 });
 
 _("host").addEventListener('click', function(event) {
