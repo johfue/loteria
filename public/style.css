@@ -1045,6 +1045,7 @@ table, td {
     display: inline-block;
     padding: 0;
     width: 25%;
+    white-space: nowrap;
 }
 
 .board img {
@@ -1305,6 +1306,11 @@ td input {
 
 #alertModal.slide .alert__stripe--top, #alertModal.slide .alert__stripe--mid {
     -webkit-animation: slideright 2.5s forwards ease;
+    animation: slideright 2.5s forwards ease;
+}
+
+#alertModal.slide .alert__stripe--bottom {
+    -webkit-animation: slideright 2.5s forwards ease reverse;
     animation: slideright 2.5s forwards ease reverse;
 }
 
