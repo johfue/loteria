@@ -1032,6 +1032,7 @@ table, td {
     border-spacing: 0;
     padding: 0;
     border: none;
+    white-space: nowrap;
 }
 
 .board {
@@ -1045,7 +1046,6 @@ table, td {
     display: inline-block;
     padding: 0;
     width: 25%;
-    white-space: nowrap;
 }
 
 .board img {
