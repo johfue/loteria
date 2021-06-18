@@ -309,7 +309,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transition: 0.25s ease;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .modal {
         height: 75%;
         top: 20%;
@@ -425,7 +425,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     color: var(--neutral-900);
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .hostConsole {
         row-gap: 2rem;
         column-gap: 2rem;
@@ -536,7 +536,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     height: 100%;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .logo {
         width: 12vw;
     }
@@ -589,7 +589,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-column: 2/3;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .cardReview {
         position: absolute;
         top: 20vh;
@@ -703,7 +703,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transform: translateY(-10px);
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .modal__content--alleged {
         padding: 0 1rem;
     }
@@ -832,7 +832,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: block;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .playerWrap {
         display: flex;
         flex-direction: row;
@@ -883,7 +883,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
-@media(min-width:768px) {
+@media(min-width:845px) {
     button, input[type=text] {
         height: 75px;
     }
@@ -978,7 +978,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-size: 0.6em;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .opponentWrap {
         left: 0;
         min-width: 25vh;
@@ -1136,7 +1136,7 @@ table, td {
     z-index: 4;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     .modal__content--boardSelect {
         max-height: calc(80vh - 2rem);
     }
@@ -1385,7 +1385,7 @@ td input {
     opacity: 0.7;
 }
 
-@media(min-width:768px) {
+@media(min-width:845px) {
     #waitingModal {
         top: 12.5%;
         left: 12.5%;
