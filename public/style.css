@@ -1076,6 +1076,7 @@ table, td {
     display: flex;
     flex-direction: column;
     list-style-type: none;
+    -webkit-position: sticky;
     position: sticky;
     top: 0;
     z-index: 2;
@@ -1121,6 +1122,10 @@ table, td {
     font-weight: bold;
     color: var(--neutral-100);
     background-color: var(--neutral-900);
+}
+
+.board__td:hover input:disabled + img, .board__td::focus input:disabled + img {
+    filter: brightness(1);
 }
 
 .board__td:hover img, .board__td:focus img {
