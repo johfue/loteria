@@ -13,7 +13,17 @@
 <form id="playerGame" class="playerGame">
     
     <div id="boardSelect" class="modal modal--boardSelect">
-        <ul id="boardSelectOptions" class="modal__content modal__content--boardSelect"></ul>
+        <div id="boardSelectOptions" class="modal__content modal__content--boardSelect">
+            <ol id="boardSelectPages" class="boardSelect__pages">
+                <li class="boardSelect__pageNum currentPage"><a href="#page_1" class="boardSelect__pageNum__a">1</a></li>
+                <li class="boardSelect__pageNum"><a href="#page_2" class="boardSelect__pageNum__a">2</a></li>
+                <li class="boardSelect__pageNum"><a href="#page_3" class="boardSelect__pageNum__a">3</a></li>
+                <li class="boardSelect__pageNum"><a href="#page_4" class="boardSelect__pageNum__a">4</a></li>
+                <li class="boardSelect__pageNum"><a href="#page_5" class="boardSelect__pageNum__a">5</a></li>
+                <li class="boardSelect__pageNum"><a href="#page_6" class="boardSelect__pageNum__a">6</a></li>
+                <li class="boardSelect__pageNum"><a href="#page_7" class="boardSelect__pageNum__a">7</a></li>
+            </ol>
+        </div>
         <h2><span class="modal__span">Choose your </span><br>board</h2>
         <button id="newBoard" class="primaryBtn" disabled="true">Select</button>
     </div>
@@ -25,28 +35,28 @@
     
     <table id="board" class="board">
         <tr>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
-            <td><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
+            <td class="board__td"><input type="checkbox" name="boardCell" class="board__input" disabled><img src="" alt=""></td>
         </tr>
     </table>
     <button type="submit" class="primaryBtn" id="announceWin">Loteria!</button>

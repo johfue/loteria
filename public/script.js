@@ -7,8 +7,8 @@ var opponentList = [];
 
 content = _("popItIn");
 
-function changeAlert(string) {
-    return string;
+function readyNodes() {
+    
 }
 
 function generateCardOnBoard(func, param, arg) {
@@ -27,7 +27,6 @@ function generateCardOnBoard(func, param, arg) {
             }
         }
 }
-
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
@@ -98,6 +97,9 @@ function newPlayer(nickname, id) {
 }
 
 function host() {
+    window.onpopstate = function(event) {
+        window.location = "/";
+    };
     const drawBtn = _("drawBtn");
     const currentCard = _("currentCard");
     const winConditionBtn = _("winConditionBtn");
@@ -113,6 +115,10 @@ function host() {
     const alertModal = _("alertModal");
     const cardReviewListAlleged = _("cardReviewListAlleged");
     const shadowBox = _("shadowBox");
+    const bottomStripe = _("bottomStripe");
+    const midStripe = _("midStripe");
+    const toptripe = _("topStripe");
+    const playerGraph = _("playerGraph");
     let drawnCards = [];
     let allegedWinnerID = null;
     
@@ -127,6 +133,7 @@ function host() {
     socket.emit('new room', roomNumber);
 
     socket.on('room clear', function(r){
+        window.history.pushState('','', r);
         _("roomNumber").innerHTML = r;
     });
     
@@ -141,6 +148,19 @@ function host() {
         for (var i=0; i<54; i++) {
             deckList.push(i+1);
         }
+    }
+    
+    function reviewCards() {
+        var cardReviewListFragment = document.createDocumentFragment();
+
+        for (c=0; c < drawnCards.length; c++) {
+            var li = document.createElement("li");
+            var img = document.createElement("img");
+            img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
+            li.appendChild(img);
+            cardReviewListFragment.appendChild(li);
+        }
+        return cardReviewListFragment;
     }
     
     function chooseWinCondition() {
@@ -164,7 +184,7 @@ function host() {
         drawBtn.innerHTML = "Draw";
         gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
-        _("topStripe").innerHTML = "Game Start"
+        topStripe.innerHTML = "Game Start"
         alertModal.classList.remove("invisible");
         shadowBox.classList.remove("invisible");
         alertModal.classList.add("slide");
@@ -204,13 +224,8 @@ function host() {
             disableThis[q].disabled = true;
         }
         cardReviewListAlleged.innerHTML = "";
-        for (c=0; c < drawnCards.length; c++) {
-            var li = document.createElement("li");
-            var img = document.createElement("img");
-            img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
-            li.appendChild(img);
-            cardReviewListAlleged.appendChild(li);
-        }
+
+        cardReviewListAlleged.appendChild(reviewCards());
         boardHold.appendChild(allegedBoard);
         shadowBox.classList.remove("invisible");
         allegedWinner.classList.remove("invisible");
@@ -231,7 +246,7 @@ function host() {
         restartGame.addEventListener('click', function(event) {
             event.preventDefault();
             endGame();
-            _("bottomStripe").innerHTML = "";
+            bottomStripe.innerHTML = "";
             alertModal.classList.remove("paused");
 
         });
@@ -241,17 +256,17 @@ function host() {
             alertModal.classList.add("invisible");
             shadowBox.classList.add("invisible");
             alertModal.classList.remove("paused");
-            _("bottomStripe").innerHTML = "";
+            bottomStripe.innerHTML = "";
         });
 
 
         if (bool) {
-            _("bottomStripe").appendChild(restartGame);
-            _("bottomStripe").appendChild(continueGame);
-            _("topStripe").innerHTML = "Winner";
+            bottomStripe.appendChild(restartGame);
+            bottomStripe.appendChild(continueGame);
+            topStripe.innerHTML = "Winner";
             for (n=0; n < gameInfo.playerList.length; n++) {
                 if (gameInfo.playerList[n].ID === allegedWinnerID) {
-                    _("midStripe").innerHTML = gameInfo.playerList[n].Nickname;
+                    midStripe.innerHTML = gameInfo.playerList[n].Nickname;
                     break;
                 }
             }            alertModal.classList.remove("invisible");
@@ -297,8 +312,8 @@ function host() {
         currentCard.src="images/blank.svg";
         alertModal.classList.add("invisible");
         gameSettings.classList.remove("invisible");
-        opponentTiles = _("playerGraph").getElementsByTagName('td');
-        losers = _("playerGraph").querySelectorAll(".winnerGlow");
+        opponentTiles = playerGraph.getElementsByTagName('td');
+        losers = playerGraph.querySelectorAll(".winnerGlow");
         for (u=0; u < losers.length; u++) {
             losers[u].classList.remove("winnerGlow");
             losers[u].removeEventListener('click', checkBoardRender(board, checked, id));
@@ -348,13 +363,7 @@ function host() {
     
     _("reviewBtn").addEventListener('click', function() {
         cardReviewList.innerHTML = "";
-        for (c=0; c < drawnCards.length; c++) {
-            var li = document.createElement("li");
-            var img = document.createElement("img");
-            img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
-            li.appendChild(img);
-            cardReviewList.appendChild(li);
-        }
+        cardReviewList.appendChild(reviewCards());
         cardReview.classList.remove("invisible");
         shadowBox.classList.remove("invisible");
     
@@ -404,18 +413,15 @@ function host() {
             }
         }
         
-        console.log(checkedPosition);
     });
     
     socket.on ("player left", function(id) {
-        console.log("host: player left");
         for (var p = 0; p < gameInfo.playerList.length; p++) {
-             if (gameInfo.playerList.ID == id) {
+             if (gameInfo.playerList[p].ID == id) {
                  gameInfo.playerList.splice(p,1);
                  break;
              }
         }
-
     });
     
     shuffleDeck();
@@ -434,7 +440,18 @@ function host() {
 }
 
 function player() {
-    
+    window.onpopstate = function(event) {
+    if(event.state === null) {
+        event.preventDefault();
+        return false;
+    }
+    else {
+        window.location = "/";
+    }
+    };
+    window.onhashchange = function(event) {
+        history.replaceState = roomInput;
+    }
     const table = _("board");
     const newBoard = _("newBoard");
     const tableCells = table.querySelectorAll('input[type="checkbox"]');
@@ -446,7 +463,10 @@ function player() {
     const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
     const shadowBox = _("shadowBox");
     const alertNodal = _("alertModal");
-    
+    const bottomStripe = _("bottomStripe");
+    const midStripe = _("midStripe");
+    const toptripe = _("topStripe");
+    const playerGraph = _("playerGraph");
     let chosenBoard = null;
     let checkedPosition = [];
     let currentWinCondition = "";
@@ -459,7 +479,7 @@ function player() {
             }
             
         }
-        opponentTiles = _("playerGraph").getElementsByTagName('td');
+        opponentTiles = playerGraph.getElementsByTagName('td');
         for (w=0; w < opponentTiles.length; w++) {
             opponentTiles[w].classList.remove("beaned");
         }
@@ -504,15 +524,14 @@ function player() {
     function startEnd(bool) {
         if (bool) {
             disableBoard(false);
-            console.log("game started")
-            _("topStripe").innerHTML = "Game Start"
+            topStripe.innerHTML = "Game Start"
             shadowBox.classList.remove("invisible");
             alertModal.classList.remove("invisible");
             window.setTimeout(function() {
                 alertModal.classList.add("invisible");
                 shadowBox.classList.add("invisible");
-                _("topStripe").innerHTML = "";
-                _("midStripe").innerHTML = "";
+                topStripe.innerHTML = "";
+                midStripe.innerHTML = "";
             }, 2500);
             
         }
@@ -542,13 +561,13 @@ function player() {
     
     socket.on('win checked', function(bool){
         if (bool) {
-                _("topStripe").innerHTML = "Congratulations";
+                topStripe.innerHTML = "Congratulations";
             shadowBox.classList.remove("invisible");
             alertModal.classList.remove("invisible");
             window.setTimeout(function() {
                 alertModal.classList.add("invisible");
                 shadowBox.classList.add("invisible");
-                _("topStripe").innerHTML = "";
+                topStripe.innerHTML = "";
             }, 2500);
     
         }
@@ -560,30 +579,76 @@ function player() {
     socket.emit('new player', roomInput, nickname);
     
     var boardSelectOptionsContainer = document.createDocumentFragment();
+    var ol = document.createElement("ol");
     var li = document.createElement("li");
     var input = document.createElement("input");
+    var span = document.createElement("span");
+    li.classList.add("boardSelect__li");
+    ol.classList.add("boardSelect__page");
+    span.classList.add("boardSelect__span");
     input.setAttribute("type", "radio");
     input.setAttribute("name", "boardNumber");
     var label = document.createElement("label");
     li.appendChild(input);
     li.appendChild(label);
 
-    for (o=0; o < 63; o++) {
-        let liO = li.cloneNode('true');
-        liO.children[1].setAttribute("value", o);
-        liO.children[1].setAttribute("for", o);
-        liO.children[1].appendChild(boardConstruct(o));
-        liO.addEventListener('click', function() {
-            newBoard.disabled = false;
-        });
-    
-        boardSelectOptionsContainer.appendChild(liO);
+
+    function claimBoard(board, name) {
+        claimedBoard = document.querySelector('input[value='+ board +']');
+        if (claimedBoard.checked) {
+            claimedBoard.checked = false;
+            newBoard.disabled = true;
+        }
+        claimedBoard.disabled = true;
+        claimToken = document.createElement("span");
+        claimToken.classList.add("claimToken");
+        claimToken.innerHTML = name;
+        claimedBoard.appendChild(claimToken);
+        claimedBoard.classList.add("claimed");
+    }
+
+    for (p=0; p<7; p++) {
+        let olO = ol.cloneNode('true');
+        olO.setAttribute("id", "page_" + (p+1));
+        for (b=0; b<9; b++) {
+            let liO = li.cloneNode('true');
+            let spanO = span.cloneNode('true');
+            let currentBoard = (p*9) + (b+1);
+            spanO.innerHTML = currentBoard;
+            liO.children[1].setAttribute("value", currentBoard);
+            liO.children[1].setAttribute("for", currentBoard);
+            liO.children[1].appendChild(boardConstruct(currentBoard));
+            liO.addEventListener('click', function() {
+                newBoard.disabled = false;
+                socket.emit('claim board', this.value, roomInput, nickname);
+            });
+            liO.children[1].appendChild(spanO);
+            olO.appendChild(liO);
+        }
+        boardSelectOptionsContainer.appendChild(olO);
     }
     boardSelectOptions.appendChild(boardSelectOptionsContainer);
+
+    boardSelectOptions.onscroll = function() {scrollTrack()};
+    
+    function scrollTrack() {
+      let winScroll = boardSelectOptions.scrollTop;
+      let height = boardSelectOptions.scrollHeight;
+      let scrolled = Math.round(((winScroll / height) * 100)/13);
+      let scrolledMin = Math.max(scrolled, 1);
+
+      document.querySelector(".currentPage").classList.remove("currentPage");
+      console.log(winScroll);
+      console.log(scrolledMin);
+
+      document.querySelector("#boardSelectPages li:nth-child(" + scrolledMin + ")").classList.add("currentPage");
+    }
+
 
     socket.on('catch-up', function(gameInfo) {
         disableBoard(!gameInfo.gameState);
         if (!gameInfo.gameState) {
+            console.log("this should run whenver there's no current card");
             currentCard.src = "images/blank.svg";
         }
         else {
@@ -597,6 +662,10 @@ function player() {
                 opponentUpdate(gameInfo.playerList[e].placedBeans[b].x, gameInfo.playerList[e].placedBeans[b].y, true, gameInfo.playerList[e].ID)
             }
         }
+    });
+
+    socket.on ("board claim", function(board, nickname) {
+        claimBoard(board, nickname);
     });
     
     socket.on ("new player", function(nickname, id) {
@@ -634,6 +703,7 @@ function roomSearch(room, evt) {
 function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
+        window.history.pushState('','', _("roomSearch").value);
         load_page("player");
     }
     else {
@@ -645,6 +715,7 @@ function nameCheck(name, evt) {
 function opponentUpdate(x,y, bool, id) {
     var opponent = _(id).firstElementChild;
     opponent.rows[y].cells[x].classList.toggle("beaned");
+    playerGraph.insertBefore(_(id), playerGraph.firstElementChild)
 }
 
 socket.on ("updateActivity", function(x, y, bool, id) {
