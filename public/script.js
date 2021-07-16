@@ -385,15 +385,24 @@ function host() {
     socket.on ("new player", function(nickname, id) {
         socket.emit('update newcomer', gameInfo, id);
         newPlayer(nickname, id);
-        var player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
+        let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
         gameInfo.playerList.push(player);
     });
     
-    socket.on ("updateActivity", function(x, y, bool, id) {
-        var coordinate = {y:y, x:x};
+    socket.on ("board claim", function(claimedBoard, nickname, id) {
         for (i=0; i < gameInfo.playerList.length; i++) {
             if (gameInfo.playerList[i].ID === id) {
-                var checkedPosition = gameInfo.playerList[i].placedBeans;
+                gameInfo.playerList[i].board = claimedBoard;
+                break;
+            }
+        }
+    });
+    
+    socket.on ("updateActivity", function(x, y, bool, id) {
+        let coordinate = {y:y, x:x};
+        for (i=0; i < gameInfo.playerList.length; i++) {
+            if (gameInfo.playerList[i].ID === id) {
+                let checkedPosition = gameInfo.playerList[i].placedBeans;
                 
                 if (bool) {
                     checkedPosition.push(coordinate);
@@ -460,6 +469,7 @@ function player() {
     const announceWin = _("announceWin");
     const boardSelect = _("boardSelect");
     const boardSelectOptions = _("boardSelectOptions");
+    const boardSelectOptionsWrap = _("boardSelectOptionsWrap");
     const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
     const shadowBox = _("shadowBox");
     const alertNodal = _("alertModal");
@@ -592,19 +602,25 @@ function player() {
     li.appendChild(input);
     li.appendChild(label);
 
+    var claimToken = document.createElement("span");
+    claimToken.classList.add("claimToken");
 
-    function claimBoard(board, name) {
+    function claimBoard(board, name, id) {
         claimedBoard = document.querySelector('input[value='+ board +']');
         if (claimedBoard.checked) {
             claimedBoard.checked = false;
             newBoard.disabled = true;
         }
+        
+        if (_(id + "claimed")) {
+            claimedBoard.remove(_(id + "claimed"));
+        }
+        let claimTokenO = claimToken.cloneNode('true');
         claimedBoard.disabled = true;
-        claimToken = document.createElement("span");
-        claimToken.classList.add("claimToken");
-        claimToken.innerHTML = name;
-        claimedBoard.appendChild(claimToken);
+        claimTokenO.innerHTML = name;
+        claimedBoard.appendChild(claimTokenO);
         claimedBoard.classList.add("claimed");
+        claimedBoard.setAttribute("id", id + "claimed");
     }
 
     for (p=0; p<7; p++) {
@@ -614,13 +630,13 @@ function player() {
             let liO = li.cloneNode('true');
             let spanO = span.cloneNode('true');
             let currentBoard = (p*9) + (b+1);
-            spanO.innerHTML = currentBoard;
+            spanO.innerHTML = "#" + currentBoard;
             liO.children[1].setAttribute("value", currentBoard);
             liO.children[1].setAttribute("for", currentBoard);
             liO.children[1].appendChild(boardConstruct(currentBoard));
             liO.addEventListener('click', function() {
                 newBoard.disabled = false;
-                socket.emit('claim board', this.value, roomInput, nickname);
+                socket.emit('claim board', this.value, nickname, roomInput);
             });
             liO.children[1].appendChild(spanO);
             olO.appendChild(liO);
@@ -629,19 +645,16 @@ function player() {
     }
     boardSelectOptions.appendChild(boardSelectOptionsContainer);
 
-    boardSelectOptions.onscroll = function() {scrollTrack()};
+    boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
     
     function scrollTrack() {
-      let winScroll = boardSelectOptions.scrollTop;
-      let height = boardSelectOptions.scrollHeight;
-      let scrolled = Math.round(((winScroll / height) * 100)/13);
-      let scrolledMin = Math.max(scrolled, 1);
+      let winScroll = boardSelectOptionsWrap.scrollTop;
+      let increment = boardSelectOptions.firstElementChild.offsetHeight;
+      let scrolled = (Math.floor(winScroll / increment) + 1 );
 
       document.querySelector(".currentPage").classList.remove("currentPage");
-      console.log(winScroll);
-      console.log(scrolledMin);
 
-      document.querySelector("#boardSelectPages li:nth-child(" + scrolledMin + ")").classList.add("currentPage");
+      document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
     }
 
 
@@ -655,7 +668,12 @@ function player() {
             currentCard.src = "images/CAAR/" + gameInfo.card + '.jpeg';
         }
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
+
         for (e=0; e < gameInfo.playerList.length; e++) {
+            if (!null) {
+                claimBoard(currentToken[0], , ,);
+            }
+
             newPlayer(gameInfo.playerList[e].Nickname, gameInfo.playerList[e].ID);
 
             for (b=0; b < gameInfo.playerList[e].placedBeans.length; b++) {
@@ -664,8 +682,8 @@ function player() {
         }
     });
 
-    socket.on ("board claim", function(board, nickname) {
-        claimBoard(board, nickname);
+    socket.on ("board claim", function(board, nickname, id) {
+        claimBoard(board, nickname, id);
     });
     
     socket.on ("new player", function(nickname, id) {
