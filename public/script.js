@@ -671,7 +671,7 @@ function player() {
 
         for (e=0; e < gameInfo.playerList.length; e++) {
             if (!null) {
-                claimBoard(currentToken[0], , ,);
+                claimBoard(currentToken.board, currentToken.name, currentToken.id);
             }
 
             newPlayer(gameInfo.playerList[e].Nickname, gameInfo.playerList[e].ID);
