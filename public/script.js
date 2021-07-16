@@ -652,7 +652,7 @@ function player() {
         let winScroll = boardSelectOptionsWrap.scrollTop;
         let increment = boardSelectOptions.firstElementChild.offsetHeight;
         let scrolled = (Math.floor(winScroll / increment) + 1 );
-        if (document.querySelector(".currentPage")) {
+        if (document.querySelector(".currentPage") === null) {
             firstPage.classList.add("currentPage");
         }
         else {
