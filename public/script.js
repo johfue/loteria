@@ -477,6 +477,7 @@ function player() {
     const midStripe = _("midStripe");
     const toptripe = _("topStripe");
     const playerGraph = _("playerGraph");
+    const firstPage = _("firstPage");
     let chosenBoard = null;
     let checkedPosition = [];
     let currentWinCondition = "";
@@ -648,15 +649,17 @@ function player() {
     boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
     
     function scrollTrack() {
-      let winScroll = boardSelectOptionsWrap.scrollTop;
-      let increment = boardSelectOptions.firstElementChild.offsetHeight;
-      let scrolled = (Math.floor(winScroll / increment) + 1 );
-
-      document.querySelector(".currentPage").classList.remove("currentPage");
-
-      document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
+        let winScroll = boardSelectOptionsWrap.scrollTop;
+        let increment = boardSelectOptions.firstElementChild.offsetHeight;
+        let scrolled = (Math.floor(winScroll / increment) + 1 );
+        if (document.querySelector(".currentPage")) {
+            firstPage.classList.add("currentPage");
+        }
+        else {
+            document.querySelector(".currentPage").classList.remove("currentPage");
+        }
+        document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
     }
-
 
     socket.on('catch-up', function(gameInfo) {
         disableBoard(!gameInfo.gameState);
