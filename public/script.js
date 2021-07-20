@@ -127,7 +127,6 @@ function host() {
         card: "blank",
         goal: "blank",
         playerList: [],
-        pickedBoards: [],
     };
     
     socket.emit('new room', roomNumber);
@@ -184,7 +183,7 @@ function host() {
         drawBtn.innerHTML = "Draw";
         gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
-        topStripe.innerHTML = "Game Start"
+        topStripe.innerHTML = "Start"
         alertModal.classList.remove("invisible");
         shadowBox.classList.remove("invisible");
         alertModal.classList.add("slide");
@@ -535,7 +534,7 @@ function player() {
     function startEnd(bool) {
         if (bool) {
             disableBoard(false);
-            topStripe.innerHTML = "Game Start"
+            topStripe.innerHTML = "Start"
             shadowBox.classList.remove("invisible");
             alertModal.classList.remove("invisible");
             window.setTimeout(function() {
@@ -607,21 +606,24 @@ function player() {
     claimToken.classList.add("claimToken");
 
     function claimBoard(board, name, id) {
-        claimedBoard = document.querySelector('input[value='+ board +']');
+        let boardString = "[value=" + '"' + board + '"' + "]";
+        claimedBoard = document.querySelector('input[name="boardNumber"]' + boardString);
         if (claimedBoard.checked) {
             claimedBoard.checked = false;
             newBoard.disabled = true;
         }
         
-        if (_(id + "claimed")) {
-            claimedBoard.remove(_(id + "claimed"));
+        if (_(id + "claimed") != null) {
+            _(id + "claimed").previousSibling.disabled = false;
+            claimedBoard.parentNode.classList.remove("claimed");
+            _(id + "claimed").remove(_(id + "claimed"));
         }
         let claimTokenO = claimToken.cloneNode('true');
-        claimedBoard.disabled = true;
         claimTokenO.innerHTML = name;
-        claimedBoard.appendChild(claimTokenO);
-        claimedBoard.classList.add("claimed");
-        claimedBoard.setAttribute("id", id + "claimed");
+        claimTokenO.setAttribute("id", id + "claimed");
+        claimedBoard.disabled = true;
+        claimedBoard.parentNode.classList.add("claimed");
+        claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
 
     for (p=0; p<7; p++) {
@@ -632,12 +634,12 @@ function player() {
             let spanO = span.cloneNode('true');
             let currentBoard = (p*9) + (b+1);
             spanO.innerHTML = "#" + currentBoard;
-            liO.children[1].setAttribute("value", currentBoard);
+            liO.children[0].setAttribute("value", currentBoard);
             liO.children[1].setAttribute("for", currentBoard);
             liO.children[1].appendChild(boardConstruct(currentBoard));
             liO.addEventListener('click', function() {
                 newBoard.disabled = false;
-                socket.emit('claim board', this.value, nickname, roomInput);
+                socket.emit('claim board', this.firstElementChild.value, nickname, roomInput);
             });
             liO.children[1].appendChild(spanO);
             olO.appendChild(liO);
@@ -673,25 +675,33 @@ function player() {
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
 
         for (e=0; e < gameInfo.playerList.length; e++) {
-            if (!null) {
-                claimBoard(currentToken.board, currentToken.name, currentToken.id);
+            iteratedPlayer = gameInfo.playerList[e];
+            console.log("catch-up");
+            if (iteratedPlayer.board != null) {
+                claimBoard(iteratedPlayer.board, iteratedPlayer.Nickname, iteratedPlayer.ID);
             }
 
-            newPlayer(gameInfo.playerList[e].Nickname, gameInfo.playerList[e].ID);
+            newPlayer(iteratedPlayer.Nickname, iteratedPlayer.ID);
 
-            for (b=0; b < gameInfo.playerList[e].placedBeans.length; b++) {
-                opponentUpdate(gameInfo.playerList[e].placedBeans[b].x, gameInfo.playerList[e].placedBeans[b].y, true, gameInfo.playerList[e].ID)
+            for (b=0; b < iteratedPlayer.placedBeans.length; b++) {
+                opponentUpdate(iteratedPlayer.placedBeans[b].x, iteratedPlayer.placedBeans[b].y, true, iteratedPlayer.ID)
             }
         }
     });
 
     socket.on ("board claim", function(board, nickname, id) {
+        console.log("board claim")
         claimBoard(board, nickname, id);
     });
     
     socket.on ("new player", function(nickname, id) {
         newPlayer(nickname, id);
     });
+    socket.on ("player left", function(id) {
+        _(id + "claimed").previousSibling.disabled = false;
+        _(id + "claimed").remove(_(id + "claimed"));
+    });
+    
 }
 
 function load_page(page) {

@@ -64,6 +64,10 @@ io.on('connection', (socket) => {
     socket.on('current card', (sentCard, roomNumber) => {
         socket.to(roomNumber).emit('current card', sentCard);
     });
+    socket.on('claim board', (board, nickname, roomNumber) => {
+        socket.to(roomNumber).emit('board claim', board, nickname, socket.id);
+
+    });
     socket.on('activity', (x, y, bool, roomNumber) => {
         socket.to(roomNumber).emit('updateActivity', x, y, bool, socket.id);
 
@@ -89,7 +93,7 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(3000, function() {
+http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });
 

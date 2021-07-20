@@ -341,6 +341,21 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-position: 50% 25%;
 }
 
+.claimToken {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: var(--action-base);
+    width: 100%;
+    padding: 0.5rem 0.25em 0.75rem 0.25rem;
+    clip-path: polygon(0% 0%, 0% 100%, 100% 80%, 100% 00%);
+    box-sizing: border-box;
+    font-family: 'poppins';
+    color: var(--neutral-100);
+    font-size: 0.8em;
+}
+
 .boardSelect__li {
     transition: 0.1s ease;
 }
@@ -354,6 +369,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .gameSettings__option:active, .boardSelect__li:active {
     -webkit-transform: translateY(-10%);
     transform: translateY(-10%);
+}
+
+.boardSelect__li.claimed:hover, .boardSelect__li.claimed:active, .boardSelect__li.claimed:focus {
+    background-color: initial;
+    -webkit-transform: none;
+    transform: none;
 }
 
 .gameSettings label {
@@ -467,6 +488,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .winWrap--host {
         top: 15px;
     }
+}
+
+.a--logo {
+    height: -moz-fit-content;
+    width: -moz-fit-content;
+    height: fit-content;
+    width: fit-content;
 }
 
 .logo {
