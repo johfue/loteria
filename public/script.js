@@ -615,7 +615,7 @@ function player() {
         
         if (_(id + "claimed") != null) {
             _(id + "claimed").previousSibling.disabled = false;
-            claimedBoard.parentElement.classList.remove("claimed");
+            _(id + "claimed").parentElement.classList.remove("claimed");
             _(id + "claimed").remove(_(id + "claimed"));
         }
         let claimTokenO = claimToken.cloneNode('true');
