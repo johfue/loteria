@@ -615,14 +615,14 @@ function player() {
         
         if (_(id + "claimed") != null) {
             _(id + "claimed").previousSibling.disabled = false;
-            claimedBoard.parentNode.classList.remove("claimed");
+            claimedBoard.parentElement.classList.remove("claimed");
             _(id + "claimed").remove(_(id + "claimed"));
         }
         let claimTokenO = claimToken.cloneNode('true');
         claimTokenO.innerHTML = name;
         claimTokenO.setAttribute("id", id + "claimed");
         claimedBoard.disabled = true;
-        claimedBoard.parentNode.classList.add("claimed");
+        claimedBoard.parentElement.classList.add("claimed");
         claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
 
@@ -698,6 +698,7 @@ function player() {
         newPlayer(nickname, id);
     });
     socket.on ("player left", function(id) {
+        _(id + "claimed").parentElement.classList.remove("claimed");
         _(id + "claimed").previousSibling.disabled = false;
         _(id + "claimed").remove(_(id + "claimed"));
     });
