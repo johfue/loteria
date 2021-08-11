@@ -30,13 +30,13 @@ function generateCardOnBoard(func, param, arg) {
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/delClemente/" + card + '.jpg';
+    cellT.firstElementChild.src = "images/donClemente/" + card + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/delClemente/" + card + '.jpg';
+    col.lastElementChild.src = "images/donClemente/" + card + '.jpg';
     col.addEventListener("click", function() {
         var cell = this.cellIndex;
         var row = this.parentNode.rowIndex;
@@ -155,7 +155,7 @@ function host() {
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
-            img.src = "images/delClemente/" + drawnCards[c] + ".jpg";
+            img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
             li.appendChild(img);
             cardReviewListFragment.appendChild(li);
         }
@@ -330,7 +330,7 @@ function host() {
         
         if (gameInfo.gameState) {
             cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
-            currentCard.src = "images/delClemente/" + cardDrawn + ".jpg";
+            currentCard.src = "images/donClemente/" + cardDrawn + ".jpg";
             gameInfo.card = cardDrawn;
             drawnCards.push(cardDrawn);
             
@@ -561,7 +561,7 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        currentCard.src = "images/delClemente/" + sentCard + '.jpg';
+        currentCard.src = "images/donClemente/" + sentCard + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -672,7 +672,7 @@ function player() {
             currentCard.src = "images/blank.svg";
         }
         else {
-            currentCard.src = "images/delClemente/" + gameInfo.card + '.jpg';
+            currentCard.src = "images/donClemente/" + gameInfo.card + '.jpg';
         }
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
 
