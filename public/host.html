@@ -2,37 +2,37 @@
     <div class="modal__content modal__content--gameSettings">
         <div class="gameSettings__option">
             <input type="radio" id="win1" name="winCondition" value="row" class="modal__input--gameSettings">
-            <label for="win1">
+            <label for="win1" class="radio-sibling">
                 <img src="images/row.svg" alt="win condition: row">Rows
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win2" name="winCondition" value="column" class="modal__input--gameSettings">
-            <label for="win2">
+            <label for="win2" class="radio-sibling">
                 <img src="images/column.svg" alt="win condition: column">Columns
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win3" name="winCondition" value="diagonal" class="modal__input--gameSettings">
-            <label for="win3">
+            <label for="win3" class="radio-sibling">
                 <img src="images/diagonal.svg" alt="win condition: diagonal">Diagonals
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win4" name="winCondition" value="corner" class="modal__input--gameSettings">
-            <label for="win4">
+            <label for="win4" class="radio-sibling">
                 <img src="images/corner.svg" alt="win condition: ">Corners
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win5" name="winCondition" value="center" class="modal__input--gameSettings">
-            <label for="win5">
+            <label for="win5" class="radio-sibling">
                 <img src="images/center.svg" alt="win condition: center">Center
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win6" name="winCondition" value="blackOut" class="modal__input--gameSettings">
-            <label for="win6">
+            <label for="win6" class="radio-sibling">
                 <img src="images/blackOut.svg" alt="win condition: blackout">Black Out
             </label>
         </div>
@@ -44,7 +44,7 @@
 <div class="hostInfo">
     <a href="/" class="a--logo"><img src="images/logo.svg" class="logo logo--host"></a>
     <div class="winWrap winWrap--host">
-        <img id="winConditionInfo" class="winInfo winInfo--host" src="images/blank.svg">
+        <img id="winConditionInfo" class="winInfo winInfo--host" src="images/blank_sqaure.svg">
             <h3 class="winWrap__h3--host">Goal</h3>
     </div>
     <h3 class="hostInfo__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span></h3>
@@ -52,7 +52,7 @@
 
 <div id="hostConsole" class="hostConsole">
     <div class="drawWrap">
-        <img src="images/CAAR.jpeg" id="deck" class="deck">
+        <img src="images/back.jpg" id="deck" class="deck">
         <button id="drawBtn" class="primaryBtn" disabled>Start</button>
     </div>
     <div class="currentCardWrap currentCardWrap--host">

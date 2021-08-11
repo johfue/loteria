@@ -30,13 +30,13 @@ function generateCardOnBoard(func, param, arg) {
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/CAAR/" + card + '.jpeg';
+    cellT.firstElementChild.src = "images/delMonte/" + card + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/CAAR/" + card + '.jpeg';
+    col.lastElementChild.src = "images/delMonte/" + card + '.jpg';
     col.addEventListener("click", function() {
         var cell = this.cellIndex;
         var row = this.parentNode.rowIndex;
@@ -155,7 +155,7 @@ function host() {
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
-            img.src = "images/CAAR/" + drawnCards[c] + ".jpeg";
+            img.src = "images/delMonte/" + drawnCards[c] + ".jpg";
             li.appendChild(img);
             cardReviewListFragment.appendChild(li);
         }
@@ -330,7 +330,7 @@ function host() {
         
         if (gameInfo.gameState) {
             cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
-            currentCard.src = "images/CAAR/" + cardDrawn + ".jpeg";
+            currentCard.src = "images/delMonte/" + cardDrawn + ".jpg";
             gameInfo.card = cardDrawn;
             drawnCards.push(cardDrawn);
             
@@ -548,7 +548,7 @@ function player() {
         else {
             clearBeans();
             currentCard.src="images/blank.svg";
-            winConditionInfo.src="images/blank.svg";
+            winConditionInfo.src="images/blank_sqaure.svg";
             disableBoard(true);
             shadowBox.classList.add("invisible");
             boardSelect.classList.remove("invisible");
@@ -561,7 +561,7 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        currentCard.src = "images/CAAR/" + sentCard + '.jpeg';
+        currentCard.src = "images/delMonte/" + sentCard + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -571,7 +571,7 @@ function player() {
     
     socket.on('win checked', function(bool){
         if (bool) {
-                topStripe.innerHTML = "Congratulations";
+            topStripe.innerHTML = "You won!";
             shadowBox.classList.remove("invisible");
             alertModal.classList.remove("invisible");
             window.setTimeout(function() {
@@ -593,12 +593,14 @@ function player() {
     var li = document.createElement("li");
     var input = document.createElement("input");
     var span = document.createElement("span");
+    var label = document.createElement("label");
+    label.classList.add("radio-sibling");
     li.classList.add("boardSelect__li");
     ol.classList.add("boardSelect__page");
     span.classList.add("boardSelect__span");
+    input.classList.add("boardSelect__input");
     input.setAttribute("type", "radio");
     input.setAttribute("name", "boardNumber");
-    var label = document.createElement("label");
     li.appendChild(input);
     li.appendChild(label);
 
@@ -670,7 +672,7 @@ function player() {
             currentCard.src = "images/blank.svg";
         }
         else {
-            currentCard.src = "images/CAAR/" + gameInfo.card + '.jpeg';
+            currentCard.src = "images/delMonte/" + gameInfo.card + '.jpg';
         }
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
 
@@ -756,7 +758,6 @@ socket.on ("updateActivity", function(x, y, bool, id) {
 
 socket.on ("player left", function(id) {
     _(id).remove(_(id));
-
 });
 
 _("join").addEventListener('click', function(event) {
