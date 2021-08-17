@@ -315,8 +315,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .splash__img--network {
-    height: -moz-fit-content;
-    height: fit-content;
+    height: auto;
     max-height: 245%;
     width: 230%;
     position: unset;

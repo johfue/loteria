@@ -156,7 +156,6 @@ function host() {
 
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
-        midStripe.innerHTML = "";
         bottomStripe.innerHTML = "";
         alertModal.classList.remove("paused");
         endGame();
@@ -224,6 +223,7 @@ function host() {
         drawBtn.innerHTML = "Draw";
         gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
+        midStripe.innerHTML = "";
         topStripe.innerHTML = "Start"
         alertModal.classList.remove("invisible");
         shadowBox.classList.remove("invisible");
