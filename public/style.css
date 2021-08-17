@@ -475,6 +475,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-color: var(--action-base);
     width: 100%;
     padding: 0.5rem 0.25em 0.75rem 0.25rem;
+    -webkit-clip-path: polygon(0% 0%, 0% 100%, 100% 80%, 100% 00%);
     clip-path: polygon(0% 0%, 0% 100%, 100% 80%, 100% 00%);
     box-sizing: border-box;
     font-family: 'poppins';
@@ -1052,7 +1053,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .winWrap--player:before, .winWrap--player:after {
-    clip-path: polygon(0% 100%, 0% 5%, 100% 0%, 100% 95%)
+    -webkit-clip-path: polygon(0% 100%, 0% 5%, 100% 0%, 100% 95%);
+    clip-path: polygon(0% 100%, 0% 5%, 100% 0%, 100% 95%);
 }
 
 .winWrap--player:before {
@@ -1576,8 +1578,6 @@ td input {
     background-position: 50% 0%;
 }
 
-
-
 .alertModal {
     position: absolute;
     top: 0;
@@ -1625,6 +1625,7 @@ td input {
 .alert__stripe--top {
     text-transform: uppercase;
     background-color: var(--primary-base);
+    -webkit-clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 95% 0%);
     clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 95% 0%);
 }
 
@@ -1632,6 +1633,7 @@ td input {
     font-size: 2em;
     color: var(--neutral-900);
     background-color: var(--neutral-100);
+    -webkit-clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 95% 0%);
     clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 95% 0%);
 }
 
@@ -1651,6 +1653,7 @@ td input {
     height: 100%;
     width: 100%;
     background-color: var(--primary-base);
+    -webkit-clip-path: polygon(5% 0%, 10% 100%, 100% 100%, 100% 0%);
     clip-path: polygon(5% 0%, 10% 100%, 100% 100%, 100% 0%);
 }
 
@@ -1759,15 +1762,18 @@ td input {
         padding: 0.5em 10%;
     }
     .alert__stripe--top {
+        -webkit-clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
         clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
     }
     .alert__stripe--bottom {
         margin-top: 7vw;
     }
     .alert__stripe--bottom:after {
+        -webkit-clip-path: polygon(5% 0%, 0% 100%, 95% 100%, 100% 0%);
         clip-path: polygon(5% 0%, 0% 100%, 95% 100%, 100% 0%);
     }
     .alert__stripe--mid {
+        -webkit-clip-path: polygon(10% 0%, 5% 100%, 81% 100%,85% 0%);
         clip-path: polygon(10% 0%, 5% 100%, 81% 100%,85% 0%);
     }
     

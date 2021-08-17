@@ -156,6 +156,7 @@ function host() {
 
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
+        midStripe.innerHTML = "";
         bottomStripe.innerHTML = "";
         alertModal.classList.remove("paused");
         endGame();
