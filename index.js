@@ -10,6 +10,16 @@ express2.get('/', function(req, res) {
     res.sendfile(__dirname + '/public/index.html');
 });
 
+express2.get('/:room([0-9]{6})', function(req, res){
+    res.sendfile(__dirname + '/public/index.html');
+});
+
+//Other routes here
+express2.get('*', function(req, res){
+   res.send('Sorry, this is an invalid URL.');
+});
+
+
 var roomList =[];
 
 io.on('connection', (socket) => {

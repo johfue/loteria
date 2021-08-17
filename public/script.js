@@ -7,7 +7,33 @@ var opponentList = [];
 
 content = _("popItIn");
 
-function readyNodes() {
+function share() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'PlayLoteria.Online!',
+        text: 'Come join my game!',
+        url: location
+      });
+    }
+    else {
+        const copy = _("shareTextArea");
+        
+        copy.value = location;
+        copy.select();
+        copy.setSelectionRange(0, 9999);
+        document.getElementById("alertModalSmall").classList.remove("invisible");
+        shadowBox.classList.remove("invisible");
+    }
+}
+
+function copyShare() {
+    const copy = _("shareTextArea");
+    
+    copy.select();
+    document.execCommand("copy");
+
+    document.getElementById("alertModalSmall").classList.add("invisible");
+    shadowBox.classList.add("invisible");
     
 }
 
@@ -37,11 +63,6 @@ function appendCell(cell, tbl) {
 function drawCell(table) {
     col = table.rows[i].cells[j];
     col.lastElementChild.src = "images/donClemente/" + card + '.jpg';
-    col.addEventListener("click", function() {
-        var cell = this.cellIndex;
-        var row = this.parentNode.rowIndex;
-        socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
-    });
 }
 
 function boardConstruct(seed) {
@@ -108,7 +129,13 @@ function host() {
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
     const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    const infoHub = _("infoHub");
+    const copy = _("shareTextArea");
+    const invite = _("invite");
+    const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
+    const board_tab_btn = _("board-tab-btn");
+    const drawnCard_tab_btn = _("drawnCard-tab-btn");
     const allegedWinner = _("allegedWinner");
     const cardReview = _("cardReview");
     const cardReviewList = _("cardReviewList");
@@ -121,6 +148,19 @@ function host() {
     const playerGraph = _("playerGraph");
     let drawnCards = [];
     let allegedWinnerID = null;
+    
+    const continueGame = document.createElement("button");
+    const restartGame = document.createElement("button");
+    continueGame.setAttribute("class", "secondaryBtn");
+    restartGame.setAttribute("class", "primaryBtn");
+
+    restartGame.addEventListener('click', function(event) {
+        event.preventDefault();
+        bottomStripe.innerHTML = "";
+        alertModal.classList.remove("paused");
+        endGame();
+    });
+    
     
     var gameInfo = {
         gameState: false,
@@ -176,8 +216,8 @@ function host() {
     }
     
     function startGame() {
-        currentCard.src = "images/blank.svg";
         shuffleDeck();
+        alertModal.classList.remove("paused");
         winConditionBtn.disabled = true;
         reviewBtn.disabled = false;
         drawBtn.innerHTML = "Draw";
@@ -234,22 +274,9 @@ function host() {
     
     function boardChecked(bool) {
         socket.emit('board checked', bool, allegedWinnerID, roomNumber);
-        let continueGame = document.createElement("button");
-        let restartGame = document.createElement("button");
-        continueGame.setAttribute("class", "secondaryBtn");
-        restartGame.setAttribute("class", "primaryBtn");
         continueGame.innerHTML = "Keep playing";
         restartGame.innerHTML = "New game";
 
-        
-        restartGame.addEventListener('click', function(event) {
-            event.preventDefault();
-            endGame();
-            bottomStripe.innerHTML = "";
-            alertModal.classList.remove("paused");
-
-        });
-    
         continueGame.addEventListener('click', function(event) {
             event.preventDefault();
             alertModal.classList.add("invisible");
@@ -268,7 +295,9 @@ function host() {
                     midStripe.innerHTML = gameInfo.playerList[n].Nickname;
                     break;
                 }
-            }            alertModal.classList.remove("invisible");
+            }
+            alertModal.classList.remove("paused");
+            alertModal.classList.remove("invisible");
             alertModal.classList.add("slide");
             window.setTimeout(function() {
                 alertModal.classList.add("paused");
@@ -300,6 +329,10 @@ function host() {
 
 
     function endGame() {
+        currentCard.src = "images/blank.svg";
+        for (r=0; r < gameInfo.playerList.length; r++) {
+            gameInfo.playerList[r].placedBeans = [];
+        }
         drawBtn.disabled = true;
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
@@ -307,8 +340,6 @@ function host() {
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
-        drawnCards = [];
-        currentCard.src="images/blank.svg";
         alertModal.classList.add("invisible");
         gameSettings.classList.remove("invisible");
         opponentTiles = playerGraph.getElementsByTagName('td');
@@ -336,14 +367,40 @@ function host() {
             
             deckList.splice(deckList.indexOf(cardDrawn), 1);
             
-            if (deckList.length <= 0) {
-                endGame();
+            if (deckList.length < 0) {
+                reshuffle = continueGame.cloneNode('true');
+                reshuffle.innerHTML = "Reshuffle cards";
+                restartGame.innerHTML = "New game";
+                
+                reshuffle.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alertModal.classList.add("invisible");
+                    shadowBox.classList.add("invisible");
+                    alertModal.classList.remove("paused");
+                    bottomStripe.innerHTML = "";
+                    shuffleDeck();
+                    drawnCards = [];
+                    currentCard.src="images/blank.svg";
+                });
+                
+                bottomStripe.appendChild(restartGame);
+                bottomStripe.appendChild(reshuffle);
+                topStripe.innerHTML = "Out of cards";
+                
+                alertModal.classList.remove("paused");
+                alertModal.classList.remove("invisible");
+                    alertModal.classList.add("slide");
+                    window.setTimeout(function() {
+                        alertModal.classList.add("paused");
+                        }, 2125);
+                shadowBox.classList.remove("invisible");
+
             }
+            
             else {
                 socket.emit('current card', cardDrawn, roomNumber);
             }
         }
-        
         else {
             startGame();
         }
@@ -379,6 +436,10 @@ function host() {
         chooseWinCondition();
     });
 
+    invite.onclick = share;
+    inviteClone.onclick = share;
+    infoHub.onclick = share;
+    alertModalSmall.onclick = copyShare;
     drawBtn.onclick = drawCard;
     
     socket.on ("new player", function(nickname, id) {
@@ -386,6 +447,11 @@ function host() {
         newPlayer(nickname, id);
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
         gameInfo.playerList.push(player);
+        console.log(gameInfo.playerList);
+        if (gameInfo.playerList.length > 0) {
+            console.log(gameInfo.playerList.length);
+            _("invite").remove(_("invite"));
+        }
     });
     
     socket.on ("board claim", function(claimedBoard, nickname, id) {
@@ -427,6 +493,9 @@ function host() {
         for (var p = 0; p < gameInfo.playerList.length; p++) {
              if (gameInfo.playerList[p].ID == id) {
                  gameInfo.playerList.splice(p,1);
+                 if (gameInfo.playerList.length < 1) {
+                     playerGraph.appendChild(inviteClone);
+                 }
                  break;
              }
         }
@@ -435,14 +504,16 @@ function host() {
     shuffleDeck();
     
     function tabSwitch() {
+        board_tab_btn.classList.toggle("current-tab");
+        drawnCard_tab_btn.classList.toggle("current-tab");
         cardReviewListAlleged.classList.toggle("invisible");
         boardHold.classList.toggle("invisible");
     }
     
-    _('board-tab-btn').addEventListener("click", function(event) {
+    board_tab_btn.addEventListener("click", function(event) {
         tabSwitch();
     })
-    _('drawnCard-tab-btn').addEventListener("click", function(event) {
+    drawnCard_tab_btn.addEventListener("click", function(event) {
         tabSwitch();
     })
 }
@@ -465,6 +536,8 @@ function player() {
     const tableCells = table.querySelectorAll('input[type="checkbox"]');
     const currentCard = _('currentCard');
     const winCondition = _('winConditionInfo');
+    const infoHub = _("infoHub");
+    const copy = _("shareTextArea");
     const announceWin = _("announceWin");
     const boardSelect = _("boardSelect");
     const boardSelectOptions = _("boardSelectOptions");
@@ -480,6 +553,18 @@ function player() {
     let chosenBoard = null;
     let checkedPosition = [];
     let currentWinCondition = "";
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            let col = table.rows[i].cells[j];
+            col.addEventListener("click", function() {
+                let cell = this.cellIndex;
+                let row = this.parentNode.rowIndex;
+                socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
+                });
+        }
+        
+    }
 
     function clearBeans() {
         tiles = board.getElementsByTagName('input');
@@ -665,6 +750,9 @@ function player() {
         document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
     }
 
+    infoHub.onclick = share;
+    alertModalSmall.onclick = copyShare;
+
     socket.on('catch-up', function(gameInfo) {
         disableBoard(!gameInfo.gameState);
         if (!gameInfo.gameState) {
@@ -678,7 +766,6 @@ function player() {
 
         for (e=0; e < gameInfo.playerList.length; e++) {
             iteratedPlayer = gameInfo.playerList[e];
-            console.log("catch-up");
             if (iteratedPlayer.board != null) {
                 claimBoard(iteratedPlayer.board, iteratedPlayer.Nickname, iteratedPlayer.ID);
             }
@@ -692,7 +779,6 @@ function player() {
     });
 
     socket.on ("board claim", function(board, nickname, id) {
-        console.log("board claim")
         claimBoard(board, nickname, id);
     });
     
@@ -719,7 +805,7 @@ function load_page(page) {
 }
 
 function roomSearch(room, evt) {
-    evt.preventDefault();
+    // evt.preventDefault();
     socket.emit("room check", (room));
     socket.on('room join', function(bool){
         if (bool) {
@@ -760,10 +846,17 @@ socket.on ("player left", function(id) {
     _(id).remove(_(id));
 });
 
-_("join").addEventListener('click', function(event) {
+// _("join").addEventListener('click', function(event) {
+// });
+
+_("welcomeForm").onsubmit = submit;
+
+function submit(event) {
     roomInput = _("roomSearch").value;
     roomSearch(roomInput, event);
-});
+    event.preventDefault();
+}
+
 
 _("player").addEventListener('click', function(event) {
     nickname = _("nickname").value;

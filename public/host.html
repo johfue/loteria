@@ -2,37 +2,37 @@
     <div class="modal__content modal__content--gameSettings">
         <div class="gameSettings__option">
             <input type="radio" id="win1" name="winCondition" value="row" class="modal__input--gameSettings">
-            <label for="win1" class="radio-sibling">
+            <label for="win1" class="radio-sibling radio-sibling--gameSettings">
                 <img src="images/row.svg" alt="win condition: row">Rows
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win2" name="winCondition" value="column" class="modal__input--gameSettings">
-            <label for="win2" class="radio-sibling">
+            <label for="win2" class="radio-sibling radio-sibling--gameSettings">
                 <img src="images/column.svg" alt="win condition: column">Columns
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win3" name="winCondition" value="diagonal" class="modal__input--gameSettings">
-            <label for="win3" class="radio-sibling">
+            <label for="win3" class="radio-sibling radio-sibling--gameSettings">
                 <img src="images/diagonal.svg" alt="win condition: diagonal">Diagonals
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win4" name="winCondition" value="corner" class="modal__input--gameSettings">
-            <label for="win4" class="radio-sibling">
+            <label for="win4" class="radio-sibling radio-sibling--gameSettings">
                 <img src="images/corner.svg" alt="win condition: ">Corners
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win5" name="winCondition" value="center" class="modal__input--gameSettings">
-            <label for="win5" class="radio-sibling">
+            <label for="win5" class="radio-sibling radio-sibling--gameSettings">
                 <img src="images/center.svg" alt="win condition: center">Center
             </label>
         </div>
         <div class="gameSettings__option">
             <input type="radio" id="win6" name="winCondition" value="blackOut" class="modal__input--gameSettings">
-            <label for="win6" class="radio-sibling">
+            <label for="win6" class="radio-sibling radio-sibling--gameSettings">
                 <img src="images/blackOut.svg" alt="win condition: blackout">Black Out
             </label>
         </div>
@@ -42,12 +42,20 @@
 </form>
 
 <div class="hostInfo">
-    <a href="/" class="a--logo"><img src="images/logo.svg" class="logo logo--host"></a>
+    <a href="/" class="a--logo">
+        <picture>
+            <source srcset="images/logo.svg" media="(min-width: 800px)">
+            <img src="images/logo-small.svg" class="logo logo--host" alt="Home">
+        </picture>
+    </a>
+
     <div class="winWrap winWrap--host">
         <img id="winConditionInfo" class="winInfo winInfo--host" src="images/blank_sqaure.svg">
-            <h3 class="winWrap__h3--host">Goal</h3>
+            <h3 id="hostGoal" class="winWrap__h3--host">Goal</h3>
     </div>
-    <h3 class="hostInfo__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span></h3>
+        <h3 id="infoHub" class="hostInfo__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span>
+            <img id="share" class="share" src="images/share-white.svg">
+        </h3>
 </div>
 
 <div id="hostConsole" class="hostConsole">
@@ -56,12 +64,15 @@
         <button id="drawBtn" class="primaryBtn" disabled>Start</button>
     </div>
     <div class="currentCardWrap currentCardWrap--host">
-        <img src="images/blank.png" id="currentCard" class="currentCard currentCard-host">
+        <img src="images/blank.svg" id="currentCard" class="currentCard currentCard-host">
         <button id="reviewBtn" class="secondaryBtn" disabled>Review</button>
     </div>
 </div>
 
-<div class="playerGraph playerGraph--host"><div id="playerGraph"  class="opponentWrap--host"></div>
+<div class="playerGraph playerGraph--host">
+    <div id="playerGraph"  class="opponentWrap--host">
+    <span id="invite" class="invite"><span class="invite__anchor">Invite</span> players to get started</span>
+    </div>
 </div>
 
 <div id="cardReview" class="modal modal--cardReview invisible">
@@ -71,7 +82,7 @@
 
 <div id="allegedWinner" class="modal modal--allegedWinner invisible">
         <div class="modal__content modal__content--alleged">
-            <h3 id="board-tab-btn" class="alleged__h3"><span id="allegedWinnerName"></span>'s Board</h3>
+            <h3 id="board-tab-btn" class="alleged__h3 current-tab"><span id="allegedWinnerName"></span>'s Board</h3>
             <div id="boardHold" class="modal__content modal__content--boardHold"></div>
             <h3 id="drawnCard-tab-btn" class="alleged__h3">Drawn Cards</h3>
             <ul id="cardReviewListAlleged" class="modal__content modal__content--cardReview modal__content--cardReview--alleged invisible"></ul>
@@ -86,9 +97,10 @@
 <div id="alertModal" class="alertModal invisible">
     <div id="topStripe" class="alert__stripe alert__stripe--top">Start</div>
     <div id="midStripe" class="alert__stripe alert__stripe--mid"></div>
-    <div id="bottomStripe" class="alert__stripe alert__stripe--bottom">
-    <!--    <button class="primaryBtn" id="restartGame" value="">New game</button>-->
-    <!--<button class="secondaryBtn" id="continueGame" value="">Keep playing</button>-->
-    </div>
+    <div id="bottomStripe" class="alert__stripe alert__stripe--bottom"></div>
+</div>
+<div id="alertModalSmall" class="alertModal--small invisible">
+    Click to copy
+    <textarea id="shareTextArea" class="share__textarea" readonly></textarea>
 </div>
 <div id="shadowBox" class="shadowBox"></div>

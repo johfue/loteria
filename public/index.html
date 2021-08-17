@@ -24,7 +24,14 @@
     <meta name="theme-color" content="#FFE354">
     <link href="/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body onload="
+    if (location.pathname.length === 7) {
+        roomParam = (location.pathname).substring(1,7);
+        joinBTN = document.getElementById('join');
+        document.getElementById('roomSearch').value = roomParam;
+        document.getElementById('welcomeForm').requestSubmit(joinBTN);
+    }
+">
 <div id="popItIn">
     
     <img src="images/logo.svg" class="hero" alt="Play Loteria Online">
