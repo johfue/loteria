@@ -37,6 +37,16 @@ function copyShare() {
     
 }
 
+function disconnectionHandler() {
+    socket.on("disconnect", (reason) => {
+        if (reason === "io server disconnect") {
+          // the disconnection was initiated by the server, you need to reconnect manually
+          socket.connect();
+        }
+        // else the socket will automatically try to reconnect
+      });
+}
+
 function generateCardOnBoard(func, param, arg) {
     cardOnBoard = [];
         for (i = 0; i < 4; i++) {
@@ -144,7 +154,7 @@ function host() {
     const shadowBox = _("shadowBox");
     const bottomStripe = _("bottomStripe");
     const midStripe = _("midStripe");
-    const toptripe = _("topStripe");
+    const topStripe = _("topStripe");
     const playerGraph = _("playerGraph");
     let drawnCards = [];
     let allegedWinnerID = null;
@@ -545,10 +555,10 @@ function player() {
     const boardSelectOptionsWrap = _("boardSelectOptionsWrap");
     const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
     const shadowBox = _("shadowBox");
-    const alertNodal = _("alertModal");
+    const alertModal = _("alertModal");
     const bottomStripe = _("bottomStripe");
     const midStripe = _("midStripe");
-    const toptripe = _("topStripe");
+    const topStripe = _("topStripe");
     const playerGraph = _("playerGraph");
     const firstPage = _("firstPage");
     let chosenBoard = null;
