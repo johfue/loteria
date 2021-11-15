@@ -37,6 +37,17 @@ function copyShare() {
     
 }
 
+function targetDom() {
+    const playerGraph = _("playerGraph");
+    const infoHub = _("infoHub");
+    const copy = _("shareTextArea");
+    const shadowBox = _("shadowBox");
+    const alertModal = _("alertModal");
+    const bottomStripe = _("bottomStripe");
+    const midStripe = _("midStripe");
+    const topStripe = _("topStripe");
+}
+
 function disconnectionHandler() {
     socket.on("disconnect", (reason) => {
         if (reason === "io server disconnect") {
@@ -141,8 +152,6 @@ function host() {
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
     const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    const infoHub = _("infoHub");
-    const copy = _("shareTextArea");
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
@@ -151,13 +160,9 @@ function host() {
     const allegedWinner = _("allegedWinner");
     const cardReview = _("cardReview");
     const cardReviewList = _("cardReviewList");
-    const alertModal = _("alertModal");
     const cardReviewListAlleged = _("cardReviewListAlleged");
-    const shadowBox = _("shadowBox");
-    const bottomStripe = _("bottomStripe");
-    const midStripe = _("midStripe");
-    const topStripe = _("topStripe");
-    const playerGraph = _("playerGraph");
+    targetDom();
+
     let drawnCards = [];
     let allegedWinnerID = null;
     
@@ -551,20 +556,13 @@ function player() {
     const tableCells = table.querySelectorAll('input[type="checkbox"]');
     const currentCard = _('currentCard');
     const winCondition = _('winConditionInfo');
-    const infoHub = _("infoHub");
-    const copy = _("shareTextArea");
     const announceWin = _("announceWin");
     const boardSelect = _("boardSelect");
     const boardSelectOptions = _("boardSelectOptions");
     const boardSelectOptionsWrap = _("boardSelectOptionsWrap");
     const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
-    const shadowBox = _("shadowBox");
-    const alertModal = _("alertModal");
-    const bottomStripe = _("bottomStripe");
-    const midStripe = _("midStripe");
-    const topStripe = _("topStripe");
-    const playerGraph = _("playerGraph");
     const firstPage = _("firstPage");
+    targetDom();
     let chosenBoard = null;
     let checkedPosition = [];
     let currentWinCondition = "";
