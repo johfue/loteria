@@ -41,10 +41,12 @@ function disconnectionHandler() {
     socket.on("disconnect", (reason) => {
         if (reason === "io server disconnect") {
           // the disconnection was initiated by the server, you need to reconnect manually
+          console.log("disonnected by server");
           socket.connect();
         }
         // else the socket will automatically try to reconnect
-      });
+        console.log("disonnected some other way");
+    });
 }
 
 function generateCardOnBoard(func, param, arg) {
@@ -527,6 +529,8 @@ function host() {
     drawnCard_tab_btn.addEventListener("click", function(event) {
         tabSwitch();
     })
+
+    disconnectionHandler();
 }
 
 function player() {
@@ -802,6 +806,7 @@ function player() {
         _(id + "claimed").remove(_(id + "claimed"));
     });
     
+    disconnectionHandler();
 }
 
 function load_page(page) {
