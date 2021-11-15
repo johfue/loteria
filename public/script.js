@@ -385,7 +385,7 @@ function host() {
             
             deckList.splice(deckList.indexOf(cardDrawn), 1);
             
-            if (deckList.length < 0) {
+            if (deckList.length <= 0) {
                 reshuffle = continueGame.cloneNode('true');
                 reshuffle.innerHTML = "Reshuffle cards";
                 restartGame.innerHTML = "New game";
