@@ -165,30 +165,12 @@ button:focus:not(:focus-visible) {
     background-color: var(--confirm-base);
 }
 
-.primaryBtn:active:after {
-    background-color: var(--confirm-dark);
-}
-
 .secondaryBtn:after {
     background-color: var(--action-base);
 }
 
-.secondaryBtn:active:after {
-    background-color: var(--action-dark);
-}
-
 .denyBtn:after {
     background-color: var(--deny-base);
-}
-
-.denyBtn:active:after {
-    background-color: var(--deny-dark);
-}
-
-button:disabled:after, button:disabled:hover:after, button:disabled:active:after {
-    background-color: #dddddd;
-    border-color: #999999;
-    color: #999999;
 }
 
 @media (min-width: 768px) {
@@ -211,9 +193,27 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
 }
 
+.primaryBtn:active:after {
+    background-color: var(--confirm-dark);
+}
+
+.secondaryBtn:active:after {
+    background-color: var(--action-dark);
+}
+
+.denyBtn:active:after {
+    background-color: var(--deny-dark);
+}
+
 button:active:before {
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
+}
+
+button:disabled:after, button:disabled:hover:after, button:disabled:active:after {
+    background-color: #dddddd;
+    border-color: #999999;
+    color: #999999;
 }
 
 @media(min-width: 768px) {
