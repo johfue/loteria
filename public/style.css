@@ -195,8 +195,8 @@ button:focus:not(:focus-visible) {
 }
 
 button:active:before {
-    -webkit-transform: translate(0, -5px);
-    transform: translate(0, -5px);    
+    -webkit-transform: translate(0, 5px);
+    transform: translate(0, 5px);    
 }
 
 .primaryBtn:active:after {
@@ -209,11 +209,6 @@ button:active:before {
 
 .denyBtn:active:after {
     background-color: var(--deny-dark);
-}
-
-button:active:before {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
 }
 
 button:disabled:after, button:disabled:hover:after, button:disabled:active:after {
