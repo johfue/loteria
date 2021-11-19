@@ -138,6 +138,8 @@ button {
     text-transform: uppercase;
     padding: 0 1rem;
     justify-self: end;
+    outline-offset: 4px;
+
 }
 
 button:before, button:after {
@@ -158,27 +160,19 @@ button:before {
     height: 110%;
 }
 
-button:hover:before, button:focus:before {
-    -webkit-transform: translate(0, 10px);
-    transform: translate(0, 10px);
-}
-
 button:active:before {
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
 }
 
-button:disabled:hover:before, button:disabled:focus:before, button:disabled:active:before {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
-}
+button:focus:not(:focus-visible) {
+    outline: none;
+  }
 
 .primaryBtn:after {
     background-color: var(--confirm-base);
 }
-.primaryBtn:hover:after, .primaryBtn:focus:after {
-    background-color: var(--confirm-light);
-}
+
 .primaryBtn:active:after {
     background-color: var(--confirm-dark);
 }
@@ -186,9 +180,7 @@ button:disabled:hover:before, button:disabled:focus:before, button:disabled:acti
 .secondaryBtn:after {
     background-color: var(--action-base);
 }
-.secondaryBtn:hover:after, .secondaryBtn:focus:after {
-    background-color: var(--action-light);
-}
+
 .secondaryBtn:active:after {
     background-color: var(--action-dark);
 }
@@ -197,9 +189,6 @@ button:disabled:hover:before, button:disabled:focus:before, button:disabled:acti
     background-color: var(--deny-base);
 }
 
-.denyBtn:hover:after, .denyBtn:focus:after {
-    background-color: var(--deny-light);
-}
 .denyBtn:active:after {
     background-color: var(--deny-dark);
 }
@@ -208,6 +197,26 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-color: #dddddd;
     border-color: #999999;
     color: #999999;
+}
+
+@media (min-width: 768px) {
+    button:hover:before, button:focus:before {
+        -webkit-transform: translate(0, 10px);
+        transform: translate(0, 10px);
+    }
+    button:disabled:hover:before, button:disabled:focus:before, button:disabled:active:before {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .primaryBtn:hover:after, .primaryBtn:focus:after {
+        background-color: var(--confirm-light);
+    }
+    .secondaryBtn:hover:after, .secondaryBtn:focus:after {
+        background-color: var(--action-light);
+    }
+    .denyBtn:hover:after, .denyBtn:focus:after {
+        background-color: var(--deny-light);
+    }
 }
 
 @media(min-width: 768px) {

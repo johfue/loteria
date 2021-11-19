@@ -89,6 +89,10 @@ io.on('connection', (socket) => {
         io.to(id).emit('win checked', bool);
     });
     
+    socket.on('reconnected', (roomNumber, nickname) => {
+        socket.to(roomNumber).emit('reconnected', nickname, socket.id);
+    });
+
     socket.on("disconnecting", (reason) => {
         console.log(socket.rooms);
         

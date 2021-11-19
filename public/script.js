@@ -57,7 +57,7 @@ function disconnectionHandler() {
         }
         // else the socket will automatically try to reconnect
         console.log("disonnected some other way");
-        socket.emit('new player', roomInput, nickname);
+        socket.emit('reconnected', roomInput, nickname);
 
     });
 }
