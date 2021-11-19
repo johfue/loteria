@@ -136,7 +136,8 @@ button {
     padding: 0 1rem;
     justify-self: end;
     outline-offset: 4px;
-
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 button:before, button:after {
