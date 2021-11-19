@@ -147,7 +147,7 @@ button:before, button:after {
     position: absolute;
     top: 0;
     left: 0;
-    transition: 0.15s ease;
+    transition: 0.5s ease;
     -webkit-clip-path: polygon(calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, calc(0% + 10px) 100%, 0% 50%, calc(0% + 10px) 0%);
     clip-path: polygon(calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, calc(0% + 10px) 100%, 0% 50%, calc(0% + 10px) 0%);
     z-index: -1;
@@ -177,6 +177,7 @@ button:focus:not(:focus-visible) {
 
 @media (min-width: 768px) {
     button:hover:before {
+        transition: 0.15s;
         -webkit-transform: translate(0, 15px);
         transform: translate(0, 15px);
     }
