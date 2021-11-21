@@ -457,11 +457,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     height: 100%;
     display: block;
     transition: inherit;
-    font-family: libre_baskervillebold;
-}
-
-.radio-sibling {
     font-family: poppins;
+    outline-offset: 4px;
 }
 
 .modal__input--gameSettings:checked {
@@ -495,22 +492,31 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transition: 0.1s ease;
 }
 
-.gameSettings__option:hover .radio-sibling, .gameSettings__option:focus .radio-sibling, .boardSelect__li:hover .radio-sibling, .boardSelect__li:focus .radio-sibling {
-    background-color: var(--neutral-700);
-    
-    -webkit-transform: translateY(-6%);
-    transform: translateY(-6%);
+@media (min-width: 768px) {
+
+    .gameSettings__option:hover .radio-sibling .radio-sibling, .boardSelect__li:hover .radio-sibling {
+        background-color: var(--neutral-700);
+
+        -webkit-transform: translateY(-6%);
+        transform: translateY(-6%);
+    }
+
+    .boardSelect__li.claimed:hover .radio-sibling .radio-sibling, boardSelect__li.claimed:hover {
+        transform: none;
+        background-color: initial;
+        -webkit-transform: none;
+    }
 }
+
+.boardSelect__li.claimed:active, .boardSelect__li.claimed:active {
+    transform: none;
+    background-color: initial;
+    -webkit-transform: none;
+} 
 
 .gameSettings__option:active, .boardSelect__li:active {
     -webkit-transform: translateY(-10%);
-    transform: translateY(-10%);
-}
-
-.boardSelect__li.claimed:hover .radio-sibling, .boardSelect__li.claimed:active .radio-sibling, .boardSelect__li.claimed:focus .radio-sibling, boardSelect__li.claimed:hover, .boardSelect__li.claimed:active, .boardSelect__li.claimed:focus {
-    background-color: initial;
-    -webkit-transform: none;
-    transform: none;
+   transform: translateY(-10%);
 }
 
 .gameSettings label {
