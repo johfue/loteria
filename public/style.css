@@ -182,8 +182,8 @@ button:focus:not(:focus-visible) {
         transform: translate(0, 15px);
     }
     button:disabled:hover:before, button:disabled:active:before {
-        -webkit-transform: translate(0, 0);
-        transform: translate(0, 0);
+        -webkit-transform: translate(0, 10px);
+        transform: translate(0, 10px);
     }
     .primaryBtn:hover:after {
         background-color: var(--confirm-light);
