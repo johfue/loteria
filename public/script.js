@@ -63,9 +63,12 @@ function disconnectionHandler() {
         }
         // else the socket will automatically try to reconnect
         console.log("disonnected some other way");
-        socket.emit('newPlayer', roomInput, nickname, oldID);
-        storeID();
     });
+}
+
+function reonnectionHandler() {
+    socket.emit('newPlayer', roomInput, nickname, oldID);
+    storeID();    
 }
 
 function generateCardOnBoard(func, param, arg) {
@@ -698,8 +701,11 @@ function player() {
     });
     
     _("roomNumber").innerHTML = roomInput;
-    
-    socket.emit('new player', roomInput, nickname);
+
+    socket.on("connect", function() {
+        socket.on("connect", () => {
+            socket.emit('new player', roomInput, nickname);
+    });
     
     var boardSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
@@ -871,11 +877,11 @@ function opponentUpdate(x,y, bool, id) {
     playerGraph.insertBefore(_(id), playerGraph.firstElementChild)
 }
 
-socket.on ("updateActivity", function(x, y, bool, id) {
+socket.on("updateActivity", function(x, y, bool, id) {
     opponentUpdate(x, y, bool, id);
 });
 
-socket.on ("player left", function(id) {
+socket.on("player left", function(id) {
     _(id).remove(_(id));
 });
 
