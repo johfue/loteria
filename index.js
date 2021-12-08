@@ -107,7 +107,7 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(3000, function() {
+http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });
 
