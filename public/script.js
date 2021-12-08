@@ -703,11 +703,11 @@ function player() {
     _("roomNumber").innerHTML = roomInput;
 
     socket.on("connect", function() {
-        socket.on("connect", () => {
+        socket.on("connect", function() {
             socket.emit('new player', roomInput, nickname);
         })
-    };
-    
+    )};
+
     var boardSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
     var li = document.createElement("li");
