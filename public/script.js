@@ -705,7 +705,8 @@ function player() {
     socket.on("connect", function() {
         socket.on("connect", () => {
             socket.emit('new player', roomInput, nickname);
-    });
+        })
+    };
     
     var boardSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
