@@ -37,6 +37,12 @@ function copyShare() {
     
 }
 
+let oldID = "";
+
+function storeID() {
+    oldID = socket.id;
+}
+
 function targetDom() {
     const playerGraph = _("playerGraph");
     const infoHub = _("infoHub");
@@ -57,8 +63,8 @@ function disconnectionHandler() {
         }
         // else the socket will automatically try to reconnect
         console.log("disonnected some other way");
-        socket.emit('reconnected', roomInput, nickname);
-
+        socket.emit('newPlayer', roomInput, nickname, oldID);
+        storeID();
     });
 }
 
@@ -109,8 +115,11 @@ function boardConstruct(seed) {
 }
 
 
-function newPlayer(nickname, id) {
-    
+function newPlayer(nickname, id, oldID) {
+    if (opponentList.includes(oldID)) {
+        _(oldID).remove(oldID);
+    }
+
     if (!opponentList.includes(id)) {
         var opponent = document.createElement("div");
         var opponentTable = document.createElement("table");
@@ -139,7 +148,7 @@ function newPlayer(nickname, id) {
         opponent.appendChild(opponentName);
         _("playerGraph").appendChild(opponent);
     }
-
+ 
 }
 
 function host() {
@@ -554,6 +563,9 @@ function player() {
     window.onhashchange = function(event) {
         history.replaceState = roomInput;
     }
+
+    storeID();
+
     const table = _("board");
     const newBoard = _("newBoard");
     const tableCells = table.querySelectorAll('input[type="checkbox"]');
@@ -769,7 +781,7 @@ function player() {
     infoHub.onclick = share;
     alertModalSmall.onclick = copyShare;
 
-    socket.on('catch-up', function(gameInfo) {
+    function catchUp(gameInfo) {
         disableBoard(!gameInfo.gameState);
         if (!gameInfo.gameState) {
             console.log("this should run whenver there's no current card");
@@ -792,6 +804,10 @@ function player() {
                 opponentUpdate(iteratedPlayer.placedBeans[b].x, iteratedPlayer.placedBeans[b].y, true, iteratedPlayer.ID)
             }
         }
+    }
+
+    socket.on('catch-up', function(gameInfo) {
+        catchUp(gameInfo);
     });
 
     socket.on ("board claim", function(board, nickname, id) {

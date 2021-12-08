@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
     });
     
     socket.on('reconnected', (roomNumber, nickname) => {
-        socket.to(roomNumber).emit('reconnected', nickname, socket.id);
+        socket.to(roomNumber).emit('playerReconnected', nickname, socket.id);
     });
 
     socket.on("disconnecting", (reason) => {
