@@ -702,6 +702,8 @@ function player() {
     
     _("roomNumber").innerHTML = roomInput;
 
+    socket.emit('new player', roomInput, nickname);
+
     socket.on("connect", function() {
             socket.emit('new player', roomInput, nickname);
     });
