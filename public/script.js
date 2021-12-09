@@ -62,13 +62,9 @@ function disconnectionHandler() {
           socket.connect();
         }
         // else the socket will automatically try to reconnect
-        console.log("disonnected some other way");
+        storeID();
+        console.log("disonnected some other way " + oldID);
     });
-}
-
-function reonnectionHandler() {
-    socket.emit('newPlayer', roomInput, nickname, oldID);
-    storeID();    
 }
 
 function generateCardOnBoard(func, param, arg) {
@@ -479,12 +475,10 @@ function host() {
         socket.emit('update newcomer', gameInfo, id);
         newPlayer(nickname, id);
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
-        gameInfo.playerList.push(player);
-        console.log(gameInfo.playerList);
-        if (gameInfo.playerList.length > 0) {
-            console.log(gameInfo.playerList.length);
+        if (gameInfo.playerList.length === 0) {
             _("invite").remove(_("invite"));
         }
+        gameInfo.playerList.push(player);
     });
     
     socket.on ("board claim", function(claimedBoard, nickname, id) {
@@ -705,7 +699,8 @@ function player() {
     socket.emit('new player', roomInput, nickname);
 
     socket.on("connect", function() {
-            socket.emit('new player', roomInput, nickname);
+        console.log("reconnected? " + oldID);
+        socket.emit('new player', roomInput, nickname);
     });
 
     var boardSelectOptionsContainer = document.createDocumentFragment();

@@ -56,8 +56,8 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('new player', (roomNumber, nickname) => {
-        socket.to(roomNumber).emit('new player', nickname, socket.id);
+    socket.on('new player', (roomNumber, nickname, oldID) => {
+        socket.to(roomNumber).emit('new player', nickname, socket.id, oldID);
     });
     socket.on('update newcomer', (gameInfo, id) => {
         io.to(id).emit('catch-up', gameInfo);
