@@ -701,16 +701,15 @@ function player() {
         console.log("reconnected? " + oldID);
         socket.emit("rejoin room", (roomInput));
         socket.emit('new player', roomInput, nickname);
-        getBeans()
+        getBeans();
     });
 
     function getBeans() {
         for (u = 0; u < 4; u++) {
             for (f = 0; f < 4; f++) {
                 let col = table.rows[u].cells[f];
-                    if (col.checked) {
-                    socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, true, roomInput);
-                }
+                socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, col.checked, roomInput);
+                console.log(col);
             }
             
         } 
