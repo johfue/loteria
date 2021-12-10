@@ -45,8 +45,8 @@ io.on('connection', (socket) => {
         if (roomList.includes(parseInt(room, 10))) {
             io.to(socket.id).emit('room join', true);
             socket.join(room);
-                    console.log(io.sockets.adapter.rooms);
-                    console.log(socket.rooms);
+                    // console.log(io.sockets.adapter.rooms);
+                    // console.log(socket.rooms);
 
             // io.to(room).emit('new player', socket.id);
     
@@ -55,7 +55,9 @@ io.on('connection', (socket) => {
             io.emit('room join', false);
         }
     });
-
+    socket.on('rejoin room'), (room) => {
+        socket.join(room);
+    }
     socket.on('new player', (roomNumber, nickname, oldID) => {
         socket.to(roomNumber).emit('new player', nickname, socket.id, oldID);
     });

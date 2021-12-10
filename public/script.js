@@ -699,7 +699,7 @@ function player() {
     socket.on("connect", function() {
         storeID();
         console.log("reconnected? " + oldID);
-        socket.emit("room check", (roomInput));
+        socket.emit("rejoin room", (roomInput));
         socket.emit('new player', roomInput, nickname);
         getBeans()
     });
@@ -708,7 +708,7 @@ function player() {
         for (u = 0; u < 4; u++) {
             for (f = 0; f < 4; f++) {
                 let col = table.rows[u].cells[f];
-                if (col.checked) {
+                    if (col.checked) {
                     socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, true, roomInput);
                 }
             }
