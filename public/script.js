@@ -62,7 +62,6 @@ function disconnectionHandler() {
           socket.connect();
         }
         // else the socket will automatically try to reconnect
-        storeID();
         console.log("disonnected some other way " + oldID);
     });
 }
@@ -113,6 +112,17 @@ function boardConstruct(seed) {
     return tbl;
 }
 
+function getBeans() {
+    for (u = 0; u < 4; u++) {
+        for (f = 0; f < 4; f++) {
+            let col = table.rows[u].cells[f];
+            if (col.checked) {
+                socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, true, roomInput);
+            }
+        }
+        
+    } 
+}
 
 function newPlayer(nickname, id, oldID) {
     if (opponentList.includes(oldID)) {
@@ -585,7 +595,7 @@ function player() {
             col.addEventListener("click", function() {
                 let cell = this.cellIndex;
                 let row = this.parentNode.rowIndex;
-                socket.emit("activity", cell, row, this.firstElementChild.checked, roomNumber.innerHTML);
+                socket.emit("activity", cell, row, this.firstElementChild.checked, roomInput);
                 });
         }
         
@@ -697,10 +707,13 @@ function player() {
     _("roomNumber").innerHTML = roomInput;
 
     socket.emit('new player', roomInput, nickname);
-
+    
     socket.on("connect", function() {
+        storeID();
         console.log("reconnected? " + oldID);
+        socket.emit("room check", (roomInput));
         socket.emit('new player', roomInput, nickname);
+        getBeans()
     });
 
     var boardSelectOptionsContainer = document.createDocumentFragment();
