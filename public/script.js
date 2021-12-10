@@ -708,8 +708,8 @@ function player() {
         for (u = 0; u < 4; u++) {
             for (f = 0; f < 4; f++) {
                 let col = table.rows[u].cells[f];
-                socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, col.checked, roomInput);
-                console.log(col);
+                socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, col.firstElementChild.checked, roomInput);
+                console.log(col.checked);
             }
             
         } 
@@ -881,7 +881,12 @@ function nameCheck(name, evt) {
 
 function opponentUpdate(x,y, bool, id) {
     var opponent = _(id).firstElementChild;
-    opponent.rows[y].cells[x].classList.toggle("beaned");
+    if (bool) {
+        opponent.rows[y].cells[x].classList.add("beaned");
+    }
+    else {
+        opponent.rows[y].cells[x].classList.remove("beaned");
+    }
     playerGraph.insertBefore(_(id), playerGraph.firstElementChild)
 }
 
