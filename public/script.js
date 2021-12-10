@@ -709,7 +709,7 @@ function player() {
             for (f = 0; f < 4; f++) {
                 let col = table.rows[u].cells[f];
                 socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, col.firstElementChild.checked, roomInput);
-                console.log(col.checked);
+                console.log(col.firstElementChild.checked);
             }
             
         } 
