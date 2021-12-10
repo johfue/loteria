@@ -112,18 +112,6 @@ function boardConstruct(seed) {
     return tbl;
 }
 
-function getBeans() {
-    for (u = 0; u < 4; u++) {
-        for (f = 0; f < 4; f++) {
-            let col = table.rows[u].cells[f];
-            if (col.checked) {
-                socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, true, roomInput);
-            }
-        }
-        
-    } 
-}
-
 function newPlayer(nickname, id, oldID) {
     if (opponentList.includes(oldID)) {
         _(oldID).remove(oldID);
@@ -715,6 +703,18 @@ function player() {
         socket.emit('new player', roomInput, nickname);
         getBeans()
     });
+
+    function getBeans() {
+        for (u = 0; u < 4; u++) {
+            for (f = 0; f < 4; f++) {
+                let col = table.rows[u].cells[f];
+                if (col.checked) {
+                    socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, true, roomInput);
+                }
+            }
+            
+        } 
+    }
 
     var boardSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
