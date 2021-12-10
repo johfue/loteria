@@ -55,9 +55,9 @@ io.on('connection', (socket) => {
             io.emit('room join', false);
         }
     });
-    socket.on('rejoin room'), (room) => {
+    socket.on('rejoin room', (room) => {
         socket.join(room);
-    }
+    });
     socket.on('new player', (roomNumber, nickname, oldID) => {
         socket.to(roomNumber).emit('new player', nickname, socket.id, oldID);
     });
