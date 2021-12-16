@@ -333,11 +333,12 @@ function host() {
             shadowBox.classList.add("invisible");
         }
         // _(allegedWinnerID).removeEventListener('click', checkBoardRender(board, checked, id));
-        _(allegedWinnerID).removeEventListener('click', function(event) {
-            checkBoardRender(board, checked, id);
-        });
-
-
+        //checks if the board is still there, then removes it
+        if (_(allegedWinnerID)) {
+            _(allegedWinnerID).removeEventListener('click', function(event) {
+                checkBoardRender(board, checked, id);
+            });
+        }
         // stopSelectNode(1);
 
         allegedWinner.classList.add("invisible");
@@ -469,9 +470,9 @@ function host() {
     alertModalSmall.onclick = copyShare;
     drawBtn.onclick = drawCard;
     
-    socket.on ("new player", function(nickname, id) {
+    socket.on ("new player", function(nickname, id, oldID) {
         socket.emit('update newcomer', gameInfo, id);
-        newPlayer(nickname, id);
+        newPlayer(nickname, id, oldID);
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
         if (gameInfo.playerList.length === 0) {
             _("invite").remove(_("invite"));
@@ -698,9 +699,10 @@ function player() {
     
     socket.on("connect", function() {
         storeID();
+        // if has declared win, emit an extra thing, when player rejions see if it has that flag
         console.log("reconnected? " + oldID);
         socket.emit("rejoin room", (roomInput));
-        socket.emit('new player', roomInput, nickname);
+        socket.emit('new player', roomInput, nickname, oldID);
         getBeans();
     });
 
@@ -824,12 +826,12 @@ function player() {
         catchUp(gameInfo);
     });
 
-    socket.on ("board claim", function(board, nickname, id) {
+    socket.on("board claim", function(board, nickname, id) {
         claimBoard(board, nickname, id);
     });
     
-    socket.on ("new player", function(nickname, id) {
-        newPlayer(nickname, id);
+    socket.on("new player", function(nickname, id, oldID) {
+        newPlayer(nickname, id, oldID);
     });
     socket.on ("player left", function(id) {
         _(id + "claimed").parentElement.classList.remove("claimed");
