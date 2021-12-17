@@ -54,17 +54,17 @@ function targetDom() {
     const topStripe = _("topStripe");
 }
 
-function disconnectionHandler() {
-    socket.on("disconnect", (reason) => {
-        if (reason === "io server disconnect") {
-          // the disconnection was initiated by the server, you need to reconnect manually
-          console.log("disonnected by server");
-          socket.connect();
-        }
-        // else the socket will automatically try to reconnect
-        console.log("disonnected some other way " + oldID);
-    });
-}
+// function disconnectionHandler() {
+//     socket.on("disconnect", (reason) => {
+//         if (reason === "io server disconnect") {
+//           // the disconnection was initiated by the server, you need to reconnect manually
+//           console.log("disonnected by server");
+//           socket.connect();
+//         }
+//         // else the socket will automatically try to reconnect
+//         console.log("disonnected some other way " + oldID);
+//     });
+// }
 
 function generateCardOnBoard(func, param, arg) {
     cardOnBoard = [];
@@ -186,6 +186,10 @@ function host() {
         endGame();
     });
     
+    socket.on("connect", function() {
+        socket.emit("resync", roomNumber);
+        socket.emit('current card', currentCard, roomNumber);
+    });
     
     var gameInfo = {
         gameState: false,
@@ -706,6 +710,8 @@ function player() {
         getBeans();
     });
 
+
+
     function getBeans() {
         for (u = 0; u < 4; u++) {
             for (f = 0; f < 4; f++) {
@@ -833,6 +839,11 @@ function player() {
     socket.on("new player", function(nickname, id, oldID) {
         newPlayer(nickname, id, oldID);
     });
+
+    socket.on("fetch beans", function() {
+        getBeans();
+    });
+
     socket.on ("player left", function(id) {
         _(id + "claimed").parentElement.classList.remove("claimed");
         _(id + "claimed").previousSibling.disabled = false;

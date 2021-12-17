@@ -78,21 +78,15 @@ io.on('connection', (socket) => {
     });
     socket.on('claim board', (board, nickname, roomNumber) => {
         socket.to(roomNumber).emit('board claim', board, nickname, socket.id);
-
     });
     socket.on('activity', (x, y, bool, roomNumber) => {
         socket.to(roomNumber).emit('updateActivity', x, y, bool, socket.id);
-
     });
     socket.on('announce win', (board, roomNumber) => {
         socket.to(roomNumber).emit('check win', board, socket.id);
     });
     socket.on('board checked', (bool, id, roomNumber) => {
         io.to(id).emit('win checked', bool);
-    });
-    
-    socket.on('reconnected', (roomNumber, nickname) => {
-        socket.to(roomNumber).emit('playerReconnected', nickname, socket.id);
     });
 
     socket.on("disconnecting", (reason) => {
@@ -106,7 +100,10 @@ io.on('connection', (socket) => {
             }
         }
         
-  });
+    });
+    socket.on('resync', (roomNumber) => {
+        socket.to(roomNumber).emit('fetch beans');
+    });
 });
 
 http.listen(3050, function() {
