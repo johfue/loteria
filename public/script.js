@@ -547,7 +547,6 @@ function host() {
         tabSwitch();
     })
 
-    disconnectionHandler();
 }
 
 function player() {
@@ -850,7 +849,6 @@ function player() {
         _(id + "claimed").remove(_(id + "claimed"));
     });
     
-    disconnectionHandler();
 }
 
 function load_page(page) {
