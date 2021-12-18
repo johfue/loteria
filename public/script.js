@@ -185,8 +185,9 @@ function host() {
         alertModal.classList.remove("paused");
         endGame();
     });
-    
+
     socket.on("connect", function() {
+        socket.emit("rejoin room", (roomInput));
         socket.emit("resync", roomNumber);
         socket.emit('current card', currentCard, roomNumber);
     });
