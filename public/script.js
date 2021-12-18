@@ -187,7 +187,7 @@ function host() {
     });
 
     socket.on("connect", function() {
-        socket.emit("rejoin room", (roomInput));
+        socket.emit("rejoin room", roomNumber);
         socket.emit("resync", roomNumber);
         socket.emit('current card', currentCard, roomNumber);
     });
