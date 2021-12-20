@@ -417,8 +417,6 @@ function host() {
                     alertModal.classList.remove("paused");
                     bottomStripe.innerHTML = "";
                     shuffleDeck();
-                    drawnCards = [];
-                    currentCard.src="images/blank.svg";
                 });
                 
                 bottomStripe.appendChild(restartGame);
