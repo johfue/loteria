@@ -248,7 +248,7 @@ function host() {
     function startGame() {
         shuffleDeck();
         drawnCards = [];
-        cardInfo.card = true;
+        gameInfo.card = true;
         alertModal.classList.remove("paused");
         winConditionBtn.disabled = true;
         reviewBtn.disabled = false;
