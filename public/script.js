@@ -191,7 +191,7 @@ function host() {
         socket.emit("resync", roomNumber);
         socket.emit('current card', currentCard, roomNumber);
     });
-    
+
     var gameInfo = {
         gameState: false,
         card: "blank",
@@ -304,6 +304,7 @@ function host() {
     }
     
     function boardChecked(bool) {
+
         socket.emit('board checked', bool, allegedWinnerID, roomNumber);
         continueGame.innerHTML = "Keep playing";
         restartGame.innerHTML = "New game";
@@ -316,6 +317,9 @@ function host() {
             bottomStripe.innerHTML = "";
         });
 
+        socket.on("sync checked", function(nickname, id, oldID) {
+            allegedWinnerID = id;
+        });
 
         if (bool) {
             bottomStripe.appendChild(restartGame);
@@ -455,7 +459,6 @@ function host() {
         cardReviewList.appendChild(reviewCards());
         cardReview.classList.remove("invisible");
         shadowBox.classList.remove("invisible");
-    
     });
     
     _("closeReview").addEventListener('click', function(event) {
@@ -519,7 +522,7 @@ function host() {
         }
         
     });
-    
+
     socket.on ("player left", function(id) {
         for (var p = 0; p < gameInfo.playerList.length; p++) {
              if (gameInfo.playerList[p].ID == id) {
@@ -638,10 +641,13 @@ function player() {
     
     newBoard.onclick = pickBoard;
     
+    beingChecked = false;
+
     announceWin.addEventListener('click', function(event) {
         event.preventDefault();
         disableBoard(true);
         socket.emit("announce win", chosenBoard, roomInput);
+        beingChecked = true;
     });
     
     function startEnd(bool) {
@@ -665,6 +671,7 @@ function player() {
             disableBoard(true);
             shadowBox.classList.add("invisible");
             boardSelect.classList.remove("invisible");
+            beingChecked = false;
         }
         
     }
@@ -694,6 +701,7 @@ function player() {
             }, 2500);
     
         }
+        beingChecked = false;
         disableBoard(false);
     });
     
@@ -710,7 +718,15 @@ function player() {
         getBeans();
     });
 
-
+    socket.on("resync", function() {
+        if (!caughtUp) {
+            socket.emit('new player', roomInput, nickname, oldID);
+        }
+        if (beingChecked) {
+            socket.emit('sync checked', roomInput, nickname, oldID);
+        }
+        getBeans();
+    });
 
     function getBeans() {
         for (u = 0; u < 4; u++) {
@@ -803,6 +819,8 @@ function player() {
     infoHub.onclick = share;
     alertModalSmall.onclick = copyShare;
 
+    caughtUp = false;
+
     function catchUp(gameInfo) {
         disableBoard(!gameInfo.gameState);
         if (!gameInfo.gameState) {
@@ -826,6 +844,9 @@ function player() {
                 opponentUpdate(iteratedPlayer.placedBeans[b].x, iteratedPlayer.placedBeans[b].y, true, iteratedPlayer.ID)
             }
         }
+
+        caughtUp = true;
+
     }
 
     socket.on('catch-up', function(gameInfo) {

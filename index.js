@@ -45,11 +45,6 @@ io.on('connection', (socket) => {
         if (roomList.includes(parseInt(room, 10))) {
             io.to(socket.id).emit('room join', true);
             socket.join(room);
-                    // console.log(io.sockets.adapter.rooms);
-                    // console.log(socket.rooms);
-
-            // io.to(room).emit('new player', socket.id);
-    
         }
         else {
             io.emit('room join', false);
@@ -61,7 +56,7 @@ io.on('connection', (socket) => {
     socket.on('new player', (roomNumber, nickname, oldID) => {
         socket.to(roomNumber).emit('new player', nickname, socket.id, oldID);
     });
-    socket.on('update newcomer', (gameInfo, id) => {
+        socket.on('update newcomer', (gameInfo, id) => {
         io.to(id).emit('catch-up', gameInfo);
     });
     socket.on('game state', (bool, roomNumber) => {
@@ -102,8 +97,11 @@ io.on('connection', (socket) => {
         
     });
     socket.on('resync', (roomNumber) => {
-        socket.to(roomNumber).emit('fetch beans');
+        socket.to(roomNumber).emit('reysnc');
     });
+    socket.on('sync checked', (roomNumber, nickname, oldID) => {
+        socket.to(roomNumber).emit('sync checked', nickname, socket.id, oldID);
+    })
 });
 
 http.listen(3050, function() {
