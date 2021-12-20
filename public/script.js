@@ -194,7 +194,7 @@ function host() {
 
     var gameInfo = {
         gameState: false,
-        card: "blank",
+        card: true,
         goal: "blank",
         playerList: [],
     };
@@ -248,6 +248,7 @@ function host() {
     function startGame() {
         shuffleDeck();
         drawnCards = [];
+        cardInfo.card = true;
         alertModal.classList.remove("paused");
         winConditionBtn.disabled = true;
         reviewBtn.disabled = false;
@@ -822,9 +823,8 @@ function player() {
 
     function catchUp(gameInfo) {
         disableBoard(!gameInfo.gameState);
-        if (!gameInfo.gameState) {
-            console.log("this should run whenver there's no current card");
-            currentCard.src = "images/blank.svg";
+        if (gameInfo.card) {
+            currentCard.src = "images/blank.png";
         }
         else {
             currentCard.src = "images/donClemente/" + gameInfo.card + '.jpg';
