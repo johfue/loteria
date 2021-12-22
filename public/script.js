@@ -149,6 +149,12 @@ function newPlayer(nickname, id, oldID) {
 }
 
 function host() {
+
+    var link = document.createElement('meta');
+    link.setAttribute('property', 'og:url');
+    link.content = document.location;
+    document.getElementsByTagName('head')[0].appendChild(link);
+
     window.onpopstate = function(event) {
         window.location = "/";
     };
@@ -554,6 +560,12 @@ function host() {
 }
 
 function player() {
+    var link = document.createElement('meta');
+    link.setAttribute('property', 'og:url');
+    link.content = document.location;
+    document.getElementsByTagName('head')[0].appendChild(link);
+
+    document.getElementsByTagName('head')[0].appendChild(link);
     window.onpopstate = function(event) {
     if(event.state === null) {
         event.preventDefault();
