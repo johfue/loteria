@@ -835,7 +835,7 @@ function player() {
 
     function catchUp(gameInfo) {
         disableBoard(!gameInfo.gameState);
-        if (gameInfo.card) {
+        if (typeof gameInfo.card == "boolean") {
             currentCard.src = "images/blank.png";
         }
         else {
