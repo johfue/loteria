@@ -748,7 +748,7 @@ function player() {
                 console.log(col.firstElementChild.checked);
             }
             
-        } 
+        }
     }
 
     var boardSelectOptionsContainer = document.createDocumentFragment();
@@ -835,7 +835,7 @@ function player() {
 
     function catchUp(gameInfo) {
         disableBoard(!gameInfo.gameState);
-        if (gameInfo.card) {
+        if (!gameInfo.card) {
             currentCard.src = "images/blank.png";
         }
         else {
