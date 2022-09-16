@@ -307,15 +307,18 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     border-bottom: 2px solid var(--neutral-100);
     background-color: var(--primary-base);
     align-self: auto;
+    margin-top: 3rem auto 0;
+    text-decoration: none;
 }
 
 .contactBtn__Txt {
-    font-size: 12px
+    font-size: 12px;
+    padding: 8xp 12px;
 }
 
 .contactBtn__Questions {
     font-family: Merienda-Bold;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .contactBtn__Img {
@@ -325,6 +328,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 @media(min-width:400px) {
     .contactBtn {
         align-self: flex-end;
+        margin-top: 3rem 0 0 0;
     }
 }
 
