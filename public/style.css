@@ -198,7 +198,7 @@ button:focus:not(:focus-visible) {
 
 button:active:before {
     -webkit-transform: translate(0, 5px);
-    transform: translate(0, 5px);    
+    transform: translate(0, 5px);
 }
 
 .primaryBtn:active:after {
@@ -302,6 +302,31 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     margin: 0 auto;
 }
 
+.contactBtn {
+    display: flex;
+    border-bottom: 2px solid var(--neutral-100);
+    background-color: var(--primary-base);
+    align-self: auto;
+}
+
+.contactBtn__Txt {
+    font-size: 12px
+}
+
+.contactBtn__Questions {
+    font-family: Merienda-Bold;
+    font-size: 24px;
+}
+
+.contactBtn__Img {
+    background-color: #008CD8;
+}
+
+@media(min-width:400px) {
+    .contactBtn {
+        align-self: flex-end;
+    }
+}
 
 /*.splash__img {*/
 /*}*/
@@ -512,7 +537,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transform: none;
     background-color: initial;
     -webkit-transform: none;
-} 
+}
 
 .gameSettings__option:active, .boardSelect__li:active {
     -webkit-transform: translateY(-10%);
@@ -804,10 +829,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .modal__content--cardReview {
     overflow-y: scroll;
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: 0.75rem;
+    column-gap: 1.5rem;
     grid-template-columns: repeat(auto-fill, 50px);
     background-color: var(--action-base);
     align-content: start;
+    justify-content: center;
 }
 
 .modal__content--cardReview li {
@@ -1031,6 +1058,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: grid;
     background-color: var(--neutral-900);
     padding: 0.5em;
+    padding-bottom: 1.2em;
     height: -moz-fit-content;
     height: fit-content;
     width: -moz-fit-content;
