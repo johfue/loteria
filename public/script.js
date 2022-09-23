@@ -72,7 +72,7 @@ function generateCardOnBoard(func, param, arg) {
             for (j = 0; j < 4; j++) {
                 cardOnBoardCheck = cardOnBoard.length;
                 while (cardOnBoard.length === cardOnBoardCheck ) {
-                    card = (Math.floor(Math.random() * (54 - 1 + 1)) + 1);
+                    card = (Math.floor(Math.random() * (51 - 1 + 1)) + 1);
         
                     if (cardOnBoard.includes(card) === false) {
                         cardOnBoard.push(card);
@@ -85,13 +85,13 @@ function generateCardOnBoard(func, param, arg) {
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/donClemente/" + card + '.jpg';
+    cellT.firstElementChild.src = "images/donClemente-Clean/" + card + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/donClemente/" + card + '.jpg';
+    col.lastElementChild.src = "images/donClemente-Clean/" + card + '.jpg';
 }
 
 function boardConstruct(seed) {
@@ -220,7 +220,7 @@ function host() {
     
     function shuffleDeck() {
         deckList = [];
-        for (var i=0; i<54; i++) {
+        for (var i=0; i<51; i++) {
             deckList.push(i+1);
         }
     }
@@ -231,7 +231,7 @@ function host() {
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
-            img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
+            img.src = "images/donClemente-Clean/" + drawnCards[c] + ".jpg";
             li.appendChild(img);
             cardReviewListFragment.appendChild(li);
         }
@@ -405,7 +405,7 @@ function host() {
         
         if (gameInfo.gameState) {
             cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
-            currentCard.src = "images/donClemente/" + cardDrawn + ".jpg";
+            currentCard.src = "images/donClemente-Clean/" + cardDrawn + ".jpg";
             gameInfo.card = cardDrawn;
             drawnCards.push(cardDrawn);
             
@@ -693,7 +693,7 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        currentCard.src = "images/donClemente/" + sentCard + '.jpg';
+        currentCard.src = "images/donClemente-Clean/" + sentCard + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -839,7 +839,7 @@ function player() {
             currentCard.src = "images/blank.png";
         }
         else {
-            currentCard.src = "images/donClemente/" + gameInfo.card + '.jpg';
+            currentCard.src = "images/donClemente-Clean/" + gameInfo.card + '.jpg';
         }
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
 
