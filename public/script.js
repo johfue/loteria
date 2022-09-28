@@ -95,7 +95,7 @@ function drawCell(table) {
 }
 
 function boardConstruct(seed) {
-    Math.seedrandom(seed.toString() + "x");
+    Math.seedrandom(seed.toString() + "Q");
     let tbl = document.createElement("table");
     let tblRow = document.createElement("tr");
     for (v=0; v < 4; v++) {
@@ -630,7 +630,7 @@ function player() {
     function pickBoard(evt) {
         evt.preventDefault();
         chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
-        Math.seedrandom(chosenBoard + "x");
+        Math.seedrandom(chosenBoard + "Q");
         drawTable();
         boardSelect.classList.add("invisible");
         table.classList.remove("invisible");
