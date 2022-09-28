@@ -630,7 +630,7 @@ function player() {
     function pickBoard(evt) {
         evt.preventDefault();
         chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
-        Math.seedrandom(chosenBoard);
+        Math.seedrandom(chosenBoard + "x");
         drawTable();
         boardSelect.classList.add("invisible");
         table.classList.remove("invisible");
