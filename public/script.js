@@ -74,10 +74,10 @@ function generateCardOnBoard(func, param, arg) {
                 while (cardOnBoard.length === cardOnBoardCheck ) {
                     card = (Math.floor(Math.random() * (51 - 1 + 1)) + 1);
         
-                    // if (cardOnBoard.includes(card) === false) {
+                    if (cardOnBoard.includes(card) === false) {
                         cardOnBoard.push(card);
                         func(param, arg);
-                    // }
+                    }
                 }
             }
         }
@@ -95,7 +95,7 @@ function drawCell(table) {
 }
 
 function boardConstruct(seed) {
-    Math.seedrandom(seed.toString());
+    Math.seedrandom(seed.toString() + "x");
     let tbl = document.createElement("table");
     let tblRow = document.createElement("tr");
     for (v=0; v < 4; v++) {
