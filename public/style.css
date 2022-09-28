@@ -307,7 +307,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     border-bottom: 2px solid var(--neutral-100);
     background-color: var(--primary-base);
     align-self: auto;
-    margin: 3rem auto 0;
+    margin-top: 3rem auto 0;
     text-decoration: none;
 }
 
@@ -329,7 +329,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 @media(min-width:400px) {
     .contactBtn {
         align-self: flex-end;
-        margin: 3rem 0 0 0;
+        margin-top: 3rem 0 0 0;
     }
 }
 
