@@ -433,8 +433,45 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
-.modal__content--gameSettings {
-    display: grid;
+
+
+
+.modal--deckSettings {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.deckSettings__option {
+    width: 100%;
+    position: relative;
+    transition: 0.1s ease;
+}
+
+.deckSettings__option:before, .deckSettings__option:after {
+    content: "";
+    position: absolute;
+    top: -15%;
+    left: -25%;
+    height: 130%;
+    width: 150%;
+    background-color: var(--neutral-900);
+    -webkit-clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+    clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+    z-index: -1;
+}
+
+.deckSettings__option:after {
+    top: -10%;
+    height: 120%;
+    left: -10%;
+    width: 120%;
+    background-color: var(--neutral-100);
+    -webkit-clip-path: polygon(0% 97%, 100% 100%, 100% 3%, 0% 0%);
+    clip-path: polygon(0% 97%, 100% 100%, 100% 3%, 0% 0%);
+}
+
+.modal__content--deckSettings {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: min-content;
     grid-gap: 1rem;
@@ -443,25 +480,23 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     padding: 0 1rem 1rem 1rem;
 }
 
-.gameSettings__option {
-    width: 100%;
-    position: relative;
-    transition: 0.1s ease;
-}
-
-.modal__input--gameSettings{
-    height: 100%;
-    width: 100%;
-    position: absolute;
+.modal__input--deckSettings{
     -webkit-appearance: none;
     appearance: none;
-    background-size: 65%;
-    background-position: 50% 0%;
     transition: 0.25s ease;
-    z-index: 3;
-    top: 0;
-    left: 0;
 }
+
+.modal__input--deckSettings:checked{
+    background-image: url(images/check.svg);
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-position: 50% 25%;
+}
+
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+
 
 @media(min-width:845px) {
     .modal {
