@@ -454,20 +454,18 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .deckSettings__option:before, .deckSettings__option:after {
     content: "";
     position: absolute;
-    top: 20%;
-    left: -3%;
+    top: 14%;
+    left: -2%;
     height: 100%;
-    width: 100%;
+    width: 110%;
     background-color: var(--neutral-100);
-    -webkit-clip-path: polygon(10% 0%, 5% 100%, 95% 100%, 100% 0%);
-    clip-path: polygon(10% 0%, 5% 100%, 95% 100%, 100% 0%);
+    -webkit-clip-path: polygon(3% 0%, 0% 100%, 97% 100%, 100% 0%);
+    clip-path: polygon(3% 0%, 0% 100%, 97% 100%, 100% 0%);
 }
 
 .deckSettings__option:after {
     top: 0;
-    height: 100%;
-    left: -15%;
-    width: 100%;
+    left: -4%;
     background-color: var(--neutral-900);
 }
 
@@ -481,6 +479,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .modal__input--deckSettings {
     z-index: 1;
     position: relative;
+    vertical-align: text-bottom;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    border: 2px solid var(--neutral-100);
+    
 }
 
 .modal__content--deckSettings {
@@ -501,7 +505,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .modal__input--deckSettings:checked{
     background-image: url(images/check.svg);
     background-repeat: no-repeat;
-    background-size: 150%;
+    background-size: 100%;
     background-position: 50% 25%;
 }
 
