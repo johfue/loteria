@@ -459,8 +459,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     height: 100%;
     width: 100%;
     background-color: var(--neutral-100);
-    -webkit-clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
-    clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+    -webkit-clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
+    clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
     z-index: -1;
 }
 
@@ -468,10 +468,15 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     top: 0;
     height: 100%;
     left: 0;
-    width: 100;
+    width: 100%;
     background-color: var(--neutral-900);
-    -webkit-clip-path: polygon(0% 97%, 100% 100%, 100% 3%, 0% 0%);
-    clip-path: polygon(0% 97%, 100% 100%, 100% 3%, 0% 0%);
+    -webkit-clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
+    clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
+}
+
+.radio-sibling--deckSettings {
+    color: var(--neutral-100);
+    position: relative;
 }
 
 .modal__content--deckSettings {
