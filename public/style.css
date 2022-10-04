@@ -455,27 +455,31 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     content: "";
     position: absolute;
     top: 20%;
-    left: 3%;
+    left: -3%;
     height: 100%;
     width: 100%;
     background-color: var(--neutral-100);
-    -webkit-clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
-    clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
-    z-index: -1;
+    -webkit-clip-path: polygon(10% 0%, 5% 100%, 95% 100%, 100% 0%);
+    clip-path: polygon(10% 0%, 5% 100%, 95% 100%, 100% 0%);
 }
 
 .deckSettings__option:after {
     top: 0;
     height: 100%;
-    left: 0;
+    left: -15%;
     width: 100%;
     background-color: var(--neutral-900);
-    -webkit-clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
-    clip-path: polygon(13% 0%, 5% 100%, 95% 100%, 100% 0%);
 }
 
 .radio-sibling--deckSettings {
     color: var(--neutral-100);
+    position: relative;
+    z-index: 1;
+    padding: 1rem;
+}
+
+.modal__input--deckSettings {
+    z-index: 1;
     position: relative;
 }
 
