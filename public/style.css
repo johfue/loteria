@@ -439,7 +439,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .deckSettings {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
 .deckSettings__option {
@@ -456,7 +457,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     content: "";
     position: absolute;
     top: 8px;
-    left: -3px;
+    left: -6px;
     height: 100%;
     width: 110%;
     background-color: var(--neutral-100);
@@ -466,7 +467,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .deckSettings__option:after {
     top: 0;
-    left: -5px;
+    left: -12px;
     background-color: var(--neutral-900);
 }
 
@@ -498,7 +499,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 #deckSelectBtn {
     display: block;
-    margin: 0 auto;
+    margin: 1rem auto 0;
     width: 100%;
 }
 
@@ -514,6 +515,14 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-size: 100%;
     background-position: 50% 25%;
 }
+
+@media (min-width: 768px) {
+    .modal__input--deckSettings:hover {
+        -webkit-transform: translateY(-6%);
+        transform: translateY(-6%);
+    }
+}
+
 
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
@@ -601,7 +610,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     -webkit-transform: none;
 }
 
-.gameSettings__option:active, .boardSelect__li:active {
+.gameSettings__option:active, .boardSelect__li:active, .modal__input--deckSettings {
     -webkit-transform: translateY(-10%);
    transform: translateY(-10%);
 }
