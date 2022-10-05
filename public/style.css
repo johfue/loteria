@@ -517,7 +517,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 @media (min-width: 768px) {
-    .modal__input--deckSettings:hover {
+    .deckSettings__option:hover {
         -webkit-transform: translateY(-6%);
         transform: translateY(-6%);
     }
@@ -610,7 +610,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     -webkit-transform: none;
 }
 
-.gameSettings__option:active, .boardSelect__li:active, .modal__input--deckSettings {
+.gameSettings__option:active, .boardSelect__li:active, .deckSettings__option {
     -webkit-transform: translateY(-10%);
    transform: translateY(-10%);
 }

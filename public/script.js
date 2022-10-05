@@ -960,6 +960,12 @@ _("player").addEventListener('click', function(event) {
 });
 
 _("host").addEventListener('click', function(event) {
+    _("welcomeForm").classList.add("invisible");
+    _("host").classList.add("invisible");
+    _("deckSettings").classList.remove("invisible");
+});
+
+_("deckSelectBtn").addEventListener('click', function(event) {
     load_page("host", event);
     event.preventDefault();
 });
