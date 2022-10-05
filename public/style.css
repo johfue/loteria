@@ -474,6 +474,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     position: relative;
     z-index: 1;
     padding: 1rem;
+    font-size: 12px;
 }
 
 .modal__input--deckSettings {
@@ -482,9 +483,15 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     vertical-align: text-bottom;
     height: 20px;
     width: 20px;
+    padding: 9px;
     border-radius: 100%;
     border: 2px solid var(--neutral-100);
-    
+    align-self: center;
+}
+
+.deckSettings__label--header{
+    font-family: 'poppinsblack';
+    font-size: 16px;
 }
 
 .modal__content--deckSettings {
