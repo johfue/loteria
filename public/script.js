@@ -968,20 +968,22 @@ _("host").addEventListener('click', function(event) {
     var li = document.createElement("li");
     var input = document.createElement("input");
     var img = document.createElement("img");
+    var label = document.createElement("label");
     li.classList.add("deckSelect__li");
     input.classList.add("deckSelect__input");
     input.setAttribute("type", "radio");
     input.setAttribute("name", "cardNumber");
+    label.appendChild(img);
     li.appendChild(input);
     li.appendChild(label);
 
     
         for (c=1; c<45; c++) {
             let liO = li.cloneNode('true');
+
             liO.children[0].setAttribute("value", c);
             liO.children[1].setAttribute("for", c);
-            let imgO = img.cloneNode('true');
-            imgO.src = "images/donClemente-Clean/" + c + '.jpg';
+             liO.children[1].children[0].src = "images/donClemente-Clean/" + c + '.jpg';
             
             deckSelectOptionsContainer.appendChild(liO);
         }
