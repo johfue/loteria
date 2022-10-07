@@ -965,28 +965,31 @@ _("host").addEventListener('click', function(event) {
     _("deckSettings").classList.remove("invisible");
     
     var deckSelectOptionsContainer = document.createDocumentFragment();
+    var ol = document.createElement("ol");
     var li = document.createElement("li");
     var input = document.createElement("input");
     var img = document.createElement("img");
     var label = document.createElement("label");
     li.classList.add("deckSelect__li");
     input.classList.add("deckSelect__input");
-    input.setAttribute("type", "radio");
+    input.setAttribute("type", "checkbox");
+    input.setAttribute("checked", "checked");
     input.setAttribute("name", "cardNumber");
     label.appendChild(img);
     li.appendChild(input);
     li.appendChild(label);
 
     
-        for (c=1; c<45; c++) {
+        for (c=1; c<54; c++) {
             let liO = li.cloneNode('true');
 
             liO.children[0].setAttribute("value", c);
             liO.children[1].setAttribute("for", c);
-             liO.children[1].children[0].src = "images/donClemente-Clean/" + c + '.jpg';
+            liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
             
-            deckSelectOptionsContainer.appendChild(liO);
+            ol.appendChild(liO);
         }
+        deckSelectOptionsContainer.appendChild(ol);
         _("cardSelectList").appendChild(deckSelectOptionsContainer);
     
 });
