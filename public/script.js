@@ -963,6 +963,30 @@ _("host").addEventListener('click', function(event) {
     _("welcomeForm").classList.add("invisible");
     _("host").classList.add("invisible");
     _("deckSettings").classList.remove("invisible");
+    
+    var deckSelectOptionsContainer = document.createDocumentFragment();
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    var img = document.createElement("img");
+    li.classList.add("deckSelect__li");
+    input.classList.add("deckSelect__input");
+    input.setAttribute("type", "radio");
+    input.setAttribute("name", "cardNumber");
+    li.appendChild(input);
+    li.appendChild(label);
+
+    
+        for (c=1; c<45; c++) {
+            let liO = li.cloneNode('true');
+            liO.children[0].setAttribute("value", c);
+            liO.children[1].setAttribute("for", c);
+            let imgO = img.cloneNode('true');
+            imgO.src = "images/donClemente-Clean/" + c + '.jpg';
+            
+            deckSelectOptionsContainer.appendChild(liO);
+        }
+        _("cardSelectList").appendChild(deckSelectOptionsContainer);
+    
 });
 
 _("deckSelectBtn").addEventListener('click', function(event) {

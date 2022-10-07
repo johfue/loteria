@@ -518,8 +518,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 @media (min-width: 768px) {
     .deckSettings__option:hover {
-        -webkit-transform: translateY(-6%);
-        transform: translateY(-6%);
+        -webkit-transform: translateY(6%);
+        transform: translateY(6%);
     }
 }
 
