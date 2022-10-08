@@ -987,9 +987,8 @@ _("host").addEventListener('click', function(event) {
             liO.children[1].setAttribute("for", c);
             liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
             
-            ol.appendChild(liO);
+            deckSelectOptionsContainer.appendChild(liO);
         }
-        deckSelectOptionsContainer.appendChild(ol);
         _("cardSelectList").appendChild(deckSelectOptionsContainer);
     
 });
