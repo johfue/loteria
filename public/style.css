@@ -524,6 +524,19 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 
+.modal__content--deckSelect {
+    grid-template-columns: 1fr 1fr 1fr;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0.8rem;
+    grid-row-gap: 0.5rem;
+    padding: 1rem;
+    position: relative;
+}
+
+
+
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
@@ -1672,12 +1685,12 @@ td input {
     z-index: 2;
 }
 
-.boardSelect__li, .modal__content--boardHold li {
+.boardSelect__li, .modal__content--boardHold li, .modal__content--cardSelect li {
     position: relative;
     list-style-type: none;
 }
 
-.boardSelect__li > input, .modal__content--boardHold li > input {
+.boardSelect__li > input, .modal__content--boardHold li > input, .modal__content--cardSelect li > input {
     height: 100%;
     width: 100%;
     -webkit-appearance: none;

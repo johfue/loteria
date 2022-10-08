@@ -972,6 +972,7 @@ _("host").addEventListener('click', function(event) {
     var label = document.createElement("label");
     li.classList.add("deckSelect__li");
     input.classList.add("deckSelect__input");
+    input.classList.add("radioSibling");
     input.setAttribute("type", "checkbox");
     input.setAttribute("checked", "checked");
     input.setAttribute("name", "cardNumber");
@@ -980,7 +981,7 @@ _("host").addEventListener('click', function(event) {
     li.appendChild(label);
 
     
-        for (c=1; c<54; c++) {
+        for (c=1; c<55; c++) {
             let liO = li.cloneNode('true');
 
             liO.children[0].setAttribute("value", c);
