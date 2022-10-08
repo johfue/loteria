@@ -479,7 +479,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-size: 12px;
 }
 
-.modal__content--cardSelect {
+.modal__input--deckSettings {
     z-index: 1;
     position: relative;
     vertical-align: text-bottom;
@@ -503,13 +503,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 100%;
 }
 
-.modal__content--cardSelect{
+.modal__input--deckSettings{
     -webkit-appearance: none;
     appearance: none;
     transition: 0.25s ease;
 }
 
-.modal__content--cardSelect:checked{
+.modal__input--deckSettings:checked{
     background-image: url(images/check.svg);
     background-repeat: no-repeat;
     background-size: 100%;
