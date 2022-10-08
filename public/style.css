@@ -479,7 +479,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-size: 12px;
 }
 
-.modal__input--deckSettings {
+.modal__content--cardSelect {
     z-index: 1;
     position: relative;
     vertical-align: text-bottom;
@@ -503,13 +503,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 100%;
 }
 
-.modal__input--deckSettings{
+.modal__content--cardSelect{
     -webkit-appearance: none;
     appearance: none;
     transition: 0.25s ease;
 }
 
-.modal__input--deckSettings:checked{
+.modal__content--cardSelect:checked{
     background-image: url(images/check.svg);
     background-repeat: no-repeat;
     background-size: 100%;
@@ -524,7 +524,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 
-.modal__content--deckSelect {
+.modal__content--cardSelect {
     grid-template-columns: 1fr 1fr 1fr;
     list-style-type: none;
     display: grid;
