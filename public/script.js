@@ -973,7 +973,6 @@ _("host").addEventListener('click', function(event) {
     li.classList.add("deckSelect__li");
     input.classList.add("deckSelect__input");
     img.classList.add("deckSelect__img");
-    input.classList.add("radioSibling");
     input.setAttribute("type", "checkbox");
     input.setAttribute("checked", "checked");
     input.setAttribute("name", "cardNumber");

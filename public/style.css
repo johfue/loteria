@@ -507,13 +507,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 100%;
 }
 
-.modal__input--deckSettings{
+.deckSelect__input{
     -webkit-appearance: none;
     appearance: none;
     transition: 0.25s ease;
 }
 
-.modal__input--deckSettings:checked{
+.deckSelect__input:checked{
     background-image: url(images/check.svg);
     background-repeat: no-repeat;
     background-size: 100%;
@@ -525,8 +525,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         -webkit-transform: translateY(6%);
         transform: translateY(6%);
     }
+    .deckSelect__img:hover img {
+        filter: brightness(0.7);
+    }
 }
-
 
 .modal__content--cardSelect {
     align-content: start;
@@ -1692,12 +1694,12 @@ td input {
     z-index: 2;
 }
 
-.boardSelect__li, .modal__content--boardHold li, .modal__content--cardSelect li {
+.boardSelect__li, .modal__content--boardHold li, .deckSelect__li {
     position: relative;
     list-style-type: none;
 }
 
-.boardSelect__li > input, .modal__content--boardHold li > input, .modal__content--cardSelect li > input {
+.boardSelect__li > input, .modal__content--boardHold li > input, .deckSelect__input {
     height: 100%;
     width: 100%;
     -webkit-appearance: none;
