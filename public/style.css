@@ -497,6 +497,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     line-height: 1.5;
 }
 
+.deckSettings__img {
+    width: 25%;
+}
+
 #deckSelectBtn {
     display: block;
     margin: 1rem auto 0;
@@ -525,14 +529,16 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 
 .modal__content--cardSelect {
-    grid-template-columns: 1fr 1fr 1fr;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-column-gap: 0.8rem;
     grid-row-gap: 0.5rem;
-    padding: 1rem;
+    padding: 1rem 10rem;
     position: relative;
+    overflow-y: scroll;
+    background-color: var(--primary-base);
+    
 }
 
 
