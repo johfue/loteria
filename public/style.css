@@ -508,7 +508,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .deckSelect__input{
-    transition: 0.25s ease;
+    transition: 0.15s ease;
     filter: brightness(0.7);
     background-repeat: no-repeat;
     background-size: 33%;
@@ -523,6 +523,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     z-index: 3;
     background-color: rgba(100,100,100,0.8);
     mix-blend-mode: saturation;
+    filter: unset;
 }
 
 .deckSelect__input:hover {
