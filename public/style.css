@@ -497,7 +497,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     line-height: 1.5;
 }
 
-.deckSettings__img {
+.deckSelect__img {
     width: 100%;
 }
 
