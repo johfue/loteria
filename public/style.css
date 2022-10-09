@@ -511,13 +511,30 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     -webkit-appearance: none;
     appearance: none;
     transition: 0.25s ease;
+    filter: brightness(0.7);
+    background-repeat: no-repeat;
+    background-size: 33%;
+    background-position: 85% 85%;
+}
+
+.deckSelect__input:checked {
+    filter: unset;
 }
 
 .deckSelect__input:checked{
     background-image: url(images/check.svg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: 50% 25%;
+    background-color: none;
+    mix-blend-mode: unset;
+}
+
+.deckSelect__input:checked:hover {
+    background-color: none;
+    mix-blend-mode: unset;
+}
+
+.deckSelect__input, .deckSelect__input:hover {
+    background-color: rgba(100,100,100,0.8);
+    mix-blend-mode: saturation;
 }
 
 @media (min-width: 768px) {
@@ -525,7 +542,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         -webkit-transform: translateY(6%);
         transform: translateY(6%);
     }
-    .deckSelect__img:hover img {
+    .deckSelect__img:hover {
         filter: brightness(0.7);
     }
 }
@@ -1566,7 +1583,7 @@ table, td {
 }
 
 .board__input:disabled, .boardSelect__input:disabled, .board__input:disabled:hover, .boardSelect__input:disabled:hover {
-    background-color: rgba(100,100,100,0.7);
+    background-color: rgba(100,100,100,0.8);
     mix-blend-mode: saturation;
 }
 
