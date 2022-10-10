@@ -964,6 +964,12 @@ _("host").addEventListener('click', function(event) {
     _("host").classList.add("invisible");
     _("deckSettings").classList.remove("invisible");
     
+    _("closeSelect").addEventListener('click', function(event) {
+        _("deckSettings").classList.add("invisible");
+        _("shadowBox").classList.add("invisible");
+    };
+
+    
     var deckSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
     var li = document.createElement("li");
