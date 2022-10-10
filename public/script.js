@@ -963,11 +963,16 @@ _("host").addEventListener('click', function(event) {
     _("welcomeForm").classList.add("invisible");
     _("host").classList.add("invisible");
     _("deckSettings").classList.remove("invisible");
-    
+
+    _("deckSettings__label--Edit").addEventListener('click', function(event) {
+        _("deckSettings").classList.remove("invisible");
+        _("shadowBox").classList.remove("invisible");
+    });
+
     _("closeSelect").addEventListener('click', function(event) {
         _("deckSettings").classList.add("invisible");
         _("shadowBox").classList.add("invisible");
-    };
+    });
 
     
     var deckSelectOptionsContainer = document.createDocumentFragment();
