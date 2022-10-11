@@ -544,6 +544,16 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 
+.deckSettings__label--Edit {
+    color: var(--confirm-dark);
+    display: inline-block;
+    position: relative;
+    left: calc(100% - 1rem);
+    /* width: 50px; */
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
 @media (min-width: 768px) {
     .deckSettings__option:hover {
         -webkit-transform: translateY(6%);
@@ -558,7 +568,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     align-content: start;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(auto-fill, 50px);
     grid-column-gap: 0.8rem;
     grid-row-gap: 0.5rem;
     padding: 1rem 10rem;
@@ -568,7 +578,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     
 }
 
-
+@media (min-width: 768px) {
+    .modal__content--cardSelect {
+        grid-template-columns: repeat(6, 1fr);
+        grid-column-gap: 0.8rem;
+        grid-row-gap: 0.5rem;
+        padding: 1rem 10rem;
+}
 
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
