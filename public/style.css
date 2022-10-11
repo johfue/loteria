@@ -548,7 +548,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     color: var(--confirm-dark);
     display: inline-block;
     position: relative;
-    left: calc(100% - 1rem);
+    left: calc(100% - 2rem);
     /* width: 50px; */
     padding: 0.5rem 1rem;
     text-transform: uppercase;
@@ -571,7 +571,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-template-columns: repeat(auto-fill, 50px);
     grid-column-gap: 0.8rem;
     grid-row-gap: 0.5rem;
-    padding: 1rem 10rem;
+    padding: 1rem;
     position: relative;
     overflow-y: scroll;
     background-color: var(--primary-base);
