@@ -584,6 +584,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         grid-column-gap: 0.8rem;
         grid-row-gap: 0.5rem;
         padding: 1rem 10rem;
+    }
 }
 
 /*/--------------------------------------------/*/
