@@ -233,7 +233,7 @@ function host() {
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
-            img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
+            img.src = "images/donClemente/" + deck[drawnCards[c]] + ".jpg";
             li.appendChild(img);
             cardReviewListFragment.appendChild(li);
         }
@@ -410,8 +410,8 @@ function host() {
             currentCard.src = "images/donClemente/" + deck[cardDrawn] + ".jpg";
             console.log(cardDrawn);
             console.log(deck[cardDrawn]);
-            gameInfo.card = cardDrawn;
-            drawnCards.push(cardDrawn);
+            gameInfo.card = deck[cardDrawn];
+            drawnCards.push(deck[cardDrawn]);
             
             deckList.splice(deckList.indexOf(cardDrawn), 1);
             
@@ -1020,7 +1020,7 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     }
     
     else if (currentDeck === "school") {
-        deck = [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,27,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55];
+        deck = [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,27,28,29,30,31,32,33,34,35,37,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55];
     }
    
     else {
