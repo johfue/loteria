@@ -37,6 +37,8 @@ function copyShare() {
     
 }
 
+var deck = [];
+
 let oldID = "";
 
 function storeID() {
@@ -72,7 +74,7 @@ function generateCardOnBoard(func, param, arg) {
             for (j = 0; j < 4; j++) {
                 cardOnBoardCheck = cardOnBoard.length;
                 while (cardOnBoard.length === cardOnBoardCheck ) {
-                    card = (Math.floor(Math.random() * (51 - 1 + 1)) + 1);
+                    card = (Math.floor(Math.random() * (deck.length - 1 + 1)) + 1);
         
                     if (cardOnBoard.includes(card) === false) {
                         cardOnBoard.push(card);
@@ -85,13 +87,13 @@ function generateCardOnBoard(func, param, arg) {
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/donClemente-Clean/" + card + '.jpg';
+    cellT.firstElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/donClemente-Clean/" + card + '.jpg';
+    col.lastElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
 }
 
 function boardConstruct(seed) {
@@ -231,7 +233,7 @@ function host() {
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
-            img.src = "images/donClemente-Clean/" + drawnCards[c] + ".jpg";
+            img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
             li.appendChild(img);
             cardReviewListFragment.appendChild(li);
         }
@@ -405,7 +407,7 @@ function host() {
         
         if (gameInfo.gameState) {
             cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
-            currentCard.src = "images/donClemente-Clean/" + cardDrawn + ".jpg";
+            currentCard.src = "images/donClemente/" + deck[cardDrawn] + ".jpg";
             gameInfo.card = cardDrawn;
             drawnCards.push(cardDrawn);
             
@@ -485,7 +487,7 @@ function host() {
     drawBtn.onclick = drawCard;
     
     socket.on ("new player", function(nickname, id, oldID) {
-        socket.emit('update newcomer', gameInfo, id);
+        socket.emit('update newcomer', gameInfo, id, deck);
         newPlayer(nickname, id, oldID);
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
         if (gameInfo.playerList.length === 0) {
@@ -693,7 +695,7 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        currentCard.src = "images/donClemente-Clean/" + sentCard + '.jpg';
+        currentCard.src = "images/donClemente/" + deck[sentCard] + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -833,13 +835,14 @@ function player() {
 
     caughtUp = false;
 
-    function catchUp(gameInfo) {
+    function catchUp(gameInfo, deckList) {
+        deck = deckList;
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
             currentCard.src = "images/blank.png";
         }
         else {
-            currentCard.src = "images/donClemente-Clean/" + gameInfo.card + '.jpg';
+            currentCard.src = "images/donClemente/" + deck[gameInfo.card] + '.jpg';
         }
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
 
@@ -1006,6 +1009,26 @@ _("host").addEventListener('click', function(event) {
 });
 
 _("deckSelectBtn").addEventListener('click', function(event) {
+    currentDeck = document.querySelector('input[name="deckOption"]:checked').value;
+
+    let cardSelectList = _("cardSelectList");
+    
+    if (currentDeck === "standard") {
+        deck = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
+    }
+    
+    else if (currentdeck === "school") {
+        deck = [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,27,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55];
+    }
+   
+    else {
+        for (s=0; s>cardSelectList.children.length, s++) {
+            if (cardSelectList.children[s].checked) {
+                deck.append(cardSelectList.children[s].value)
+            }
+        }
+    }
+    
     load_page("host", event);
     event.preventDefault();
 });
