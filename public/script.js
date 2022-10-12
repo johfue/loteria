@@ -1022,7 +1022,7 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     }
    
     else {
-        for (s=0; s>cardSelectList.children.length, s++) {
+        for (s=0; s>cardSelectList.children.length; s++) {
             if (cardSelectList.children[s].checked) {
                 deck.append(cardSelectList.children[s].value)
             }
