@@ -977,7 +977,10 @@ _("host").addEventListener('click', function(event) {
     _("closeSelect").addEventListener('click', function(event) {
         _("cardReview").classList.add("invisible");
         _("shadowBox").classList.add("invisible");
+                deck = document.querySelectorAll('input[name="cardNumber"]:checked').value);
 
+        console.log(deck);
+        
     
     });
 
