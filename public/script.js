@@ -981,7 +981,7 @@ _("host").addEventListener('click', function(event) {
 
         console.log(deck);
         
-    }
+    
     });
 
     
