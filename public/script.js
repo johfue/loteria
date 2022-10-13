@@ -222,7 +222,7 @@ function host() {
     
     function shuffleDeck() {
         deckList = [];
-        for (var i=0; i<51; i++) {
+        for (var i=0; i<deck.length; i++) {
             deckList.push(i+1);
         }
     }
