@@ -982,7 +982,7 @@ _("host").addEventListener('click', function(event) {
 
         for (s=0; s>cardSelectList.children.length; s++) {
             if (cardSelectList.children[s].checked) {
-                deck.append(cardSelectList.children[s].value)
+                deck.append(cardSelectList.children[s].children.value)
                 console.log(cardSelectList.children[s]);
                 console.log(deck);
             }
@@ -1034,13 +1034,7 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     }
    
     else {
-        for (s=0; s>cardSelectList.children.length; s++) {
-            if (cardSelectList.children[s].checked) {
-                deck.append(cardSelectList.children[s].value)
-                console.log(cardSelectList.children[s]);
-                console.log(deck);
-            }
-        }
+        deck = document.querySelectAll('input[name="cardNumber"]:checked').value;
     }
     
     load_page("host", event);
