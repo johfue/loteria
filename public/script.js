@@ -233,7 +233,7 @@ function host() {
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
             var img = document.createElement("img");
-            img.src = "images/donClemente/" + deck[drawnCards[c]] + ".jpg";
+            img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
             li.appendChild(img);
             cardReviewListFragment.appendChild(li);
         }
