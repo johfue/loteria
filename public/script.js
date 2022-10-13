@@ -977,6 +977,9 @@ _("host").addEventListener('click', function(event) {
     _("closeSelect").addEventListener('click', function(event) {
         _("cardReview").classList.add("invisible");
         _("shadowBox").classList.add("invisible");
+        console.log(cardSelectList);
+                console.log(cardSelectList.children);
+
         for (s=0; s>cardSelectList.children.length; s++) {
             if (cardSelectList.children[s].checked) {
                 deck.append(cardSelectList.children[s].value)
