@@ -980,8 +980,8 @@ _("host").addEventListener('click', function(event) {
         selectedCards = document.querySelectorAll('input[name="cardNumber"]:checked');
         selectedCards.length;
         for (f=0; f<selectedCards.length; f++) {
-            console.log(deck.append(selectedCards[f]));
-            deck.append(selectedCards[f].value);
+            console.log(deck.push(selectedCards[f]));
+            deck.push(selectedCards[f].value);
         }
 
         console.log(deck);
@@ -1035,8 +1035,8 @@ _("deckSelectBtn").addEventListener('click', function(event) {
    
     else {
         selectedCards = document.querySelectorAll('input[name="cardNumber"]:checked');
-        for (f=0; f>selectedCards.length; f++) {
-            deck.append(selectedCards[f].value);
+        for (f=0; f<selectedCards.length; f++) {
+            deck.push(selectedCards[f].value);
         }
     }
     
