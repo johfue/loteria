@@ -1027,6 +1027,8 @@ _("deckSelectBtn").addEventListener('click', function(event) {
         for (s=0; s>cardSelectList.children.length; s++) {
             if (cardSelectList.children[s].checked) {
                 deck.append(cardSelectList.children[s].value)
+                console.log(cardSelectList.children[s]);
+                console.log(deck);
             }
         }
     }
