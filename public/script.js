@@ -110,7 +110,6 @@ function boardConstruct(seed) {
     let img = document.createElement("img");
     cell.appendChild(img);
     
-    console.log(7);
     generateCardOnBoard(appendCell, cell, tbl);
 
     return tbl;
@@ -616,7 +615,6 @@ function player() {
         }
         
     }
-    console.log(1);
 
     function clearBeans() {
         tiles = board.getElementsByTagName('input');
@@ -737,9 +735,6 @@ function player() {
         getBeans();
     });
 
-    console.log(2);
-
-
     socket.on("resync", function() {
         if (!caughtUp) {
             socket.emit('new player', roomInput, nickname, oldID);
@@ -760,9 +755,6 @@ function player() {
             
         }
     }
-
-    console.log(3);
-
 
     var boardSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
@@ -816,9 +808,7 @@ function player() {
             spanO.innerHTML = "#" + currentBoard;
             liO.children[0].setAttribute("value", currentBoard);
             liO.children[1].setAttribute("for", currentBoard);
-            console.log(4);
             liO.children[1].appendChild(boardConstruct(currentBoard));
-            console.log(5);
             liO.addEventListener('click', function() {
                 newBoard.disabled = false;
                 socket.emit('claim board', this.firstElementChild.value, nickname, roomInput);
@@ -880,12 +870,9 @@ function player() {
         caughtUp = true;
 
     }
-        console.log(5);
-
     socket.on('catch-up', function(gameInfo, deckList) {
         catchUp(gameInfo, deckList);
     });
-        console.log(6);
 
     socket.on("board claim", function(board, nickname, id) {
         claimBoard(board, nickname, id);
