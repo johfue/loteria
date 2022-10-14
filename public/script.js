@@ -796,6 +796,37 @@ function player() {
         claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
 
+    caughtUp = false;
+
+    function catchUp(gameInfo, deckList) {
+        deck = deckList;
+        disableBoard(!gameInfo.gameState);
+        if (typeof gameInfo.card == "boolean") {
+            currentCard.src = "images/blank.png";
+        }
+        else {
+            currentCard.src = "images/donClemente/" + deck[gameInfo.card] + '.jpg';
+        }
+        winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
+
+        for (e=0; e < gameInfo.playerList.length; e++) {
+            iteratedPlayer = gameInfo.playerList[e];
+            if (iteratedPlayer.board != null) {
+                claimBoard(iteratedPlayer.board, iteratedPlayer.Nickname, iteratedPlayer.ID);
+            }
+
+            newPlayer(iteratedPlayer.Nickname, iteratedPlayer.ID);
+
+            for (b=0; b < iteratedPlayer.placedBeans.length; b++) {
+                opponentUpdate(iteratedPlayer.placedBeans[b].x, iteratedPlayer.placedBeans[b].y, true, iteratedPlayer.ID)
+            }
+        }
+
+        caughtUp = true;
+
+    }
+
+
     for (p=0; p<7; p++) {
         let olO = ol.cloneNode('true');
         olO.setAttribute("id", "page_" + (p+1));
@@ -836,35 +867,6 @@ function player() {
     infoHub.onclick = share;
     alertModalSmall.onclick = copyShare;
 
-    caughtUp = false;
-
-    function catchUp(gameInfo, deckList) {
-        deck = deckList;
-        disableBoard(!gameInfo.gameState);
-        if (typeof gameInfo.card == "boolean") {
-            currentCard.src = "images/blank.png";
-        }
-        else {
-            currentCard.src = "images/donClemente/" + deck[gameInfo.card] + '.jpg';
-        }
-        winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
-
-        for (e=0; e < gameInfo.playerList.length; e++) {
-            iteratedPlayer = gameInfo.playerList[e];
-            if (iteratedPlayer.board != null) {
-                claimBoard(iteratedPlayer.board, iteratedPlayer.Nickname, iteratedPlayer.ID);
-            }
-
-            newPlayer(iteratedPlayer.Nickname, iteratedPlayer.ID);
-
-            for (b=0; b < iteratedPlayer.placedBeans.length; b++) {
-                opponentUpdate(iteratedPlayer.placedBeans[b].x, iteratedPlayer.placedBeans[b].y, true, iteratedPlayer.ID)
-            }
-        }
-
-        caughtUp = true;
-
-    }
 
     socket.on('catch-up', function(gameInfo, cardList) {
         catchUp(gameInfo, cardList);
