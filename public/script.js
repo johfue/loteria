@@ -564,6 +564,7 @@ function host() {
 }
 
 function player() {
+    console.log(3);
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
     link.content = document.location;
@@ -920,7 +921,9 @@ function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
         window.history.pushState('','', _("roomSearch").value);
+        console.log(1);
         load_page("player");
+        console.log(2);
     }
     else {
         _("errorMsg2").classList.remove("invisible");
@@ -969,16 +972,16 @@ _("host").addEventListener('click', function(event) {
     _("host").classList.add("invisible");
     _("deckSettings").classList.remove("invisible");
 
-    _("deckSettings__label--Edit").addEventListener('click', function(event) {
-        _("cardReview").classList.remove("invisible");
-        _("shadowBox").classList.remove("invisible");
-    });
+_("deckSettings__label--Edit").addEventListener('click', function(event) {
+    _("cardReview").classList.remove("invisible");
+    _("shadowBox").classList.remove("invisible");
+});
 
-    _("closeSelect").addEventListener('click', function(event) {
-        _("cardReview").classList.add("invisible");
-        _("shadowBox").classList.add("invisible");
+_("closeSelect").addEventListener('click', function(event) {
+    _("cardReview").classList.add("invisible");
+    _("shadowBox").classList.add("invisible");
     
-    });
+});
 
     
     var deckSelectOptionsContainer = document.createDocumentFragment();
