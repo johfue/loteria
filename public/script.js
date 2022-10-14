@@ -884,8 +884,8 @@ function player() {
     }
         console.log(5);
 
-    socket.on('catch-up', function(gameInfo) {
-        catchUp(gameInfo);
+    socket.on('catch-up', function(gameInfo, deckList) {
+        catchUp(gameInfo, deckList);
     });
         console.log(6);
 
