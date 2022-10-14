@@ -605,6 +605,8 @@ function player() {
     let checkedPosition = [];
     let currentWinCondition = "";
 
+    socket.emit('new player', roomInput, nickname);
+
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
             let col = table.rows[i].cells[j];
@@ -728,8 +730,6 @@ function player() {
     
     _("roomNumber").innerHTML = roomInput;
 
-    socket.emit('new player', roomInput, nickname);
-    
     socket.on("connect", function() {
         storeID();
         // if has declared win, emit an extra thing, when player rejions see if it has that flag
@@ -854,6 +854,7 @@ function player() {
     caughtUp = false;
 
     function catchUp(gameInfo, deckList) {
+        console.log(9);
         deck = deckList;
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
