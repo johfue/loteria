@@ -73,8 +73,6 @@ function generateCardOnBoard(func, param, arg) {
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
                 cardOnBoardCheck = cardOnBoard.length;
-                console.log(deck);
-                console.log(deck.length);
                 // while (cardOnBoard.length === cardOnBoardCheck ) {
                 //     card = (Math.floor(Math.random() * (deck.length - 1 + 1)) + 1);
         
