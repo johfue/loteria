@@ -97,7 +97,6 @@ function drawCell(table) {
 }
 
 function boardConstruct(seed) {
-    console.log(6);
     Math.seedrandom(seed.toString() + "Q");
     let tbl = document.createElement("table");
     let tblRow = document.createElement("tr");
@@ -602,8 +601,6 @@ function player() {
     let checkedPosition = [];
     let currentWinCondition = "";
 
-    socket.emit('new player', roomInput, nickname);
-
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
             let col = table.rows[i].cells[j];
@@ -726,6 +723,8 @@ function player() {
     
     _("roomNumber").innerHTML = roomInput;
 
+    socket.emit('new player', roomInput, nickname);
+    
     socket.on("connect", function() {
         storeID();
         // if has declared win, emit an extra thing, when player rejions see if it has that flag
@@ -795,9 +794,7 @@ function player() {
         claimedBoard.parentElement.classList.add("claimed");
         claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
-    
-    console.log(3);
-    
+
     for (p=0; p<7; p++) {
         let olO = ol.cloneNode('true');
         olO.setAttribute("id", "page_" + (p+1));
@@ -819,7 +816,6 @@ function player() {
         boardSelectOptionsContainer.appendChild(olO);
     }
     boardSelectOptions.appendChild(boardSelectOptionsContainer);
-        console.log(4);
 
     boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
     
@@ -842,8 +838,6 @@ function player() {
     caughtUp = false;
 
     function catchUp(gameInfo, deckList) {
-        console.log(9);
-        console.log(deckList);
         deck = deckList;
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
@@ -870,8 +864,9 @@ function player() {
         caughtUp = true;
 
     }
-    socket.on('catch-up', function(gameInfo, deckList) {
-        catchUp(gameInfo, deckList);
+
+    socket.on('catch-up', function(gameInfo, cardList) {
+        catchUp(gameInfo, cardList);
     });
 
     socket.on("board claim", function(board, nickname, id) {
@@ -891,7 +886,6 @@ function player() {
         _(id + "claimed").previousSibling.disabled = false;
         _(id + "claimed").remove(_(id + "claimed"));
     });
-
     
 }
 
