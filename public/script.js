@@ -855,6 +855,7 @@ function player() {
 
     function catchUp(gameInfo, deckList) {
         console.log(9);
+        console.log(deckList);
         deck = deckList;
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
