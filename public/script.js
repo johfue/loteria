@@ -74,6 +74,7 @@ function generateCardOnBoard(func, param, arg) {
             for (j = 0; j < 4; j++) {
                 cardOnBoardCheck = cardOnBoard.length;
                 while (cardOnBoard.length === cardOnBoardCheck ) {
+                    console.log(8);
                     card = (Math.floor(Math.random() * (deck.length - 1 + 1)) + 1);
         
                     if (cardOnBoard.includes(card) === false) {
@@ -97,6 +98,7 @@ function drawCell(table) {
 }
 
 function boardConstruct(seed) {
+    console.log(6);
     Math.seedrandom(seed.toString() + "Q");
     let tbl = document.createElement("table");
     let tblRow = document.createElement("tr");
@@ -109,6 +111,7 @@ function boardConstruct(seed) {
     let img = document.createElement("img");
     cell.appendChild(img);
     
+    console.log(7);
     generateCardOnBoard(appendCell, cell, tbl);
 
     return tbl;
@@ -814,7 +817,9 @@ function player() {
             spanO.innerHTML = "#" + currentBoard;
             liO.children[0].setAttribute("value", currentBoard);
             liO.children[1].setAttribute("for", currentBoard);
+            console.log(4);
             liO.children[1].appendChild(boardConstruct(currentBoard));
+            console.log(5);
             liO.addEventListener('click', function() {
                 newBoard.disabled = false;
                 socket.emit('claim board', this.firstElementChild.value, nickname, roomInput);
