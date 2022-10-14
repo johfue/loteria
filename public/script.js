@@ -406,12 +406,12 @@ function host() {
         evt.preventDefault();
         
         if (gameInfo.gameState) {
-            cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))-1];
+            cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
             currentCard.src = "images/donClemente/" + deck[cardDrawn] + ".jpg";
             console.log(cardDrawn);
             console.log(deck[cardDrawn]);
-            gameInfo.card = deck[cardDrawn];
-            drawnCards.push(deck[cardDrawn]);
+            gameInfo.card = deck[cardDrawn-1];
+            drawnCards.push(deck[cardDrawn-1]);
             
             deckList.splice(deckList.indexOf(cardDrawn), 1);
             
