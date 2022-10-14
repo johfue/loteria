@@ -837,6 +837,7 @@ function player() {
             spanO.innerHTML = "#" + currentBoard;
             liO.children[0].setAttribute("value", currentBoard);
             liO.children[1].setAttribute("for", currentBoard);
+            console.log(deck.length);
             liO.children[1].appendChild(boardConstruct(currentBoard));
             liO.addEventListener('click', function() {
                 newBoard.disabled = false;
