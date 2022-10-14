@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
         socket.to(roomNumber).emit('new player', nickname, socket.id, oldID);
     });
     socket.on('update newcomer', (gameInfo, id, deck) => {
-        io.to(id).emit('catch-up', gameInfo, deckList);
+        io.to(id).emit('catch-up', gameInfo, deck);
     });
     socket.on('game state', (bool, roomNumber) => {
         socket.to(roomNumber).emit('game state', bool);
