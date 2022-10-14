@@ -977,13 +977,6 @@ _("host").addEventListener('click', function(event) {
     _("closeSelect").addEventListener('click', function(event) {
         _("cardReview").classList.add("invisible");
         _("shadowBox").classList.add("invisible");
-        selectedCards = document.querySelectorAll('input[name="cardNumber"]:checked');
-        for (f=0; f<selectedCards.length; f++) {
-            deck.push(selectedCards[f].value);
-        }
-
-        console.log(deck);
-        
     
     });
 
