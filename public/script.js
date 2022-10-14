@@ -795,11 +795,54 @@ function player() {
         claimedBoard.parentElement.classList.add("claimed");
         claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
+    function generateBoardOptions() {
+        for (p=0; p<7; p++) {
+        let olO = ol.cloneNode('true');
+        olO.setAttribute("id", "page_" + (p+1));
+        for (b=0; b<9; b++) {
+            let liO = li.cloneNode('true');
+            let spanO = span.cloneNode('true');
+            let currentBoard = (p*9) + (b+1);
+            spanO.innerHTML = "#" + currentBoard;
+            liO.children[0].setAttribute("value", currentBoard);
+            liO.children[1].setAttribute("for", currentBoard);
+            liO.children[1].appendChild(boardConstruct(currentBoard));
+            liO.addEventListener('click', function() {
+                newBoard.disabled = false;
+                socket.emit('claim board', this.firstElementChild.value, nickname, roomInput);
+            });
+            liO.children[1].appendChild(spanO);
+            olO.appendChild(liO);
+        }
+        boardSelectOptionsContainer.appendChild(olO);
+    }
+    boardSelectOptions.appendChild(boardSelectOptionsContainer);
+
+}
+
+    boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
+    
+    function scrollTrack() {
+        let winScroll = boardSelectOptionsWrap.scrollTop;
+        let increment = boardSelectOptions.firstElementChild.offsetHeight;
+        let scrolled = (Math.floor(winScroll / increment) + 1 );
+        if (document.querySelector(".currentPage") === null) {
+            firstPage.classList.add("currentPage");
+        }
+        else {
+            document.querySelector(".currentPage").classList.remove("currentPage");
+        }
+        document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
+    }
+
+    infoHub.onclick = share;
+    alertModalSmall.onclick = copyShare;
 
     caughtUp = false;
 
     function catchUp(gameInfo, deckList) {
         deck = deckList;
+        generateBoardOptions();
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
             currentCard.src = "images/blank.png";
@@ -825,49 +868,6 @@ function player() {
         caughtUp = true;
 
     }
-
-
-    for (p=0; p<7; p++) {
-        let olO = ol.cloneNode('true');
-        olO.setAttribute("id", "page_" + (p+1));
-        for (b=0; b<9; b++) {
-            let liO = li.cloneNode('true');
-            let spanO = span.cloneNode('true');
-            let currentBoard = (p*9) + (b+1);
-            spanO.innerHTML = "#" + currentBoard;
-            liO.children[0].setAttribute("value", currentBoard);
-            liO.children[1].setAttribute("for", currentBoard);
-            console.log(deck.length);
-            liO.children[1].appendChild(boardConstruct(currentBoard));
-            liO.addEventListener('click', function() {
-                newBoard.disabled = false;
-                socket.emit('claim board', this.firstElementChild.value, nickname, roomInput);
-            });
-            liO.children[1].appendChild(spanO);
-            olO.appendChild(liO);
-        }
-        boardSelectOptionsContainer.appendChild(olO);
-    }
-    boardSelectOptions.appendChild(boardSelectOptionsContainer);
-
-    boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
-    
-    function scrollTrack() {
-        let winScroll = boardSelectOptionsWrap.scrollTop;
-        let increment = boardSelectOptions.firstElementChild.offsetHeight;
-        let scrolled = (Math.floor(winScroll / increment) + 1 );
-        if (document.querySelector(".currentPage") === null) {
-            firstPage.classList.add("currentPage");
-        }
-        else {
-            document.querySelector(".currentPage").classList.remove("currentPage");
-        }
-        document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
-    }
-
-    infoHub.onclick = share;
-    alertModalSmall.onclick = copyShare;
-
 
     socket.on('catch-up', function(gameInfo, cardList) {
         catchUp(gameInfo, cardList);
