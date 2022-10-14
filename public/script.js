@@ -564,7 +564,6 @@ function host() {
 }
 
 function player() {
-    console.log(3);
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
     link.content = document.location;
@@ -613,6 +612,7 @@ function player() {
         }
         
     }
+    console.log(1);
 
     function clearBeans() {
         tiles = board.getElementsByTagName('input');
@@ -735,6 +735,9 @@ function player() {
         getBeans();
     });
 
+    console.log(2);
+
+
     socket.on("resync", function() {
         if (!caughtUp) {
             socket.emit('new player', roomInput, nickname, oldID);
@@ -755,6 +758,9 @@ function player() {
             
         }
     }
+
+    console.log(3);
+
 
     var boardSelectOptionsContainer = document.createDocumentFragment();
     var ol = document.createElement("ol");
@@ -795,7 +801,9 @@ function player() {
         claimedBoard.parentElement.classList.add("claimed");
         claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
-
+    
+    console.log(3);
+    
     for (p=0; p<7; p++) {
         let olO = ol.cloneNode('true');
         olO.setAttribute("id", "page_" + (p+1));
@@ -887,6 +895,8 @@ function player() {
         _(id + "claimed").previousSibling.disabled = false;
         _(id + "claimed").remove(_(id + "claimed"));
     });
+        console.log(4);
+
     
 }
 
@@ -921,9 +931,7 @@ function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
         window.history.pushState('','', _("roomSearch").value);
-        console.log(1);
         load_page("player");
-        console.log(2);
     }
     else {
         _("errorMsg2").classList.remove("invisible");
