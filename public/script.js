@@ -1038,6 +1038,8 @@ _("deckSelectBtn").addEventListener('click', function(event) {
         for (f=0; f<selectedCards.length; f++) {
             deck.push(selectedCards[f].value);
         }
+        console.log(deck);
+        console.log(deck.length);
     }
     
     load_page("host", event);
