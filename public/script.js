@@ -978,9 +978,7 @@ _("host").addEventListener('click', function(event) {
         _("cardReview").classList.add("invisible");
         _("shadowBox").classList.add("invisible");
         selectedCards = document.querySelectorAll('input[name="cardNumber"]:checked');
-        selectedCards.length;
         for (f=0; f<selectedCards.length; f++) {
-            console.log(deck.push(selectedCards[f]));
             deck.push(selectedCards[f].value);
         }
 
