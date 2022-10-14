@@ -75,14 +75,14 @@ function generateCardOnBoard(func, param, arg) {
                 cardOnBoardCheck = cardOnBoard.length;
                 console.log(deck);
                 console.log(deck.length);
-                while (cardOnBoard.length === cardOnBoardCheck ) {
-                    card = (Math.floor(Math.random() * (deck.length - 1 + 1)) + 1);
+                // while (cardOnBoard.length === cardOnBoardCheck ) {
+                //     card = (Math.floor(Math.random() * (deck.length - 1 + 1)) + 1);
         
-                    if (cardOnBoard.includes(card) === false) {
-                        cardOnBoard.push(card);
-                        func(param, arg);
-                    }
-                }
+                //     if (cardOnBoard.includes(card) === false) {
+                //         cardOnBoard.push(card);
+                //         func(param, arg);
+                //     }
+                // }
             }
         }
 }
