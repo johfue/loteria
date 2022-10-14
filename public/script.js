@@ -825,6 +825,7 @@ function player() {
         boardSelectOptionsContainer.appendChild(olO);
     }
     boardSelectOptions.appendChild(boardSelectOptionsContainer);
+        console.log(4);
 
     boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
     
@@ -873,10 +874,12 @@ function player() {
         caughtUp = true;
 
     }
+        console.log(5);
 
     socket.on('catch-up', function(gameInfo) {
         catchUp(gameInfo);
     });
+        console.log(6);
 
     socket.on("board claim", function(board, nickname, id) {
         claimBoard(board, nickname, id);
@@ -895,7 +898,6 @@ function player() {
         _(id + "claimed").previousSibling.disabled = false;
         _(id + "claimed").remove(_(id + "claimed"));
     });
-        console.log(4);
 
     
 }
