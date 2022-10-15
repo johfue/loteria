@@ -95,7 +95,7 @@ function appendCell(cell, tbl) {
 function drawCell(table) {
     col = table.rows[i].cells[j];
     console.log(card);
-    col.lastElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
+    col.lastElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
 }
 
 function boardConstruct(seed) {
