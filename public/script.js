@@ -87,13 +87,13 @@ function generateCardOnBoard(func, param, arg) {
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
+    cellT.firstElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
+    col.lastElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
 }
 
 function boardConstruct(seed) {
