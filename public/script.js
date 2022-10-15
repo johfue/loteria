@@ -73,12 +73,11 @@ function generateCardOnBoard(func, param, arg) {
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
                 cardOnBoardCheck = cardOnBoard.length;
-                console.log(deck.length);
                 while (cardOnBoard.length === cardOnBoardCheck ) {
                     card = (Math.floor(Math.random() * (deck.length - 1 + 1)) + 1);
         
-                    if (cardOnBoard.includes(card) === false) {
-                        cardOnBoard.push(card);
+                    if (cardOnBoard.includes(card-1) === false) {
+                        cardOnBoard.push(card-1);
                         func(param, arg);
                     }
                 }
@@ -88,13 +87,13 @@ function generateCardOnBoard(func, param, arg) {
 
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
+    cellT.firstElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/donClemente/" + deck[card] + '.jpg';
+    col.lastElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
 }
 
 function boardConstruct(seed) {
@@ -409,8 +408,6 @@ function host() {
         if (gameInfo.gameState) {
             cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
             currentCard.src = "images/donClemente/" + deck[cardDrawn-1] + ".jpg";
-            console.log(cardDrawn);
-            console.log(deck[cardDrawn]);
             gameInfo.card = deck[cardDrawn-1];
             drawnCards.push(deck[cardDrawn-1]);
             
@@ -698,7 +695,7 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        currentCard.src = "images/donClemente/" + deck[sentCard] + '.jpg';
+        currentCard.src = "images/donClemente/" + deck[sentCard-1] + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -848,7 +845,7 @@ function player() {
             currentCard.src = "images/blank.png";
         }
         else {
-            currentCard.src = "images/donClemente/" + deck[gameInfo.card] + '.jpg';
+            currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
         winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
 
