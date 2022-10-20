@@ -970,7 +970,7 @@ _("player").addEventListener('click', function(event) {
 _("host").addEventListener('click', function(event) {
 
     if (!localStorage.getItem('deckCookie')) {
-        populateStorage();
+       _("deck1").checked = true;
     }
     else {
         retrieveCookie = localStorage.getItem('deckCookie');
