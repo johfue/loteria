@@ -968,6 +968,21 @@ _("player").addEventListener('click', function(event) {
 });
 
 _("host").addEventListener('click', function(event) {
+
+    if (!localStorage.getItem('deckCookie')) {
+        populateStorage();
+    }
+    else {
+        retrieveCookie = localStorage.getItem('deckCookie');
+
+        retrieveList = localStorage.getItem('listCookie').split(" ");
+        document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
+
+        for (f=0; f<retrieveList.length; f++) {
+            document.querySelectorAll('input[value=' + retrieveList[f] + ']').checked = true;
+        }
+    }
+
     _("welcomeForm").classList.add("invisible");
     _("host").classList.add("invisible");
     _("deckSettings").classList.remove("invisible");
@@ -1016,8 +1031,6 @@ _("closeSelect").addEventListener('click', function(event) {
 
 _("deckSelectBtn").addEventListener('click', function(event) {
     currentDeck = document.querySelector('input[name="deckOption"]:checked').value;
-
-    let cardSelectList = _("cardSelectList");
     
     if (currentDeck === "classic") {
         deck = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
@@ -1029,13 +1042,18 @@ _("deckSelectBtn").addEventListener('click', function(event) {
    
     else {
         selectedCards = document.querySelectorAll('input[name="cardNumber"]:checked');
+        deck = [];
         for (f=0; f<selectedCards.length; f++) {
             deck.push(selectedCards[f].value);
         }
-        console.log(deck);
-        console.log(deck.length);
+
     }
     
+    saveDeckSettings = [deck, currentDeck]
+
+    localStorage.setItem('deckCookie', currentDeck);
+    localStorage.setItem('listCookie', deck.join(" "));
+
     load_page("host", event);
     event.preventDefault();
 });

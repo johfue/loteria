@@ -503,7 +503,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .deckSelect__li:active {
-    transform: translateX(-6%);
+    transform: translateY(-6%);
 }
 
 .deckSelect__img {
@@ -565,6 +565,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     top: 0;
     text-transform: uppercase;
     font-family: 'poppinsbold';
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
