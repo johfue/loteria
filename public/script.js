@@ -970,7 +970,6 @@ _("player").addEventListener('click', function(event) {
 _("host").addEventListener('click', function(event) {
 
     var deckSelectOptionsContainer = document.createDocumentFragment();
-    var ol = document.createElement("ol");
     var li = document.createElement("li");
     var input = document.createElement("input");
     var img = document.createElement("img");
@@ -979,14 +978,12 @@ _("host").addEventListener('click', function(event) {
     input.classList.add("deckSelect__input");
     img.classList.add("deckSelect__img");
     input.setAttribute("type", "checkbox");
-    input.setAttribute("checked", "checked");
     input.setAttribute("name", "cardNumber");
     label.appendChild(img);
     li.appendChild(input);
     li.appendChild(label);
 
-    
-        for (c=1; c<55; c++) {
+    for (c=1; c<55; c++) {
             let liO = li.cloneNode('true');
 
             liO.children[0].setAttribute("value", c);
@@ -994,21 +991,27 @@ _("host").addEventListener('click', function(event) {
             liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
             
             deckSelectOptionsContainer.appendChild(liO);
+    }
+
+    if (!localStorage.getItem('listCookie')) {
+            _("deck1").checked = true;
+    }
+    else {
+        document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
+     
+        for (f=0; f<retrieveList.length; f++) {
+            deckSelectOptionsContainer.querySelectorAll('input[value=' + retrieveList[f] + ']').checked = true;
         }
-        _("cardSelectList").appendChild(deckSelectOptionsContainer);
+    }
+
+    _("cardSelectList").appendChild(deckSelectOptionsContainer);
 
     if (!localStorage.getItem('deckCookie')) {
        _("deck1").checked = true;
     }
     else {
         retrieveCookie = localStorage.getItem('deckCookie');
-
-        retrieveList = localStorage.getItem('listCookie').split(" ");
         document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
-
-        for (f=0; f<retrieveList.length; f++) {
-            document.querySelectorAll('input[value=' + retrieveList[f] + ']').checked = true;
-        }
     }
 
     _("welcomeForm").classList.add("invisible");
