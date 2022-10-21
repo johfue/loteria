@@ -992,14 +992,13 @@ _("host").addEventListener('click', function(event) {
             
             deckSelectOptionsContainer.appendChild(liO);
     }
-    retrieveCookie = localStorage.getItem('deckCookie');
      
-    retrieveList = localStorage.getItem('listCookie').split(" ");
-    
     if (!localStorage.getItem('listCookie')) {
             _("deck1").checked = true;
     }
     else {
+        retrieveList = localStorage.getItem('listCookie').split(" ");
+
         document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
      
         for (f=0; f<retrieveList.length; f++) {
