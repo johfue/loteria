@@ -992,7 +992,10 @@ _("host").addEventListener('click', function(event) {
             
             deckSelectOptionsContainer.appendChild(liO);
     }
-
+    retrieveCookie = localStorage.getItem('deckCookie');
+     
+    retrieveList = localStorage.getItem('listCookie').split(" ");
+    
     if (!localStorage.getItem('listCookie')) {
             _("deck1").checked = true;
     }
