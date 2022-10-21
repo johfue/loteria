@@ -969,6 +969,34 @@ _("player").addEventListener('click', function(event) {
 
 _("host").addEventListener('click', function(event) {
 
+    var deckSelectOptionsContainer = document.createDocumentFragment();
+    var ol = document.createElement("ol");
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    var img = document.createElement("img");
+    var label = document.createElement("label");
+    li.classList.add("deckSelect__li");
+    input.classList.add("deckSelect__input");
+    img.classList.add("deckSelect__img");
+    input.setAttribute("type", "checkbox");
+    input.setAttribute("checked", "checked");
+    input.setAttribute("name", "cardNumber");
+    label.appendChild(img);
+    li.appendChild(input);
+    li.appendChild(label);
+
+    
+        for (c=1; c<55; c++) {
+            let liO = li.cloneNode('true');
+
+            liO.children[0].setAttribute("value", c);
+            liO.children[1].setAttribute("for", c);
+            liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
+            
+            deckSelectOptionsContainer.appendChild(liO);
+        }
+        _("cardSelectList").appendChild(deckSelectOptionsContainer);
+
     if (!localStorage.getItem('deckCookie')) {
        _("deck1").checked = true;
     }
@@ -997,35 +1025,6 @@ _("closeSelect").addEventListener('click', function(event) {
     _("shadowBox").classList.add("invisible");
     
 });
-
-    
-    var deckSelectOptionsContainer = document.createDocumentFragment();
-    var ol = document.createElement("ol");
-    var li = document.createElement("li");
-    var input = document.createElement("input");
-    var img = document.createElement("img");
-    var label = document.createElement("label");
-    li.classList.add("deckSelect__li");
-    input.classList.add("deckSelect__input");
-    img.classList.add("deckSelect__img");
-    input.setAttribute("type", "checkbox");
-    input.setAttribute("checked", "checked");
-    input.setAttribute("name", "cardNumber");
-    label.appendChild(img);
-    li.appendChild(input);
-    li.appendChild(label);
-
-    
-        for (c=1; c<55; c++) {
-            let liO = li.cloneNode('true');
-
-            liO.children[0].setAttribute("value", c);
-            liO.children[1].setAttribute("for", c);
-            liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
-            
-            deckSelectOptionsContainer.appendChild(liO);
-        }
-        _("cardSelectList").appendChild(deckSelectOptionsContainer);
     
 });
 
