@@ -983,27 +983,32 @@ _("host").addEventListener('click', function(event) {
     li.appendChild(input);
     li.appendChild(label);
 
-    for (c=1; c<55; c++) {
+    function generateDeckCustomOptions() {
+
+        for (c=1; c<55; c++) {
             let liO = li.cloneNode('true');
 
             liO.children[0].setAttribute("value", c);
             liO.children[1].setAttribute("for", c);
+            if (retrieveList.includes(c)) {
+                liO.children[1].setAttribute("checked", "checked");
+            }
             liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
             
             deckSelectOptionsContainer.appendChild(liO);
+        }
     }
-     
     if (!localStorage.getItem('listCookie')) {
-            _("deck1").checked = true;
+            generateDeckCustomOptions();
     }
     else {
         retrieveList = localStorage.getItem('listCookie').split(" ");
+        
+        generateDeckCustomOptions(retrieveList);
 
-        document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
-     
-        for (f=0; f<retrieveList.length; f++) {
-            deckSelectOptionsContainer.querySelectorAll('input[value=' + retrieveList[f] + ']').checked = true;
-        }
+        // for (f=0; f<retrieveList.length; f++) {
+        //     deckSelectOptionsContainer.querySelectorAll('input[value=' + retrieveList[f] + ']').checked = true;
+        // }
     }
 
     _("cardSelectList").appendChild(deckSelectOptionsContainer);
