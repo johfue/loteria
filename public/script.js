@@ -997,7 +997,7 @@ _("host").addEventListener('click', function(event) {
 
             liO.children[0].setAttribute("value", c);
             liO.children[1].setAttribute("for", c);
-            if (checkerChecker) {
+            if (checkChecker) {
                 liO.children[0].setAttribute("checked", "checked");
             }
             else {
