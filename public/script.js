@@ -992,7 +992,7 @@ _("host").addEventListener('click', function(event) {
             liO.children[1].setAttribute("for", c);
             let cString = String(c);
             if (retrieveList.includes(String(c))) {
-                liO.children[1].setAttribute("checked", "checked");
+                liO.children[0].setAttribute("checked", "checked");
                 console.log(c)
             }
             liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
