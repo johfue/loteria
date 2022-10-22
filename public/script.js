@@ -982,38 +982,34 @@ _("host").addEventListener('click', function(event) {
     label.appendChild(img);
     li.appendChild(input);
     li.appendChild(label);
+    checkChecker = true;
 
-    function generateDeckCustomOptions() {
+    if (!localStorage.getItem('listCookie')) {
+        checkChecker = true;
+    }
+    else {
+        checkChecker = false;
+        retrieveList = localStorage.getItem('listCookie').split(" ");
+    }
 
         for (c=1; c<55; c++) {
             let liO = li.cloneNode('true');
 
             liO.children[0].setAttribute("value", c);
             liO.children[1].setAttribute("for", c);
-            let cString = String(c);
-            if (retrieveList.includes(String(c))) {
+            if (checkerChecker) {
                 liO.children[0].setAttribute("checked", "checked");
-                console.log(c)
             }
+            else {
+                if (retrieveList.includes(String(c))) {
+                    liO.children[0].setAttribute("checked", "checked");
+                }
+            }
+
             liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
             
             deckSelectOptionsContainer.appendChild(liO);
         }
-    }
-    if (!localStorage.getItem('listCookie')) {
-            generateDeckCustomOptions();
-    }
-    else {
-        console.log(1);
-        retrieveList = localStorage.getItem('listCookie').split(" ");
-        console.log(retrieveList);
-
-        generateDeckCustomOptions(retrieveList);
-
-        // for (f=0; f<retrieveList.length; f++) {
-        //     deckSelectOptionsContainer.querySelectorAll('input[value=' + retrieveList[f] + ']').checked = true;
-        // }
-    }
 
     _("cardSelectList").appendChild(deckSelectOptionsContainer);
 
