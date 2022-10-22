@@ -1024,7 +1024,7 @@ _("host").addEventListener('click', function(event) {
         console.log(2);
         retrieveCookie = localStorage.getItem('deckCookie');
         console.log(retrieveCookie);
-        document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
+        document.querySelector('input[value=' + retrieveCookie + ']').checked = true;
     }
 
     _("welcomeForm").classList.add("invisible");
