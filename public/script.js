@@ -991,7 +991,7 @@ _("host").addEventListener('click', function(event) {
             liO.children[0].setAttribute("value", c);
             liO.children[1].setAttribute("for", c);
             let cString = String(c);
-            if (retrieveList.includes(cString) {
+            if (retrieveList.includes(String(c))) {
                 liO.children[1].checked = true;
                 console.log(c)
             }
