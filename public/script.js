@@ -1002,8 +1002,10 @@ _("host").addEventListener('click', function(event) {
             generateDeckCustomOptions();
     }
     else {
+        console.log(1);
         retrieveList = localStorage.getItem('listCookie').split(" ");
-        
+        console.log(retrieveList);
+
         generateDeckCustomOptions(retrieveList);
 
         // for (f=0; f<retrieveList.length; f++) {
@@ -1017,7 +1019,9 @@ _("host").addEventListener('click', function(event) {
        _("deck1").checked = true;
     }
     else {
+        console.log(2);
         retrieveCookie = localStorage.getItem('deckCookie');
+        console.log(retrieveCookie);
         document.querySelectorAll('input[value=' + retrieveCookie[0] + ']').checked = true;
     }
 
