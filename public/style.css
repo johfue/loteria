@@ -1796,6 +1796,7 @@ td input {
 .boardSelect__li, .modal__content--boardHold li, .deckSelect__li {
     position: relative;
     list-style-type: none;
+    line-height: 0;
 }
 
 .boardSelect__li > input, .modal__content--boardHold li > input {
