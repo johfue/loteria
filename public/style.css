@@ -587,17 +587,16 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     align-content: start;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 50px);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 0.8rem;
     grid-row-gap: 0.5rem;
     padding: 1rem;
     position: relative;
     overflow-y: scroll;
     background-color: var(--primary-base);
-    
 }
 
-@media (min-width: 768px) {
+@media (min-width: 821px) {
     .modal__content--cardSelect {
         grid-template-columns: repeat(6, 1fr);
         grid-column-gap: 0.8rem;
