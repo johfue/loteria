@@ -537,10 +537,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     filter: unset;
 }
 
-.deckSelect__input:active {
+/* .deckSelect__input:active {
     -webkit-transform: translateY(6%);;
     transform: translateY(6%);
-}
+} */
 
 .deckSelect__input:hover {
     background-color: rgba(20,20,20,0.3);
