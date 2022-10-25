@@ -904,10 +904,11 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     position: relative;
     grid-row: 2/3;
     grid-column: 1/3;
-    padding: 0 1.5em 1.5em 1.5em;
+    padding: 0px 2.5em 1.5em;
     height: 20vh;
-    width: 90%;
+    width: 100%;
     right: 12px;
+    box-sizing: border-box;
 }
 
 .playerGraph--host:before, .playerGraph--host:after {
@@ -1002,7 +1003,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     .playerGraph--host {
         margin: 0 auto;
-        padding: 0 1rem 3rem 1rem 3rem;
     }
     .opponentWrap--host {
         grid-template-columns: repeat(auto-fill, 10vh);
@@ -1020,7 +1020,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: grid;
     grid-gap: 0.75rem;
     column-gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, 50px);
+    grid-template-columns: repeat(auto-fill, 18%);
     background-color: var(--action-base);
     align-content: start;
     justify-content: center;
@@ -1067,7 +1067,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content 1fr;
     background-color: var(--primary-base);
-    padding-top: 0;
+    padding-top: 24vh;
     overflow-y: scroll;
     align-content: start;
     grid-gap: 1rem;
@@ -1099,11 +1099,11 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .alleged__h3 {
     grid-row: 1/2;
-    margin-top: 20vh;
     width: 100%;
     padding: 0.5rem;
     color: var(--neutral-100);
     transition: 0.15s ease;
+    max-width: 250px
 }
 
 @media(max-width: 845px) {
@@ -1609,7 +1609,6 @@ table, td {
     padding: 0;
     margin: 0 0 0 -3rem;
     justify-content: space-around;
-    max-width: 500px
 }
 
 .boardSelect__pageNum__a {
@@ -1642,6 +1641,7 @@ table, td {
     margin: 0 0 2.5rem 0;
     scroll-snap-align: start;
     position: relative;
+    max-width: 500px
 }
 
 .currentPage .boardSelect__pageNum__a {
