@@ -1079,7 +1079,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .modal__content--boardHold {
-    width: 36vh;
+    width: calc(35vh - 2rem);
     padding: 0;
 }
 
@@ -1178,8 +1178,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 @media(min-width:845px) {
     .modal__content--alleged {
-        padding: 0 1rem 2rem 0;
+        padding: 0 1rem 0 0;
         justify-content: center;
+        row-gap: 0
     }
     .alleged__h3 {
         margin-top: 0;
@@ -1188,6 +1189,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     .modal__content--cardReview--alleged {
         padding: 0;
+        column-gap: 0.75rem;
     }
     .modal__content--boardHold, .modal__content--cardReview--alleged {
         grid-column: span 1;
