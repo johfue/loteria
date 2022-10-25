@@ -1268,6 +1268,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     box-sizing: border-box;
     width: fit-content;
     justify-self: center;
+    justify-content: center;
 }
 
 .currentCardWrap--player:before, .winWrap--player:before, .currentCardWrap--player:after, .winWrap--player:after {
@@ -1526,7 +1527,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     .opponentWrap__h3, .winInfo__h3 {
         font-size: 1em;
-        padding-bottom: 1.5em;
+        padding-bottom: 1em;
     }
     .winInfo__h3 {
         font-size: 1.5rem;
@@ -1538,7 +1539,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         overflow-y: scroll;
         grid-gap: 1rem;
         grid-auto-rows: max-content;
-        height: 90%;
+        height: 85%;
     }
     .player__table {
         height: 10vh;
