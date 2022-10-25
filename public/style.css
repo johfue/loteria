@@ -1606,6 +1606,7 @@ table, td {
     padding: 0;
     margin: 0 0 0 -3rem;
     justify-content: space-around;
+    max-width: 500px
 }
 
 .boardSelect__pageNum__a {
@@ -1771,6 +1772,7 @@ table, td {
     scroll-padding: 3rem;
     scroll-behavior: smooth;
     display: flex;
+    justify-content: center;
 }
 
 td input {
