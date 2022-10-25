@@ -701,8 +701,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-size: 0.8em;
 }
 
-.boardSelect__li {
+.boardSelect__page .boardSelect__li {
     transition: 0.1s ease;
+    line-height: 1;
 }
 
 @media (min-width: 768px) {
@@ -1263,6 +1264,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-gap: 0.5rem;
     padding: 1rem;
     box-sizing: border-box;
+    width: fit-content;
+    justify-self: center;
 }
 
 .currentCardWrap--player:before, .winWrap--player:before, .currentCardWrap--player:after, .winWrap--player:after {
@@ -1443,7 +1446,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     overflow-x: auto;
     gap: 0.25rem;
     grid-gap: 0.25rem;
-    align-items: center;
+    align-items: start;
     height: 90%;
 }
 /*.playerGraph-player table:nth-child(1) {*/
@@ -1484,10 +1487,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 @media(min-width:500px) {
     .playerInfo {
-        grid-template-columns: 20vh 20vh 20vh;
+        grid-template-columns: 15vh 20vh 20vh;
     }
     .playerWrap {
-        grid-template-columns: minmax(min-content, 20vh) 20vh 20vh;
+        grid-template-columns: 15vh 20vh 20vh;
         column-gap: 1rem;
     }
     .opponentWrap {
