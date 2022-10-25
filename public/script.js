@@ -1017,9 +1017,7 @@ _("host").addEventListener('click', function(event) {
        _("deck1").checked = true;
     }
     else {
-        console.log(2);
         retrieveCookie = localStorage.getItem('deckCookie');
-        console.log(retrieveCookie);
         document.querySelector('input[value=' + retrieveCookie + ']').checked = true;
     }
 
@@ -1035,7 +1033,6 @@ _("deckSettings__label--Edit").addEventListener('click', function(event) {
 _("closeSelect").addEventListener('click', function(event) {
     _("cardReview").classList.add("invisible");
     _("shadowBox").classList.add("invisible");
-    
 });
     
 });
@@ -1057,13 +1054,10 @@ _("deckSelectBtn").addEventListener('click', function(event) {
         for (f=0; f<selectedCards.length; f++) {
             deck.push(selectedCards[f].value);
         }
-
+        localStorage.setItem('listCookie', deck.join(" "));
     }
     
-    saveDeckSettings = [deck, currentDeck]
-
     localStorage.setItem('deckCookie', currentDeck);
-    localStorage.setItem('listCookie', deck.join(" "));
 
     load_page("host", event);
     event.preventDefault();
