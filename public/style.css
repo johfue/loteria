@@ -1450,7 +1450,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     gap: 0.25rem;
     grid-gap: 0.25rem;
     align-items: start;
-    height: 90%;
+    height: 80%;
+    grid-auto-rows: max-content; 
 }
 /*.playerGraph-player table:nth-child(1) {*/
 /*    display: none;*/
@@ -1538,7 +1539,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         overflow-x: auto;
         overflow-y: scroll;
         grid-gap: 1rem;
-        grid-auto-rows: max-content;
         height: 85%;
     }
     .player__table {
