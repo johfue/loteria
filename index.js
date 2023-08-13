@@ -1,21 +1,153 @@
-const express2 = require('express')();
-const express = require('express');
-//var app = express2;
-const http = require('http').Server(express2);
+const express = require("express");
+const app = express();//var app = app;
+const http = require('http').Server(app);
 const io = require('socket.io')(http);
+app.use(express.urlencoded({ extended: false }));
 
-express2.use(express.static('public'));
 
-express2.get('/', function(req, res) {
+
+
+
+// Import the mongoose module
+const mongoose = require("mongoose");
+
+const server = '127.0.0.1:27017';
+const database = 'Loteria';
+class Database {
+  constructor() {
+    this._connect();
+  }
+  _connect() {
+    mongoose
+      .connect(`mongodb://${server}/${database}`)
+      .then(() => {
+        console.log('Database connection successful');
+      })
+      .catch((err) => {
+        console.error('Database connection failed');
+      });
+  }
+}
+
+module.exports = new Database();
+
+
+
+// const Schema = mongoose.Schema;
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number,
+});
+
+const User = mongoose.model('User', userSchema);
+const newUser = new User({
+  name: 'Elena John',
+  email: 'elena.john@example.com',
+  age: 22,
+});
+
+newUser.save()
+.then(() => {
+  console.log('Save User at MongoDB');
+})
+.catch((error) => {
+  console.error(error);
+});
+
+const GameSchema = mongoose.Schema({
+  room_number: { type: Number, required: true, maxLength: 6 },
+  win_condition: { type: String, enum: ["diagonal", "column", "row", "corner", "center", "BlackOut",] },
+  current_card: { type: Number },
+  banned_names: { type: Array },
+});
+const Game = mongoose.model('Game', GameSchema);
+
+
+app.get("/:room([0-9]{6})", async (request, response) => {
+  const user = new User(request.body);
+  try {
+    console.log("logged" + request.body);
+    await user.save();
+    // response.send(user);
+    response.sendfile(__dirname + '/public/index.html');
+
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+
+// app.post('/game', function (req, res) {
+//   console.log(req.body);
+//   res.send(req.body);
+// });
+
+
+app.post("/game", async (request, response) => {
+  console.log("dinged");
+  const game = new Game(request.body);
+  try {
+    console.log("logged" + request.body);
+    await game.save();
+    // response.send(user);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+
+});
+
+
+
+
+
+// const PlayerSchema = new mongoose.Schema({
+//   nickname: { type: String, required: true, maxLength: 8 },
+//   room: { type: Schema.Types.ObjectId, ref: "Room", required: true },
+//   board: { type: Number },
+//   beans: { type: Array },
+
+// });
+
+// module.exports = mongoose.model("Player", PlayerSchema);
+
+
+// app.post("/player",async(req,res)=>{
+
+//     console.log("posted");
+
+//     const data = new PlayerSchema ({
+//         nickname:req.body.wrewrw,
+//     });
+    
+//     const val = await data.save();
+// });
+
+
+
+
+
+
+app.use(express.static('public'));
+
+app.get('/', function(req, res) {
     res.sendfile(__dirname + '/public/index.html');
 });
 
-express2.get('/:room([0-9]{6})', function(req, res){
-    res.sendfile(__dirname + '/public/index.html');
-});
+// app.get('/:room([0-9]{6})', function(req, res){
+//     console.log("roomed");
+//     res.sendfile(__dirname + '/public/index.html');
+    
+//     const data = new PlayerSchema ({
+//         deck:"ngfgr",
+//     });
+    
+//     const val = data.save();
+
+// });
 
 //Other routes here
-express2.get('*', function(req, res){
+app.get('*', function(req, res){
    res.send('Sorry, this is an invalid URL.');
 });
 
@@ -31,6 +163,37 @@ io.on('connection', (socket) => {
         while (roomList.length === roomListCheck ) {
             if (roomList.includes(r) === false) {
                 roomList.push(r);
+                
+                
+                
+                
+                
+                
+                
+                
+                
+      const game = new Game({room_number:r});
+      console.log("logged" + r);
+      game.save();
+                
+      // Check if Genre with same name already exists.
+      const gameExists = game.findOne({ room_number: r }).exec();
+      if (genreExists) {
+        // Genre exists, redirect to its detail page.
+        res.redirect(genreExists.url);
+      } else {
+        await genre.save();
+        // New genre saved. Redirect to genre detail page.
+        res.redirect(genre.url);
+      }
+                
+                
+                
+                
+                
+                
+                
+                
                 socket.join(r);
                 io.to(socket.id).emit('room clear', r);
             }
@@ -85,10 +248,8 @@ io.on('connection', (socket) => {
     });
 
     socket.on("disconnecting", (reason) => {
-        console.log(socket.rooms);
-        
+
         for (const prop in socket.rooms) {
-            console.log(prop);
             if (prop.length == 6) {
                 io.to(prop).emit('player left', socket.id);
                 break;
@@ -107,32 +268,3 @@ io.on('connection', (socket) => {
 http.listen(3000, function() {
    console.log('listening on localhost:3000');
 });
-
-
-//var express = require('express');
-//var app = express();
-// var http = require( "http" ).createServer( app );
-//var http = require('http');
-//var server = http.createServer(app);
-//var io = require('socket.io').listen(server);
-
-// app.use(express.static('public'));
-
-// app.get('/', (req, res) => {
-//  res.sendFile(__dirname + '/public/index.html');
-// });
-
-//app.get('/', (req, res) => {
-//    res.send('An alligator approaches!');
-//});
-
-//io.on('connection', (socket) => {
-//  console.log('a user connected');
-//});
-
-//io.on('connection', (socket) => {
-//  socket.on('chat message', (msg) => {
-//    io.emit('chat message', msg);
-//  });
-//});
-

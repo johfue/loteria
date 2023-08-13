@@ -39,6 +39,14 @@
         document.getElementById('welcomeForm').requestSubmit(joinBTN);
     }
 ">
+    
+    <form method="post" action="/game">
+  <input type="text" name="username" /><br />
+  <input type="password" name="password" /><br />
+  <input type="submit" />
+</form>
+
+    
 <div id="popItIn">
     
     <img src="images/logo.svg" class="hero" alt="Play Lotería Online">
@@ -50,7 +58,7 @@
         <button class="welcome__input secondaryBtn" type="submit" id="join">Join a game</button>
     </form>
     
-    <form id="nameForm" class="nickname invisible">
+    <form id="nameForm" class="nickname invisible" method="post" action="/player">
         <label for="nickname" class="welcome__label">Nickname</label>
         <input class="welcome__input" placeholder="Name" type="text" inputmode="text" minlength="1" maxlength="8" required id="nickname">
         <span id="errorMsg2" class="errorMsg invisible"></span>
@@ -59,7 +67,7 @@
     
     <button class="welcome__input primaryBtn" id="host">Host a game</button>
     
-    <form id="deckSettings" class="deckSettings invisible">
+    <form id="deckSettings" class="deckSettings invisible" method="post" action="/game">
             <div class="deckSettings__option">
                 <input type="radio" id="deck1" name="deckOption" value="classic" class="modal__input--deckSettings">
                 <label for="deck1" class="radio-sibling--deckSettings"><span class="deckSettings__label--header">Classic</span><br>The original 54 Don Clemente cards</label>
