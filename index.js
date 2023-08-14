@@ -4,10 +4,6 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 app.use(express.urlencoded({ extended: false }));
 
-
-
-
-
 // Import the mongoose module
 const mongoose = require("mongoose");
 
@@ -35,26 +31,26 @@ module.exports = new Database();
 
 // const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: Number,
-});
+// const userSchema = new mongoose.Schema({
+//   name: String,
+//   email: String,
+//   age: Number,
+// });
 
-const User = mongoose.model('User', userSchema);
-const newUser = new User({
-  name: 'Elena John',
-  email: 'elena.john@example.com',
-  age: 22,
-});
+// const User = mongoose.model('User', userSchema);
+// const newUser = new User({
+//   name: 'Elena John',
+//   email: 'elena.john@example.com',
+//   age: 22,
+// });
 
-newUser.save()
-.then(() => {
-  console.log('Save User at MongoDB');
-})
-.catch((error) => {
-  console.error(error);
-});
+// newUser.save()
+// .then(() => {
+//   console.log('Save User at MongoDB');
+// })
+// .catch((error) => {
+//   console.error(error);
+// });
 
 const GameSchema = mongoose.Schema({
   room_number: { type: Number, required: true, maxLength: 6 },
@@ -63,6 +59,11 @@ const GameSchema = mongoose.Schema({
   banned_names: { type: Array },
 });
 const Game = mongoose.model('Game', GameSchema);
+const newGame = new Game({
+  room_number: 123456,
+});
+
+newGame.save();
 
 
 app.get("/:room([0-9]{6})", async (request, response) => {
@@ -152,60 +153,31 @@ app.get('*', function(req, res){
 });
 
 
-var roomList =[];
 
 io.on('connection', (socket) => {
     
     console.log('a user connected');
     
-    socket.on('new room', (r) => {
-        roomListCheck = roomList.length;
-        while (roomList.length === roomListCheck ) {
-            if (roomList.includes(r) === false) {
-                roomList.push(r);
-                
-                
-                
-                
-                
-                
-                
-                
-                
-      const game = new Game({room_number:r});
-      console.log("logged" + r);
-      game.save();
-                
-      // Check if Genre with same name already exists.
-      const gameExists = game.findOne({ room_number: r }).exec();
-      if (genreExists) {
-        // Genre exists, redirect to its detail page.
-        res.redirect(genreExists.url);
+    socket.on('new room', async (r) => {
+
+      const gameExists = await Game.findOne({ room_number: r }).exec();
+      if (gameExists) {
+            r = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+            console.log(gameExists);
+            //Should return error and ask them to try again
       } else {
-        await genre.save();
-        // New genre saved. Redirect to genre detail page.
-        res.redirect(genre.url);
+            const game = new Game({room_number:r});
+            await game.save();
+            socket.join(r);
+            io.to(socket.id).emit('room clear', r);
       }
                 
-                
-                
-                
-                
-                
-                
-                
-                socket.join(r);
-                io.to(socket.id).emit('room clear', r);
-            }
-            else {
-                r = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-            }
-        }
     });
     
     socket.on('room check', (room) => {
+        const gameExists = games.find({ room_number: room }).exec();
 
-        if (roomList.includes(parseInt(room, 10))) {
+        if (gameExists) {
             io.to(socket.id).emit('room join', true);
             socket.join(room);
         }
@@ -213,6 +185,7 @@ io.on('connection', (socket) => {
             io.emit('room join', false);
         }
     });
+    
     socket.on('rejoin room', (room) => {
         socket.join(room);
     });

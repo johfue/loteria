@@ -170,6 +170,7 @@ function host() {
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
     const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
@@ -212,6 +213,7 @@ function host() {
     socket.emit('new room', roomNumber);
 
     socket.on('room clear', function(r){
+        console.log("room clear")
         window.history.pushState('','', r);
         _("roomNumber").innerHTML = r;
     });
