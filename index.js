@@ -67,16 +67,19 @@ newGame.save();
 
 
 app.get("/:room([0-9]{6})", async (request, response) => {
-  const user = new User(request.body);
-  try {
-    console.log("logged" + request.body);
-    await user.save();
-    // response.send(user);
-    response.sendfile(__dirname + '/public/index.html');
+  const game = new Game({curent_card:request.params, room_number:123321});
+    await game.save();
+      response.sendfile(__dirname + '/public/index.html');
 
-  } catch (error) {
-    response.status(500).send(error);
-  }
+//   try {
+//     console.log("logged" + request.body);
+//     await game.save();
+//     // response.send(user);
+//     // response.sendfile(__dirname + '/public/index.html');
+
+//   } catch (error) {
+//     response.status(500).send(error);
+//   }
 });
 
 // app.post('/game', function (req, res) {
@@ -171,16 +174,14 @@ io.on('connection', (socket) => {
             socket.join(r);
             io.to(socket.id).emit('room clear', r);
       }
-                
     });
     
-    socket.on('room check', (room) => {
-        const gameExists = games.find({ room_number: room }).exec();
+    socket.on('room check', async (room) => {
+        const gameExists = await Game.findOne({ room_number: room }).exec();
 
         if (gameExists) {
             io.to(socket.id).emit('room join', true);
-            socket.join(room);
-        }
+            socket.join(room);        }
         else {
             io.emit('room join', false);
         }
