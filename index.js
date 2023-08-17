@@ -221,16 +221,20 @@ io.on('connection', (socket) => {
         io.to(id).emit('win checked', bool);
     });
 
-    socket.on("disconnecting", (reason) => {
+    socket.on("disconnecting", async (reason) => {
 
         for (const prop in socket.rooms) {
             if (prop.length == 6) {
                 io.to(prop).emit('player left', socket.id);
+                if ( (io.sockets.adapter.rooms[prop].length) >= 1) {
+                    await Game.deleteOne({ room_number: prop }).exec();
+                }
                 break;
             }
         }
         
     });
+
     socket.on('resync', (roomNumber) => {
         socket.to(roomNumber).emit('reysnc');
     });
