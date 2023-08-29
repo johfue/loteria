@@ -176,7 +176,7 @@ io.on('connection', (socket) => {
       }
     });
     
-    socket.on('room check', async (room) => {
+    socket.on('room check', async (nickname, room) => {
         const gameExists = await Game.findOne({ room_number: room }).exec();
 
         if (gameExists) {
@@ -189,6 +189,16 @@ io.on('connection', (socket) => {
     
     socket.on('rejoin room', (room) => {
         socket.join(room);
+    });
+    socket.on('check nickname', async (n) => {
+
+      const nameIsBanned = await Game.findOne({ room_number: r }).exec();
+      if (nameIsBanned) {
+            io.to(socket.id).emit('name clear', false);
+      }
+      else {
+            io.to(socket.id).emit('name clear', true);
+      }
     });
     socket.on('new player', (roomNumber, nickname, oldID) => {
         socket.to(roomNumber).emit('new player', nickname, socket.id, oldID);
@@ -220,15 +230,24 @@ io.on('connection', (socket) => {
     socket.on('board checked', (bool, id, roomNumber) => {
         io.to(id).emit('win checked', bool);
     });
-
-    socket.on("disconnecting", async (reason) => {
+    socket.on('remove player', async (nickname, id, roomNumber) => {
+        io.to(id).emit('kick out');
+        await Game.updateOne({room:roomNumber},{banned_names: nickname});
+    });
+    socket.on("disconnecting", (reason) => {
 
         for (const prop in socket.rooms) {
             if (prop.length == 6) {
                 io.to(prop).emit('player left', socket.id);
-                if ( (io.sockets.adapter.rooms[prop].length) >= 1) {
-                    await Game.deleteOne({ room_number: prop }).exec();
-                }
+                console.log(io.sockets.adapter.rooms[prop].length);
+
+                setTimeout(function() {
+                
+                    if ( !(io.sockets.adapter.rooms[prop]) ) {
+                        Game.deleteOne({ room_number: prop }).exec();
+                        console.log("deleted game");
+                    }
+                }, 30000);
                 break;
             }
         }

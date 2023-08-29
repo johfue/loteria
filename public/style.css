@@ -1133,12 +1133,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     margin: 0 auto;
 }
 
-.alleged__btnWrap {
+#alleged__btnWrap {
     display: flex;
     gap: 1em;
     grid-gap: 1em;
     width: 100%;
     max-width: 350px;
+    justify-content: end;
 }
 
 #confirm, #deny {
@@ -1166,7 +1167,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: top;
-    z-index: 2;
+    /*z-index: 2;*/
     transition: 0.15s ease;
 }
 @media(min-width: 768px) {
@@ -1451,7 +1452,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-gap: 0.25rem;
     align-items: start;
     height: 80%;
-    grid-auto-rows: max-content; 
+    grid-auto-rows: max-content;
 }
 /*.playerGraph-player table:nth-child(1) {*/
 /*    display: none;*/
