@@ -503,7 +503,7 @@ function host() {
 
         var removeBtn = document.createElement("button");
         removeBtn.addEventListener('click', function(event) {
-            socket.emit("remove player", nickname, id);
+            socket.emit("remove player", nickname, id, roomNumber);
         });
         
         checkRemoveBtns = document.createDocumentFragment();
@@ -930,8 +930,9 @@ function load_page(page) {
 
 function roomSearch(room, evt) {
     // evt.preventDefault();
-    socket.emit("room check", (room));
-    socket.on('room join', function(bool){
+    console.log(room)
+    socket.emit("room check", room);
+    socket.on('room join', function(bool, bool2){
         if (bool) {
             _("welcomeForm").classList.add("invisible");
             _("host").classList.add("invisible");
@@ -947,17 +948,18 @@ function roomSearch(room, evt) {
 function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
-        socket.emit('name check', nickname, _("roomSearch").value));
+        socket.emit('check nickname', nickname, _("roomSearch").value);
     }
     else {
         _("errorMsg2").classList.remove("invisible");
         _("errorMsg2").innerHTML = "Enter a nickname";
     }
+
 }
 
 socket.on("name clear", function(bool) {
     if (bool) {
-        window.history.pushState('','', _("roomSearch").value);
+        window.history.pushState('','', roomInput);
         load_page("player");
     }
     else {

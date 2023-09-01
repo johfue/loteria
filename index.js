@@ -176,11 +176,10 @@ io.on('connection', (socket) => {
       }
     });
     
-    socket.on('room check', async (nickname, room) => {
+    socket.on('room check', async (room) => {
         const gameExists = await Game.findOne({ room_number: room }).exec();
-
         if (gameExists) {
-            io.to(socket.id).emit('room join', true);
+            io.to(socket.id).emit('room join', true, false);
             socket.join(room);        }
         else {
             io.emit('room join', false);
@@ -190,9 +189,9 @@ io.on('connection', (socket) => {
     socket.on('rejoin room', (room) => {
         socket.join(room);
     });
-    socket.on('check nickname', async (n) => {
+    socket.on('check nickname', async (n, r) => {
 
-      const nameIsBanned = await Game.findOne({ room_number: r }).exec();
+      const nameIsBanned = await Game.findOne({ room_number: r, banned_names: { $all: [n] } }).exec();
       if (nameIsBanned) {
             io.to(socket.id).emit('name clear', false);
       }
@@ -232,7 +231,15 @@ io.on('connection', (socket) => {
     });
     socket.on('remove player', async (nickname, id, roomNumber) => {
         io.to(id).emit('kick out');
-        await Game.updateOne({room:roomNumber},{banned_names: nickname});
+     await Game.findOneAndUpdate(
+         { room_number: roomNumber},
+            {
+                $addToSet: {
+                    banned_names: nickname
+                }
+         }).exec();
+     
+        // await Game.updateOne({room_number : roomNumber, banned_names : }, { $set: { banned_names.$ : nickname });
     });
     socket.on("disconnecting", (reason) => {
 
