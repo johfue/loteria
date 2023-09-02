@@ -138,19 +138,6 @@ app.get('/', function(req, res) {
     res.sendfile(__dirname + '/public/index.html');
 });
 
-// app.get('/:room([0-9]{6})', function(req, res){
-//     console.log("roomed");
-//     res.sendfile(__dirname + '/public/index.html');
-    
-//     const data = new PlayerSchema ({
-//         deck:"ngfgr",
-//     });
-    
-//     const val = data.save();
-
-// });
-
-//Other routes here
 app.get('*', function(req, res){
    res.send('Sorry, this is an invalid URL.');
 });
@@ -238,8 +225,6 @@ io.on('connection', (socket) => {
                     banned_names: nickname
                 }
          }).exec();
-     
-        // await Game.updateOne({room_number : roomNumber, banned_names : }, { $set: { banned_names.$ : nickname });
     });
     socket.on("disconnecting", (reason) => {
 
