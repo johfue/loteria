@@ -1488,6 +1488,15 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     padding-top: 0.2em;
     color: var(--neutral-100);
     font-size: 0.6em;
+    text-decoration-thickness: 2px;
+}
+
+.player__span--host {
+    padding-top: 0.35rem;
+}
+
+.player__span--host:hover {
+    text-decoration: line-through;
 }
 
 @media(min-width:500px) {
@@ -1548,7 +1557,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     .player__span {
         font-size: 1rem;
-        padding-top: 0.35rem;
     }
 }
 

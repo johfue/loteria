@@ -101,7 +101,6 @@ function boardConstruct(seed) {
     return tbl;
 }
 
-
 function newPlayer(nickname, id, oldID, bool) {
     if (opponentList.includes(oldID)) {
         _(oldID).remove(oldID);
@@ -122,6 +121,12 @@ function newPlayer(nickname, id, oldID, bool) {
         opponentName.setAttribute("class", "player__span");
         opponentList.push(id);
         
+        if (bool) {
+            opponentTable.setAttribute("id", "player__table--" + id);
+            opponentName.setAttribute("id", "player__span--" + id);
+            opponentName.classList.add("player__span--host");
+        }
+        
         for (j = 0; j < 4; j++) {
             let cellJ = cell.cloneNode();
             row.appendChild(cellJ);
@@ -133,7 +138,6 @@ function newPlayer(nickname, id, oldID, bool) {
         
         opponent.appendChild(opponentTable);
         opponent.appendChild(opponentName);
-
         _("playerGraph").appendChild(opponent);
     }
  
@@ -495,22 +499,33 @@ function host() {
         socket.emit('update newcomer', gameInfo, id, deck);
         newPlayer(nickname, id, oldID, true);
         
-        var checkBtn = document.createElement("button");
-        checkBtn.addEventListener('click', function(event) {
+        let joiningTable = _("player__table--" + id);
+        let joiningPlayer = _("player__span--" + id);
+        
+
+        _(id).addEventListener('click', function(event) {
             checkBoardRender(id);
-
-        });
-
-        var removeBtn = document.createElement("button");
-        removeBtn.addEventListener('click', function(event) {
-            socket.emit("remove player", nickname, id, roomNumber);
         });
         
-        checkRemoveBtns = document.createDocumentFragment();
-        checkRemoveBtns.appendChild(checkBtn);
-        checkRemoveBtns.appendChild(removeBtn);
-        _(id).appendChild(checkRemoveBtns);
+        joiningPlayer.addEventListener('click', function(event) {
+            socket.emit("remove player", nickname, id, roomNumber);
+        });
 
+        // var checkBtn = document.createElement("button");
+        // checkBtn.addEventListener('click', function(event) {
+        //     checkBoardRender(id);
+
+        // });
+
+        // var removeBtn = document.createElement("button");
+        // removeBtn.addEventListener('click', function(event) {
+        //     socket.emit("remove player", nickname, id, roomNumber);
+        // });
+        
+        // checkRemoveBtns = document.createDocumentFragment();
+        // checkRemoveBtns.appendChild(checkBtn);
+        // checkRemoveBtns.appendChild(removeBtn);
+        // _(id).appendChild(checkRemoveBtns);
         
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
         if (gameInfo.playerList.length === 0) {
