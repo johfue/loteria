@@ -122,8 +122,8 @@ function newPlayer(nickname, id, oldID, bool) {
         opponentList.push(id);
         
         if (bool) {
-            opponentTable.setAttribute("id", "player__table--" + id);
             opponentName.setAttribute("id", "player__span--" + id);
+            opponentTable.setAttribute("id", "player__table--" + id);
             opponentName.classList.add("player__span--host");
         }
         
@@ -326,7 +326,7 @@ function host() {
 
         let allegedBtns = document.createDocumentFragment()
 
-        if (_(id).classList.contains("winnerGlow")) {
+        if (_("player__table--" + id).classList.contains("winnerGlow")) {
             _("allegedWinner__h2").innerHTML = '<span class="modal__span">Do we have a </span><br>winner?';
             allegedBtns.appendChild(confirmBtn);
             allegedBtns.appendChild(denyBtn);
@@ -385,7 +385,7 @@ function host() {
         else {
             shadowBox.classList.add("invisible");
         }
-        _(allegedWinnerID).classList.remove("winnerGlow")
+        _("player__table--" + allegedWinnerID).classList.remove("winnerGlow")
         allegedWinner.classList.add("invisible");
         allegedWinnerID = null;
         
@@ -468,7 +468,7 @@ function host() {
     }
     
     socket.on ("check win", function(board, id) {
-        _(id).classList.add("winnerGlow");
+        _("player__table--" + id).classList.add("winnerGlow");
     });
     
     _("reviewBtn").addEventListener('click', function() {
@@ -499,19 +499,15 @@ function host() {
         socket.emit('update newcomer', gameInfo, id, deck);
         newPlayer(nickname, id, oldID, true);
         
-        let joiningTable = _("player__table--" + id);
         let joiningPlayer = _("player__span--" + id);
         
-
         _(id).addEventListener('click', function(event) {
             checkBoardRender(id);
         });
-        
         joiningPlayer.addEventListener('click', function(event) {
             socket.emit("remove player", nickname, id, roomNumber);
-        });
-
-        // var checkBtn = document.createElement("button");
+            event.stopPropagation();
+        });        // var checkBtn = document.createElement("button");
         // checkBtn.addEventListener('click', function(event) {
         //     checkBoardRender(id);
 
