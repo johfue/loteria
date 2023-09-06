@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();//var app = app;
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+// const { body, validationResult } = require("express-validator");
 app.use(express.urlencoded({ extended: false }));
 
 // Import the mongoose module
@@ -62,11 +63,11 @@ const GameSchema = mongoose.Schema({
   banned_names: { type: Array },
 });
 const Game = mongoose.model('Game', GameSchema);
-const newGame = new Game({
-  room_number: 123456,
-});
+// const newGame = new Game({
+//   room_number: 123456,
+// });
 
-newGame.save();
+// newGame.save();
 
 
 app.get("/:room([0-9]{6})", async (request, response) => {
@@ -91,18 +92,16 @@ app.get("/:room([0-9]{6})", async (request, response) => {
 // });
 
 
-app.post("/game", async (request, response) => {
-  console.log("dinged");
-  const game = new Game(request.body);
-  try {
-    console.log("logged" + request.body);
-    await game.save();
-    // response.send(user);
-  } catch (error) {
-    response.status(500).send(error);
-  }
+// app.post("/game", async (request, response) => {
+//   const game = new Game(request.body);
+//   try {
+//     await game.save();
+//     // response.send(user);
+//   } catch (error) {
+//     response.status(500).send(error);
+//   }
 
-});
+// });
 
 
 
