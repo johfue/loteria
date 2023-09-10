@@ -2123,7 +2123,27 @@ td input {
     }
 }
 
-.twoByTwo #cell_11, .twoByTwo #cell_21 {
+.twoByTwo #cell_11 {
+    -webkit-animation: twoByTwo 1s steps(1) infinite;
+    animation: twoByTwo 1s steps(1) infinite;
+}
+
+.twoByTwo #cell_12 {
+    -webkit-animation: twoByTwo 2s steps(1) infinite;
+    animation: twoByTwo 2s steps(1) infinite;
+}
+
+.twoByTwo #cell_13 {
+    -webkit-animation: twoByTwo 2s steps(1) 1s infinite;
+    animation: twoByTwo 2s steps(1) 1s infinite;
+}
+
+.twoByTwo #cell_14 {
+    -webkit-animation: twoByTwo 3s steps(1) infinite;
+    animation: twoByTwo 3s steps(1) infinite;
+}
+
+/* .twoByTwo #cell_11, .twoByTwo #cell_21 {
     -webkit-animation: twoByTwo 8s steps(1) infinite;
     animation: twoByTwo 8s steps(1) infinite;
 }
@@ -2181,13 +2201,11 @@ td input {
 .twoByTwo #cell_34, .twoByTwo #cell_44 {
     -webkit-animation: twoByTwo 8s steps(1) 8s infinite;
     animation: twoByTwo 8s steps(1) 8s infinite;
-}
+} */
 
 @keyframes twoByTwo {
+
     0% {
-        fill: #F9A140;
-    }
-    12.5% {
         fill: #FFE464;
     }
     100% {
