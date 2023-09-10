@@ -2048,7 +2048,7 @@ td input {
 
 .column #cell_13, .column #cell_23, .column #cell_33, .column #cell_43 {
     -webkit-animation: columns 10s steps(1) 5s infinite;
-    animation: columns steps(1) 5s infinite;
+    animation: columns 10s steps(1) 5s infinite;
 }
 
 .column #cell_14, .column #cell_24, .column #cell_34, .column #cell_44 {
