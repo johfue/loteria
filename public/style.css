@@ -2129,13 +2129,13 @@ td input {
 }
 
 .twoByTwo #cell_12, .twoByTwo #cell_22 {
-    -webkit-animation: twoByTwo 9s steps(1) infinite;
-    animation: twoByTwo2 9s steps(1) infinite;
+    -webkit-animation: twoByTwo 8s steps(1) infinite;
+    animation: twoByTwo2 8s steps(1) infinite;
 }
 
 .twoByTwo #cell_13, .twoByTwo #cell_23 {
-    -webkit-animation: twoByTwo2 9s steps(1) 1s infinite;
-    animation: twoByTwo2 9s steps(1) 1s infinite;
+    -webkit-animation: twoByTwo2 8s steps(1) 1s infinite;
+    animation: twoByTwo2 8s steps(1) 1s infinite;
 }
 
 .twoByTwo #cell_14, .twoByTwo #cell_24 {
@@ -2149,13 +2149,13 @@ td input {
 }
 
 .twoByTwo #cell_22, .twoByTwo #cell_32 {
-    -webkit-animation: twoByTwo2 9s steps(1) 3s infinite;
-    animation: twoByTwo2 9s steps(1) 3s infinite;
+    -webkit-animation: twoByTwo2 8s steps(1) 3s infinite;
+    animation: twoByTwo2 8s steps(1) 3s infinite;
 }
 
 .twoByTwo #cell_23, .twoByTwo #cell_33 {
-    -webkit-animation: twoByTwo2 9s steps(1) 4s infinite;
-    animation: twoByTwo2 9s steps(1) 4s infinite;
+    -webkit-animation: twoByTwo2 8s steps(1) 4s infinite;
+    animation: twoByTwo2 8s steps(1) 4s infinite;
 }
 
 .twoByTwo #cell_24, .twoByTwo #cell_34 {
@@ -2169,13 +2169,13 @@ td input {
 }
 
 .twoByTwo #cell_32, .twoByTwo #cell_42 {
-    -webkit-animation: twoByTwo2 9s steps(1) 6s infinite;
-    animation: twoByTwo2 9s steps(1) 6s infinite;
+    -webkit-animation: twoByTwo2 8s steps(1) 6s infinite;
+    animation: twoByTwo2 8s steps(1) 6s infinite;
 }
 
 .twoByTwo #cell_33, .twoByTwo #cell_43 {
-    -webkit-animation: twoByTwo2 9s steps(1) 7s infinite;
-    animation: twoByTwo2 9s steps(1) 7s infinite;
+    -webkit-animation: twoByTwo2 8s steps(1) 7s infinite;
+    animation: twoByTwo2 8s steps(1) 7s infinite;
 }
 
 .twoByTwo #cell_34, .twoByTwo #cell_44 {
@@ -2199,7 +2199,7 @@ td input {
     0% {
         fill: #F9A140;
     }
-    22% {
+    25% {
         fill: #FFE464;
     }
     100% {
