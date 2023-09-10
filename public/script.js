@@ -144,6 +144,7 @@ function newPlayer(nickname, id, oldID, bool) {
 }
 
 function setWinCondition (condition) {
+    winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     setWinCondition(condition);
 }
 
