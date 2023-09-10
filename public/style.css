@@ -2047,8 +2047,8 @@ td input {
 }
 
 .column #cell_13, .column #cell_23, .column #cell_33, .column #cell_43 {
-    -webkit-animation: rows columns 10s steps(1) 5s infinite;
-    animation: rows columns steps(1) 5s infinite;
+    -webkit-animation: columns 10s steps(1) 5s infinite;
+    animation: columns steps(1) 5s infinite;
 }
 
 .column #cell_14, .column #cell_24, .column #cell_34, .column #cell_44 {
@@ -2128,12 +2128,12 @@ td input {
     animation: twoByTwo 9s steps(1) infinite;
 }
 
-.twoByTwo #cell_21, .twoByTwo #cell_22, .twoByTwo #cell_31, .twoByTwo #cell_32 {
+.twoByTwo #cell_12, .twoByTwo #cell_22, .twoByTwo #cell_13, .twoByTwo #cell_23 {
     -webkit-animation: twoByTwo 9s steps(1) 1s infinite;
     animation: twoByTwo 9s steps(1) 1s infinite;
 }
 
-.twoByTwo #cell_31, .twoByTwo #cell_32, .twoByTwo #cell_41, .twoByTwo #cell_42 {
+.twoByTwo #cell_13, .twoByTwo #cell_23, .twoByTwo #cell_14, .twoByTwo #cell_24 {
     -webkit-animation: twoByTwo 9s steps(1) 2s infinite;
     animation: twoByTwo 9s steps(1) 2s infinite;
 }
