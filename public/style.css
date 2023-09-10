@@ -2139,8 +2139,8 @@ td input {
 }
 
 .twoByTwo #cell_14 {
-    -webkit-animation: twoByTwo 3s steps(1) infinite;
-    animation: twoByTwo 3s steps(1) infinite;
+    -webkit-animation: twoByTwo 1s steps(1) 3s infinite;
+    animation: twoByTwo 1s steps(1) 3s infinite;
 }
 
 /* .twoByTwo #cell_11, .twoByTwo #cell_21 {
@@ -2206,10 +2206,10 @@ td input {
 @keyframes twoByTwo {
 
     0% {
-        fill: #FFE464;
+        fill: #F9A140;
     }
     100% {
-        fill: #F9A140;
+        fill: #FFE464;
     }
 }
 
