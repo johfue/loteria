@@ -2058,14 +2058,14 @@ td input {
 
 @keyframes columns {
     0% {
-        fill: #FFE464;
+        fill: #F9A140;
     }
     
     25% {
-        fill: #F9A140;
+        fill: #FFE464;
     }
     100% {
-        fill: #FFE464;
+        fill: #F9A140;
     }
 }
 
@@ -2091,13 +2091,13 @@ td input {
 
 @keyframes rows {
     0% {
-        fill: #FFE464;
+        fill: #F9A140;
     }    
     25% {
-        fill: #F9A140;
+        fill: #FFE464;
     }
     100% {
-        fill: #FFE464;
+        fill: #F9A140;
     }
 }
 
@@ -2106,20 +2106,20 @@ td input {
     animation: diagonal 2s steps(1) 1s infinite;
 }
 
-.diagonal #cell_13, .diagonal #cell_23, .diagonal #cell_32, .diagonal #cell_41 {
+.diagonal #cell_14, .diagonal #cell_23, .diagonal #cell_32, .diagonal #cell_41 {
     -webkit-animation: diagonal 2s steps(1) 2s infinite;
     animation: diagonal 2s steps(1) 2s infinite;
 }
 
 @keyframes diagonal {
     0% {
-        fill: #FFE464;
-    }
-    50% {
         fill: #F9A140;
     }
-    100% {
+    50% {
         fill: #FFE464;
+    }
+    100% {
+        fill: #F9A140;
     }
 }
 
@@ -2170,13 +2170,13 @@ td input {
 
 @keyframes twoByTwo {
     0% {
-        fill: #FFE464;
-    }
-    12.5% {
         fill: #F9A140;
     }
-    100% {
+    12.5% {
         fill: #FFE464;
+    }
+    100% {
+        fill: #F9A140;
     }
 }
 
