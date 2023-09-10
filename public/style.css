@@ -2124,8 +2124,8 @@ td input {
 }
 
 .twoByTwo #cell_11 {
-    -webkit-animation: twoByTwo 1s steps(1) infinite;
-    animation: twoByTwo 1s steps(1) infinite;
+    -webkit-animation: twoByTwo 2s steps(1) infinite;
+    animation: twoByTwo 2s steps(1) infinite;
 }
 
 .twoByTwo #cell_12 {
@@ -2139,8 +2139,8 @@ td input {
 }
 
 .twoByTwo #cell_14 {
-    -webkit-animation: twoByTwo 1s steps(1) 3s infinite;
-    animation: twoByTwo 1s steps(1) 3s infinite;
+    -webkit-animation: twoByTwo 2s steps(1) 3s infinite;
+    animation: twoByTwo 2s steps(1) 3s infinite;
 }
 
 /* .twoByTwo #cell_11, .twoByTwo #cell_21 {
