@@ -2036,6 +2036,175 @@ td input {
     
 }
 
+.column #cell_11, .column #cell_21, .column #cell_31, .column #cell_41 {
+    -webkit-animation: columns 4s steps(1) 1s infinite;
+    animation: columns 4s steps(1) 1s infinite;
+}
+
+.column #cell_12, .column #cell_22, .column #cell_32, .column #cell_42 {
+    -webkit-animation: columns 4s steps(1) 2s infinite;
+    animation: columns 4s steps(1) 2s infinite;
+}
+
+.column #cell_13, .column #cell_23, .column #cell_33, .column #cell_43 {
+    -webkit-animation: rows columns steps(1) 3s infinite;
+    animation: rows columns steps(1) 3s infinite;
+}
+
+.column #cell_14, .column #cell_23, .column #cell_34, .column #cell_44 {
+    -webkit-animation: columns 4s steps(1) 4s infinite;
+    animation: columns 4s steps(1) 4s infinite;
+}
+
+@keyframes columns {
+    0% {
+        fill: #FFE464;
+    }
+    
+    25% {
+        fill: #F9A140;
+    }
+    100% {
+        fill: #FFE464;
+    }
+}
+
+.row #cell_11, .row #cell_12, .row #cell_13, .row #cell_14 {
+    -webkit-animation: rows 4s steps(1) 1s infinite;
+    animation: rows 4s steps(1) 1s infinite;
+}
+
+.row #cell_21, .row #cell_22, .row #cell_23, .row #cell_24 {
+    -webkit-animation: rows 4s steps(1) 2s infinite;
+    animation: rows 4s steps(1) 2s infinite;
+}
+
+.row #cell_31, .row #cell_32, .row #cell_33, .row #cell_34 {
+    -webkit-animation: rows 4s steps(1) 3s infinite;
+    animation: rows 4s steps(1) 3s infinite;
+}
+
+.row #cell_41, .row #cell_42, .row #cell_43, .row #cell_44 {
+    -webkit-animation: rows 4s steps(1) 4s infinite;
+    animation: rows 4s steps(1) 4s infinite;
+}
+
+@keyframes rows {
+    0% {
+        fill: #FFE464;
+    }    
+    25% {
+        fill: #F9A140;
+    }
+    100% {
+        fill: #FFE464;
+    }
+}
+
+.diagonal #cell_11, .diagonal #cell_22, .diagonal #cell_33, .diagonal #cell_44 {
+    -webkit-animation: diagonal 2s steps(1) 1s infinite;
+    animation: diagonal 2s steps(1) 1s infinite;
+}
+
+.diagonal #cell_13, .diagonal #cell_23, .diagonal #cell_32, .diagonal #cell_41 {
+    -webkit-animation: diagonal 2s steps(1) 2s infinite;
+    animation: diagonal 2s steps(1) 2s infinite;
+}
+
+@keyframes diagonal {
+    0% {
+        fill: #FFE464;
+    }
+    50% {
+        fill: #F9A140;
+    }
+    100% {
+        fill: #FFE464;
+    }
+}
+
+.twoByTwo #cell_11, .twoByTwo #cell_12, .twoByTwo #cell_21, .twoByTwo #cell_22 {
+    -webkit-animation: twoByTwo 9s steps(1) 1s infinite;
+    animation: twoByTwo 9s steps(1) 1s infinite;
+}
+
+.twoByTwo #cell_21, .twoByTwo #cell_22, .twoByTwo #cell_31, .twoByTwo #cell_32 {
+    -webkit-animation: twoByTwo 9s steps(1) 2s infinite;
+    animation: twoByTwo 9s steps(1) 2s infinite;
+}
+
+.twoByTwo #cell_31, .twoByTwo #cell_32, .twoByTwo #cell_41, .twoByTwo #cell_42 {
+    -webkit-animation: twoByTwo 9s steps(1) 3s infinite;
+    animation: twoByTwo 9s steps(1) 3s infinite;
+}
+
+.twoByTwo #cell_21, .twoByTwo #cell_22, .twoByTwo #cell_31, .twoByTwo #cell_32 {
+    -webkit-animation: twoByTwo 9s steps(1) 4s infinite;
+    animation: twoByTwo 9s steps(1) 4s infinite;
+}
+
+.twoByTwo #cell_22, .twoByTwo #cell_23, .twoByTwo #cell_32, .twoByTwo #cell_33 {
+    -webkit-animation: twoByTwo 9s steps(1) 5s infinite;
+    animation: twoByTwo 9s steps(1) 5s infinite;
+}
+
+.twoByTwo #cell_23, .twoByTwo #cell_24, .twoByTwo #cell_33, .twoByTwo #cell_34 {
+    -webkit-animation: twoByTwo 9s steps(1) 6s infinite;
+    animation: twoByTwo 9s steps(1) 6s infinite;
+}
+
+.twoByTwo #cell_31, .twoByTwo #cell_32, .twoByTwo #cell_41, .twoByTwo #cell_42 {
+    -webkit-animation: twoByTwo 9s steps(1) 7s infinite;
+    animation: twoByTwo 9s steps(1) 7s infinite;
+}
+
+.twoByTwo #cell_32, .twoByTwo #cell_33, .twoByTwo #cell_42, .twoByTwo #cell_43 {
+    -webkit-animation: twoByTwo 9s steps(1) 8s infinite;
+    animation: twoByTwo 9s steps(1) 8s infinite;
+}
+
+.twoByTwo #cell_33, .twoByTwo #cell_34, .twoByTwo #cell_43, .twoByTwo #cell_44 {
+    -webkit-animation: twoByTwo 9s steps(1) 9s infinite;
+    animation: twoByTwo 9s steps(1) 9s infinite;
+}
+
+@keyframes twoByTwo {
+    0% {
+        fill: #FFE464;
+    }
+    12.5% {
+        fill: #F9A140;
+    }
+    100% {
+        fill: #FFE464;
+    }
+}
+
+.blackout .cell {
+    fill: #F9A140;
+}
+
+.inside #cell_22, .inside #cell_23, .inside #cell_32, .inside #cell_33 {
+    fill: #F9A140;
+}
+
+.outside #cell_11, .outside #cell_12, .outside #cell_13, .outside #cell_14, .outside #cell_21, .outside #cell_24, .outside #cell_31, .outside #cell_34, .outside #cell_41, .outside #cell_42, .outside #cell_43, .outside #cell_44 {
+    fill: #F9A140;
+}
+
+.Z #cell_11, .Z #cell_12, .Z #cell_13, .Z #cell_14, .Z #cell,_.Z #cell_23, .Z #cell_32, .Z #cell_41, .Z #cell_42, .Z #cell_43, .Z #cell_44 {
+    fill: #F9A140;
+}
+
+.N #cell_21, .N #cell_22, .N #cell_24, .N #cell_31, .N #cell_33, .N #cell_34, .N #cell_41, .N #cell_44{
+    fill: #F9A140;
+}
+
+.corner #cell_11, .corner #cell_14, .corner #cell_41, .corner #cell_44  {
+    fill: #F9A140;
+}
+
+
 .invisible {
     display: none;
 }
