@@ -2192,11 +2192,11 @@ td input {
     fill: #F9A140;
 }
 
-.Z #cell_11, .Z #cell_12, .Z #cell_13, .Z #cell_14, .Z #cell,_.Z #cell_23, .Z #cell_32, .Z #cell_41, .Z #cell_42, .Z #cell_43, .Z #cell_44 {
+.Z #cell_11, .Z #cell_12, .Z #cell_13, .Z #cell_14, .Z #cell, .Z #cell_23, .Z #cell_32, .Z #cell_41, .Z #cell_42, .Z #cell_43, .Z #cell_44 {
     fill: #F9A140;
 }
 
-.N #cell_21, .N #cell_22, .N #cell_24, .N #cell_31, .N #cell_33, .N #cell_34, .N #cell_41, .N #cell_44{
+.N #cell_11, .N #cell_14, .N #cell_21, .N #cell_22, .N #cell_24, .N #cell_31, .N #cell_33, .N #cell_34, .N #cell_41, .N #cell_44{
     fill: #F9A140;
 }
 
