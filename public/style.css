@@ -2128,9 +2128,14 @@ td input {
     animation: twoByTwo 8s steps(1) infinite;
 }
 
-.twoByTwo #cell_12, .twoByTwo #cell_22 {
-    -webkit-animation: twoByTwo 8s steps(1) infinite;
-    animation: twoByTwo2 8s steps(1) infinite;
+.twoByTwo #cell_12 {
+    -webkit-animation: twoByTwo3 8s steps(1) infinite;
+    animation: twoByTwo3 8s steps(1) infinite;
+}
+
+.twoByTwo #cell_22 {
+    -webkit-animation: twoByTwo4 8s steps(1) infinite;
+    animation: twoByTwo4 8s steps(1) infinite;
 }
 
 .twoByTwo #cell_13, .twoByTwo #cell_23 {
@@ -2200,6 +2205,42 @@ td input {
         fill: #F9A140;
     }
     25% {
+        fill: #FFE464;
+    }
+    100% {
+        fill: #F9A140;
+    }
+}
+
+@keyframes twoByTwo3 {
+    0% {
+        fill: #F9A140;
+    }
+    12.5% {
+        fill: #FFE464;
+    }
+    62.5% {
+        fill: #F9A140;
+    }
+    87.5% {
+        fill: #FFE464;
+    }
+    100% {
+        fill: #F9A140;
+    }
+}
+
+@keyframes twoByTwo3 {
+    0% {
+        fill: #F9A140;
+    }
+    25% {
+        fill: #FFE464;
+    }
+    62.5% {
+        fill: #F9A140;
+    }
+    75% {
         fill: #FFE464;
     }
     100% {
