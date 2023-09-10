@@ -2051,7 +2051,7 @@ td input {
     animation: rows columns steps(1) 3s infinite;
 }
 
-.column #cell_14, .column #cell_23, .column #cell_34, .column #cell_44 {
+.column #cell_14, .column #cell_24, .column #cell_34, .column #cell_44 {
     -webkit-animation: columns 4s steps(1) 4s infinite;
     animation: columns 4s steps(1) 4s infinite;
 }

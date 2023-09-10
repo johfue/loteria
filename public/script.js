@@ -893,7 +893,7 @@ function player() {
             currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
         
-        setWinConditio(gameInfo);
+        setWinCondition(gameInfo);
 
         for (e=0; e < gameInfo.playerList.length; e++) {
             iteratedPlayer = gameInfo.playerList[e];
