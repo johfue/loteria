@@ -2155,12 +2155,12 @@ td input {
     animation: twoByTwo4 8s steps(1) 2s infinite;
 }
 .twoByTwo #cell_31 {
-    -webkit-animation: twoByTwo 8s steps(1) 4s infinite;
-    animation: twoByTwo3 8s steps(1) 4s infinite;
+    -webkit-animation: twoByTwo 8s steps(1) 3s infinite;
+    animation: twoByTwo3 8s steps(1) 3s infinite;
 }
 .twoByTwo #cell_32 {
-    -webkit-animation: twoByTwo 8s steps(1) 4s infinite;
-    animation: twoByTwo4 8s steps(1) 4s infinite;
+    -webkit-animation: twoByTwo 8s steps(1) 3s infinite;
+    animation: twoByTwo4 8s steps(1) 3s infinite;
 }
 .twoByTwo #cell_33 {
     -webkit-animation: twoByTwo 8s steps(1) 5s infinite;
