@@ -2171,16 +2171,16 @@ td input {
     animation: twoByTwo3 8s steps(1) 5s infinite;
 }
 .twoByTwo #cell_41 {
-    -webkit-animation: twoByTwo 8s steps(1) 7s infinite;
-    animation: twoByTwo 8s steps(1) 7s infinite;
+    -webkit-animation: twoByTwo 8s steps(1) 6s infinite;
+    animation: twoByTwo 8s steps(1) 6s infinite;
 }
 .twoByTwo #cell_42 {
-    -webkit-animation: twoByTwo 8s steps(1) 7s infinite;
-    animation: twoByTwo2 8s steps(1) 7s infinite;
+    -webkit-animation: twoByTwo 8s steps(1) 6s infinite;
+    animation: twoByTwo2 8s steps(1) 6s infinite;
 }
 .twoByTwo #cell_43 {
-    -webkit-animation: twoByTwo 8s steps(1) 8s infinite;
-    animation: twoByTwo2 8s steps(1) 8s infinite;
+    -webkit-animation: twoByTwo 8s steps(1) 7s infinite;
+    animation: twoByTwo2 8s steps(1) 7s infinite;
 }
 .twoByTwo #cell_44 {
     -webkit-animation: twoByTwo 8s steps(1) 8s infinite;
