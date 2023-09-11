@@ -742,7 +742,7 @@ function player() {
     
     socket.on('win condition', function(condition){
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
-        winConditionInfo.classList.add("class", condition;
+        winConditionInfo.classList.add("class", condition);
     });
     
     socket.on('win checked', function(bool){
