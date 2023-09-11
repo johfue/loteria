@@ -741,7 +741,8 @@ function player() {
     });
     
     socket.on('win condition', function(condition){
-        setConditionInfo(condition);
+        winConditionInfo.setAttribute("class", "winInfo winInfo--player");
+        winConditionInfo.classList.add("class", gameInfo.goal);
     });
     
     socket.on('win checked', function(bool){
