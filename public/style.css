@@ -617,16 +617,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         width: 80%;
         left: 10%;
     }
-    
-    .modal__content--gameSettings {
-        display: flex;
-        align-items: flex-end;
-    }
-    
-    .modal__input--gameSettings{
-        max-height: 14vw;
-        max-width: 12vw;
-    }
 }
 
 .radio-sibling {
@@ -645,13 +635,32 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .modal__content--gameSettings {
+
+    /* overflow-y: scroll;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: min-content;
+    grid-gap: 0.75rem;
+    column-gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, 18%);
+    align-content: start;
+    justify-content: center; */
+
+
+    display: grid;
+    overflow-y: scroll;
+    grid-template-columns: repeat(auto-fill, 30%);
+    /* grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: min-content; */
     grid-gap: 1rem;
     background-color: var(--secondary-base);
     text-align: center;
-    padding: 0 1rem 1rem 1rem;
+    align-content: start;
+    justify-content: center;
+}
+
+.gameSettings__span {
+    display: block;
+    margin-top: 0.25em;
+    font-family: 'poppinsbold';
 }
 
 .modal__input--gameSettings {
@@ -668,12 +677,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     left: 0;
 }
 
-@media (min-width: 845px) {
-    .modal__content--gameSettings {
-        display: flex;
-        align-items: flex-end;
-    }
-}
 .modal__input--gameSettings:checked {
     background-image: url(images/check.svg);
     background-repeat: no-repeat;
@@ -722,6 +725,26 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
 }
 
+@media(min-width:845px) {
+    .modal {
+        height: 75%;
+        top: 20%;
+        width: 80%;
+        left: 10%;
+    }
+    
+    .modal__content--gameSettings {
+        padding: 1rem;
+        grid-template-columns: repeat(auto-fill, 17%);
+        padding: 1rem 20%;
+        align-content: end;
+    }
+    
+    .modal__input--gameSettings{
+        max-height: 14vw;
+        max-width: 12vw;
+    }
+}
 .boardSelect__li.claimed:active, .boardSelect__li.claimed:active {
     transform: none;
     background-color: initial;
@@ -2037,7 +2060,7 @@ td input {
 }
 
 .column #cell_11, .column #cell_21, .column #cell_31, .column #cell_41 {
-    -webkit-animation: columns 10s steps(1) infinite;
+    -webkit-animation:columns 10s steps(1) infinite;
     animation: columns 10s steps(1) infinite;
 }
 
@@ -2102,13 +2125,13 @@ td input {
 }
 
 .diagonal #cell_11, .diagonal #cell_22, .diagonal #cell_33, .diagonal #cell_44 {
-    -webkit-animation: diagonal 5s steps(1) infinite;
-    animation: diagonal 5s steps(1) infinite;
+    -webkit-animation: diagonal 6s steps(1) infinite;
+    animation: diagonal 6s steps(1) infinite;
 }
 
 .diagonal #cell_14, .diagonal #cell_23, .diagonal #cell_32, .diagonal #cell_41 {
-    -webkit-animation: diagonal 5s steps(1) 2.5s infinite;
-    animation: diagonal 5s steps(1) 2.5s infinite;
+    -webkit-animation: diagonal 6s steps(1) 3s infinite;
+    animation: diagonal 6s steps(1) 3s infinite;
 }
 
 @keyframes diagonal {
