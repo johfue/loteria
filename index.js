@@ -162,7 +162,8 @@ io.on('connection', (socket) => {
             await game.save();
             socket.join(r);
             io.to(socket.id).emit('room clear', r);
-      }
+            console.log("r: " + io.sockets.adapter.r[prop].length);
+        }
     });
     
     socket.on('room check', async (room) => {
