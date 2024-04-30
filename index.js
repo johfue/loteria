@@ -162,14 +162,17 @@ io.on('connection', (socket) => {
             await game.save();
             socket.join(r);
             io.to(socket.id).emit('room clear', r);
-      }
+        }
     });
     
     socket.on('room check', async (room) => {
         const gameExists = await Game.findOne({ room_number: room }).exec();
         if (gameExists) {
             io.to(socket.id).emit('room join', true, false);
-            socket.join(room);        }
+            socket.join(room);
+
+            io.sockets.adapter.rooms.get(room).size;
+        }
         else {
             io.emit('room join', false);
         }
@@ -233,7 +236,7 @@ io.on('connection', (socket) => {
         for (const prop in socket.rooms) {
             if (prop.length == 6) {
                 io.to(prop).emit('player left', socket.id);
-                console.log(io.sockets.adapter.rooms[prop].length);
+                console.log(prop + ": " + io.sockets.adapter.rooms[prop].length);
 
                 setTimeout(function() {
                 

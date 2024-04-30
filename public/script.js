@@ -53,6 +53,7 @@ function targetDom() {
     const bottomStripe = _("bottomStripe");
     const midStripe = _("midStripe");
     const topStripe = _("topStripe");
+    const winConditionInfo = _("winConditionInfo");
 }
 
 function generateCardOnBoard(func, param, arg) {
@@ -138,9 +139,13 @@ function newPlayer(nickname, id, oldID, bool) {
         
         opponent.appendChild(opponentTable);
         opponent.appendChild(opponentName);
-        _("playerGraph").appendChild(opponent);
+        playerGraph.appendChild(opponent);
     }
- 
+}
+
+function setWinCondition (condition) {
+    winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+    winConditionInfo.classList.add("class", condition);
 }
 
 function host() {
@@ -240,7 +245,10 @@ function host() {
     
     function chooseWinCondition() {
         currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
-        winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
+        // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
+        
+        setWinCondition(currentWinCondition);
+
         gameInfo.goal = currentWinCondition;
         socket.emit('win condition', currentWinCondition, roomNumber);
         drawBtn.disabled = false;
@@ -715,7 +723,7 @@ function player() {
         else {
             clearBeans();
             currentCard.src="images/blank.svg";
-            winConditionInfo.src="images/blank_sqaure.svg";
+            // winConditionInfo.src="images/blank_sqaure.svg";
             disableBoard(true);
             shadowBox.classList.add("invisible");
             boardSelect.classList.remove("invisible");
@@ -733,8 +741,8 @@ function player() {
     });
     
     socket.on('win condition', function(condition){
-        currentWinConditon = condition;
-        winConditionInfo.src = "images/" + condition + '.svg';
+        winConditionInfo.setAttribute("class", "winInfo winInfo--player");
+        winConditionInfo.classList.add("class", condition);
     });
     
     socket.on('win checked', function(bool){
@@ -880,12 +888,14 @@ function player() {
         generateBoardOptions();
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
-            currentCard.src = "images/blank.png";
+            currentCard.src = "images/blank.svg";
         }
         else {
             currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
-        winConditionInfo.src = "images/" + gameInfo.goal + '.svg';
+        winConditionInfo.setAttribute("class", "winInfo winInfo--player");
+        winConditionInfo.classList.add("class", gameInfo.goal);
+                // setWinCondition(gameInfo.goal);
 
         for (e=0; e < gameInfo.playerList.length; e++) {
             iteratedPlayer = gameInfo.playerList[e];
