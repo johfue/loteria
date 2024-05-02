@@ -274,6 +274,7 @@ function host() {
     
     function chooseWinCondition() {
         selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
+        console.log(selectedWinConditions);
         
         // if (selectedWinConditions.length === 1) {
         //     currentWinCondition = selectedWinConditions.value;
