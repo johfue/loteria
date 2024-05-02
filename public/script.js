@@ -144,6 +144,8 @@ function newPlayer(nickname, id, oldID, bool) {
 }
 
 
+
+
 function setWinConditionChain(arr) {
   return arr.reduce(function(promise, item) {
     return promise.then(function() {
@@ -154,9 +156,8 @@ function setWinConditionChain(arr) {
 }
 
 function launchChain(condition) {
-  return new Promise(function(resolve, reject) {
-      resolve();
-      console.log(condition);
+      await animate(winConditionInfo, condition);
+
     // setTimeout(function() {
     //   console.log(condition);
     //   resolve();
@@ -282,7 +283,6 @@ function host() {
         
         // else {
             for (n=0; n<selectedWinConditions.length; n++) {
-                console.log(selectedWinConditions[n]);
                 currentWincondition.push(selectedWinConditions[n].value);
             }
         // }
