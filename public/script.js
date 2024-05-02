@@ -149,7 +149,7 @@ function setWinConditionChain(arr) {
             return animate(winConditionInfo, condition);
             // return doSomethingAsyncWithResult(item, result);
         });
-    }, q());
+    });
 }
 
 // function setWinConditionChain(arr) {
