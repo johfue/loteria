@@ -155,14 +155,15 @@ function workMyCollection(arr) {
   }, Promise.resolve());
 }
 
-async function launchChain(delay) {
-  return new Promise(function(resolve, reject) {
-    animate(winConditionInfo, delay);
-    // setTimeout(function() {
-    //   console.log(delay);
-    //   resolve();
-    // }, delay);
-  });
+function launchChain(delay) {
+    return animate(winConditionInfo, delay);
+
+//   return new Promise(function(resolve, reject) {
+//     // setTimeout(function() {
+//     //   console.log(delay);
+//     //   resolve();
+//     // }, delay);
+//   });
 }
 
 function setWinCondition (conditions) {
