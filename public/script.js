@@ -157,14 +157,13 @@ function workMyCollection(arr) {
 
 function launchChain(delay) {
   return new Promise(function(resolve, reject) {
-    setTimeout(function() {
-      console.log(delay);
-      resolve();
-    }, delay);
+      await console.log(delay);
+    // setTimeout(function() {
+    //   console.log(delay);
+    //   resolve();
+    // }, delay);
   });
 }
-
-workMyCollection(delays);
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
