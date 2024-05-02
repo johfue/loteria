@@ -187,13 +187,14 @@ function animate(elem, animation) {
 
 async function init() {
   // first fadeout text
-  await animate(winConditionInfo, condition);
+  await animate(winConditionInfo, "row");
+  await animate(winConditionInfo, "column");
   console.log("ran")
 }
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-    workMyCollection(conditions);
+    init();
     // setWinConditionChain(conditions);
 
 
