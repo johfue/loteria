@@ -144,7 +144,7 @@ function newPlayer(nickname, id, oldID, bool) {
 }
 
 
-var delays = [0, 10, 20, 30, 40];
+// var delays = [0, 10, 20, 30, 40];
 
 function workMyCollection(arr) {
   return arr.reduce(function(promise, item) {
@@ -156,20 +156,38 @@ function workMyCollection(arr) {
 }
 
 function launchChain(delay) {
-    return animate(winConditionInfo, delay);
+  return new Promise(function(resolve, reject) {
 
-//   return new Promise(function(resolve, reject) {
-//     // setTimeout(function() {
-//     //   console.log(delay);
-//     //   resolve();
-//     // }, delay);
-//   });
+    init(delay);
+
+    // setTimeout(function() {
+    //   console.log(delay);
+    //   resolve();
+    // }, delay);
+  });
+}
+
+
+// common function to apply animations to an element.
+function animate(elem, animation) {
+  return new Promise((resolve, reject) => {
+    function handleAnimationEnd() {
+      console.log("animation ended...");
+      resolve(elem);
+    }
+    elem.addEventListener("animationend", handleAnimationEnd, { once: true });
+    elem.classList.add(animation);
+  });
+}
+
+async function init() {
+  // first fadeout text
+  await animate(winConditionInfo, condition);
 }
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-workMyCollection(conditions);
-
+    workMyCollection(conditions);
     // setWinConditionChain(conditions);
 
 
