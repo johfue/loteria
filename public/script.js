@@ -191,7 +191,7 @@ function host() {
     const currentCard = _("currentCard");
     const winConditionBtn = _("winConditionBtn");
     const winCondition = document.querySelectorAll('input[name="winCondition"]');
-    let currentWinCondition = [];
+    let currentWincondition = [];
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
     const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
@@ -282,7 +282,7 @@ function host() {
         
         // else {
             for (n=0; n<selectedWinConditions.length; n++) {
-                console.log(currentWincondition[n]);
+                console.log(selectedWinConditions[n]);
                 currentWincondition.push(selectedWinConditions[n].value);
             }
         // }
