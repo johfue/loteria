@@ -176,9 +176,7 @@ function launchChain(delay) {
 function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-      console.log(animation);
       resolve(elem);
-            elem.classList.remove(animation);
 
     }
     elem.addEventListener("animationend", handleAnimationEnd, { once: true });
