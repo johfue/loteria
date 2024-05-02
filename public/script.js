@@ -185,6 +185,7 @@ function animate(elem, animation) {
 }
 
 async function init() {
+    await animate(winConditionInfo, "column");
     await animate(winConditionInfo, "row");
     await animate(winConditionInfo, "diagonal");
     await animate(winConditionInfo, "twoByTwo");
