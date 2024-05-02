@@ -157,7 +157,7 @@ function workMyCollection(arr) {
 
 async function launchChain(delay) {
   return new Promise(function(resolve, reject) {
-      await console.log(delay);
+      console.log(delay);
     // setTimeout(function() {
     //   console.log(delay);
     //   resolve();
