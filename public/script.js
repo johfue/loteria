@@ -147,8 +147,10 @@ function newPlayer(nickname, id, oldID, bool) {
 // var delays = [0, 10, 20, 30, 40];
 
 function workMyCollection(arr) {
+    console.log("ran");
   return arr.reduce(function(promise, item) {
     return promise.then(function() {
+        console.log("ran");
       return launchChain(item);
     });
     // uses this orignal promise to start the chaining.
@@ -156,7 +158,9 @@ function workMyCollection(arr) {
 }
 
 function launchChain(delay) {
+    console.log("ran");
   return new Promise(function(resolve, reject) {
+      console.log("ran");
 
     init(delay);
 
@@ -170,6 +174,7 @@ function launchChain(delay) {
 
 // common function to apply animations to an element.
 function animate(elem, animation) {
+    console.log("ran");
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
       console.log("animation ended...");
@@ -183,6 +188,7 @@ function animate(elem, animation) {
 async function init() {
   // first fadeout text
   await animate(winConditionInfo, condition);
+  console.log("ran")
 }
 
 function setWinCondition (conditions) {
