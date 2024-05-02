@@ -157,7 +157,7 @@ function workMyCollection(arr) {
 
 async function launchChain(delay) {
   return new Promise(function(resolve, reject) {
-      console.log(delay);
+    await animate(winConditionInfo, delay);
     // setTimeout(function() {
     //   console.log(delay);
     //   resolve();
@@ -167,7 +167,7 @@ async function launchChain(delay) {
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-workMyCollection(delays);
+workMyCollection(conditions);
 
     // setWinConditionChain(conditions);
 
