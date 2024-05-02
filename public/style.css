@@ -2126,13 +2126,13 @@ td input {
 }
 
 .diagonal #cell_11, .diagonal #cell_22, .diagonal #cell_33, .diagonal #cell_44 {
-    -webkit-animation: diagonal 6s steps(1) infinite;
-    animation: diagonal 6s steps(1) infinite;
+    -webkit-animation: diagonal 6s steps(1);
+    animation: diagonal 6s steps(1);
 }
 
 .diagonal #cell_14, .diagonal #cell_23, .diagonal #cell_32, .diagonal #cell_41 {
-    -webkit-animation: diagonal 6s steps(1) 3s infinite;
-    animation: diagonal 6s steps(1) 3s infinite;
+    -webkit-animation: diagonal 6s steps(1) 3s;
+    animation: diagonal 6s steps(1) 3s;
 }
 
 @keyframes diagonal {

@@ -185,8 +185,7 @@ function animate(elem, animation) {
 }
 
 async function init() {
-  // first fadeout text
-  await animate(winConditionInfo, "twoByTwo");
+    await animate(winConditionInfo, "diagonal");
     await animate(winConditionInfo, "row");
 
 }
