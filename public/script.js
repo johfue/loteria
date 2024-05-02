@@ -177,8 +177,9 @@ function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
       console.log(animation);
-      elem.classList.remove(animation);
       resolve(elem);
+            elem.classList.remove(animation);
+
     }
     elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
