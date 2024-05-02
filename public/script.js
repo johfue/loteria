@@ -144,33 +144,33 @@ function newPlayer(nickname, id, oldID, bool) {
 }
 
 
-function setWinConditionChain(arr) {
+var delays = [0, 10, 20, 30, 40];
+
+function workMyCollection(arr) {
   return arr.reduce(function(promise, item) {
     return promise.then(function() {
-              console.log("ran");
-
       return launchChain(item);
     });
     // uses this orignal promise to start the chaining.
   }, Promise.resolve());
 }
 
-function launchChain(condition) {
+function launchChain(delay) {
   return new Promise(function(resolve, reject) {
-      animate(winConditionInfo, condition);
-      console.log("ran");
-
-    // setTimeout(function() {
-    //   console.log(condition);
-    //   resolve();
-    // }, condition);
+    setTimeout(function() {
+      console.log(delay);
+      resolve();
+    }, delay);
   });
 }
 
+workMyCollection(delays);
+
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+workMyCollection(delays);
 
-    setWinConditionChain(conditions);
+    // setWinConditionChain(conditions);
 
 
     // winConditionInfo.classList.add("class", condition);
