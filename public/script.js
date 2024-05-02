@@ -144,7 +144,7 @@ function newPlayer(nickname, id, oldID, bool) {
 }
 
 
-function setWinCondition(arr) {
+function setWinConditionChain(arr) {
   return arr.reduce(function(promise, item) {
     return promise.then(function() {
       return launchChain(item);
@@ -166,7 +166,7 @@ function launchChain(condition) {
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
 
-    setWinCondition(conditions);
+    setWinConditionChain(conditions);
 
 
     // winConditionInfo.classList.add("class", condition);
@@ -275,8 +275,6 @@ function host() {
     function chooseWinCondition() {
         currentWinCondition = [];
         selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
-        console.log(selectedWinConditions);
-        
         // if (selectedWinConditions.length === 1) {
         //     currentWinCondition = selectedWinConditions.value;
         // }
