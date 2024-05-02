@@ -143,27 +143,34 @@ function newPlayer(nickname, id, oldID, bool) {
     }
 }
 
-
-
-
 function setWinConditionChain(arr) {
-  return arr.reduce(function(promise, item) {
-    return promise.then(function() {
-      return launchChain(item);
-    });
-    // uses this orignal promise to start the chaining.
-  }, Promise.resolve());
+    return arr.reduce(function(promise, item) {
+        return promise.then(function(result) {
+            return animate(winConditionInfo, condition);
+            // return doSomethingAsyncWithResult(item, result);
+        });
+    }, q());
 }
 
-function launchChain(condition) {
-      await animate(winConditionInfo, condition);
+// function setWinConditionChain(arr) {
+//   return arr.reduce(function(promise, item) {
+//     return promise.then(function() {
+//       return launchChain(item);
+//     });
+//     // uses this orignal promise to start the chaining.
+//   }, Promise.resolve());
+// }
 
-    // setTimeout(function() {
-    //   console.log(condition);
-    //   resolve();
-    // }, condition);
-  });
-}
+// function launchChain(condition) {
+//   return new Promise(function(resolve, reject) {
+//       await animate(winConditionInfo, condition);
+
+//     // setTimeout(function() {
+//     //   console.log(condition);
+//     //   resolve();
+//     // }, condition);
+//   });
+// }
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
