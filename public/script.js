@@ -143,9 +143,38 @@ function newPlayer(nickname, id, oldID, bool) {
     }
 }
 
-function setWinCondition (condition) {
+
+function setWinCondition(arr) {
+  return arr.reduce(function(promise, item) {
+    return promise.then(function() {
+      return launchChain(item);
+    });
+    // uses this orignal promise to start the chaining.
+  }, Promise.resolve());
+}
+
+function launchChain(condition) {
+  return new Promise(function(resolve, reject) {
+      console.log(condition)
+    // setTimeout(function() {
+    //   console.log(condition);
+    //   resolve();
+    // }, condition);
+  });
+}
+
+function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-    winConditionInfo.classList.add("class", condition);
+
+    setWinCondition(conditions);
+
+
+    // winConditionInfo.classList.add("class", condition);
+    
+    // await animate(para, "fadeOut");
+    // await animate(header, "fill");
+
+    
 }
 
 function host() {
@@ -244,7 +273,18 @@ function host() {
     }
     
     function chooseWinCondition() {
-        currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
+        selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
+        
+        if (selectedWinConditions.length === 1) {
+            currentWinCondition = selectedWinConditions.value;
+        }
+        
+        else {
+            for (n=0; n<selectedWinConditions.length; n++) {
+                currentWincondition.push(selectedWinConditions[n].value);
+            }
+        }
+        
         // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
         
         setWinCondition(currentWinCondition);
