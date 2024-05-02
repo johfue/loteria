@@ -147,6 +147,8 @@ function newPlayer(nickname, id, oldID, bool) {
 function setWinConditionChain(arr) {
   return arr.reduce(function(promise, item) {
     return promise.then(function() {
+              console.log("ran");
+
       return launchChain(item);
     });
     // uses this orignal promise to start the chaining.
@@ -156,6 +158,7 @@ function setWinConditionChain(arr) {
 function launchChain(condition) {
   return new Promise(function(resolve, reject) {
       animate(winConditionInfo, condition);
+      console.log("ran");
 
     // setTimeout(function() {
     //   console.log(condition);
