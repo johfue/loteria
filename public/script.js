@@ -174,7 +174,6 @@ function launchChain(delay) {
 
 // common function to apply animations to an element.
 function animate(elem, animation) {
-    console.log("ran");
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
       console.log("animation ended...");
@@ -189,7 +188,6 @@ async function init() {
   // first fadeout text
   await animate(winConditionInfo, "row");
   await animate(winConditionInfo, "column");
-  console.log("ran")
 }
 
 function setWinCondition (conditions) {
