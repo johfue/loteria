@@ -2061,23 +2061,23 @@ td input {
 }
 
 .column #cell_11, .column #cell_21, .column #cell_31, .column #cell_41 {
-    -webkit-animation:columns 10s steps(1) forewards;
-    animation: columns 10s steps(1) forewards;
+    -webkit-animation:columns 10s steps(1) forwards;
+    animation: columns 10s steps(1) forwards;
 }
 
 .column #cell_12, .column #cell_22, .column #cell_32, .column #cell_42 {
-    -webkit-animation: columns 10s steps(1) 2.5s forewards;
-    animation: columns 10s steps(1) 2.5s forewards;
+    -webkit-animation: columns 10s steps(1) 2.5s forwards;
+    animation: columns 10s steps(1) 2.5s forwards;
 }
 
 .column #cell_13, .column #cell_23, .column #cell_33, .column #cell_43 {
-    -webkit-animation: columns 10s steps(1) 5s forewards;
-    animation: columns 10s steps(1) 5s forewards;
+    -webkit-animation: columns 10s steps(1) 5s forwards;
+    animation: columns 10s steps(1) 5s forwards;
 }
 
 .column #cell_14, .column #cell_24, .column #cell_34, .column #cell_44 {
-    -webkit-animation: columns 10s steps(1) 7.5s forewards;
-    animation: columns 10s steps(1) 7.5s forewards;
+    -webkit-animation: columns 10s steps(1) 7.5s forwards;
+    animation: columns 10s steps(1) 7.5s forwards;
 }
 
 @keyframes columns {
@@ -2094,23 +2094,23 @@ td input {
 }
 
 .row #cell_11, .row #cell_12, .row #cell_13, .row #cell_14 {
-    -webkit-animation: rows 10s steps(1) forewards;
-    animation: rows 10s steps(1) forewards;
+    -webkit-animation: rows 10s steps(1) forwards;
+    animation: rows 10s steps(1) forwards;
 }
 
 .row #cell_21, .row #cell_22, .row #cell_23, .row #cell_24 {
-    -webkit-animation: rows 10s steps(1) 2.5s forewards;
-    animation: rows 10s steps(1) 2.5s forewards;
+    -webkit-animation: rows 10s steps(1) 2.5s forwards;
+    animation: rows 10s steps(1) 2.5s forwards;
 }
 
 .row #cell_31, .row #cell_32, .row #cell_33, .row #cell_34 {
-    -webkit-animation: rows 10s steps(1) 5s forewards;
-    animation: rows 10s steps(1) 5s forewards;
+    -webkit-animation: rows 10s steps(1) 5s forwards;
+    animation: rows 10s steps(1) 5s forwards;
 }
 
 .row #cell_41, .row #cell_42, .row #cell_43, .row #cell_44 {
-    -webkit-animation: rows 10s steps(1) 7.5s forewards;
-    animation: rows 10s steps(1) 7.5s forewards;
+    -webkit-animation: rows 10s steps(1) 7.5s forwards;
+    animation: rows 10s steps(1) 7.5s forwards;
 }
 
 @keyframes rows {
