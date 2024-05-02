@@ -282,6 +282,7 @@ function host() {
         
         // else {
             for (n=0; n<selectedWinConditions.length; n++) {
+                console.log(currentWincondition[n]);
                 currentWincondition.push(selectedWinConditions[n].value);
             }
         // }
