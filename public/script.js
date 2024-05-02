@@ -189,7 +189,7 @@ async function init() {
     await animate(winConditionInfo, "row");
     await animate(winConditionInfo, "diagonal");
     await animate(winConditionInfo, "twoByTwo");
-    consol.log("done")
+    console.log("done")
 
 }
 
