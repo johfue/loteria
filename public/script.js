@@ -177,10 +177,10 @@ function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
       console.log("animation ended...");
-    //   elem.classList.remove(animation);
+      elem.classList.remove(animation);
       resolve(elem);
     }
-    elem.addEventListener("animationend", handleAnimationEnd, { once: true });
+    elem.addEventListener("animationend", handleAnimationEnd);
     elem.classList.add(animation);
   });
 }
