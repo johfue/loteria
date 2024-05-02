@@ -273,6 +273,7 @@ function host() {
     }
     
     function chooseWinCondition() {
+        currentWincondition = [];
         selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
         console.log(selectedWinConditions);
         
