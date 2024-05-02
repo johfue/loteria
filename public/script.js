@@ -181,13 +181,12 @@ function animate(elem, animation) {
     }
     elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
-    console.log(animation);
   });
 }
 
 async function init() {
-    await animate(winConditionInfo, "diagonal");
     await animate(winConditionInfo, "row");
+    await animate(winConditionInfo, "diagonal");
     await animate(winConditionInfo, "column");
 
 }
