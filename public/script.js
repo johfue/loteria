@@ -155,8 +155,8 @@ function setWinConditionChain(arr) {
 
 function launchChain(condition) {
   return new Promise(function(resolve, reject) {
-      console.log(condition)
       resolve();
+      console.log(condition);
     // setTimeout(function() {
     //   console.log(condition);
     //   resolve();
