@@ -181,6 +181,9 @@ function animate(elem, animation) {
     setTimeout(() => {
         handleAnimationEnd();
     }, 500);
+    
+    elem.addEventListener("animationend", () => {handleAnimationEnd()};
+
     elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
   });
