@@ -167,7 +167,6 @@ function launchChain(delay) {
     console.log(delay);
   return new Promise(function(resolve, reject) {
     animate(winConditionInfo, delay);
-    resolve();
     // setTimeout(function() {
     //   console.log(delay);
     //   resolve();
@@ -180,7 +179,7 @@ function launchChain(delay) {
 function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-      resolve(elem);
+      resolve();
     }
     elem.classList.add(animation);
     setTimeout(function() {
