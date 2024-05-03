@@ -154,6 +154,7 @@ const delayList = {
 // var delays = [0, 10, 20, 30, 40];
 
 function workMyCollection(arr) {
+    console.log(arr);
   return arr.reduce(function(promise, item) {
     return promise.then(function() {
       return launchChain(item);
@@ -163,6 +164,7 @@ function workMyCollection(arr) {
 }
 
 function launchChain(delay) {
+    console.log(delay);
   return new Promise(function(resolve, reject) {
     animate(winConditionInfo, delay);
     // setTimeout(function() {
