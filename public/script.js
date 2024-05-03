@@ -143,6 +143,13 @@ function newPlayer(nickname, id, oldID, bool) {
     }
 }
 
+const delayList = {
+    row: 10000,
+    column: 10000,
+    diagonal: 6000,
+    twoByTwo: 9000,
+};
+
 
 // var delays = [0, 10, 20, 30, 40];
 
@@ -181,7 +188,7 @@ function animate(elem, animation) {
     }
     setTimeout(function() {
         handleAnimationEnd();
-    }, 6000);
+    }, delayList.animation);
     // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
   });
@@ -203,15 +210,8 @@ async function init() {
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     init();
-    // setWinConditionChain(conditions);
-
 
     // winConditionInfo.classList.add("class", condition);
-    
-    // await animate(para, "fadeOut");
-    // await animate(header, "fill");
-
-    
 }
 
 function host() {
