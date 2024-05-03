@@ -185,7 +185,7 @@ function animate(elem, animation) {
 }
 
 async function init() {
-    target = _("cell_44")
+    const target = _("cell_44");
     console.log("0");
     await animate(target, "fill");
     console.log("a");
