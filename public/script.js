@@ -167,9 +167,9 @@ function launchChain(delay) {
     console.log(delay);
   return new Promise(function(resolve, reject) {
       
-    elem.classList.add(delay);
+    winConditionInfo.classList.add(delay);
     setTimeout(function() {
-    elem.classList.remove(delay);
+    winConditionInfo.classList.remove(delay);
       resolve();
     }, delayList[animation]);
       
