@@ -495,6 +495,7 @@ function host() {
         for (r=0; r < gameInfo.playerList.length; r++) {
             gameInfo.playerList[r].placedBeans = [];
         }
+        DrawBtn.innerHTML = "Start";
         drawBtn.disabled = true;
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
