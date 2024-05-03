@@ -167,6 +167,7 @@ function launchChain(delay) {
     console.log(delay);
   return new Promise(function(resolve, reject) {
     animate(winConditionInfo, delay);
+    resolve();
     // setTimeout(function() {
     //   console.log(delay);
     //   resolve();
@@ -309,12 +310,10 @@ function host() {
         // else {
         for (n=0; n<selectedWinConditions.length; n++) {
             currentWinCondition.push(selectedWinConditions[n].value);
-            console.log(currentWinCondition);
         }
         // }
         
         // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
-        console.log(currentWinCondition);
         setWinCondition(currentWinCondition);
 
         gameInfo.goal = currentWinCondition;
