@@ -189,7 +189,7 @@ function animate(elem, animation) {
     elem.classList.add(animation);
     setTimeout(function() {
         handleAnimationEnd();
-    }, delayList.animation);
+    }, 900);
     // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
   });
 }
