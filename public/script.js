@@ -153,40 +153,32 @@ const delayList = {
 
 // var delays = [0, 10, 20, 30, 40];
 
-// function workMyCollection(arr) {
-//     console.log("ran");
-//   return arr.reduce(function(promise, item) {
-//     return promise.then(function() {
-//         console.log("ran");
-//       return launchChain(item);
-//     });
-//     // uses this orignal promise to start the chaining.
-//   }, Promise.resolve());
-// }
+function workMyCollection(arr) {
+  return arr.reduce(function(promise, item) {
+    return promise.then(function() {
+      return launchChain(item);
+    });
+    // uses this orignal promise to start the chaining.
+  }, Promise.resolve());
+}
 
-// function launchChain(delay) {
-//     console.log("ran");
-//   return new Promise(function(resolve, reject) {
-//       console.log("ran");
-
-//     init(delay);
-
-//     // setTimeout(function() {
-//     //   console.log(delay);
-//     //   resolve();
-//     // }, delay);
-//   });
-// }
+function launchChain(delay) {
+  return new Promise(function(resolve, reject) {
+    animate(winConditionInfo, delay);
+    // setTimeout(function() {
+    //   console.log(delay);
+    //   resolve();
+    // }, delay);
+  });
+}
 
 
 // common function to apply animations to an element.
 function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-      console.log("animation ended...");
       resolve(elem);
     }
-    console.log(delayList[animation]);
     elem.classList.add(animation);
     setTimeout(function() {
     elem.classList.remove(animation);
@@ -197,21 +189,15 @@ function animate(elem, animation) {
 }
 
 async function init() {
-    console.log("0");
     await animate(winConditionInfo, "column");
-    console.log("a");
     await animate(winConditionInfo, "twoByTwo");
-    console.log("b");
     await animate(winConditionInfo, "diagonal");
-    console.log("c");
     await animate(winConditionInfo, "row");
-    console.log("done")
-
 }
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-    init();
+    workMyCollection(conditions);
 
     // winConditionInfo.classList.add("class", condition);
 }
