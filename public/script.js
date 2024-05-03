@@ -166,7 +166,16 @@ function workMyCollection(arr) {
 function launchChain(delay) {
     console.log(delay);
   return new Promise(function(resolve, reject) {
-    animate(winConditionInfo, delay);
+      
+    elem.classList.add(delay);
+    setTimeout(function() {
+    elem.classList.remove(delay);
+      resolve();
+    }, delayList[animation]);
+      
+      
+      
+    // animate(winConditionInfo, delay);
     // setTimeout(function() {
     //   console.log(delay);
     //   resolve();
@@ -179,7 +188,7 @@ function launchChain(delay) {
 function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-      resolve();
+      resolve(elem);
     }
     elem.classList.add(animation);
     setTimeout(function() {
@@ -190,12 +199,6 @@ function animate(elem, animation) {
   });
 }
 
-async function init() {
-    await animate(winConditionInfo, "column");
-    await animate(winConditionInfo, "twoByTwo");
-    await animate(winConditionInfo, "diagonal");
-    await animate(winConditionInfo, "row");
-}
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
