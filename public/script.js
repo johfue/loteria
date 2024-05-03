@@ -147,6 +147,12 @@ const delayList = {
     row: 10000,
     column: 10000,
     diagonal: 6000,
+    corners: 3500,
+    inside: 3500,
+    outside: 3500,
+    z: 3500,
+    n: 3500,
+    blackOut: 3500,
     twoByTwo: 9000,
 };
 
@@ -173,9 +179,15 @@ function launchChain(rule) {
     return new Promise(function(resolve, reject) {
       
     winConditionInfo.classList.add(rule);
+    winConditionInfo.classList.remove("looping");
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
-        resolve();
+        if (winConditionInfo.hasClass("looping")) {
+            resolve(elem);
+        }
+        else {
+            reject();
+        }
     }, delayList[rule]);
     
     // animate(winConditionInfo, delay);
@@ -191,7 +203,7 @@ function launchChain(rule) {
 function animate(elem, animation) {
     return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-        resolve(elem);
+            resolve(elem);
     }
     elem.classList.add(animation);
     setTimeout(function() {
@@ -206,6 +218,8 @@ function animate(elem, animation) {
 function setWinCondition (conditions) {
     // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     loopSetWinAnimation(conditions);
+    winConditionInfo.style.animationPlayState === 'running');
+    winConditionInfo.classList.add("looping");
 
     // winConditionInfo.classList.add("class", condition);
 }
@@ -479,7 +493,8 @@ function host() {
         drawBtn.disabled = true;
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
-        drawBtn.innerHTML = "Start";
+        winConditionInfo.animatio
+        winConditionInfo.style.animationPlayState = 'paused';
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
@@ -795,7 +810,7 @@ function player() {
         else {
             clearBeans();
             currentCard.src="images/blank.svg";
-            // winConditionInfo.src="images/blank_sqaure.svg";
+            winConditionInfo.style.animationPlayState = "paused";
             disableBoard(true);
             shadowBox.classList.add("invisible");
             boardSelect.classList.remove("invisible");
