@@ -219,7 +219,7 @@ function animate(elem, animation) {
 function setWinCondition (conditions) {
     // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     loopSetWinAnimation(conditions);
-    winConditionInfo.style.animation-play-state = 'running';
+    winConditionInfo.style.animationPlayState = 'running';
     winConditionInfo.classList.add("looping");
 
     // winConditionInfo.classList.add("class", condition);
@@ -495,7 +495,7 @@ function host() {
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
         winConditionInfo.animatio
-        winConditionInfo.style.animation-play-state = 'paused';
+        winConditionInfo.style.animationPlayState = 'paused';
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
@@ -811,7 +811,7 @@ function player() {
         else {
             clearBeans();
             currentCard.src="images/blank.svg";
-            winConditionInfo.style.animation-play-state = "paused";
+            winConditionInfo.style.animationPlayState = "paused";
             disableBoard(true);
             shadowBox.classList.add("invisible");
             boardSelect.classList.remove("invisible");
