@@ -313,7 +313,7 @@ function host() {
         // }
         
         // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
-        
+        console.log(currentWinCondition);
         setWinCondition(currentWinCondition);
 
         gameInfo.goal = currentWinCondition;
