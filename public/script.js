@@ -179,10 +179,10 @@ function launchChain(rule) {
     return new Promise(function(resolve, reject) {
       
     winConditionInfo.classList.add(rule);
-    winConditionInfo.classList.has("looping");
+    winConditionInfo.classList.remove("looping");
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
-        if (winConditionInfo.classList.has("looping")) {
+        if (winConditionInfo.classList.contains("looping")) {
             resolve(elem);
         }
         else {
