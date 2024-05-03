@@ -190,9 +190,10 @@ function animate(elem, animation) {
 }
 
 async function init() {
-    await animate(winConditionInfo, "column");
+    const winConFo = _("winConditionInfo");
+    await animate(winConFo, "column");
     console.log("a");
-    await animate(winConditionInfo, "row");
+    await animate(winConFo, "row");
     console.log("b");
     // await animate(winConditionInfo, "diagonal");
     // console.log("c");
