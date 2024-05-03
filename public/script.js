@@ -146,30 +146,30 @@ function newPlayer(nickname, id, oldID, bool) {
 
 // var delays = [0, 10, 20, 30, 40];
 
-function workMyCollection(arr) {
-    console.log("ran");
-  return arr.reduce(function(promise, item) {
-    return promise.then(function() {
-        console.log("ran");
-      return launchChain(item);
-    });
-    // uses this orignal promise to start the chaining.
-  }, Promise.resolve());
-}
+// function workMyCollection(arr) {
+//     console.log("ran");
+//   return arr.reduce(function(promise, item) {
+//     return promise.then(function() {
+//         console.log("ran");
+//       return launchChain(item);
+//     });
+//     // uses this orignal promise to start the chaining.
+//   }, Promise.resolve());
+// }
 
-function launchChain(delay) {
-    console.log("ran");
-  return new Promise(function(resolve, reject) {
-      console.log("ran");
+// function launchChain(delay) {
+//     console.log("ran");
+//   return new Promise(function(resolve, reject) {
+//       console.log("ran");
 
-    init(delay);
+//     init(delay);
 
-    // setTimeout(function() {
-    //   console.log(delay);
-    //   resolve();
-    // }, delay);
-  });
-}
+//     // setTimeout(function() {
+//     //   console.log(delay);
+//     //   resolve();
+//     // }, delay);
+//   });
+// }
 
 
 // common function to apply animations to an element.
