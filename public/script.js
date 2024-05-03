@@ -147,7 +147,7 @@ const delayList = {
     row: 10000,
     column: 10000,
     diagonal: 6000,
-    corners: 3500,
+    corner: 3500,
     inside: 3500,
     outside: 3500,
     Z: 3500,
