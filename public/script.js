@@ -179,10 +179,10 @@ function launchChain(rule) {
     return new Promise(function(resolve, reject) {
       
     winConditionInfo.classList.add(rule);
-    winConditionInfo.classList.remove("looping");
+    winConditionInfo.classList.has("looping");
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
-        if (winConditionInfo.hasClass("looping")) {
+        if (winConditionInfo.classList.("looping")) {
             resolve(elem);
         }
         else {
@@ -218,7 +218,7 @@ function animate(elem, animation) {
 function setWinCondition (conditions) {
     // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     loopSetWinAnimation(conditions);
-    winConditionInfo.style.animationPlayState === 'running';
+    winConditionInfo.style.animationPlayState = 'running';
     winConditionInfo.classList.add("looping");
 
     // winConditionInfo.classList.add("class", condition);
