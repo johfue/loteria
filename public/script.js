@@ -189,6 +189,7 @@ function animate(elem, animation) {
     console.log(delayList[animation]);
     elem.classList.add(animation);
     setTimeout(function() {
+    elem.classList.remove(animation);
         handleAnimationEnd();
     }, delayList[animation]);
     // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
