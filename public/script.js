@@ -966,7 +966,7 @@ function player() {
             currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
-        winConditionInfo.classList.add("class", gameInfo.goal);
+        setWinCondition(gameInfo.goal);
                 // setWinCondition(gameInfo.goal);
 
         for (e=0; e < gameInfo.playerList.length; e++) {
