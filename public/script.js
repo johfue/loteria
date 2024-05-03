@@ -499,8 +499,7 @@ function host() {
         drawBtn.disabled = true;
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
-        winConditionInfo.animatio
-        winConditionInfo.style.animationPlayState = 'paused';
+        winConditionInfo.setAttribute("class", "winInfo winInfo--host");
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
