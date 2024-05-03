@@ -183,10 +183,11 @@ function launchChain(rule) {
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
         if (winConditionInfo.classList.contains("looping")) {
-            resolve(elem);
+            reject();
         }
         else {
-            reject();
+            resolve(elem);
+
         }
     }, delayList[rule]);
     
