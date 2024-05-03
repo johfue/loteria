@@ -204,7 +204,7 @@ function animate(elem, animation) {
 
 
 function setWinCondition (conditions) {
-    winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+    // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     loopSetWinAnimation(conditions);
 
     // winConditionInfo.classList.add("class", condition);

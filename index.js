@@ -172,6 +172,7 @@ io.on('connection', (socket) => {
             socket.join(room);
 
             io.sockets.adapter.rooms.get(room).size;
+            //rooms.get is not a function?
         }
         else {
             io.emit('room join', false);
