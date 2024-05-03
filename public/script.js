@@ -150,14 +150,23 @@ const delayList = {
     twoByTwo: 9000,
 };
 
+function loopSetWinAnimation(arr) {
+    
+Promise.resolve().then(function resolver() {
+    return setWinAnimation(arr)
+    .then(resolver);
+}).catch((error) => {
+    console.log("Error: " + error);
+});
+}
+
 function setWinAnimation(arr) {
     return arr.reduce(function(promise, item) {
     return promise.then(function() {
         return launchChain(item);
     });
     // uses this orignal promise to start the chaining.
-    }, Promise.resolve())
-    .then.setWinAnimation(arr);
+    }, Promise.resolve());
 }
 
 function launchChain(rule) {
@@ -196,7 +205,7 @@ function animate(elem, animation) {
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-    setWinAnimation(conditions);
+    loopSetWinAnimation(conditions);
 
     // winConditionInfo.classList.add("class", condition);
 }
