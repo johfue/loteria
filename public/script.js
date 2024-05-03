@@ -150,9 +150,9 @@ const delayList = {
     corners: 3500,
     inside: 3500,
     outside: 3500,
-    z: 3500,
-    n: 3500,
-    blackOut: 3500,
+    Z: 3500,
+    N: 3500,
+    blackout: 3500,
     twoByTwo: 9000,
 };
 
