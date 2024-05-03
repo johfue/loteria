@@ -150,31 +150,25 @@ const delayList = {
     twoByTwo: 9000,
 };
 
-
-// var delays = [0, 10, 20, 30, 40];
-
-function workMyCollection(arr) {
-    console.log(arr);
-  return arr.reduce(function(promise, item) {
+function setWinAnimation(arr) {
+    return arr.reduce(function(promise, item) {
     return promise.then(function() {
-      return launchChain(item);
+        return launchChain(item);
     });
     // uses this orignal promise to start the chaining.
-  }, Promise.resolve());
+    }, Promise.resolve())
+    .then.setWinAnimation(arr);
 }
 
-function launchChain(delay) {
-    console.log(delay);
-  return new Promise(function(resolve, reject) {
+function launchChain(rule) {
+    return new Promise(function(resolve, reject) {
       
-    winConditionInfo.classList.add(delay);
+    winConditionInfo.classList.add(rule);
     setTimeout(function() {
-    winConditionInfo.classList.remove(delay);
-      resolve();
-    }, delayList[delay]);
-      
-      
-      
+    winConditionInfo.classList.remove(rule);
+        resolve();
+    }, delayList[rule]);
+    
     // animate(winConditionInfo, delay);
     // setTimeout(function() {
     //   console.log(delay);
@@ -186,9 +180,9 @@ function launchChain(delay) {
 
 // common function to apply animations to an element.
 function animate(elem, animation) {
-  return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-      resolve(elem);
+        resolve(elem);
     }
     elem.classList.add(animation);
     setTimeout(function() {
@@ -202,7 +196,7 @@ function animate(elem, animation) {
 
 function setWinCondition (conditions) {
     winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-    workMyCollection(conditions);
+    setWinAnimation(conditions);
 
     // winConditionInfo.classList.add("class", condition);
 }
