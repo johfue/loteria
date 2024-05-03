@@ -185,6 +185,7 @@ function animate(elem, animation) {
 }
 
 async function init() {
+    console.log("0");
     await animate(winConditionInfo, "fill");
     console.log("a");
     await animate(winConditionInfo, "fadeOut");
