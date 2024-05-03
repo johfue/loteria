@@ -179,22 +179,24 @@ function animate(elem, animation) {
       console.log("animation ended...");
       resolve(elem);
     }
-    elem.addEventListener("animationend", handleAnimationEnd, { once: true });
+    setTimeout(function() {
+        handleAnimationEnd();
+    }, 6000);
+    // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
   });
 }
 
 async function init() {
-    const target = _("cell_44");
     console.log("0");
-    await animate(target, "fill");
+    await animate(winConditionInfo, "column");
     console.log("a");
-    await animate(target, "fadeOut");
+    await animate(winConditionInfo, "twoByTwo");
     console.log("b");
-    // await animate(winConditionInfo, "diagonal");
-    // console.log("c");
-    // await animate(winConditionInfo, "row");
-    // console.log("done")
+    await animate(winConditionInfo, "diagonal");
+    console.log("c");
+    await animate(winConditionInfo, "row");
+    console.log("done")
 
 }
 
