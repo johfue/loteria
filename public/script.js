@@ -186,11 +186,11 @@ function animate(elem, animation) {
       console.log("animation ended...");
       resolve(elem);
     }
+    elem.classList.add(animation);
     setTimeout(function() {
         handleAnimationEnd();
     }, delayList.animation);
     // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
-    elem.classList.add(animation);
   });
 }
 
