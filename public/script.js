@@ -182,7 +182,7 @@ function launchChain(rule) {
     winConditionInfo.classList.has("looping");
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
-        if (winConditionInfo.classList.("looping")) {
+        if (winConditionInfo.classList.("looping") {
             resolve(elem);
         }
         else {
