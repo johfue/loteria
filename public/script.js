@@ -184,7 +184,7 @@ function animate(elem, animation) {
     
     elem.addEventListener("animationend", handleAnimationEnd);
 
-    elem.addEventListener("animationend", handleAnimationEnd, { once: true });
+    // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
   });
 }
