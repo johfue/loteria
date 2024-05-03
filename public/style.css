@@ -2301,7 +2301,7 @@ td input {
 
 @keyframes fillColor {
   to {
-    background-color: #7afcff;
+    fill: #7afcff;
   }
 }
 
@@ -2313,7 +2313,7 @@ td input {
 
 @keyframes fadeOut {
   to {
-    opacity: 0;
+    fill: #435708;
   }
 }
 
