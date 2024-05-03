@@ -176,6 +176,7 @@ function launchChain(delay) {
 function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
+        console.log("end");
       resolve(elem);
     }
     // setTimeout(() => {
