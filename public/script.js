@@ -186,7 +186,7 @@ function launchChain(rule) {
             reject();
         }
         else {
-            resolve(elem);
+            resolve();
 
         }
     }, delayList[rule]);
