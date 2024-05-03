@@ -175,14 +175,18 @@ function setWinAnimation(arr) {
     }, Promise.resolve());
 }
 
+let round = 1;
+let currentRound = 1;
+
+
 function launchChain(rule) {
     return new Promise(function(resolve, reject) {
       
     winConditionInfo.classList.add(rule);
-    winConditionInfo.classList.remove("looping");
+    let currentRound = round;
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
-        if (winConditionInfo.classList.contains("looping")) {
+        if (round > currentRound) {
             reject();
         }
         else {
@@ -218,6 +222,7 @@ function animate(elem, animation) {
 
 function setWinCondition (conditions) {
     // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+    round += 1;
     loopSetWinAnimation(conditions);
     winConditionInfo.style.animationPlayState = 'running';
     winConditionInfo.classList.add("looping");
