@@ -187,9 +187,9 @@ function animate(elem, animation) {
 async function init() {
     target = _("cell_44")
     console.log("0");
-    await animate(winConditionInfo, "fill");
+    await animate(target, "fill");
     console.log("a");
-    await animate(winConditionInfo, "fadeOut");
+    await animate(target, "fadeOut");
     console.log("b");
     // await animate(winConditionInfo, "diagonal");
     // console.log("c");
