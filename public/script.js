@@ -300,18 +300,18 @@ function host() {
     }
     
     function chooseWinCondition() {
-        currentWinCondition = [];
-        selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
+        let currentWinCondition = [];
+        let selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
         // if (selectedWinConditions.length === 1) {
         //     currentWinCondition = selectedWinConditions.value;
         // }
         
         // else {
-            for (n=0; n<selectedWinConditions.length; n++) {
-                currentWincondition.push(selectedWinConditions[n].value);
-                console.log(selectedWinConditions[n].value);
-                console.log(currentWincondition);
-            }
+        for (n=0; n<selectedWinConditions.length; n++) {
+            currentWincondition.push(selectedWinConditions[n].value);
+            console.log(selectedWinConditions[n].value);
+            console.log(currentWincondition);
+        }
         // }
         
         // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
