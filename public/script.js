@@ -218,7 +218,7 @@ function animate(elem, animation) {
 function setWinCondition (conditions) {
     // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
     loopSetWinAnimation(conditions);
-    winConditionInfo.style.animationPlayState === 'running');
+    winConditionInfo.style.animationPlayState === 'running';
     winConditionInfo.classList.add("looping");
 
     // winConditionInfo.classList.add("class", condition);
