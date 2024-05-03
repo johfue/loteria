@@ -711,7 +711,7 @@ function player() {
     targetDom();
     let chosenBoard = null;
     let checkedPosition = [];
-    let currentWinCondition = "";
+    let currentWinCondition = [];
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
@@ -814,7 +814,7 @@ function player() {
     
     socket.on('win condition', function(condition){
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
-        winConditionInfo.classList.add("class", condition);
+        setWinCondition(condition);
     });
     
     socket.on('win checked', function(bool){
