@@ -308,9 +308,8 @@ function host() {
         
         // else {
         for (n=0; n<selectedWinConditions.length; n++) {
-            currentWincondition.push(selectedWinConditions[n].value);
-            console.log(selectedWinConditions[n].value);
-            console.log(currentWincondition);
+            currentWinCondition.push(selectedWinConditions[n].value);
+            console.log(currentWinCondition);
         }
         // }
         
