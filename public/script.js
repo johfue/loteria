@@ -185,6 +185,7 @@ function animate(elem, animation) {
 }
 
 async function init() {
+    target = _("cell_44")
     console.log("0");
     await animate(winConditionInfo, "fill");
     console.log("a");
