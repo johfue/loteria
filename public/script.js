@@ -176,15 +176,9 @@ function newPlayer(nickname, id, oldID, bool) {
 function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
-        console.log("end");
+      console.log("animation ended...");
       resolve(elem);
     }
-    // setTimeout(() => {
-    //     handleAnimationEnd();
-    // }, 500);
-    
-    // elem.addEventListener("animationend", handleAnimationEnd);
-
     elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
   });
