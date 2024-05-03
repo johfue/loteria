@@ -171,7 +171,7 @@ function launchChain(delay) {
     setTimeout(function() {
     winConditionInfo.classList.remove(delay);
       resolve();
-    }, delayList[animation]);
+    }, delayList[delay]);
       
       
       
