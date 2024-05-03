@@ -187,6 +187,7 @@ function launchChain(rule) {
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
         if (round > currentRound) {
+            winConditionInfo.classList.remove(rule);
             reject();
         }
         else {
@@ -225,7 +226,6 @@ function setWinCondition (conditions) {
     round += 1;
     loopSetWinAnimation(conditions);
     winConditionInfo.style.animationPlayState = 'running';
-    winConditionInfo.classList.add("looping");
 
     // winConditionInfo.classList.add("class", condition);
 }
