@@ -2318,9 +2318,9 @@ td input {
 }
 
 .fill {
-  animation: fillColor var(--animation-duration) forwards ease-out;
+  animation: fillColor 1s forwards ease-out;
 }
 
 .fadeOut {
-  animation: fadeOut var(--animation-duration) forwards ease-out;
+  animation: fadeOut 1s forwards ease-out;
 }
