@@ -185,14 +185,14 @@ function animate(elem, animation) {
 }
 
 async function init() {
-    await animate(winConditionInfo, "column");
+    await animate(winConditionInfo, "fill");
     console.log("a");
-    await animate(winConditionInfo, "twoByTwo");
+    await animate(winConditionInfo, "fadeOut");
     console.log("b");
-    await animate(winConditionInfo, "diagonal");
-    console.log("c");
-    await animate(winConditionInfo, "row");
-    console.log("done")
+    // await animate(winConditionInfo, "diagonal");
+    // console.log("c");
+    // await animate(winConditionInfo, "row");
+    // console.log("done")
 
 }
 

@@ -2298,3 +2298,29 @@ td input {
 .invisible {
     display: none;
 }
+
+@keyframes fillColor {
+  to {
+    background-color: #7afcff;
+  }
+}
+
+@keyframes unfillColor {
+  to {
+    background-color: #feff9c;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.fill {
+  animation: fillColor var(--animation-duration) forwards ease-out;
+}
+
+.fadeOut {
+  animation: fadeOut var(--animation-duration) forwards ease-out;
+}
