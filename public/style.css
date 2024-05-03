@@ -2094,23 +2094,23 @@ td input {
 }
 
 .row #cell_11, .row #cell_12, .row #cell_13, .row #cell_14 {
-    -webkit-animation: rows 10s steps(1);
-    animation: rows 10s steps(1);
+    -webkit-animation: rows 10s steps(1) forwards;
+    animation: rows 10s steps(1) forwards;
 }
 
 .row #cell_21, .row #cell_22, .row #cell_23, .row #cell_24 {
-    -webkit-animation: rows 10s steps(1) 2.5s;
-    animation: rows 10s steps(1) 2.5s;
+    -webkit-animation: rows 10s steps(1) 2.5s forwards;
+    animation: rows 10s steps(1) 2.5s forwards;
 }
 
 .row #cell_31, .row #cell_32, .row #cell_33, .row #cell_34 {
-    -webkit-animation: rows 10s steps(1) 5s;
-    animation: rows 10s steps(1) 5s;
+    -webkit-animation: rows 10s steps(1) 5s forwards;
+    animation: rows 10s steps(1) 5s forwards;
 }
 
 .row #cell_41, .row #cell_42, .row #cell_43, .row #cell_44 {
-    -webkit-animation: rows 10s steps(1) 7.5s;
-    animation: rows 10s steps(1) 7.5s;
+    -webkit-animation: rows 10s steps(1) 7.5s forwards;
+    animation: rows 10s steps(1) 7.5s forwards;
 }
 
 @keyframes rows {
@@ -2126,13 +2126,13 @@ td input {
 }
 
 .diagonal #cell_11, .diagonal #cell_22, .diagonal #cell_33, .diagonal #cell_44 {
-    -webkit-animation: diagonal 6s steps(1);
-    animation: diagonal 6s steps(1);
+    -webkit-animation: diagonal 6s steps(1) forwards;
+    animation: diagonal 6s steps(1) forwards;
 }
 
 .diagonal #cell_14, .diagonal #cell_23, .diagonal #cell_32, .diagonal #cell_41 {
-    -webkit-animation: diagonal 6s steps(1) 3s;
-    animation: diagonal 6s steps(1) 3s;
+    -webkit-animation: diagonal 6s steps(1) 3s forwards;
+    animation: diagonal 6s steps(1) 3s forwards;
 }
 
 @keyframes diagonal {
@@ -2148,67 +2148,67 @@ td input {
 }
 
 .twoByTwo #cell_11 {
-    -webkit-animation: twoByTwo 9s steps(1);
-    animation: twoByTwo 9s steps(1);
+    -webkit-animation: twoByTwo 9s steps(1) forwards;
+    animation: twoByTwo 9s steps(1 forwards);
 }
 .twoByTwo #cell_12 {
-    -webkit-animation: twoByTwo3 9s steps(1);
-    animation: twoByTwo2 9s steps(1);
+    -webkit-animation: twoByTwo3 9s steps(1) forwards;
+    animation: twoByTwo2 9s steps(1) forwards;
 }
 .twoByTwo #cell_13 {
-    -webkit-animation: twoByTwo2 9s steps(1) 1s;
-    animation: twoByTwo2 9s steps(1) 1s;
+    -webkit-animation: twoByTwo2 9s steps(1) 1s forwards;
+    animation: twoByTwo2 9s steps(1) 1s forwards;
 }
 .twoByTwo #cell_14 {
-    -webkit-animation: twoByTwo 9s steps(1) 2s;
-    animation: twoByTwo 9s steps(1) 2s;
+    -webkit-animation: twoByTwo 9s steps(1) 2s forwards;
+    animation: twoByTwo 9s steps(1) 2s forwards;
 }
 .twoByTwo #cell_21 {
-    -webkit-animation: twoByTwo3 9s steps(1);
-    animation: twoByTwo3 9s steps(1);
+    -webkit-animation: twoByTwo3 9s steps(1) forwards;
+    animation: twoByTwo3 9s steps(1) forwards;
 }
 .twoByTwo #cell_22 {
-    -webkit-animation: twoByTwo4 9s steps(1);
-    animation: twoByTwo4 9s steps(1);
+    -webkit-animation: twoByTwo4 9s steps(1) forwards;
+    animation: twoByTwo4 9s steps(1) forwards;
 }
 .twoByTwo #cell_23 {
-    -webkit-animation: twoByTwo4 9s steps(1) 1s;
-    animation: twoByTwo4 9s steps(1) 1s;
+    -webkit-animation: twoByTwo4 9s steps(1) 1s forwards;
+    animation: twoByTwo4 9s steps(1) 1s forwards;
 }.twoByTwo #cell_24 {
-    -webkit-animation: twoByTwo3 9s steps(1) 2s;
-    animation: twoByTwo3 9s steps(1) 2s;
+    -webkit-animation: twoByTwo3 9s steps(1) 2s forwards;
+    animation: twoByTwo3 9s steps(1) 2s forwards;
 }
 .twoByTwo #cell_31 {
-    -webkit-animation: twoByTwo 9s steps(1) 3s;
-    animation: twoByTwo3 9s steps(1) 3s;
+    -webkit-animation: twoByTwo 9s steps(1) 3s forwards;
+    animation: twoByTwo3 9s steps(1) 3s forwards;
 }
 .twoByTwo #cell_32 {
-    -webkit-animation: twoByTwo 9s steps(1) 3s;
-    animation: twoByTwo4 9s steps(1) 3s;
+    -webkit-animation: twoByTwo 9s steps(1) 3s forwards;
+    animation: twoByTwo4 9s steps(1) 3s forwards;
 }
 .twoByTwo #cell_33 {
-    -webkit-animation: twoByTwo 9s steps(1) 4s;
-    animation: twoByTwo4 9s steps(1) 4s;
+    -webkit-animation: twoByTwo 9s steps(1) 4s forwards;
+    animation: twoByTwo4 9s steps(1) 4s forwards;
 }
 .twoByTwo #cell_34 {
-    -webkit-animation: twoByTwo 9s steps(1) 5s;
-    animation: twoByTwo3 9s steps(1) 5s;
+    -webkit-animation: twoByTwo 9s steps(1) 5s forwards;
+    animation: twoByTwo3 9s steps(1) 5s forwards;
 }
 .twoByTwo #cell_41 {
-    -webkit-animation: twoByTwo 9s steps(1) 6s;
-    animation: twoByTwo 9s steps(1) 6s;
+    -webkit-animation: twoByTwo 9s steps(1) 6s forwards;
+    animation: twoByTwo 9s steps(1) 6s forwards;
 }
 .twoByTwo #cell_42 {
-    -webkit-animation: twoByTwo 9s steps(1) 6s;
-    animation: twoByTwo2 9s steps(1) 6s;
+    -webkit-animation: twoByTwo 9s steps(1) 6sforwards;
+    animation: twoByTwo2 9s steps(1) 6s forwards;
 }
 .twoByTwo #cell_43 {
-    -webkit-animation: twoByTwo 9s steps(1) 7s;
-    animation: twoByTwo2 9s steps(1) 7s;
+    -webkit-animation: twoByTwo 9s steps(1) 7s forwards;
+    animation: twoByTwo2 9s steps(1) 7s forwards;
 }
 .twoByTwo #cell_44 {
-    -webkit-animation: twoByTwo 9s steps(1) 8s;
-    animation: twoByTwo 9s steps(1) 8s;
+    -webkit-animation: twoByTwo 9s steps(1) 8s forwards;
+    animation: twoByTwo 9s steps(1) 8s forwards;
 }
 @keyframes twoByTwo {
     0% {
