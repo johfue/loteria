@@ -177,7 +177,6 @@ function animate(elem, animation) {
   return new Promise((resolve, reject) => {
     function handleAnimationEnd() {
       resolve(elem);
-
     }
     elem.addEventListener("animationend", handleAnimationEnd, { once: true });
     elem.classList.add(animation);
@@ -190,6 +189,8 @@ async function init() {
     await animate(winConditionInfo, "row");
     console.log("b");
     await animate(winConditionInfo, "diagonal");
+    console.log("c");
+    await animate(winConditionInfo, "twoByTwo");
     console.log("done")
 
 }
