@@ -193,9 +193,9 @@ function animate(elem, animation) {
 async function init() {
     // await animate(winConditionInfo, "column");
     console.log("a");
-    await animate(winConditionInfo, "row");
-    console.log("b");
     await animate(winConditionInfo, "diagonal");
+    console.log("b");
+    await animate(winConditionInfo, "row");
     console.log("c");
     await animate(winConditionInfo, "twoByTwo");
     console.log("done")
