@@ -422,13 +422,14 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     padding: 5px;
 }
 
-@media(min-width:400px) {
+@media(min-width:768px) {
     .aboutBtn {
         align-self: start;
     }
-    
+
+@media(min-width:400px) {
     .contactBtn {
-        align-self: flex-end;
+        align-self: center;
         margin: 3rem 0 0 0;
     }
 }
