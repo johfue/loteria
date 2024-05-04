@@ -375,6 +375,18 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     margin: 0 auto;
 }
 
+.aboutBtn {
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+}
+
+.aboutBtn__text {
+    color: var(--neutral-900);
+    font-family: 'poppinsbold';
+    text-transform: uppercase;
+}
+
 .contactBtn {
     display: flex;
     border-bottom: 2px solid var(--neutral-100);
