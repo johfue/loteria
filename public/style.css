@@ -284,6 +284,14 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: fit-content;
 }
 
+#checker:hover .odd {
+    fill: #534537;
+}
+
+#checker:hover .even {
+    fill: #FBF6F4;
+}
+
 .expanded__div {
     background-color: var(--neutral-700);
     display: flex;
