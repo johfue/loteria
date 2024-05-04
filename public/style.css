@@ -251,7 +251,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     padding: 2em;
 }
 
-
 .about__h2 {
     background-color: var(--neutral-100);
     color: var(--neutral-900);
@@ -280,6 +279,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .about__a {
     color: var(--accent-base);
+    margin: 2em 0;
 }
 
 .expanded__div {
@@ -287,7 +287,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 1em;
-    margin: 2em 0;
 }
 
 .expanded__ul {

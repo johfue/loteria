@@ -56,9 +56,9 @@
 <br><br>
     <p class="about__p about__p--strong">How do I use this site?</p>
     <p class="about__p">First you need a group to play with. Whoever is drawing cards should be ready to share their screen, either over a video call or on a big screen everyone can see. Everyone else join on their own device by entering a code given out by the host.  </p>
-<br><br>
-    <a href="#detailed-instructions" class="about__p about__a">[Detailed hosting insstructions]</a>
-    <div class="expanded__div">
+<br>
+    <a href="#detailed-instructions" onclick="visibility()" class="about__p about__a">[Detailed hosting insstructions]</a>
+    <div id="expanded" class="expanded__div invisible">
         <img src="images/aboutStep01" class="expaneded__img">
         <ul class="expanded__ul">
             <li class="expanded__li">Click Host Game</li>
@@ -89,6 +89,13 @@
     </a>
 
 </div>
+<script>
+  const expanded = getElementById("expanded");
+  function visibility() {
+      let listOfClasses = expanded.classList;
+    listOfClasses.contains("invisible") ? listOfClasses.remove("invisible") : listOfClasses.add("invisible");
+  }
+</script>
 </body>
 
 </html>
