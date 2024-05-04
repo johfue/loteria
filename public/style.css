@@ -237,7 +237,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 .wrapper {
     padding: 1rem;
-}
+    display: flex;
+    flex-direction: column;}
 
 .about__div {
     background-color: var(--neutral-900);
