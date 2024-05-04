@@ -858,6 +858,11 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.hostWrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .hostInfo {
     display: grid;
     grid-template-rows: 1fr;
