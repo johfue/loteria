@@ -426,6 +426,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .aboutBtn {
         align-self: start;
     }
+}
 
 @media(min-width:400px) {
     .contactBtn {
