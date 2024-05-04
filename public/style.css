@@ -387,6 +387,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     margin: 0 auto;
     text-align: center;
     text-decoration: none;
+    align-self: center;
 }
 
 .aboutBtn__Txt {
@@ -422,6 +423,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 @media(min-width:400px) {
+    .aboutBtn {
+        align-self: start;
+    }
+    
     .contactBtn {
         align-self: flex-end;
         margin: 3rem 0 0 0;
