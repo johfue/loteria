@@ -101,7 +101,7 @@ body {
     100%{background-position:0% 50%}
 }
 
-h1, h2, h3, p, li, label, input, button, .about__p--a {
+h1, h2, h3, p, li, label, input, button, .about__a {
     font-family: poppins;
     color: var(--neutral-100);
     margin: 0;
@@ -277,7 +277,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     line-height: 1.3;
 }
 
-.about__p--a {
+.about__a {
     color: var(--accent-base);
 }
 
