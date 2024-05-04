@@ -235,7 +235,48 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.about__div {
+    background-color: var(--neutral-900);
+}
 
+
+.about__h2 {
+    background-color: var(--neutral-100);
+}
+
+.about__p {
+    
+}
+
+.about__p--strong {
+    font-family: poppinsbold;
+}
+
+.about__p--a {
+    color: var(--accent);
+}
+
+.expanded__div {
+    background-color: var(--neutral-700);
+}
+
+.expanded__ul {
+    
+}
+
+.expanded__li {
+    
+}
+
+.expanded__img {
+    
+}
+
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
 #popItIn {
     width: 90%;
     margin: 0 auto;
