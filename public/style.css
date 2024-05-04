@@ -320,10 +320,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 90%;
     margin: 0 auto;
     display: grid;
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    height: 100vh;
-    grid-template-rows: 1fr max-content max-content max-content 1fr;
+    height: 98vh;
+    padding: 1vh;
+    grid-template-rows: 1fr max-content max-content 1fr;
 }
 
 .hero {
@@ -400,7 +399,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: flex;
     border-bottom: 2px solid var(--neutral-100);
     background-color: var(--primary-base);
-    align-self: auto;
+    justify-self: end;
     margin: 3rem auto 0;
     text-decoration: none;
 }
