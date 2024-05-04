@@ -41,12 +41,13 @@
 ">
     
 <div id="popItIn">
+    
     <a href="about.html" id="about" class="aboutBtn">
         <p class="aboutBtn__Txt">About</p>
         <img src="images/checker.svg" class="aboutBtn__Img">
     </a>
     <img src="images/logo.svg" class="hero" alt="Play Lotería Online">
-   
+   <div>
     <form id="welcomeForm" class="welcome">
         <label for="roomSearch" class="welcome__label">Room Number</label>
         <input class="welcome__input" placeholder="######" type="text" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required id="roomSearch">
@@ -78,7 +79,7 @@
             </div>
         <button type="submit" class="secondaryBtn welcome__input" id="deckSelectBtn">Confirm</button>
     </form>
-
+    </div>
     <div id="cardReview" class="modal modal--cardSelect invisible">
             <ol id="cardSelectList" class="modal__content modal__content--cardSelect"></ol>
             <h2><span class="modal__span">Add/Remove</span><br>Cards</h2>
