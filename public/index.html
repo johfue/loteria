@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en-US">
 <head>
@@ -14,7 +15,7 @@
     </script>
     <title>Play Lotería Online</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Play la lotería with friends and family across the globe. Perfect for playing over Zoom or in a classroom. 100% free, no sign-ups and no ads.">
+    <meta name="description" content="Play la lotería with friends and family across the globe. Perfect to play over Zoom or in a classroom. 100% free, no sign-ups and no ads.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -39,13 +40,12 @@
         document.getElementById('welcomeForm').requestSubmit(joinBTN);
     }
 ">
+    
 <div id="popItIn">
     <!--<a href="about.html" id="about" class="contactBtn">-->
     <!--    <p class="contactBtn__Txt">About</p>-->
     <!--    <img src="images/contact.png" class="contactBtn__Img">-->
-    <!--</a>-->
-
-    <img src="images/logo.svg" class="hero" alt="Play Lotería Online">
+    <!--</a>-->    <img src="images/logo.svg" class="hero" alt="Play Lotería Online">
    
     <form id="welcomeForm" class="welcome">
         <label for="roomSearch" class="welcome__label">Room Number</label>
@@ -54,7 +54,7 @@
         <button class="welcome__input secondaryBtn" type="submit" id="join">Join a game</button>
     </form>
     
-    <form id="nameForm" class="nickname invisible">
+    <form id="nameForm" class="nickname invisible" method="post" action="/player">
         <label for="nickname" class="welcome__label">Nickname</label>
         <input class="welcome__input" placeholder="Name" type="text" inputmode="text" minlength="1" maxlength="8" required id="nickname">
         <span id="errorMsg2" class="errorMsg invisible"></span>
@@ -63,7 +63,7 @@
     
     <button class="welcome__input primaryBtn" id="host">Host a game</button>
     
-    <form id="deckSettings" class="deckSettings invisible">
+    <form id="deckSettings" class="deckSettings invisible" method="post" action="/game">
             <div class="deckSettings__option">
                 <input type="radio" id="deck1" name="deckOption" value="classic" class="modal__input--deckSettings">
                 <label for="deck1" class="radio-sibling--deckSettings"><span class="deckSettings__label--header">Classic</span><br>The original 54 Don Clemente cards</label>
@@ -90,8 +90,8 @@
     </div>
 
     <a href="mailto:contact@playloteria.online" target="blank_" id="contact" class="contactBtn">
-        <p class="contactBtn__Txt"><span class="contactBtn__Questions">Questions?</span><br>contact@playloteria.online</p>
         <img src="images/contact.png" class="contactBtn__Img">
+        <p class="contactBtn__Txt"><span class="contactBtn__Questions">Questions?</span><br>contact@playloteria.online</p>
     </a>
 <div id="shadowBox" class="shadowBox invisible"></div>
 </div>
