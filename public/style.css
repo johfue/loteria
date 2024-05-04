@@ -381,7 +381,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     text-decoration: none;
 }
 
-p.aboutBtn__text {
+#about .aboutBtn__text {
     color: var(--neutral-900);
     font-family: 'poppinsbold';
     text-transform: uppercase;
