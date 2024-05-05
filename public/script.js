@@ -1209,6 +1209,14 @@ _("closeSelect").addEventListener('click', function(event) {
     
 });
 
+    socket.on('room clear', function(r){
+        console.log("room clear")
+        window.history.pushState('','', r);
+        load_page("host", event);
+        // _("roomNumber").innerHTML = r;
+    });
+
+
 _("deckSelectBtn").addEventListener('click', function(event) {
     currentDeck = document.querySelector('input[name="deckOption"]:checked').value;
     
@@ -1235,11 +1243,5 @@ _("deckSelectBtn").addEventListener('click', function(event) {
 
     socket.emit('new room', roomNumber);
 
-    socket.on('room clear', function(r){
-        console.log("room clear")
-        window.history.pushState('','', r);
-        load_page("host", event);
-        // _("roomNumber").innerHTML = r;
-    });
-
+    event.preventDefault();
 });
