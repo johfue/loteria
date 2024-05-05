@@ -101,11 +101,9 @@ function boardConstruct(seed) {
 
     return tbl;
 }
-    let cell = document.createElement("td");
-    cell.setAttribute("class", "alleged__cell");
 
-    let loaderGifSpan = document.createElement("span");
-    loaderGif.setAttribute("class", "loaderGif");
+let loaderGifSpan = document.createElement("span");
+loaderGifSpan.setAttribute("class", "loaderGif");
 
 function loaderGif(target, bool) {
 
