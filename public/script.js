@@ -1242,5 +1242,4 @@ _("deckSelectBtn").addEventListener('click', function(event) {
         // _("roomNumber").innerHTML = r;
     });
 
-    event.preventDefault();
 });
