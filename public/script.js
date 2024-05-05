@@ -245,7 +245,7 @@ function setWinCondition (conditions) {
     // winConditionInfo.classList.add("class", condition);
 }
 
-function host() {
+function host(r) {
 
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
@@ -262,8 +262,9 @@ function host() {
     let currentWincondition = [];
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
-    const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    const roomNumber = r;
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
@@ -285,7 +286,9 @@ function host() {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-
+    
+    _("roomNumber").innerHTML = r;
+    
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
         bottomStripe.innerHTML = "";
@@ -306,13 +309,13 @@ function host() {
         playerList: [],
     };
     
-    socket.emit('new room', roomNumber);
+    // // socket.emit('new room', roomNumber);
 
-    socket.on('room clear', function(r){
-        console.log("room clear")
-        window.history.pushState('','', r);
-        _("roomNumber").innerHTML = r;
-    });
+    // socket.on('room clear', function(r){
+    //     console.log("room clear")
+    //     window.history.pushState('','', r);
+    //     _("roomNumber").innerHTML = r;
+    // });
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
@@ -1206,6 +1209,15 @@ _("closeSelect").addEventListener('click', function(event) {
     
 });
 
+    // socket.emit('new room', roomNumber);
+
+socket.on('room clear', function(r){
+    console.log("room clear")
+    window.history.pushState('','', r);
+    load_page("host", r, event);
+
+});
+
 _("deckSelectBtn").addEventListener('click', function(event) {
     currentDeck = document.querySelector('input[name="deckOption"]:checked').value;
     
@@ -1229,7 +1241,7 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     localStorage.setItem('deckCookie', currentDeck);
 
     loaderGif(_("deckSelectBtn", true));
+    socket.emit('new room');
 
-    load_page("host", event);
     event.preventDefault();
 });
