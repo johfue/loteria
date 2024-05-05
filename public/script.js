@@ -1079,7 +1079,7 @@ function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
         socket.emit('check nickname', nickname, _("roomSearch").value);
-        loaderGif(_("nickname"), true);
+        loaderGif(_("player"), true);
     }
     else {
         _("errorMsg2").classList.remove("invisible");
@@ -1089,7 +1089,7 @@ function nameCheck(name, evt) {
 }
 
 socket.on("name clear", function(bool) {
-    loaderGif(_("nickname"), false);
+    loaderGif(_("player"), false);
 
     if (bool) {
         window.history.pushState('','', roomInput);
