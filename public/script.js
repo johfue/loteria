@@ -102,11 +102,10 @@ function boardConstruct(seed) {
     return tbl;
 }
 
-let loaderGifSpan = document.createElement("span");
+function loaderGif(target, bool) {
+    let loaderGifSpan = document.createElement("span");
 loaderGif.setAttribute("class", "loaderGif");
 
-
-function loaderGif(target, bool) {
     if (bool) {
         target.append(loaderGifSpan);
     }
