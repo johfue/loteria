@@ -104,17 +104,17 @@ function boardConstruct(seed) {
 
 let loaderGifSpan = document.createElement("span");
 loaderGifSpan.setAttribute("class", "loaderGif");
+loaderGifSpan.innerHTML = "...";
 
 function loaderGif(target, bool) {
 
     if (bool) {
+        target.innerHTML = "";
         target.append(loaderGifSpan);
-        console.log(1);
     }
     
     else {
         target.lastChild.remove();
-        console.log(2);
     }
 }
 
@@ -1089,13 +1089,14 @@ function nameCheck(name, evt) {
 }
 
 socket.on("name clear", function(bool) {
-    loaderGif(_("player"), false);
 
     if (bool) {
         window.history.pushState('','', roomInput);
         load_page("player");
     }
     else {
+        loaderGif(_("player"), false);
+        _("player").innerHTML = "Confirm";
         _("errorMsg2").classList.remove("invisible");
         _("errorMsg2").innerHTML = "Choose a different nickname";
     }

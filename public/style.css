@@ -1101,17 +1101,14 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .loaderGif {
-    font-family: 'poppins';
-    font-size: 1.2rem;
-    align-self: center;
-    justify-self: center;
+    font-size: 2em;
+    text-align: center;
     overflow: hidden;
-    display: inline-block;
     vertical-align: bottom;
     -webkit-animation: ellipsis steps(4,end) 1500ms infinite;
     animation: ellipsis steps(4,end) 1500ms infinite;
-    content: "\2026"; /* ascii code for the ellipsis character */
-    width: 0px;
+    width: 15px;
+    height: 29px;
 }
 
 @keyframes ellipsis {
