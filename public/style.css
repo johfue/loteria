@@ -284,11 +284,11 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: fit-content;
 }
 
-#checker:hover .odd {
+#about:hover #checker .odd {
     fill: #534537;
 }
 
-#checker:hover .even {
+#about:hover #checker .even {
     fill: #FBF6F4;
 }
 
