@@ -109,10 +109,12 @@ function loaderGif(target, bool) {
 
     if (bool) {
         target.append(loaderGifSpan);
+        console.log(1);
     }
     
     else {
         target.lastChild.remove();
+        console.log(2);
     }
 }
 
