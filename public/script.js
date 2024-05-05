@@ -306,13 +306,16 @@ function host() {
         playerList: [],
     };
     
-    socket.emit('new room', roomNumber);
+    // socket.emit('new room', roomNumber);
 
-    socket.on('room clear', function(r){
-        console.log("room clear")
-        window.history.pushState('','', r);
-        _("roomNumber").innerHTML = r;
-    });
+    // socket.on('room clear', function(r){
+    //     console.log("room clear")
+    //     window.history.pushState('','', r);
+    //     _("roomNumber").innerHTML = r;
+    // });
+    
+    _("roomNumber").innerHTML = r;
+
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
@@ -1228,6 +1231,16 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     
     localStorage.setItem('deckCookie', currentDeck);
 
-    load_page("host", event);
+    loaderGif(_("deckSelectBtn", true));
+
+    socket.emit('new room', roomNumber);
+
+    socket.on('room clear', function(r){
+        console.log("room clear")
+        window.history.pushState('','', r);
+        load_page("host", event);
+        // _("roomNumber").innerHTML = r;
+    });
+
     event.preventDefault();
 });

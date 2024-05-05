@@ -1104,11 +1104,13 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-size: 2em;
     text-align: center;
     overflow: hidden;
+    display: inline-block;
     vertical-align: bottom;
-    -webkit-animation: ellipsis steps(4,end) 1500ms infinite;
-    animation: ellipsis steps(4,end) 1500ms infinite;
-    width: 15px;
-    height: 29px;
+    -webkit-animation: loader steps(4,end) 1500ms infinite;
+    animation: loader steps(4,end) 1500ms infinite;
+    width: 0;
+    height: 100%;
+    line-height: 1.2;
 }
 
 @keyframes ellipsis {
@@ -1120,6 +1122,18 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 @-webkit-keyframes ellipsis {
   to {
     width: 15px;
+  }
+}
+
+@keyframes loader {
+  to {
+    width: 1.25em;
+  }
+}
+
+@-webkit-keyframes loader {
+  to {
+    width: 1.25em;
   }
 }
 
