@@ -306,16 +306,13 @@ function host() {
         playerList: [],
     };
     
-    // socket.emit('new room', roomNumber);
+    socket.emit('new room', roomNumber);
 
-    // socket.on('room clear', function(r){
-    //     console.log("room clear")
-    //     window.history.pushState('','', r);
-    //     _("roomNumber").innerHTML = r;
-    // });
-    
-    _("roomNumber").innerHTML = r;
-
+    socket.on('room clear', function(r){
+        console.log("room clear")
+        window.history.pushState('','', r);
+        _("roomNumber").innerHTML = r;
+    });
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
@@ -1209,14 +1206,6 @@ _("closeSelect").addEventListener('click', function(event) {
     
 });
 
-    socket.on('room clear', function(r){
-        console.log("room clear")
-        window.history.pushState('','', r);
-        load_page("host", event);
-        // _("roomNumber").innerHTML = r;
-    });
-
-
 _("deckSelectBtn").addEventListener('click', function(event) {
     currentDeck = document.querySelector('input[name="deckOption"]:checked').value;
     
@@ -1241,7 +1230,6 @@ _("deckSelectBtn").addEventListener('click', function(event) {
 
     loaderGif(_("deckSelectBtn", true));
 
-    socket.emit('new room', roomNumber);
-
+    load_page("host", event);
     event.preventDefault();
 });
