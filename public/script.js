@@ -102,6 +102,20 @@ function boardConstruct(seed) {
     return tbl;
 }
 
+let loaderGifSpan = document.createElement("span");
+loaderGif.setAttribute("class", "loaderGif");
+
+
+function loaderGif(target, bool) {
+    if (bool) {
+        target.append(loaderGifSpan);
+    }
+    
+    else {
+        target.lastChild.remove();
+    }
+}
+
 function newPlayer(nickname, id, oldID, bool) {
     if (opponentList.includes(oldID)) {
         _(oldID).remove(oldID);
@@ -1063,6 +1077,7 @@ function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
         socket.emit('check nickname', nickname, _("roomSearch").value);
+        loaderGif(_("nickname"), true);
     }
     else {
         _("errorMsg2").classList.remove("invisible");
@@ -1072,6 +1087,8 @@ function nameCheck(name, evt) {
 }
 
 socket.on("name clear", function(bool) {
+    loaderGif(_("nickname"), false);
+
     if (bool) {
         window.history.pushState('','', roomInput);
         load_page("player");
