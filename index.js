@@ -153,7 +153,7 @@ io.on('connection', (socket) => {
 
     socket.on('new room', async () => {
         let roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-        const gameExists = await Game.findOne({ room_number: r }).exec();
+        const gameExists = await Game.findOne({ room_number: roomNumber }).exec();
         
         if (gameExists) {
             r = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
