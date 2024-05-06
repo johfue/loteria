@@ -245,7 +245,7 @@ function setWinCondition (conditions) {
     // winConditionInfo.classList.add("class", condition);
 }
 
-function host(event) {
+function host(event, r) {
 
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
@@ -286,7 +286,7 @@ function host(event) {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-    console.log(event);
+    console.log(event, r);
     _("roomNumber").innerHTML = event;
     
     restartGame.addEventListener('click', function(event) {
