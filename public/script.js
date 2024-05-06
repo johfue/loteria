@@ -1212,6 +1212,7 @@ _("closeSelect").addEventListener('click', function(event) {
     // socket.emit('new room', roomNumber);
 
 socket.on('room clear', function(r){
+    let rn = r;
     console.log(r)
     window.history.pushState('','', r);
     load_page("host", r);
