@@ -106,17 +106,17 @@ let loaderGifSpan = document.createElement("span");
 loaderGifSpan.setAttribute("class", "loaderGif");
 loaderGifSpan.innerHTML = "...";
 
-function loaderGif(target, bool) {
+// function loaderGif(target, bool) {
 
-    if (bool) {
-        target.innerHTML = "";
-        target.append(loaderGifSpan);
-    }
+//     if (bool) {
+//         target.innerHTML = "";
+//         target.append(loaderGifSpan);
+//     }
     
-    else {
-        target.lastChild.remove();
-    }
-}
+//     else {
+//         target.lastChild.remove();
+//     }
+// }
 
 function newPlayer(nickname, id, oldID, bool) {
     if (opponentList.includes(oldID)) {
