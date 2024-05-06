@@ -156,7 +156,7 @@ io.on('connection', (socket) => {
         const gameExists = await Game.findOne({ room_number: roomNumber }).exec();
         
         if (gameExists) {
-            r = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+            let roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
             io.to(socket.id).emit('room clear', roomNumber);
 
             //Should return error and ask them to try again

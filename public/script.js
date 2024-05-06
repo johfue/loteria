@@ -1214,7 +1214,7 @@ _("closeSelect").addEventListener('click', function(event) {
 socket.on('room clear', function(r){
     console.log("room clear")
     window.history.pushState('','', r);
-    load_page("host", r, event);
+    load_page("host", r);
 
 });
 
