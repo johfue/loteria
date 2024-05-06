@@ -1215,7 +1215,7 @@ socket.on('room clear', function(r){
     let rn = r;
     console.log(r)
     window.history.pushState('','', r);
-    load_page("host", r);
+    load_page("host", rn);
 
 });
 
