@@ -245,7 +245,7 @@ function setWinCondition (conditions) {
     // winConditionInfo.classList.add("class", condition);
 }
 
-function host(r) {
+function host(rn) {
 
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
@@ -286,8 +286,8 @@ function host(r) {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-    console.log(r);
-    _("roomNumber").innerHTML = r;
+    console.log(rn);
+    _("roomNumber").innerHTML = rn;
     
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
@@ -1214,7 +1214,7 @@ _("closeSelect").addEventListener('click', function(event) {
 socket.on('room clear', function(r){
     console.log(r)
     window.history.pushState('','', r);
-    load_page("host", r, event);
+    load_page("host", r);
 
 });
 
