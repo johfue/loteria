@@ -40,6 +40,8 @@ var deck = [];
 
 let oldID = "";
 
+let roomNumber = 0;
+
 function storeID() {
     oldID = socket.id;
 }
@@ -245,7 +247,7 @@ function setWinCondition (conditions) {
     // winConditionInfo.classList.add("class", condition);
 }
 
-function host(event, r) {
+function host(event) {
 
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
@@ -264,7 +266,6 @@ function host(event, r) {
     const winConditionInfo = _("winConditionInfo");
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    const roomNumber = event;
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
@@ -287,7 +288,7 @@ function host(event, r) {
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
     console.log(event, r);
-    _("roomNumber").innerHTML = event;
+    _("roomNumber").innerHTML = roomNumber;
     
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
@@ -1212,10 +1213,9 @@ _("closeSelect").addEventListener('click', function(event) {
     // socket.emit('new room', roomNumber);
 
 socket.on('room clear', function(r){
-    let rn = r;
-    console.log(r)
+    roomNumber = r;
     window.history.pushState('','', r);
-    load_page("host", rn);
+    load_page("host");
 
 });
 
