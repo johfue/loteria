@@ -245,7 +245,7 @@ function setWinCondition (conditions) {
     // winConditionInfo.classList.add("class", condition);
 }
 
-function host(rn) {
+function host(event) {
 
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
@@ -264,7 +264,7 @@ function host(rn) {
     const winConditionInfo = _("winConditionInfo");
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    const roomNumber = rn;
+    const roomNumber = event;
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
@@ -286,8 +286,8 @@ function host(rn) {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-    console.log(rn);
-    _("roomNumber").innerHTML = rn;
+    console.log(event);
+    _("roomNumber").innerHTML = event;
     
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
