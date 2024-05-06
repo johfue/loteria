@@ -264,7 +264,7 @@ function host(rn) {
     const winConditionInfo = _("winConditionInfo");
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    const roomNumber = r;
+    const roomNumber = rn;
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
     const boardHold = _("boardHold");
