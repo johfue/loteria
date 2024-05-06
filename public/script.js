@@ -286,7 +286,7 @@ function host(r) {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-    
+    console.log(r);
     _("roomNumber").innerHTML = r;
     
     restartGame.addEventListener('click', function(event) {
@@ -1212,7 +1212,7 @@ _("closeSelect").addEventListener('click', function(event) {
     // socket.emit('new room', roomNumber);
 
 socket.on('room clear', function(r){
-    console.log("room clear")
+    console.log(r)
     window.history.pushState('','', r);
     load_page("host", r);
 
