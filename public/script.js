@@ -1239,7 +1239,9 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     }
     
     localStorage.setItem('deckCookie', currentDeck);
-
+    
+    loaderGif(_("deckSelectBtn"), true);
+    
     socket.emit('new room');
 
     event.preventDefault();
