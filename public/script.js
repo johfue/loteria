@@ -287,7 +287,6 @@ function host(event) {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-    console.log(event, r);
     _("roomNumber").innerHTML = roomNumber;
     
     restartGame.addEventListener('click', function(event) {
