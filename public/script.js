@@ -1240,7 +1240,7 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     
     localStorage.setItem('deckCookie', currentDeck);
 
-/////    socket.emit('new room');
+    socket.emit('new room');
 
     event.preventDefault();
 });
