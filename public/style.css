@@ -227,6 +227,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     button {
         font-size: 1.75rem;
+        min-width: 4em;
     }
 }
 
@@ -2152,7 +2153,7 @@ td input {
 }
 
 .shadowBox {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
