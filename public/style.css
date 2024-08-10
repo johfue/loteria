@@ -270,7 +270,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .about__p {
     bottom: 3.5em;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
 .about__p--strong {
@@ -304,7 +304,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 @media (min-width: 768px) {
     .expanded__div {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 50% 50%;
     }
 }
 
@@ -313,11 +313,11 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .expanded__li {
-    
+    line-height: 1.2;
 }
 
 .expanded__img {
-    
+    width: 100%;
 }
 
 /*/--------------------------------------------/*/
