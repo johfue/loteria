@@ -170,8 +170,6 @@ io.on('connection', (socket) => {
         if (gameExists) {
             io.to(socket.id).emit('room join', true, false);
             socket.join(room);
-
-            io.sockets.adapter.rooms.get(room).size;
         }
         else {
             io.emit('room join', false);
@@ -242,7 +240,7 @@ io.on('connection', (socket) => {
                 
                     if ( !(io.sockets.adapter.rooms[prop]) ) {
                         Game.deleteOne({ room_number: prop }).exec();
-                        console.log("deleted game");
+                        console.log("deleted game " + prop);
                     }
                 }, 30000);
                 break;
