@@ -14,7 +14,7 @@
     </script>
     <title>Play Lotería Online</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Play la lotería with friends and family across the globe. Perfect to play over Zoom or in a classroom. 100% free, no sign-ups and no ads.">
+    <meta name="description" content="Play la lotería with friends and family across the globe. Perfect for playing over Zoom or in a classroom. 100% free, no sign-ups and no ads.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -42,8 +42,25 @@
     
 <div id="popItIn">
     
+    <a href="about.html" id="about" class="aboutBtn">
+        <p class="aboutBtn__Txt">About</p>
+        <svg id="checker" width="84" height="28" viewBox="0 0 84 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect class="even" width="14" height="14" fill="#534537"/>
+            <rect class="even" x="14" y="14" width="14" height="14" fill="#534537"/>
+            <rect class="even" x="28" width="14" height="14" fill="#534537"/>
+            <rect class="even" x="42" y="14" width="14" height="14" fill="#534537"/>
+            <rect class="even" x="56" width="14" height="14" fill="#534537"/>
+            <rect class="even" x="70" y="14" width="14" height="14" fill="#534537"/>
+            <rect class="odd" x="14" width="14" height="14" fill="#FBF6F4"/>
+            <rect class="odd" x="28" y="14" width="14" height="14" fill="#FBF6F4"/>
+            <rect class="odd" x="42" width="14" height="14" fill="#FBF6F4"/>
+            <rect class="odd" x="56" y="14" width="14" height="14" fill="#FBF6F4"/>
+            <rect class="odd" x="70" width="14" height="14" fill="#FBF6F4"/>
+            <rect class="odd" y="14" width="14" height="14" fill="#FBF6F4"/>
+        </svg>
+    </a>
     <img src="images/logo.svg" class="hero" alt="Play Lotería Online">
-   
+   <div>
     <form id="welcomeForm" class="welcome">
         <label for="roomSearch" class="welcome__label">Room Number</label>
         <input class="welcome__input" placeholder="######" type="text" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required id="roomSearch">
@@ -75,7 +92,7 @@
             </div>
         <button type="submit" class="secondaryBtn welcome__input" id="deckSelectBtn">Confirm</button>
     </form>
-
+    </div>
     <div id="cardReview" class="modal modal--cardSelect invisible">
             <ol id="cardSelectList" class="modal__content modal__content--cardSelect"></ol>
             <h2><span class="modal__span">Add/Remove</span><br>Cards</h2>
@@ -87,8 +104,8 @@
     </div>
 
     <a href="mailto:contact@playloteria.online" target="blank_" id="contact" class="contactBtn">
-        <img src="images/contact.png" class="contactBtn__Img">
         <p class="contactBtn__Txt"><span class="contactBtn__Questions">Questions?</span><br>contact@playloteria.online</p>
+        <img src="images/globe.svg" class="contactBtn__Img">
     </a>
 <div id="shadowBox" class="shadowBox invisible"></div>
 </div>

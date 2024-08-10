@@ -150,26 +150,48 @@ io.on('connection', (socket) => {
     
     console.log('a user connected');
     
-    socket.on('new room', async (r) => {
 
-      const gameExists = await Game.findOne({ room_number: r }).exec();
-      if (gameExists) {
-            r = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-            console.log(gameExists);
+    socket.on('new room', async () => {
+        let roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+        const gameExists = await Game.findOne({ room_number: roomNumber }).exec();
+        
+        if (gameExists) {
+            let roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+            io.to(socket.id).emit('room clear', roomNumber);
+
             //Should return error and ask them to try again
-      } else {
-            const game = new Game({room_number:r});
+        }
+        else {
+            const game = new Game({room_number:roomNumber});
             await game.save();
-            socket.join(r);
-            io.to(socket.id).emit('room clear', r);
+            socket.join(roomNumber);
+            io.to(socket.id).emit('room clear', roomNumber);
         }
     });
+    
+    // socket.on('new room', async (r) => {
+
+    //   const gameExists = await Game.findOne({ room_number: r }).exec();
+    //   if (gameExists) {
+    //         r = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    //         console.log(gameExists);
+    //         //Should return error and ask them to try again
+    //   } else {
+    //         const game = new Game({room_number:r});
+    //         await game.save();
+    //         socket.join(r);
+    //         io.to(socket.id).emit('room clear', r);
+    //     }
+    // });
     
     socket.on('room check', async (room) => {
         const gameExists = await Game.findOne({ room_number: room }).exec();
         if (gameExists) {
             io.to(socket.id).emit('room join', true, false);
             socket.join(room);
+
+            io.sockets.adapter.rooms.get(room).size;
+            //rooms.get is not a function?
         }
         else {
             io.emit('room join', false);
@@ -257,6 +279,6 @@ io.on('connection', (socket) => {
     })
 });
 
-http.listen(3000, function() {
+http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });

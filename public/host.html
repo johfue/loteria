@@ -1,7 +1,8 @@
+<div class="hostWrap">
 <form id="gameSettings" class="modal modal--gameSettings">
     <div class="modal__content modal__content--gameSettings">
         <div class="gameSettings__option">
-            <input type="radio" id="win1" name="winCondition" value="row" class="modal__input--gameSettings">
+            <input type="checkbox" id="win1" name="winCondition" value="row" class="modal__input--gameSettings">
             <label for="win1" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="row" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -27,7 +28,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win2" name="winCondition" value="column" class="modal__input--gameSettings">
+            <input type="checkbox" id="win2" name="winCondition" value="column" class="modal__input--gameSettings">
             <label for="win2" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="column" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -53,7 +54,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win3" name="winCondition" value="diagonal" class="modal__input--gameSettings">
+            <input type="checkbox" id="win3" name="winCondition" value="diagonal" class="modal__input--gameSettings">
             <label for="win3" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="diagonal" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -79,7 +80,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win4" name="winCondition" value="corner" class="modal__input--gameSettings">
+            <input type="checkbox" id="win4" name="winCondition" value="corner" class="modal__input--gameSettings">
             <label for="win4" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="corner" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -105,7 +106,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win5" name="winCondition" value="inside" class="modal__input--gameSettings">
+            <input type="checkbox" id="win5" name="winCondition" value="inside" class="modal__input--gameSettings">
             <label for="win5" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="inside" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -131,7 +132,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win6" name="winCondition" value="outside" class="modal__input--gameSettings">
+            <input type="checkbox" id="win6" name="winCondition" value="outside" class="modal__input--gameSettings">
             <label for="win7" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="outside" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -157,7 +158,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win7" name="winCondition" value="Z" class="modal__input--gameSettings">
+            <input type="checkbox" id="win7" name="winCondition" value="Z" class="modal__input--gameSettings">
             <label for="win8" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="Z" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -183,7 +184,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win8" name="winCondition" value="N" class="modal__input--gameSettings">
+            <input type="checkbox" id="win8" name="winCondition" value="N" class="modal__input--gameSettings">
             <label for="win9" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="N" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -209,7 +210,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win9" name="winCondition" value="twoByTwo" class="modal__input--gameSettings">
+            <input type="checkbox" id="win9" name="winCondition" value="twoByTwo" class="modal__input--gameSettings">
             <label for="win10" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="twoByTwo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -235,7 +236,7 @@
             </label>
         </div>
         <div class="gameSettings__option">
-            <input type="radio" id="win6" name="winCondition" value="blackout" class="modal__input--gameSettings">
+            <input type="checkbox" id="win10" name="winCondition" value="blackout" class="modal__input--gameSettings">
             <label for="win10" class="radio-sibling radio-sibling--gameSettings">
                 <svg class="blackout" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 383">
 
@@ -294,7 +295,6 @@
             <rect fill="#FFE464" class="cell" id="cell_43" x="191.58" y="288.49" width="77.15" height="79.3"/>
             <rect fill="#FFE464" class="cell" id="cell_44" x="279.86" y="288.49" width="77.15" height="79.3"/>
         </svg>
-                    <!-- <img id="winConditionInfo" class="winInfo winInfo--host" src="images/blank_sqaure.svg"> -->
             <h3 id="hostGoal" class="winWrap__h3--host">Goal</h3>
     </div>
         <h3 id="infoHub" class="hostInfo__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span>
@@ -345,3 +345,4 @@
     Click to copy
 </div>
 <div id="shadowBox" class="shadowBox"></div>
+</div>

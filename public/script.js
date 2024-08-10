@@ -40,6 +40,8 @@ var deck = [];
 
 let oldID = "";
 
+let roomNumber = 0;
+
 function storeID() {
     oldID = socket.id;
 }
@@ -102,6 +104,22 @@ function boardConstruct(seed) {
     return tbl;
 }
 
+let loaderGifSpan = document.createElement("span");
+loaderGifSpan.setAttribute("class", "loaderGif");
+loaderGifSpan.innerHTML = "...";
+
+function loaderGif(target, bool) {
+
+    if (bool) {
+        target.innerHTML = "";
+        target.append(loaderGifSpan);
+    }
+    
+    else {
+        target.lastChild.remove();
+    }
+}
+
 function newPlayer(nickname, id, oldID, bool) {
     if (opponentList.includes(oldID)) {
         _(oldID).remove(oldID);
@@ -143,12 +161,93 @@ function newPlayer(nickname, id, oldID, bool) {
     }
 }
 
-function setWinCondition (condition) {
-    winConditionInfo.setAttribute("class", "winInfo winInfo--host");
-    winConditionInfo.classList.add("class", condition);
+const delayList = {
+    row: 10000,
+    column: 10000,
+    diagonal: 6000,
+    corner: 3500,
+    inside: 3500,
+    outside: 3500,
+    Z: 3500,
+    N: 3500,
+    blackout: 3500,
+    twoByTwo: 9000,
+};
+
+function loopSetWinAnimation(arr) {
+    
+Promise.resolve().then(function resolver() {
+    return setWinAnimation(arr)
+    .then(resolver);
+}).catch((error) => {
+    console.log("Error: " + error);
+});
 }
 
-function host() {
+function setWinAnimation(arr) {
+    return arr.reduce(function(promise, item) {
+    return promise.then(function() {
+        return launchChain(item);
+    });
+    // uses this orignal promise to start the chaining.
+    }, Promise.resolve());
+}
+
+let round = 1;
+let currentRound = 1;
+
+
+function launchChain(rule) {
+    return new Promise(function(resolve, reject) {
+      
+    winConditionInfo.classList.add(rule);
+    let currentRound = round;
+    setTimeout(function() {
+    winConditionInfo.classList.remove(rule);
+        if (round > currentRound) {
+            winConditionInfo.classList.remove(rule);
+            reject();
+        }
+        else {
+            resolve();
+
+        }
+    }, delayList[rule]);
+    
+    // animate(winConditionInfo, delay);
+    // setTimeout(function() {
+    //   console.log(delay);
+    //   resolve();
+    // }, delay);
+  });
+}
+
+
+// common function to apply animations to an element.
+function animate(elem, animation) {
+    return new Promise((resolve, reject) => {
+    function handleAnimationEnd() {
+            resolve(elem);
+    }
+    elem.classList.add(animation);
+    setTimeout(function() {
+    elem.classList.remove(animation);
+        handleAnimationEnd();
+    }, delayList[animation]);
+    // elem.addEventListener("animationend", handleAnimationEnd, { once: true });
+  });
+}
+
+
+function setWinCondition (conditions) {
+    // winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+    loopSetWinAnimation(conditions);
+    winConditionInfo.style.animationPlayState = 'running';
+
+    // winConditionInfo.classList.add("class", condition);
+}
+
+function host(event) {
 
     var link = document.createElement('meta');
     link.setAttribute('property', 'og:url');
@@ -162,10 +261,10 @@ function host() {
     const currentCard = _("currentCard");
     const winConditionBtn = _("winConditionBtn");
     const winCondition = document.querySelectorAll('input[name="winCondition"]');
-    let currentWinCondition = null;
+    let currentWincondition = [];
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
-    const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
+    // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
     const invite = _("invite");
     const inviteClone = invite.cloneNode("true");
@@ -188,7 +287,8 @@ function host() {
     const restartGame = document.createElement("button");
     continueGame.setAttribute("class", "secondaryBtn");
     restartGame.setAttribute("class", "primaryBtn");
-
+    _("roomNumber").innerHTML = roomNumber;
+    
     restartGame.addEventListener('click', function(event) {
         event.preventDefault();
         bottomStripe.innerHTML = "";
@@ -209,13 +309,13 @@ function host() {
         playerList: [],
     };
     
-    socket.emit('new room', roomNumber);
+    // // socket.emit('new room', roomNumber);
 
-    socket.on('room clear', function(r){
-        console.log("room clear")
-        window.history.pushState('','', r);
-        _("roomNumber").innerHTML = r;
-    });
+    // socket.on('room clear', function(r){
+    //     console.log("room clear")
+    //     window.history.pushState('','', r);
+    //     _("roomNumber").innerHTML = r;
+    // });
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
@@ -244,9 +344,19 @@ function host() {
     }
     
     function chooseWinCondition() {
-        currentWinCondition = document.querySelector('input[name="winCondition"]:checked').value;
-        // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
+        let currentWinCondition = [];
+        let selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
+        // if (selectedWinConditions.length === 1) {
+        //     currentWinCondition = selectedWinConditions.value;
+        // }
         
+        // else {
+        for (n=0; n<selectedWinConditions.length; n++) {
+            currentWinCondition.push(selectedWinConditions[n].value);
+        }
+        // }
+        
+        // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
         setWinCondition(currentWinCondition);
 
         gameInfo.goal = currentWinCondition;
@@ -404,10 +514,12 @@ function host() {
         for (r=0; r < gameInfo.playerList.length; r++) {
             gameInfo.playerList[r].placedBeans = [];
         }
+        drawBtn.innerHTML = "Start";
         drawBtn.disabled = true;
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
-        drawBtn.innerHTML = "Start";
+        winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+        round += 1;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
@@ -639,7 +751,7 @@ function player() {
     targetDom();
     let chosenBoard = null;
     let checkedPosition = [];
-    let currentWinCondition = "";
+    let currentWinCondition = [];
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
@@ -723,7 +835,7 @@ function player() {
         else {
             clearBeans();
             currentCard.src="images/blank.svg";
-            // winConditionInfo.src="images/blank_sqaure.svg";
+            round += 1;
             disableBoard(true);
             shadowBox.classList.add("invisible");
             boardSelect.classList.remove("invisible");
@@ -742,7 +854,7 @@ function player() {
     
     socket.on('win condition', function(condition){
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
-        winConditionInfo.classList.add("class", condition);
+        setWinCondition(condition);
     });
     
     socket.on('win checked', function(bool){
@@ -894,7 +1006,7 @@ function player() {
             currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
-        winConditionInfo.classList.add("class", gameInfo.goal);
+        setWinCondition(gameInfo.goal);
                 // setWinCondition(gameInfo.goal);
 
         for (e=0; e < gameInfo.playerList.length; e++) {
@@ -970,6 +1082,7 @@ function nameCheck(name, evt) {
     evt.preventDefault();
     if (_("nickname").value.length > 0) {
         socket.emit('check nickname', nickname, _("roomSearch").value);
+        loaderGif(_("player"), true);
     }
     else {
         _("errorMsg2").classList.remove("invisible");
@@ -979,11 +1092,14 @@ function nameCheck(name, evt) {
 }
 
 socket.on("name clear", function(bool) {
+
     if (bool) {
         window.history.pushState('','', roomInput);
         load_page("player");
     }
     else {
+        loaderGif(_("player"), false);
+        _("player").innerHTML = "Confirm";
         _("errorMsg2").classList.remove("invisible");
         _("errorMsg2").innerHTML = "Choose a different nickname";
     }
@@ -1093,6 +1209,15 @@ _("closeSelect").addEventListener('click', function(event) {
     
 });
 
+    // socket.emit('new room', roomNumber);
+
+socket.on('room clear', function(r){
+    roomNumber = r;
+    window.history.pushState('','', r);
+    load_page("host");
+
+});
+
 _("deckSelectBtn").addEventListener('click', function(event) {
     currentDeck = document.querySelector('input[name="deckOption"]:checked').value;
     
@@ -1114,7 +1239,10 @@ _("deckSelectBtn").addEventListener('click', function(event) {
     }
     
     localStorage.setItem('deckCookie', currentDeck);
+    
+    loaderGif(_("deckSelectBtn"), true);
+    
+    socket.emit('new room');
 
-    load_page("host", event);
     event.preventDefault();
 });

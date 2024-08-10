@@ -101,7 +101,7 @@ body {
     100%{background-position:0% 50%}
 }
 
-h1, h2, h3, p, li, label, input, button {
+h1, h2, h3, p, li, label, input, button, .about__a {
     font-family: poppins;
     color: var(--neutral-100);
     margin: 0;
@@ -227,6 +227,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     button {
         font-size: 1.75rem;
+        min-width: 4em;
     }
 }
 
@@ -235,14 +236,102 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.wrapper {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;}
 
+.about__div {
+    background-color: var(--neutral-900);
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 640px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 2em;
+}
+
+.about__h2 {
+    background-color: var(--neutral-100);
+    color: var(--neutral-900);
+    top: 0.5em;
+    position: relative;
+    background-color: var(--neutral-100);
+    color: var(--neutral-900);
+    margin: auto;
+    display: block;
+    width: fit-content;
+    padding: 0.33em 0.75em;
+    clip-path: polygon(3% 0%, 0% 100%, 97% 100%, 100% 0%);
+    font-family: 'poppinsbold';
+    font-size: 2rem;
+}
+
+.about__p {
+    bottom: 3.5em;
+    line-height: 1.1;
+}
+
+.about__p--strong {
+    font-family: poppinsbold;
+    line-height: 1.3;
+}
+
+.about__a {
+    color: var(--accent-base);
+    margin: 0 0 2em 0;
+    display: block;
+    width: fit-content;
+}
+
+#about:hover #checker .odd {
+    fill: #534537;
+}
+
+#about:hover #checker .even {
+    fill: #FBF6F4;
+}
+
+.expanded__div {
+    background-color: var(--neutral-700);
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: auto;
+    padding: 1em;
+}
+
+@media (min-width: 768px) {
+    .expanded__div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.expanded__ul {
+    
+}
+
+.expanded__li {
+    
+}
+
+.expanded__img {
+    
+}
+
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
+/*/--------------------------------------------/*/
 #popItIn {
     width: 90%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
+    display: grid;
+    height: 98vh;
+    padding: 1vh;
+    grid-template-rows: 1fr max-content max-content 1fr;
 }
 
 .hero {
@@ -303,51 +392,68 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     margin: 0 auto;
 }
 
+.aboutBtn {
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+    align-self: center;
+}
+
+.aboutBtn__Txt {
+    color: var(--neutral-900);
+    font-family: 'poppinsbold';
+    text-transform: uppercase;
+}
+
 .contactBtn {
     display: flex;
     border-bottom: 2px solid var(--neutral-100);
     background-color: var(--primary-base);
-    align-self: auto;
+    justify-self: end;
     margin: 3rem auto 0;
     text-decoration: none;
 }
 
 .contactBtn__Txt {
-    font-size: 12px;
+    font-size: 10px;
     padding: 8px 12px;
 }
 
 .contactBtn__Questions {
-    font-family: Merienda-Bold;
-    font-size: 20px;
+    font-family: libre_baskervillebold;
+    font-size: 2.25em;
 }
 
 .contactBtn__Img {
     background-color: #008CD8;
     height: 61px
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+@media(min-width:768px) {
+    .aboutBtn {
+        align-self: start;
+    }
 }
 
 @media(min-width:400px) {
     .contactBtn {
-        align-self: flex-end;
+        align-self: center;
         margin: 3rem 0 0 0;
     }
 }
-
-/*.splash__img {*/
-/*}*/
 
 .splash__img--mundo {
     background-image: url(images/elMundo.png);
     background-position: bottom;
     background-size: 250%;
     background-repeat: no-repeat;
-    /*display: flex;*/
     align-items: flex-end;
     justify-content: center;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
@@ -358,8 +464,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     height: auto;
     max-height: 245%;
     width: 230%;
-    position: unset;
-    position: absolute;
+    position: fixed;
     left: -64%;
     bottom: 0;
 }
@@ -762,6 +867,11 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
+.hostWrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .hostInfo {
     display: grid;
     grid-template-rows: 1fr;
@@ -991,6 +1101,19 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
   width: 0px;
 }
 
+.loaderGif {
+    font-size: 2em;
+    text-align: center;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: loader steps(4,end) 1500ms infinite;
+    animation: loader steps(4,end) 1500ms infinite;
+    width: 0;
+    height: 100%;
+    line-height: 1.2;
+}
+
 @keyframes ellipsis {
   to {
     width: 15px;
@@ -1000,6 +1123,18 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 @-webkit-keyframes ellipsis {
   to {
     width: 15px;
+  }
+}
+
+@keyframes loader {
+  to {
+    width: 1.25em;
+  }
+}
+
+@-webkit-keyframes loader {
+  to {
+    width: 1.25em;
   }
 }
 
@@ -2018,7 +2153,7 @@ td input {
 }
 
 .shadowBox {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -2116,7 +2251,7 @@ td input {
 @keyframes rows {
     0% {
         fill: #F9A140;
-    }    
+    }
     25% {
         fill: #FFE464;
     }
@@ -2297,4 +2432,22 @@ td input {
 
 .invisible {
     display: none;
+}
+
+@keyframes fillColor {
+  to {
+    fill: #7afcff;
+  }
+}
+
+@keyframes unfillColor {
+  to {
+    background-color: #feff9c;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    fill: #435708;
+  }
 }
