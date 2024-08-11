@@ -299,7 +299,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     flex-direction: column;
     grid-template-columns: auto;
     padding: 1em;
-    row-gap: 2em;
     margin-bottom: 2em;
 }
 
@@ -307,6 +306,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .expanded__div {
         display: grid;
         grid-template-columns: 50% 50%;
+        row-gap: 2em;
     }
 }
 
@@ -442,7 +442,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .contactBtn {
         align-self: end;
         justify-self: end;
-        margin: 0;
+        margin: 3rem 0 0 0;
     }
 }
 
