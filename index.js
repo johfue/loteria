@@ -20,8 +20,10 @@ class Database {
   }
   _connect() {
     mongoose
-    //   .connect(`mongodb://${server}/${database}`)
-     .connect(`mongodb://${username}:${password}@${server}/${database}`)
+    //for local env
+      .connect(`mongodb://${server}/${database}`)
+    //for production and staging env
+    //  .connect(`mongodb://${username}:${password}@${server}/${database}`)
       .then(() => {
         console.log('Database connection successful');
       })
@@ -189,8 +191,8 @@ io.on('connection', (socket) => {
         if (gameExists) {
             io.to(socket.id).emit('room join', true, false);
             socket.join(room);
-
-            io.sockets.adapter.rooms.get(room).size;
+            // io.sockets.adapter.rooms[room].length
+            // io.sockets.adapter.rooms.get(room).size;
             //rooms.get is not a function?
         }
         else {

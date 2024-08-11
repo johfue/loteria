@@ -415,6 +415,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     justify-self: end;
     margin: 3rem auto 0;
     text-decoration: none;
+    height: fit-content;
 }
 
 .contactBtn__Txt {
@@ -429,7 +430,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .contactBtn__Img {
     background-color: #008CD8;
-    height: 61px
+    height: 61px;
     box-sizing: border-box;
     padding: 5px;
 }
@@ -438,12 +439,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .aboutBtn {
         align-self: start;
     }
-}
-
-@media(min-width:400px) {
     .contactBtn {
-        align-self: center;
-        margin: 3rem 0 0 0;
+        align-self: end;
+        justify-self: end;
+        margin: 0;
     }
 }
 
