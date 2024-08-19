@@ -21,9 +21,9 @@ class Database {
   _connect() {
     mongoose
     //for local env
-      .connect(`mongodb://${server}/${database}`)
+    //   .connect(`mongodb://${server}/${database}`)
     //for production and staging env
-    //  .connect(`mongodb://${username}:${password}@${server}/${database}`)
+     .connect(`mongodb://${username}:${password}@${server}/${database}`)
       .then(() => {
         console.log('Database connection successful');
       })
@@ -281,6 +281,9 @@ io.on('connection', (socket) => {
     })
 });
 
+// For live
+// http.listen(3000, function() {
+// For staging
 http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });

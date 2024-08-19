@@ -1,11 +1,15 @@
 <div class="playerWrap">
 <div class="playerInfo">
     <a href="/" class="a--logo logo--player">
-    <picture>
-        <source srcset="images/logo.svg" media="(min-width: 800px)">
-        <img src="images/logo-small.svg" class="logo logo--player" alt="Home">
-    </picture>
+        <picture>
+            <source srcset="images/logo.svg" media="(min-width: 800px)">
+            <img src="images/logo-small.svg" class="logo logo--player" alt="Home">
+        </picture>
     </a>
+    <div class="roomInfo--player roomInfo--player1">
+        <h3 id="infoHub" class="opponentWrap__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span>
+        <img id="share" class="share" src="images/share-black.svg"></h3>
+    </div>
 
     <div class="currentCardWrap currentCardWrap--player">
 
@@ -35,9 +39,10 @@
             <rect fill="#FFE464" class="cell" id="cell_44" x="279.86" y="288.49" width="77.15" height="79.3"/>
         </svg>
                 <!-- <img id="winConditionInfo" class="winInfo winInfo--player" src="images/blank_sqaure.svg"> -->
-        <h3>Goal</h3>
+        <!-- <h3>Goal</h3> -->
     </div>
 </div>
+
 <form id="playerGame" class="playerGame">
     
     <div id="boardSelect" class="modal modal--boardSelect">
@@ -92,8 +97,10 @@
 </form>
 
 <div class="opponentWrap">
-    <h3 id="infoHub" class="opponentWrap__h3">Room: <br><span id="roomNumber" class="winInfo__h3"></span>
+    <div class="roomInfo--player roomInfo--player2">
+        <h3 id="infoHub2" class="opponentWrap__h3">Room: <br><span id="roomNumber2" class="winInfo__h3"></span>
         <img id="share" class="share" src="images/share-black.svg"></h3>
+    </div>    
     <div id="playerGraph" class="playerGraph playerGraph--player"></div>
 </div>
 

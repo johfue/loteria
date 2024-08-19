@@ -737,6 +737,7 @@ function player() {
 
     storeID();
 
+    const infoHub2 = _("infoHub2");
     const table = _("board");
     const newBoard = _("newBoard");
     const tableCells = table.querySelectorAll('input[type="checkbox"]');
@@ -874,6 +875,7 @@ function player() {
     });
     
     _("roomNumber").innerHTML = roomInput;
+    _("roomNumber2").innerHTML = roomInput;
 
     socket.emit('new player', roomInput, nickname);
     
@@ -990,6 +992,7 @@ function player() {
         document.querySelector("#boardSelectPages li:nth-child(" + scrolled + ")").classList.add("currentPage");
     }
 
+    infoHub2.onclick = share;
     infoHub.onclick = share;
     alertModalSmall.onclick = copyShare;
 
