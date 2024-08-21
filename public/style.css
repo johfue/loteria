@@ -507,7 +507,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 100%;
     height: 100%;
     padding: 1rem 1rem 1.5rem 1rem;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: var(--neutral-900);
@@ -741,21 +741,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .modal__content--gameSettings {
-
-    /* overflow-y: scroll;
-    display: grid;
-    grid-gap: 0.75rem;
-    column-gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, 18%);
-    align-content: start;
-    justify-content: center; */
-
-
     display: grid;
     overflow-y: scroll;
     grid-template-columns: repeat(auto-fill, 30%);
-    /* grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: min-content; */
     grid-gap: 1rem;
     background-color: var(--secondary-base);
     text-align: center;
@@ -840,9 +828,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     
     .modal__content--gameSettings {
-        padding: 1rem;
+        grid-gap: 2rem;
         grid-template-columns: repeat(auto-fill, 17%);
-        padding: 1rem 20%;
+        padding: 1rem 10%;
         align-content: end;
     }
     
@@ -1073,7 +1061,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 .opponentWrap--host {
     display: grid;
     grid-template-columns: repeat(auto-fill, 12vw);
-    grid-gap: 12px;
+    grid-gap: 10px;
     font-size: 0.75em;
     overflow-y: scroll;
     overflow-x: auto;
@@ -1426,7 +1414,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .playerGame {
-    position: unset;
+    position: relative;
     /* grid-column: 2/4;
     grid-row: 2/3; */
     display: grid;
@@ -1504,7 +1492,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         height: 95vh;
     }
     .playerGame {
-        position: relative;
         width: -moz-fit-content;
         width: fit-content;
         max-width: 57vh;
@@ -1971,6 +1958,7 @@ table, td {
         width: 100%;
         top: 0;
         left: 0;
+        position: absolute;
     }
     .board {
         width: 50vh;
@@ -2168,17 +2156,17 @@ td input {
 
 #waitingModal {
     position: absolute;
-    width: 40vh;
-    max-width: 66vw;
+    width: 100%;
     z-index: 3;
 }
 
 .waitingModal__p {
+    text-align: center;
     background-color: var(--neutral-900);
     padding: 2rem;
 }
 #alertModal.paused .alert__stripe {
-    animation-play-state:paused;
+    animation-play-state: paused;
 }
 
 #maskRotate {
@@ -2223,10 +2211,7 @@ td input {
 
 @media(min-width:845px) {
     #waitingModal {
-        top: 12.5%;
-        left: 12.5%;
-        height: 75%;
-        width: 75%;
+        top: 6.5%;
     }
     .alert__stripe {
         width: 70vw;
