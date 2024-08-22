@@ -627,21 +627,7 @@ function host(event) {
         joiningPlayer.addEventListener('click', function(event) {
             socket.emit("remove player", nickname, id, roomNumber);
             event.stopPropagation();
-        });        // var checkBtn = document.createElement("button");
-        // checkBtn.addEventListener('click', function(event) {
-        //     checkBoardRender(id);
-
-        // });
-
-        // var removeBtn = document.createElement("button");
-        // removeBtn.addEventListener('click', function(event) {
-        //     socket.emit("remove player", nickname, id, roomNumber);
-        // });
-        
-        // checkRemoveBtns = document.createDocumentFragment();
-        // checkRemoveBtns.appendChild(checkBtn);
-        // checkRemoveBtns.appendChild(removeBtn);
-        // _(id).appendChild(checkRemoveBtns);
+        });
         
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
         if (gameInfo.playerList.length === 0) {
@@ -886,6 +872,7 @@ function player() {
         socket.emit("rejoin room", (roomInput));
         socket.emit('new player', roomInput, nickname, oldID);
         getBeans();
+        socket.emit('claim board', chosenBoard, nickname, roomInput);
     });
 
     socket.on("resync", function() {
@@ -896,6 +883,7 @@ function player() {
             socket.emit('sync checked', roomInput, nickname, oldID);
         }
         getBeans();
+        socket.emit('claim board', chosenBoard, nickname, roomInput);
     });
 
     socket.on("kick out", function() {
@@ -975,7 +963,7 @@ function player() {
     }
     boardSelectOptions.appendChild(boardSelectOptionsContainer);
 
-}
+    }
 
     boardSelectOptionsWrap.onscroll = function() {scrollTrack()};
     
