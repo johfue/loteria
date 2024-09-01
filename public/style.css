@@ -227,7 +227,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     }
     button {
         font-size: 1.75rem;
-        min-width: 4em;
+        min-width: 6em;
     }
 }
 
@@ -947,7 +947,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         column-gap: 2rem;
         grid-template-columns: 1fr max-content max-content 1fr;
         grid-template-rows: 20vh 45vh 20vh;
-        padding: 1.5rem 4rem;
+        padding: 1.5rem 4.5rem;
         margin: 3rem auto 2rem;
     }
     .hostInfo__h3 {
@@ -1304,7 +1304,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     gap: 1em;
     grid-gap: 1em;
     width: 100%;
-    max-width: 350px;
     justify-content: end;
 }
 
@@ -1361,6 +1360,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .modal__content--cardReview--alleged {
         padding: 0;
         column-gap: 0.75rem;
+    }
+    .modal__content--boardHold {
+        width: calc(40vh - 2rem);
     }
     .modal__content--boardHold, .modal__content--cardReview--alleged {
         grid-column: span 1;
@@ -1514,10 +1516,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         width: fit-content;
         max-width: 57vh;
         height: 90vh;
+        padding-bottom: 0;
     }
     .playerInfo {
         display: flex;
         flex-direction: column;
+        padding: 0;
     }
     .playerInfo:after {
         content: none;
