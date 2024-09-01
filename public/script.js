@@ -75,15 +75,28 @@ function generateCardOnBoard(func, param, arg) {
         }
 }
 
+function renderCard(bool, target, card) {
+    if (bool) {
+        currentCard.style.backgroundImage = "url(../images/blank.svg)";
+        currentCard.style.backgroundPosition = "50% 0)";
+    }
+    else {
+        target.style.backgroundImage = "url(../images/spritesheet.jpg)";
+        target.style.backgroundPosition = ((deck[card-1] * 1.8523)-1.8523) + "% 0";
+    }
+}
+
 function appendCell(cell, tbl) {
     let cellT = cell.cloneNode(true);
-    cellT.firstElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
+    renderCard(false, cellT.firstElementChild, card);
+    // cellT.firstElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
     tbl.rows[i].appendChild(cellT);
 }
 
 function drawCell(table) {
     col = table.rows[i].cells[j];
-    col.lastElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
+    renderCard(false, col.lastElementChild, card);
+    // col.lastElementChild.src = "images/donClemente/" + deck[card-1] + '.jpg';
 }
 
 function boardConstruct(seed) {
@@ -96,8 +109,9 @@ function boardConstruct(seed) {
     }
     let cell = document.createElement("td");
     cell.setAttribute("class", "alleged__cell");
-    let img = document.createElement("img");
-    cell.appendChild(img);
+    let div = document.createElement("div");
+    div.setAttribute("class", "card");
+    cell.appendChild(div);
     
     generateCardOnBoard(appendCell, cell, tbl);
 
@@ -319,7 +333,8 @@ function host(event) {
     
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
-            winConditionBtn.disabled = false;
+            // document.querySelector("winCondition:checked").length == 0;
+            winConditionBtn.disabled = document.querySelectorAll(".modal__input--gameSettings:checked").length == 0;;
         });
     }
     
@@ -332,12 +347,13 @@ function host(event) {
     
     function reviewCards() {
         var cardReviewListFragment = document.createDocumentFragment();
-
         for (c=0; c < drawnCards.length; c++) {
             var li = document.createElement("li");
-            var img = document.createElement("img");
-            img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
-            li.appendChild(img);
+            var div = document.createElement("div");
+            div.setAttribute("class", "card");
+            renderCard(false, div, drawnCards[c]);
+            // img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
+            li.appendChild(div);
             cardReviewListFragment.appendChild(li);
         }
         return cardReviewListFragment;
@@ -346,15 +362,10 @@ function host(event) {
     function chooseWinCondition() {
         let currentWinCondition = [];
         let selectedWinConditions = document.querySelectorAll('input[name="winCondition"]:checked');
-        // if (selectedWinConditions.length === 1) {
-        //     currentWinCondition = selectedWinConditions.value;
-        // }
-        
-        // else {
+
         for (n=0; n<selectedWinConditions.length; n++) {
             currentWinCondition.push(selectedWinConditions[n].value);
         }
-        // }
         
         // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
         setWinCondition(currentWinCondition);
@@ -503,14 +514,18 @@ function host(event) {
         else {
             shadowBox.classList.add("invisible");
         }
-        _("player__table--" + allegedWinnerID).classList.remove("winnerGlow")
+        if (_("player__table--" + allegedWinnerID)) {
+            _("player__table--" + allegedWinnerID).classList.remove("winnerGlow");
+        }
         allegedWinner.classList.add("invisible");
         allegedWinnerID = null;
         
     }
 
     function endGame() {
-        currentCard.src = "images/blank.svg";
+        // currentCard.src = "images/blank.svg";
+        renderCard(true);
+
         for (r=0; r < gameInfo.playerList.length; r++) {
             gameInfo.playerList[r].placedBeans = [];
         }
@@ -536,20 +551,12 @@ function host(event) {
         gameInfo.gameState = false;
         socket.emit('game state', false, roomNumber);
     }
-    
+
     function drawCard(evt) {
         evt.preventDefault();
         
         if (gameInfo.gameState) {
-            cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
-            currentCard.src = "images/donClemente/" + deck[cardDrawn-1] + ".jpg";
-            gameInfo.card = deck[cardDrawn-1];
-            drawnCards.push(deck[cardDrawn-1]);
-            
-            deckList.splice(deckList.indexOf(cardDrawn), 1);
-            
             if (deckList.length === 0) {
-                console.log("ran out of cards");
                 reshuffle = continueGame.cloneNode('true');
                 reshuffle.innerHTML = "Reshuffle cards";
                 restartGame.innerHTML = "New game";
@@ -578,6 +585,13 @@ function host(event) {
             }
             
             else {
+                cardDrawn = deckList[(Math.floor(Math.random() * (deckList.length - 1 + 1)))];
+                renderCard(false, currentCard, cardDrawn);
+                // currentCard.src = "images/donClemente/" + deck[cardDrawn-1] + ".jpg";
+                gameInfo.card = cardDrawn;
+                drawnCards.push(cardDrawn);
+                
+                deckList.splice(deckList.indexOf(cardDrawn), 1);
                 socket.emit('current card', cardDrawn, roomNumber);
             }
         }
@@ -821,7 +835,8 @@ function player() {
         }
         else {
             clearBeans();
-            currentCard.src="images/blank.svg";
+            // currentCard.src="images/blank.svg";
+            renderCard(true);
             round += 1;
             disableBoard(true);
             shadowBox.classList.add("invisible");
@@ -836,7 +851,8 @@ function player() {
     });
     
     socket.on('current card', function(sentCard){
-        currentCard.src = "images/donClemente/" + deck[sentCard-1] + '.jpg';
+        renderCard(false, currentCard, sentCard);
+        // currentCard.src = "images/donClemente/" + deck[sentCard-1] + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -868,7 +884,6 @@ function player() {
     socket.on("connect", function() {
         storeID();
         // if has declared win, emit an extra thing, when player rejions see if it has that flag
-        console.log("reconnected? " + oldID);
         socket.emit("rejoin room", (roomInput));
         socket.emit('new player', roomInput, nickname, oldID);
         getBeans();
@@ -895,7 +910,6 @@ function player() {
             for (f = 0; f < 4; f++) {
                 let col = table.rows[u].cells[f];
                 socket.emit("activity", col.cellIndex, col.parentNode.rowIndex, col.firstElementChild.checked, roomInput);
-                console.log(col.firstElementChild.checked);
             }
             
         }
@@ -991,14 +1005,15 @@ function player() {
         generateBoardOptions();
         disableBoard(!gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
-            currentCard.src = "images/blank.svg";
+            renderCard(true);
+            // currentCard.src = "images/blank.svg";
         }
         else {
-            currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
+            renderCard(false, currentCard, gameInfo.card);
+            // currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
         setWinCondition(gameInfo.goal);
-                // setWinCondition(gameInfo.goal);
 
         for (e=0; e < gameInfo.playerList.length; e++) {
             iteratedPlayer = gameInfo.playerList[e];
@@ -1054,7 +1069,6 @@ function load_page(page) {
 
 function roomSearch(room, evt) {
     // evt.preventDefault();
-    console.log(room)
     socket.emit("room check", room);
     socket.on('room join', function(bool, bool2){
         if (bool) {
@@ -1135,14 +1149,14 @@ _("host").addEventListener('click', function(event) {
     var deckSelectOptionsContainer = document.createDocumentFragment();
     var li = document.createElement("li");
     var input = document.createElement("input");
-    var img = document.createElement("img");
+    var div = document.createElement("div");
     var label = document.createElement("label");
     li.classList.add("deckSelect__li");
     input.classList.add("deckSelect__input");
-    img.classList.add("deckSelect__img");
+    div.setAttribute("class", "deckSelect__img card");
     input.setAttribute("type", "checkbox");
     input.setAttribute("name", "cardNumber");
-    label.appendChild(img);
+    label.appendChild(div);
     li.appendChild(input);
     li.appendChild(label);
     checkChecker = true;
@@ -1159,6 +1173,7 @@ _("host").addEventListener('click', function(event) {
             let liO = li.cloneNode('true');
 
             liO.children[0].setAttribute("value", c);
+            let liOImage = liO.children[1].children[0];
             liO.children[1].setAttribute("for", c);
             if (checkChecker) {
                 liO.children[0].setAttribute("checked", "checked");
@@ -1168,8 +1183,8 @@ _("host").addEventListener('click', function(event) {
                     liO.children[0].setAttribute("checked", "checked");
                 }
             }
-
-            liO.children[1].children[0].src = "images/donClemente/" + c + '.jpg';
+            liOImage.style.backgroundImage = "url(../images/spritesheet.jpg)"
+            liOImage.style.backgroundPosition = ((c-1) * 1.8523) + "% 0";
             
             deckSelectOptionsContainer.appendChild(liO);
         }

@@ -615,8 +615,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .deckSelect__img {
-    width: 100%;
-}
+    display: table-cell;
+    width: 200px;
+    padding-top: 151%;}
 
 #deckSelectBtn {
     display: block;
@@ -1002,11 +1003,12 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-gap: 0.5rem;
 }
 
-.drawWrap {
-    /*box-shadow: 0px 54px 0px 0px rgba(245,245,245,1);*/
+#currentCard.currentCard--host {
+    padding: 0;
+    width: auto;
 }
 
-.deck, .currentCard-host {
+.deck, .currentCard--host {
     height: 60vw;
     max-height: 35vh;
     object-fit: contain;
@@ -1014,6 +1016,21 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 #drawBtn, #reviewBtn {
     width: 100%;
+}
+
+.card {
+    width: 262px;
+    /* max-width: 100%; */
+    padding-top: 151%;
+    background-image: url(../images/blank.svg);
+    /* background-image: url(../images/spritesheet.jpg); */
+    background-repeat: no-repeat;
+    background-position: 50% 0px;
+    /* background-position: -1.8523% 0px; */
+    /* background-position: calc(1.8523%* 0) 0px; */
+    background-size: cover;
+    display: table-cell;
+    aspect-ratio: 262/400; 
 }
 
 .currentCardWrap--host {
@@ -1454,6 +1471,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 20vw;
     object-fit: contain;
     display: block;
+    padding: 0;
 }
 
 .roomInfo--player {
@@ -1485,8 +1503,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         display: flex;
         flex-direction: row;
         justify-content: center;
-        gap: 3rem;
-        grid-gap: 3rem;
+        gap: 1rem;
+        grid-gap: 1rem;
         padding: 2rem 0;
         box-sizing: border-box;
         height: 95vh;
