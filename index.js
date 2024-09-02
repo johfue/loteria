@@ -282,8 +282,8 @@ io.on('connection', (socket) => {
 });
 
 // For live
-// http.listen(3000, function() {
+http.listen(3000, function() {
 // For staging
-http.listen(3050, function() {
+// http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });
