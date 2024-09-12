@@ -832,7 +832,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         grid-gap: 2rem;
         grid-template-columns: repeat(auto-fill, 17%);
         padding: 1rem 10%;
-        align-content: end;
     }
     
     .modal__input--gameSettings{
