@@ -1004,7 +1004,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 #currentCard.currentCard--host {
     padding: 0;
-    width: auto;
+    width: 23.5vh;
 }
 
 .deck, .currentCard--host {

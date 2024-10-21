@@ -21,9 +21,10 @@ class Database {
   _connect() {
     mongoose
     //for local env
-    //   .connect(`mongodb://${server}/${database}`)
+      .connect(`mongodb://${server}/${database}`)
     //for production and staging env
-     .connect(`mongodb://${username}:${password}@${server}/${database}`)
+    //  .connect(`mongodb://${username}:${password}@${server}/${database}`)
+     //
       .then(() => {
         console.log('Database connection successful');
       })
@@ -35,29 +36,6 @@ class Database {
 
 module.exports = new Database();
 
-// const Schema = mongoose.Schema;
-
-// const userSchema = new mongoose.Schema({
-//   name: String,
-//   email: String,
-//   age: Number,
-// });
-
-// const User = mongoose.model('User', userSchema);
-// const newUser = new User({
-//   name: 'Elena John',
-//   email: 'elena.john@example.com',
-//   age: 22,
-// });
-
-// newUser.save()
-// .then(() => {
-//   console.log('Save User at MongoDB');
-// })
-// .catch((error) => {
-//   console.error(error);
-// });
-
 const GameSchema = mongoose.Schema({
   room_number: { type: Number, required: true, maxLength: 6 },
   win_condition: { type: String, enum: ["diagonal", "column", "row", "corner", "center", "BlackOut",] },
@@ -65,76 +43,12 @@ const GameSchema = mongoose.Schema({
   banned_names: { type: Array },
 });
 const Game = mongoose.model('Game', GameSchema);
-// const newGame = new Game({
-//   room_number: 123456,
-// });
-
-// newGame.save();
-
 
 app.get("/:room([0-9]{6})", async (request, response) => {
   const game = new Game({curent_card:request.params, room_number:123321});
     await game.save();
       response.sendfile(__dirname + '/public/index.html');
-
-//   try {
-//     console.log("logged" + request.body);
-//     await game.save();
-//     // response.send(user);
-//     // response.sendfile(__dirname + '/public/index.html');
-
-//   } catch (error) {
-//     response.status(500).send(error);
-//   }
 });
-
-// app.post('/game', function (req, res) {
-//   console.log(req.body);
-//   res.send(req.body);
-// });
-
-
-// app.post("/game", async (request, response) => {
-//   const game = new Game(request.body);
-//   try {
-//     await game.save();
-//     // response.send(user);
-//   } catch (error) {
-//     response.status(500).send(error);
-//   }
-
-// });
-
-
-
-
-
-// const PlayerSchema = new mongoose.Schema({
-//   nickname: { type: String, required: true, maxLength: 8 },
-//   room: { type: Schema.Types.ObjectId, ref: "Room", required: true },
-//   board: { type: Number },
-//   beans: { type: Array },
-
-// });
-
-// module.exports = mongoose.model("Player", PlayerSchema);
-
-
-// app.post("/player",async(req,res)=>{
-
-//     console.log("posted");
-
-//     const data = new PlayerSchema ({
-//         nickname:req.body.wrewrw,
-//     });
-    
-//     const val = await data.save();
-// });
-
-
-
-
-
 
 app.use(express.static('public'));
 
@@ -145,7 +59,6 @@ app.get('/', function(req, res) {
 app.get('*', function(req, res){
    res.send('Sorry, this is an invalid URL.');
 });
-
 
 
 io.on('connection', (socket) => {
@@ -282,8 +195,8 @@ io.on('connection', (socket) => {
 });
 
 // For live
-http.listen(3000, function() {
+// http.listen(3000, function() {
 // For staging
-// http.listen(3050, function() {
+http.listen(3050, function() {
    console.log('listening on localhost:3000');
 });
