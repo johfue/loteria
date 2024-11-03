@@ -612,14 +612,16 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }
 
 .deckSelect__li:active {
-    -webkit-transform: translateY(-6%);
-    transform: translateY(-6%);
+    -webkit-transform: scale(103%);
+    transform: scale(103%);
 }
 
 .deckSelect__img {
     display: table-cell;
     width: 200px;
-    padding-top: 151%;}
+    padding-top: 151%;
+    transition: 0.15ms ease;
+}
 
 #deckSelectBtn {
     display: block;
@@ -640,33 +642,29 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     top: 0;
     right: 0;
     z-index: 3;
-    background-color: rgba(20,20,20,0.9);
-    mix-blend-mode: saturation;
-    -webkit-filter: unset;
-    filter: unset;
 }
 
-/* .deckSelect__input:active {
-    -webkit-transform: translateY(6%);;
-    transform: translateY(6%);
-} */
+.deckSelect__wrapper {
+    transition: 0.15s ease;
+}
 
-.deckSelect__input:hover {
-    background-color: rgba(20,20,20,0.3);
+.deckSelect__li:hover .deckSelect__wrapper {
+    transform: translateY(-10px);
 }
 
 .deckSelect__input:checked{
     background-image: url(images/check.svg);
-    background-color: revert;
-    mix-blend-mode: unset;
     background-size: 33%;
     background-position: 85% 85%;
 }
 
-.deckSelect__input:checked:hover {
-    background-color: rgba(250,250,250,0.3);
-    -webkit-filter: unset;
-    filter: unset;
+.deckSelect__label {
+    filter: grayscale(1);
+    transition: 0.15s ease;
+}
+
+.deckSelect__input:checked + .deckSelect__label{
+    filter: grayscale(0);
 }
 
 .deckSettings__label--Edit {
@@ -686,10 +684,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         -webkit-transform: translateY(-6%);
         transform: translateY(-6%);
     }
-    .deckSelect__img:hover {
-        -webkit-filter: brightness(0.7);
-        filter: brightness(0.7);
-    }
 }
 
 .modal__content--cardSelect {
@@ -707,7 +701,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 @media (min-width: 821px) {
     .modal__content--cardSelect {
-        grid-template-columns: repeat(6, 9vw);
+        grid-template-columns: repeat(7, 7vw);
         grid-column-gap: 1.2rem;
         grid-row-gap: 1.5rem;
         /* padding: 1rem 15vw; */
@@ -725,6 +719,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transition: inherit;
     font-family: poppins;
     outline-offset: 4px;
+    filter: grayscale(0);
 }
 
 .gameSettings__optionWrap {
@@ -740,6 +735,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     display: grid;
     overflow-y: scroll;
     background-color: var(--secondary-base);
+    grid-column: span 2;
+    width: 100%;
+    height: 100%;
 }
 
 .modal__content--gameSettingsWrap {
@@ -799,25 +797,20 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     font-family: 'poppins';
     color: var(--neutral-100);
     font-size: 0.8em;
+    line-height: 1;
 }
 
-.boardSelect__page .boardSelect__li {
+.boardSelect__li {
     transition: 0.1s ease;
     line-height: 1;
 }
 
 @media (min-width: 768px) {
 
-    .gameSettings__optionWrap:hover .gameSettings__option, .boardSelect__li:hover .radio-sibling {
+    .gameSettings__optionWrap:hover .gameSettings__option, .boardSelect__li:hover .boardSelect__wrapper {
         background-color: var(--neutral-700);
         -webkit-transform: translateY(-6%);
         transform: translateY(-6%);
-    }
-
-    .boardSelect__li.claimed:hover .radio-sibling, boardSelect__li.claimed:hover {
-        transform: none;
-        background-color: initial;
-        -webkit-transform: none;
     }
 }
 
@@ -844,15 +837,21 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         max-width: 12vw;
     }
 }
-.boardSelect__li.claimed:active, .boardSelect__li.claimed:active {
+
+.gameSettings__optionWrap:active .gameSettings__option, .boardSelect__li:active, .deckSettings__option:active {
+    -webkit-transform: scale(103%);
+   transform: scale(103%);
+}
+
+.boardSelect__li.claimed .radio-sibling {
+    filter: grayscale(1);
+}
+
+.boardSelect__li.claimed, .boardSelect__li.claimed .boardSelect__wrapper{
     transform: none;
     background-color: initial;
     -webkit-transform: none;
-}
-
-.gameSettings__optionWrap:active .gameSettings__option, .boardSelect__li:active, .deckSettings__option:active {
-    -webkit-transform: translateY(-10%);
-   transform: translateY(-10%);
+    transform: none;
 }
 
 .gameSettings label {
@@ -1867,11 +1866,16 @@ table, td {
     }
 }
 
+.boardSelect__wrapper {
+    transition: inherit;
+}
+
 .boardSelect__span {
     text-align: center;
     display: block;
     font-size: 0.8em;
     margin-top: 0.5em;
+    line-height: 1;
 }
 
 .boardSelect__page {
@@ -1911,7 +1915,7 @@ table, td {
     filter: unset;
 }
 
-.board__input:disabled, .boardSelect__input:disabled, .board__input:disabled:hover, .boardSelect__input:disabled:hover {
+.board__input:disabled, .board__input:disabled:hover {
     background-color: rgba(100,100,100,0.8);
     mix-blend-mode: saturation;
 }
@@ -1974,6 +1978,7 @@ table, td {
 
 .modal--boardSelect {
     z-index: 4;
+    left: 0;
 }
 
 @media(min-width:845px) {
@@ -1995,7 +2000,7 @@ table, td {
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.boardSelect__li > input:checked {
+.boardSelect__input:checked {
     background-image: url(images/check.svg);
 }
 
@@ -2048,7 +2053,7 @@ td input {
     line-height: 0;
 }
 
-.boardSelect__li > input, .modal__content--boardHold li > input {
+.boardSelect__input, .modal__content--boardHold li > input {
     height: 100%;
     width: 100%;
     -webkit-appearance: none;

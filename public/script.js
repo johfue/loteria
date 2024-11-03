@@ -915,21 +915,24 @@ function player() {
         }
     }
 
-    var boardSelectOptionsContainer = document.createDocumentFragment();
-    var ol = document.createElement("ol");
-    var li = document.createElement("li");
-    var input = document.createElement("input");
-    var span = document.createElement("span");
-    var label = document.createElement("label");
+    let boardSelectOptionsContainer = document.createDocumentFragment();
+    let ol = document.createElement("ol");
+    let li = document.createElement("li");
+    let wrapper = document.createElement("div");
+    let input = document.createElement("input");
+    let span = document.createElement("span");
+    let label = document.createElement("label");
     label.classList.add("radio-sibling");
     li.classList.add("boardSelect__li");
     ol.classList.add("boardSelect__page");
     span.classList.add("boardSelect__span");
     input.classList.add("boardSelect__input");
+    wrapper.classList.add("boardSelect__wrapper");
     input.setAttribute("type", "radio");
     input.setAttribute("name", "boardNumber");
-    li.appendChild(input);
-    li.appendChild(label);
+    wrapper.appendChild(input);
+    wrapper.appendChild(label);
+    li.appendChild(wrapper);
 
     var claimToken = document.createElement("span");
     claimToken.classList.add("claimToken");
@@ -944,14 +947,14 @@ function player() {
         
         if (_(id + "claimed") != null) {
             _(id + "claimed").previousSibling.disabled = false;
-            _(id + "claimed").parentElement.classList.remove("claimed");
+            _(id + "claimed").parentElement.parentElement.classList.remove("claimed");
             _(id + "claimed").remove(_(id + "claimed"));
         }
         let claimTokenO = claimToken.cloneNode('true');
         claimTokenO.innerHTML = name;
         claimTokenO.setAttribute("id", id + "claimed");
         claimedBoard.disabled = true;
-        claimedBoard.parentElement.classList.add("claimed");
+        claimedBoard.parentElement.parentElement.classList.add("claimed");
         claimedBoard.insertAdjacentElement('afterend', claimTokenO);
     }
     function generateBoardOptions() {
@@ -959,7 +962,8 @@ function player() {
         let olO = ol.cloneNode('true');
         olO.setAttribute("id", "page_" + (p+1));
         for (b=0; b<9; b++) {
-            let liO = li.cloneNode('true');
+            let li0 = li.cloneNode('true');
+            let liO = li0.children[0];
             let spanO = span.cloneNode('true');
             let currentBoard = (p*9) + (b+1);
             spanO.innerHTML = "#" + currentBoard;
@@ -971,7 +975,7 @@ function player() {
                 socket.emit('claim board', this.firstElementChild.value, nickname, roomInput);
             });
             liO.children[1].appendChild(spanO);
-            olO.appendChild(liO);
+            olO.appendChild(li0);
         }
         boardSelectOptionsContainer.appendChild(olO);
     }
@@ -1146,19 +1150,23 @@ _("player").addEventListener('click', function(event) {
 
 _("host").addEventListener('click', function(event) {
 
-    var deckSelectOptionsContainer = document.createDocumentFragment();
-    var li = document.createElement("li");
-    var input = document.createElement("input");
-    var div = document.createElement("div");
-    var label = document.createElement("label");
+    let deckSelectOptionsContainer = document.createDocumentFragment();
+    let li = document.createElement("li");
+    let input = document.createElement("input");
+    let div = document.createElement("div");
+    let wrapper = document.createElement("div");
+    let label = document.createElement("label");
     li.classList.add("deckSelect__li");
     input.classList.add("deckSelect__input");
     div.setAttribute("class", "deckSelect__img card");
+    wrapper.setAttribute("class", "deckSelect__wrapper");
+    label.setAttribute("class", "deckSelect__label");
     input.setAttribute("type", "checkbox");
     input.setAttribute("name", "cardNumber");
     label.appendChild(div);
-    li.appendChild(input);
-    li.appendChild(label);
+    wrapper.appendChild(input);
+    wrapper.appendChild(label);
+    li.appendChild(wrapper);
     checkChecker = true;
 
     if (!localStorage.getItem('listCookie')) {
@@ -1170,8 +1178,8 @@ _("host").addEventListener('click', function(event) {
     }
 
         for (c=1; c<55; c++) {
-            let liO = li.cloneNode('true');
-
+            let li0 = li.cloneNode('true');
+            let liO = li0.children[0];
             liO.children[0].setAttribute("value", c);
             let liOImage = liO.children[1].children[0];
             liO.children[1].setAttribute("for", c);
@@ -1186,7 +1194,7 @@ _("host").addEventListener('click', function(event) {
             liOImage.style.backgroundImage = "url(../images/spritesheet.jpg)"
             liOImage.style.backgroundPosition = ((c-1) * 1.8523) + "% 0";
             
-            deckSelectOptionsContainer.appendChild(liO);
+            deckSelectOptionsContainer.appendChild(li0);
         }
 
     _("cardSelectList").appendChild(deckSelectOptionsContainer);
