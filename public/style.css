@@ -1008,7 +1008,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 #currentCard.currentCard--host {
     padding: 0;
-    width: 23.5vh;
+    width: 40vw;
+    max-width: 24vh;
 }
 
 .deck, .currentCard--host {
