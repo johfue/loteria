@@ -1034,6 +1034,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-size: cover;
     display: table-cell;
     aspect-ratio: 262/400; 
+    filter: brightness(1) grayscale(0);
 }
 
 .currentCardWrap--host {
@@ -1899,15 +1900,15 @@ table, td {
 }
 
 @media (min-width: 768px) {
-    .board__td:hover img {
-        -webkit-filter: brightness(0.7);
-        filter: brightness(0.7);
+    .board__td:hover .card {
+        -webkit-filter: brightness(0.7) grayscale(0);
+        filter: brightness(0.7) grayscale(0);
     }
 }
 
-.board__td:active img {
-    -webkit-filter: brightness(1.2);
-    filter: brightness(1.2);
+.board__td:active .card {
+    -webkit-filter: brightness(1.1) grayscale(0);
+    filter: brightness(1.1) grayscale(0);
 }
 
 .board__input:disabled ~ img {
@@ -1915,9 +1916,8 @@ table, td {
     filter: unset;
 }
 
-.board__input:disabled, .board__input:disabled:hover {
-    background-color: rgba(100,100,100,0.8);
-    mix-blend-mode: saturation;
+.board__input:disabled + .card {
+    filter: brightness(1) grayscale(1);
 }
 
 .beanable.beaned, .board td.input:checked, .boardSelect__input:checked {
