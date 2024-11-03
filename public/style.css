@@ -695,7 +695,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-row-gap: 0.5rem;
     padding: 1rem;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: var(--primary-base);
 }
 
@@ -733,7 +733,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 
 .modal__content--gameSettings {
     display: grid;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: var(--secondary-base);
     grid-column: span 2;
     width: 100%;
@@ -1084,7 +1084,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-template-columns: repeat(auto-fill, 12vw);
     grid-gap: 10px;
     font-size: 0.75em;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: auto;
     width: 100%;
     height: 100%;
@@ -1186,7 +1186,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 
 .modal__content--cardReview {
-    overflow-y: scroll;
+    overflow-y: auto;
     display: grid;
     grid-gap: 0.75rem;
     column-gap: 1.5rem;
@@ -1237,7 +1237,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     grid-template-rows: min-content 1fr;
     background-color: var(--primary-base);
     padding-top: 24vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     align-content: start;
     grid-gap: 1rem;
 }
@@ -1646,7 +1646,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     flex-direction: column;
     grid-template-columns: repeat(5, 1fr);
     /* justify-content: center; */
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: auto;
     gap: 0.25rem;
     grid-gap: 0.25rem;
@@ -1707,7 +1707,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         display: flex;
         /* grid-template-columns: 1fr 1fr; */
         overflow-x: auto;
-        overflow-y: scroll;
+        overflow-y: auto;
         grid-gap: 1rem;
         max-height: 68vh;
     }
@@ -1740,7 +1740,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         display: grid;
         grid-template-columns: 1fr 1fr;
         overflow-x: auto;
-        overflow-y: scroll;
+        overflow-y: auto;
         grid-gap: 1rem;
         height: 85%;
     }
@@ -2017,7 +2017,7 @@ table, td {
 
 .modal__content--boardSelect {
     list-style-type: none;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 1rem 1rem 1rem 3rem;
     background-color: var(--primary-base);
     position: relative;
