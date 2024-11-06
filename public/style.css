@@ -266,6 +266,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     clip-path: polygon(3% 0%, 0% 100%, 97% 100%, 100% 0%);
     font-family: 'poppinsbold';
     font-size: 2rem;
+    line-height: 1;
 }
 
 .about__p {
