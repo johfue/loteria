@@ -544,14 +544,27 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-
-
-.deckSettings {
+.deckSettings { 
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 1rem;
 }
+
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+    
+    .modal--cardSelect {
+        left: 0;
+    }
+
+    @media(min-width:845px) {
+        .modal--cardSelect {
+            width: 65vw;
+            left: 17.5vw;
+        }
+    }
+}}
 
 .deckSettings__option {
     transition: 0.1s ease;
@@ -1353,9 +1366,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         width: 10vh;
     }
     .modal__content--alleged {
-        padding: 0 1rem 0 0;
+        padding: 0 1rem 1rem 0;
         justify-content: center;
-        row-gap: 0
+        row-gap: 0;
         overflow-y: auto;
     }
     .alleged__h3 {
@@ -1498,6 +1511,10 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
         grid-template-rows: min-content min-content;
         width: min-content;
         height: 99vh;
+    }
+    .playerWrap h2 {
+        font-size: 3rem;
+        line-height: 0.5;
     }
     .playerInfo {
         grid-column: 1/3;
