@@ -551,9 +551,9 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     margin-top: 1rem;
 }
 
-@media not all and (min-resolution:.001dpcm)
+/* @media not all and (min-resolution:.001dpcm)
 { @supports (-webkit-appearance:none) and (stroke-color:transparent) {
-    
+     */
     .modal--cardSelect {
         left: 0;
     }
@@ -563,8 +563,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
             width: 65vw;
             left: 17.5vw;
         }
-    }
-}}
+    /* }
+}} */
 
 .deckSettings__option {
     transition: 0.1s ease;
