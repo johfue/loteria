@@ -563,6 +563,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
             width: 65vw;
             left: 17.5vw;
         }
+    }
     /* }
 }} */
 
@@ -713,7 +714,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     background-color: var(--primary-base);
 }
 
-@media (min-width: 821px) {
+@media (min-width:821px) {
     .modal__content--cardSelect {
         grid-template-columns: repeat(7, 7vw);
         grid-column-gap: 1.2rem;
