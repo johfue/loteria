@@ -60,24 +60,32 @@
         </svg>
     </a>
     <img src="images/logo.svg" class="hero" alt="Play Lotería Online">
-   <div>
-    <form id="welcomeForm" class="welcome">
-        <label for="roomSearch" class="welcome__label">Room Number</label>
-        <input class="welcome__input" placeholder="######" type="text" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required id="roomSearch">
-        <span id="errorMsg1" class="errorMsg invisible"></span>
-        <button class="welcome__input secondaryBtn" type="submit" id="join">Join a game</button>
+   
+    <div>
+    <div id="firstForm">
+    <form id="welcomeForm" class="landingForm">
+        <div>
+            <label for="roomSearch" class="welcome__label">Room Number</label>
+            <input class="welcome__input" placeholder="######" type="text" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required id="roomSearch">
+            <span id="errorMsg1" class="errorMsg invisible"></span>
+            <button class="welcome__input secondaryBtn" type="submit" id="join">Join a game</button>
+        </div>
     </form>
     
-    <form id="nameForm" class="nickname invisible" method="post" action="/player">
+    <button class="welcome__input primaryBtn" id="host">Host a game</button>
+    </div>
+
+    <form id="nameForm" class="landingForm invisible" method="post" action="/player">
+        <div>
         <label for="nickname" class="welcome__label">Nickname</label>
         <input class="welcome__input" placeholder="Name" type="text" inputmode="text" minlength="1" maxlength="8" required id="nickname" autocomplete="cc-csc">
         <span id="errorMsg2" class="errorMsg invisible"></span>
         <button class="welcome__input secondaryBtn" type="submit" id="player">Confirm</button>
+        </div>
+        <a class="back" onclick="goBack('nameForm', 'firstForm')"><img src="images/back.svg" class="back__arrow" alt="">Back</a>
     </form>
     
-    <button class="welcome__input primaryBtn" id="host">Host a game</button>
-    
-    <form id="deckSettings" class="deckSettings invisible" method="post" action="/game">
+    <form id="deckSettings" class="landingForm invisible" method="post" action="/game">
             <div class="deckSettings__option">
                 <input type="radio" id="deck1" name="deckOption" value="classic" class="modal__input--deckSettings">
                 <label for="deck1" class="radio-sibling--deckSettings"><span class="deckSettings__label--header">Classic</span><br>The original 54 Don Clemente cards</label>
@@ -91,8 +99,10 @@
                 <label for="deck3" class="radio-sibling--deckSettings"><span class="deckSettings__label--header">Custom</span><span id="deckSettings__label--Edit" class="deckSettings__label--Edit">[Edit]</span></label>
             </div>
         <button type="submit" class="secondaryBtn welcome__input" id="deckSelectBtn">Confirm</button>
+        <a class="back" onclick="goBack('deckSettings', 'firstForm')"><img src="images/back.svg" class="back__arrow" alt="">Back</a>
     </form>
     </div>
+    
     <div id="cardReview" class="modal modal--cardSelect invisible">
             <ol id="cardSelectList" class="modal__content modal__content--cardSelect"></ol>
             <h2><span class="modal__span">Add/Remove</span><br>Cards</h2>

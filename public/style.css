@@ -128,6 +128,7 @@ button {
     height: 60px;
     font-size: 24px;
     position: relative;
+    margin-bottom: 10px;
     border: none;
     background-color: unset;
     z-index: 1;
@@ -138,6 +139,7 @@ button {
     outline-offset: 4px;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
+    transition: 0.2s ease;
 }
 
 button:before, button:after {
@@ -178,7 +180,7 @@ button:focus:not(:focus-visible) {
 
 @media (min-width: 768px) {
     button:hover:before {
-        transition: 0.15s;
+        transition: 0.15s ease;
         -webkit-transform: translate(0, 15px);
         transform: translate(0, 15px);
     }
@@ -345,18 +347,22 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     transition: 0.25s ease;
 }
 
-.welcome, .nickname {
+.landingForm {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
     width: -moz-fit-content;
     width: fit-content;
     margin: 2rem auto 0;
     position: relative;
 }
+
 .welcome__input {
     max-width: 300px;
-    /*height: 75px;*/
     font-size: 1.5em;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }
 
 #roomSearch, #nickname {
@@ -366,6 +372,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     padding: calc(15px + 1rem) 25px 15px;
     display: inline-block;
     border: none;
+    margin: 0 3%;
 }
 
 .welcome__label {
@@ -394,6 +401,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     width: 94%;
     box-sizing: border-box;
     margin: 0 auto;
+    display: block;
 }
 
 .aboutBtn {
@@ -434,6 +442,39 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     height: 61px;
     box-sizing: border-box;
     padding: 5px;
+}
+
+.back {
+    display: inline-block;
+    margin: 0 auto;
+    font-family: "poppinsbold";
+    font-size: 1.3em;
+    color: var(--neutral-900);
+    margin-top: .5em;
+    cursor: pointer;
+}
+
+.back__arrow {
+    position: relative;
+    right: 0.15em;
+    vertical-align: -0.3em;
+    transition: 0.2s ease;
+}
+
+.back:hover:active .back__arrow{
+    transform: translateX(-0.1em);
+}
+
+@media (min-width:768px) {
+    .back:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 4px;
+    }
+
+    .back:hover .back__arrow {
+        transform: translateX(-0.25em);
+        transition: 0.15s ease;
+    }
 }
 
 @media(min-width:768px) {
@@ -544,13 +585,6 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 /*/--------------------------------------------/*/
 /*/--------------------------------------------/*/
 
-.deckSettings { 
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
 /* @media not all and (min-resolution:.001dpcm)
 { @supports (-webkit-appearance:none) and (stroke-color:transparent) {
      */
@@ -568,7 +602,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
 }} */
 
 .deckSettings__option {
-    transition: 0.1s ease;
+    transition: 0.25s ease;
     margin: 0 auto;
     display: flex;
 }
@@ -698,6 +732,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     .deckSettings__option:hover {
         -webkit-transform: translateY(-6%);
         transform: translateY(-6%);
+        transition: 0.1s;
     }
 }
 
@@ -1170,6 +1205,7 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     text-decoration: underline;
     color: var(--deny-base);
 }
+
 
 @media(min-width:845px) {
     .logo {
@@ -2212,6 +2248,13 @@ td input {
     z-index: 3;
 }
 
+.waitingModal__action {
+    color: var(--accent-base);
+    font-family: 'poppinsbold';
+    justify-self: center;
+    margin-top: calc(0.5em + 10px);
+}
+
 .waitingModal__p {
     text-align: center;
     background-color: var(--neutral-900);
@@ -2264,6 +2307,9 @@ td input {
 @media(min-width:845px) {
     #waitingModal {
         top: 6.5%;
+    }
+    .waitingModal__action{
+        margin-top: 0;
     }
     .alert__stripe {
         width: 70vw;

@@ -158,8 +158,11 @@ io.on('connection', (socket) => {
     socket.on('activity', (x, y, bool, roomNumber) => {
         socket.to(roomNumber).emit('updateActivity', x, y, bool, socket.id);
     });
-    socket.on('announce win', (board, roomNumber) => {
-        socket.to(roomNumber).emit('check win', board, socket.id);
+    socket.on('announce win', (roomNumber) => {
+        socket.to(roomNumber).emit('check win', socket.id);
+    });
+    socket.on('nevermind', (roomNumber) => {
+        socket.to(roomNumber).emit('cancel win', socket.id);
     });
     socket.on('board checked', (bool, id, roomNumber) => {
         io.to(id).emit('win checked', bool);

@@ -58,6 +58,15 @@ function targetDom() {
     const winConditionInfo = _("winConditionInfo");
 }
 
+function hide(elem, bool) {
+    if (bool) {
+        elem.classList.add("invisible");
+    }
+    else {
+        elem.classList.remove("invisible");
+    }
+}
+
 function generateCardOnBoard(func, param, arg) {
     cardOnBoard = [];
         for (i = 0; i < 4; i++) {
@@ -601,8 +610,12 @@ function host(event) {
         
     }
     
-    socket.on ("check win", function(board, id) {
+    socket.on ("check win", function(id) {
         _("player__table--" + id).classList.add("winnerGlow");
+    });
+
+    socket.on ("check win", function(id) {
+        _("player__table--" + id).classList.remove("winnerGlow");
     });
     
     _("reviewBtn").addEventListener('click', function() {
@@ -740,6 +753,9 @@ function player() {
     const infoHub2 = _("infoHub2");
     const table = _("board");
     const newBoard = _("newBoard");
+    const waitingModal= _("waitingModal");
+    const waitingModal__changeBoard = _("waitingModal__changeBoard");
+    const waitingModal__nevermind = _("waitingModal__nevermind");
     const tableCells = table.querySelectorAll('input[type="checkbox"]');
     const currentCard = _('currentCard');
     const winCondition = _('winConditionInfo');
@@ -753,6 +769,7 @@ function player() {
     let chosenBoard = null;
     let checkedPosition = [];
     let currentWinCondition = [];
+    let started = null;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
@@ -763,6 +780,22 @@ function player() {
                 socket.emit("activity", cell, row, this.firstElementChild.checked, roomInput);
                 });
         }
+        
+    }
+
+    function restarting() {
+
+    }
+
+    function waitingToStart() {
+
+    }
+
+    function playing() {
+
+    }
+
+    function waitingToWin() {
         
     }
 
@@ -791,7 +824,11 @@ function player() {
         drawTable();
         boardSelect.classList.add("invisible");
         table.classList.remove("invisible");
-        shadowBox.classList.add("invisible")
+        shadowBox.classList.add("invisible");
+        console.log(started);
+        if(!started) {
+            waitingModal__changeBoard.classList.remove("invisible");
+        }
     }
     
     function disableBoard(bool) {
@@ -799,10 +836,10 @@ function player() {
             tableCells[k].disabled = bool;
         }
         if (bool) {
-            _("waitingModal").classList.remove("invisible");
+            waitingModal.classList.remove("invisible");
         }
         else {
-            _("waitingModal").classList.add("invisible");
+            waitingModal.classList.add("invisible");
         }
         
         announceWin.disabled = bool;
@@ -812,19 +849,34 @@ function player() {
     
     beingChecked = false;
 
+    waitingModal__changeBoard.addEventListener('click', function(event) {
+        event.preventDefault();
+        boardSelect.classList.remove("invisible");
+    });
+
+    waitingModal__nevermind.addEventListener('click', function(event) {
+        socket.emit('nevermind', roomInput);
+        disableBoard(false);
+        waitingModal__nevermind.classList.add("invisible");
+    });
+
     announceWin.addEventListener('click', function(event) {
         event.preventDefault();
         disableBoard(true);
-        socket.emit("announce win", chosenBoard, roomInput);
+        socket.emit("announce win", roomInput);
         beingChecked = true;
+        waitingModal__nevermind.classList.remove("invisible");
     });
     
     function startEnd(bool) {
         if (bool) {
             disableBoard(false);
+            hide(waitingModal__nevermind, true);
+            hide(waitingModal__changeBoard, true);
             topStripe.innerHTML = "Start"
-            shadowBox.classList.remove("invisible");
-            alertModal.classList.remove("invisible");
+            hide(shadowBox, false);
+            hide(alertModal, false);
+
             window.setTimeout(function() {
                 alertModal.classList.add("invisible");
                 shadowBox.classList.add("invisible");
@@ -839,15 +891,17 @@ function player() {
             renderCard(true);
             round += 1;
             disableBoard(true);
-            shadowBox.classList.add("invisible");
-            boardSelect.classList.remove("invisible");
+            hide(shadowBox, false);
+            hide(boardSelect, false);
+            hide(waitingModal__changeBoard, false);
             beingChecked = false;
         }
         
     }
     
     socket.on('game state', function(bool){
-        startEnd(bool)
+        startEnd(bool);
+        gamestate = bool;
     });
     
     socket.on('current card', function(sentCard){
@@ -1008,6 +1062,8 @@ function player() {
         deck = deckList;
         generateBoardOptions();
         disableBoard(!gameInfo.gameState);
+        started = gameInfo.gameState;
+        hide(waitingModal__changeBoard, true);
         if (typeof gameInfo.card == "boolean") {
             renderCard(true);
             // currentCard.src = "images/blank.svg";
@@ -1060,6 +1116,11 @@ function player() {
     
 }
 
+function goBack(currentPage, prevPage) {
+    _(currentPage).classList.add("invisible");
+    _(prevPage).classList.remove("invisible");
+}
+
 function load_page(page) {
     fetch(page + '.html')
         .then(function (data) {
@@ -1076,8 +1137,7 @@ function roomSearch(room, evt) {
     socket.emit("room check", room);
     socket.on('room join', function(bool, bool2){
         if (bool) {
-            _("welcomeForm").classList.add("invisible");
-            _("host").classList.add("invisible");
+            _("firstForm").classList.add("invisible");
             _("nameForm").classList.remove("invisible");
         }
         else {
@@ -1207,8 +1267,7 @@ _("host").addEventListener('click', function(event) {
         document.querySelector('input[value=' + retrieveCookie + ']').checked = true;
     }
 
-    _("welcomeForm").classList.add("invisible");
-    _("host").classList.add("invisible");
+    _("firstForm").classList.add("invisible");
     _("deckSettings").classList.remove("invisible");
 
 _("deckSettings__label--Edit").addEventListener('click', function(event) {
