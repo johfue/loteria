@@ -1376,32 +1376,67 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     justify-self: start;
 }
 
-.player__table.winnerGlow:before {
+.player__table:before {
     content: "";
     position: absolute;
     top: 0;
-    bottom: 0;
-    height: 50px;
-    width: 50px;
-    background-image: url(images/exclaim_black.svg);
+    left: 0;
+    height: 100%;
+    width: 100%;
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: top;
-    /*z-index: 2;*/
-    transition: 0.15s ease;
 }
+
+.player__table.deciding:before {
+    background-image: url(images/deciding.svg);
+}
+.player__table.ready:before {
+    background-image: url(images/ready.svg);
+    -webkit-animation: small-jump 0.25s;
+    animation: small-jump 0.25s;
+}
+.player__table.winnerGlow:before {
+    background-image: url(images/exclaim_black.svg);
+    transition: 0.2s ease-in;
+    -webkit-animation: small-jump 0.25s;
+    animation: small-jump 0.25s;
+}
+
+@-webkit-keyframes small-jump {
+    from {
+        -webkit-transform: translateY(0) scale(1);
+    }
+    50% {
+        -webkit-transform: translateY(-5%) scale(1.05);
+    }
+    to {
+        -webkit-transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes small-jump {
+    from {
+        -webkit-transform: translateY(0) scale(1);
+    }
+    50% {
+        -webkit-transform: translateY(-5%) scale(1.05);
+    }
+    to {
+        -webkit-transform: translateY(0) scale(1);
+    }
+}
+
 @media(min-width: 768px) {
     .player__table.winnerGlow:hover:before {
         -webkit-transform: translateY(-10px);
         transform: translateY(-10px);
+        transition: 0.1s ease-out;
     }
 }
 
 @media(min-width:845px) {
-    .player__table.winnerGlow:before {
-        height: 10vh;
-        width: 10vh;
-    }
+    
     .modal__content--alleged {
         padding: 0 1rem 1rem 0;
         justify-content: center;
@@ -1748,6 +1783,8 @@ button:disabled:after, button:disabled:hover:after, button:disabled:active:after
     color: var(--neutral-100);
     font-size: 0.55em;
     text-decoration-thickness: 2px;
+    position: relative;
+    z-index: 1;
 }
 
 .player__span--host {
@@ -2005,7 +2042,7 @@ table, td {
     50% {
         -webkit-transform: translateY(5%) scale(1);
     }
-    t0 {
+    to {
         -webkit-transform: translateY(0) scale(1);
     }
 }

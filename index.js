@@ -158,6 +158,12 @@ io.on('connection', (socket) => {
     socket.on('activity', (x, y, bool, roomNumber) => {
         socket.to(roomNumber).emit('updateActivity', x, y, bool, socket.id);
     });
+    socket.on('deciding', (roomNumber) => {
+        socket.to(roomNumber).emit('deciding', socket.id);
+    });
+    socket.on('ready', (roomNumber) => {
+        socket.to(roomNumber).emit('ready', socket.id);
+    });
     socket.on('announce win', (roomNumber) => {
         socket.to(roomNumber).emit('check win', socket.id);
     });

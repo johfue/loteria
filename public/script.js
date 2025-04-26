@@ -130,16 +130,19 @@ function boardConstruct(seed) {
 let loaderGifSpan = document.createElement("span");
 loaderGifSpan.setAttribute("class", "loaderGif");
 loaderGifSpan.innerHTML = "...";
+let storeText = "";
 
 function loaderGif(target, bool) {
 
     if (bool) {
+        storeText = target.innerHTML
         target.innerHTML = "";
         target.append(loaderGifSpan);
     }
     
     else {
         target.lastChild.remove();
+        target.innerHTML = storeText;
     }
 }
 
@@ -197,6 +200,19 @@ const delayList = {
     twoByTwo: 9000,
 };
 
+const ruleNames = {
+    row: "Rows",
+    column: "Columns",
+    diagonal: "Diagonals",
+    corner: "Corners",
+    inside: "Inside",
+    outside: "Outside",
+    Z: "Z",
+    N: "N",
+    blackout: "Blackout",
+    twoByTwo: "2x2",
+};
+
 function loopSetWinAnimation(arr) {
     
 Promise.resolve().then(function resolver() {
@@ -224,6 +240,7 @@ function launchChain(rule) {
     return new Promise(function(resolve, reject) {
       
     winConditionInfo.classList.add(rule);
+    hostGoal.innerHTML = ruleNames[rule];
     let currentRound = round;
     setTimeout(function() {
     winConditionInfo.classList.remove(rule);
@@ -284,6 +301,7 @@ function host(event) {
     const currentCard = _("currentCard");
     const winConditionBtn = _("winConditionBtn");
     const winCondition = document.querySelectorAll('input[name="winCondition"]');
+    const hostGoal = _("hostGoal");
     let currentWincondition = [];
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
@@ -304,6 +322,7 @@ function host(event) {
 
     let drawnCards = [];
     let allegedWinnerID = null;
+    let started = false;
     
     const continueGame = document.createElement("button");
 
@@ -331,15 +350,7 @@ function host(event) {
         goal: "blank",
         playerList: [],
     };
-    
-    // // socket.emit('new room', roomNumber);
-
-    // socket.on('room clear', function(r){
-    //     console.log("room clear")
-    //     window.history.pushState('','', r);
-    //     _("roomNumber").innerHTML = r;
-    // });
-    
+        
     for (n=0; n<winCondition.length; n++) {
         winCondition[n].addEventListener('change', function() {
             // document.querySelector("winCondition:checked").length == 0;
@@ -361,7 +372,6 @@ function host(event) {
             var div = document.createElement("div");
             div.setAttribute("class", "card");
             renderCard(false, div, drawnCards[c]);
-            // img.src = "images/donClemente/" + drawnCards[c] + ".jpg";
             li.appendChild(div);
             cardReviewListFragment.appendChild(li);
         }
@@ -376,7 +386,6 @@ function host(event) {
             currentWinCondition.push(selectedWinConditions[n].value);
         }
         
-        // winConditionInfo.src =  "images/" + currentWinCondition + ".svg";
         setWinCondition(currentWinCondition);
 
         gameInfo.goal = currentWinCondition;
@@ -390,6 +399,7 @@ function host(event) {
     }
     
     function startGame() {
+        started = true;
         shuffleDeck();
         drawnCards = [];
         gameInfo.card = true;
@@ -399,14 +409,21 @@ function host(event) {
         drawBtn.innerHTML = "Draw";
         gameInfo.gameState = true;
         socket.emit('game state', true, roomNumber);
+
+        let players = playerGraph.querySelectorAll(".ready");
+
+        for (f=0; f<players.length; f++) {
+            players[f].classList.remove("ready");
+        };
+
         midStripe.innerHTML = "";
         topStripe.innerHTML = "Start"
-        alertModal.classList.remove("invisible");
-        shadowBox.classList.remove("invisible");
+        hide(alertModal, false);
+        hide(shadowBox, false);
         alertModal.classList.add("slide");
         window.setTimeout(function() {
-            alertModal.classList.add("invisible");
-            shadowBox.classList.add("invisible");
+            hide(alertModal, true);
+            hide(shadowBox, true);
         }, 2500);
 
     }
@@ -479,8 +496,8 @@ function host(event) {
         cardReviewListAlleged.appendChild(reviewCards());
         boardHold.appendChild(allegedBoard);
         
-        shadowBox.classList.remove("invisible");
-        allegedWinner.classList.remove("invisible");
+        hide(shadowBox, false);
+        hide(allegedWinner, false);
         allegedWinnerID = id;
 
     }
@@ -493,8 +510,8 @@ function host(event) {
 
         continueGame.addEventListener('click', function(event) {
             event.preventDefault();
-            alertModal.classList.add("invisible");
-            shadowBox.classList.add("invisible");
+            hide(alertModal, true);
+            hide(shadowBox, true);
             alertModal.classList.remove("paused");
             bottomStripe.innerHTML = "";
         });
@@ -514,7 +531,7 @@ function host(event) {
                 }
             }
             alertModal.classList.remove("paused");
-            alertModal.classList.remove("invisible");
+            hide(alertModal, false);
             alertModal.classList.add("slide");
             window.setTimeout(function() {
                 alertModal.classList.add("paused");
@@ -532,7 +549,7 @@ function host(event) {
     }
 
     function endGame() {
-        // currentCard.src = "images/blank.svg";
+        started = false;
         renderCard(true);
 
         for (r=0; r < gameInfo.playerList.length; r++) {
@@ -543,16 +560,18 @@ function host(event) {
         reviewBtn.disabled = true;
         winConditionBtn.disabled = false;
         winConditionInfo.setAttribute("class", "winInfo winInfo--host");
+        hostGoal.innerHTML = "&nbsp;"
         round += 1;
         for (n=0; n<winCondition.length; n++) {
             winCondition[n].disabled = false;
         }
         alertModal.classList.add("invisible");
-        gameSettings.classList.remove("invisible");
+        hide(gameSettings, false)
         opponentTiles = playerGraph.getElementsByTagName('td');
-        losers = playerGraph.querySelectorAll(".winnerGlow");
+        losers = playerGraph.querySelectorAll(".player__table");
         for (u=0; u < losers.length; u++) {
             losers[u].classList.remove("winnerGlow");
+            losers[u].classList.add("deciding");
         }
         for (w=0; w < opponentTiles.length; w++) {
             opponentTiles[w].classList.remove("beaned");
@@ -614,7 +633,7 @@ function host(event) {
         _("player__table--" + id).classList.add("winnerGlow");
     });
 
-    socket.on ("check win", function(id) {
+    socket.on ("cancel win", function(id) {
         _("player__table--" + id).classList.remove("winnerGlow");
     });
     
@@ -648,7 +667,7 @@ function host(event) {
         
         let joiningPlayer = _("player__span--" + id);
         
-        _(id).addEventListener('click', function(event) {
+        _("player__table--" + id).addEventListener('click', function(event) {
             checkBoardRender(id);
         });
         joiningPlayer.addEventListener('click', function(event) {
@@ -657,6 +676,7 @@ function host(event) {
         });
         
         let player = {ID: id, Nickname:nickname, board:undefined, placedBeans: []};
+        _("player__table--" + id).classList.add("deciding");
         if (gameInfo.playerList.length === 0) {
             _("invite").remove(_("invite"));
         }
@@ -696,6 +716,18 @@ function host(event) {
             }
         }
         
+    });
+
+    socket.on ("ready", function(id) {
+        _("player__table--" + id).classList.remove("deciding");
+        if (!started) {
+            _("player__table--" + id).classList.add("ready");
+        }
+    });
+
+    socket.on ("deciding", function(id) {
+        _("player__table--" + id).classList.remove("ready");
+        _("player__table--" + id).classList.add("deciding");
     });
 
     socket.on ("player left", function(id) {
@@ -765,11 +797,12 @@ function player() {
     const boardSelectOptionsWrap = _("boardSelectOptionsWrap");
     const boardOptions = document.querySelectorAll('input[name="boardNumber"]');
     const firstPage = _("firstPage");
+
     targetDom();
     let chosenBoard = null;
+    let beingChecked = false;
     let checkedPosition = [];
     let currentWinCondition = [];
-    let started = null;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
@@ -783,20 +816,43 @@ function player() {
         
     }
 
-    function restarting() {
-
+    function waitingToStart() {
+        clearBeans();
+        renderCard(true);
+        round += 1;
+        disableBoard(true);
+        hide(shadowBox, false);
+        hide(boardSelect, false);
+        hide(waitingModal__changeBoard, false);
+        hide(waitingModal__nevermind, true);
+        beingChecked = false;
     }
 
-    function waitingToStart() {
+    function starting() {
+        topStripe.innerHTML = "Start"
+        hide(shadowBox, false);
+        hide(alertModal, false);
+        playing();
+
+        window.setTimeout(function() {
+            hide(alertModal, true);
+            hide(shadowBox, true);
+            topStripe.innerHTML = "";
+            midStripe.innerHTML = "";
+        }, 2500);
 
     }
 
     function playing() {
-
+        disableBoard(false);
+        hide(waitingModal__nevermind, true);
+        hide(waitingModal__changeBoard, true);
     }
 
     function waitingToWin() {
-        
+        disableBoard(true);
+        beingChecked = true;
+        hide(waitingModal__nevermind, false);
     }
 
     function clearBeans() {
@@ -822,13 +878,10 @@ function player() {
         chosenBoard = document.querySelector('input[name="boardNumber"]:checked').value;
         Math.seedrandom(chosenBoard + "Q");
         drawTable();
-        boardSelect.classList.add("invisible");
-        table.classList.remove("invisible");
-        shadowBox.classList.add("invisible");
-        console.log(started);
-        if(!started) {
-            waitingModal__changeBoard.classList.remove("invisible");
-        }
+        hide(boardSelect, true);
+        hide(table, false);
+        hide(shadowBox, true);
+        socket.emit('ready', roomInput);
     }
     
     function disableBoard(bool) {
@@ -847,66 +900,66 @@ function player() {
     
     newBoard.onclick = pickBoard;
     
-    beingChecked = false;
-
     waitingModal__changeBoard.addEventListener('click', function(event) {
         event.preventDefault();
         boardSelect.classList.remove("invisible");
+        socket.emit('deciding', roomInput);
     });
 
     waitingModal__nevermind.addEventListener('click', function(event) {
         socket.emit('nevermind', roomInput);
-        disableBoard(false);
-        waitingModal__nevermind.classList.add("invisible");
+        playing();
     });
 
     announceWin.addEventListener('click', function(event) {
         event.preventDefault();
-        disableBoard(true);
         socket.emit("announce win", roomInput);
-        beingChecked = true;
-        waitingModal__nevermind.classList.remove("invisible");
+        waitingToWin();
     });
     
-    function startEnd(bool) {
-        if (bool) {
-            disableBoard(false);
-            hide(waitingModal__nevermind, true);
-            hide(waitingModal__changeBoard, true);
-            topStripe.innerHTML = "Start"
-            hide(shadowBox, false);
-            hide(alertModal, false);
+    // function startEnd(bool) {
+    //     if (bool) {
+    //         disableBoard(false);
+    //         hide(waitingModal__nevermind, true);
+    //         hide(waitingModal__changeBoard, true);
+    //         topStripe.innerHTML = "Start"
+    //         hide(shadowBox, false);
+    //         hide(alertModal, false);
 
-            window.setTimeout(function() {
-                alertModal.classList.add("invisible");
-                shadowBox.classList.add("invisible");
-                topStripe.innerHTML = "";
-                midStripe.innerHTML = "";
-            }, 2500);
+    //         window.setTimeout(function() {
+    //             alertModal.classList.add("invisible");
+    //             shadowBox.classList.add("invisible");
+    //             topStripe.innerHTML = "";
+    //             midStripe.innerHTML = "";
+    //         }, 2500);
             
+    //     }
+    //     else {
+    //         clearBeans();
+    //         renderCard(true);
+    //         round += 1;
+    //         disableBoard(true);
+    //         hide(shadowBox, false);
+    //         hide(boardSelect, false);
+    //         hide(waitingModal__changeBoard, false);
+    //         beingChecked = false;
+    //     }
+        
+    // }
+    
+    socket.on('game state', function(bool) {
+        if (bool) {
+            starting();
         }
         else {
-            clearBeans();
-            // currentCard.src="images/blank.svg";
-            renderCard(true);
-            round += 1;
-            disableBoard(true);
-            hide(shadowBox, false);
-            hide(boardSelect, false);
-            hide(waitingModal__changeBoard, false);
-            beingChecked = false;
+            waitingToStart();
         }
-        
-    }
-    
-    socket.on('game state', function(bool){
-        startEnd(bool);
-        gamestate = bool;
+        // startEnd(bool);
+        // gamestate = bool;
     });
     
     socket.on('current card', function(sentCard){
         renderCard(false, currentCard, sentCard);
-        // currentCard.src = "images/donClemente/" + deck[sentCard-1] + '.jpg';
     });
     
     socket.on('win condition', function(condition){
@@ -917,17 +970,18 @@ function player() {
     socket.on('win checked', function(bool){
         if (bool) {
             topStripe.innerHTML = "You won!";
-            shadowBox.classList.remove("invisible");
-            alertModal.classList.remove("invisible");
+            hide(shadowBox, false);
+            hide(alertModal, false);
+
             window.setTimeout(function() {
-                alertModal.classList.add("invisible");
-                shadowBox.classList.add("invisible");
+                hide(alertModal, true);
+                hide(shadowBox, true);
                 topStripe.innerHTML = "";
             }, 2500);
     
         }
         beingChecked = false;
-        disableBoard(false);
+        playing();
     });
     
     _("roomNumber").innerHTML = roomInput;
@@ -937,7 +991,7 @@ function player() {
     
     socket.on("connect", function() {
         storeID();
-        // if has declared win, emit an extra thing, when player rejions see if it has that flag
+
         socket.emit("rejoin room", (roomInput));
         socket.emit('new player', roomInput, nickname, oldID);
         getBeans();
@@ -1061,16 +1115,14 @@ function player() {
     function catchUp(gameInfo, deckList) {
         deck = deckList;
         generateBoardOptions();
+
         disableBoard(!gameInfo.gameState);
-        started = gameInfo.gameState;
-        hide(waitingModal__changeBoard, true);
+        hide(waitingModal__changeBoard, gameInfo.gameState);
         if (typeof gameInfo.card == "boolean") {
             renderCard(true);
-            // currentCard.src = "images/blank.svg";
         }
         else {
             renderCard(false, currentCard, gameInfo.card);
-            // currentCard.src = "images/donClemente/" + deck[gameInfo.card-1] + '.jpg';
         }
         winConditionInfo.setAttribute("class", "winInfo winInfo--player");
         setWinCondition(gameInfo.goal);
@@ -1117,8 +1169,8 @@ function player() {
 }
 
 function goBack(currentPage, prevPage) {
-    _(currentPage).classList.add("invisible");
-    _(prevPage).classList.remove("invisible");
+    hide(_(currentPage), true);
+    hide(_(prevPage), false);
 }
 
 function load_page(page) {
@@ -1134,8 +1186,11 @@ function load_page(page) {
 
 function roomSearch(room, evt) {
     // evt.preventDefault();
+    _("errorMsg1").classList.add("invisible");
+    loaderGif(_("join"), true);
     socket.emit("room check", room);
     socket.on('room join', function(bool, bool2){
+        loaderGif(_("join"), false);
         if (bool) {
             _("firstForm").classList.add("invisible");
             _("nameForm").classList.remove("invisible");
@@ -1149,6 +1204,7 @@ function roomSearch(room, evt) {
 
 function nameCheck(name, evt) {
     evt.preventDefault();
+    _("errorMsg1").classList.add("invisible");
     if (_("nickname").value.length > 0) {
         socket.emit('check nickname', nickname, _("roomSearch").value);
         loaderGif(_("player"), true);
@@ -1168,7 +1224,6 @@ socket.on("name clear", function(bool) {
     }
     else {
         loaderGif(_("player"), false);
-        _("player").innerHTML = "Confirm";
         _("errorMsg2").classList.remove("invisible");
         _("errorMsg2").innerHTML = "Choose a different nickname";
     }
