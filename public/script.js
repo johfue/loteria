@@ -297,12 +297,27 @@ function host(event) {
     window.onpopstate = function(event) {
         window.location = "/";
     };
+
+    window.addEventListener('beforeunload', function() {
+
+        if (started) {
+            gtmEndGameUpdate();
+        }
+
+        window.dataLayer.push({
+	        'event' : 'custom.exit',
+            'custom.maxPlayers' : maxPlayers,
+            'custom.rounds' : round,
+	    });
+    });
+
+    
     const drawBtn = _("drawBtn");
     const currentCard = _("currentCard");
     const winConditionBtn = _("winConditionBtn");
     const winCondition = document.querySelectorAll('input[name="winCondition"]');
     const hostGoal = _("hostGoal");
-    let currentWincondition = [];
+    let currentWinCondition = [];
     const gameSettings = _("gameSettings");
     const winConditionInfo = _("winConditionInfo");
     // const roomNumber = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
@@ -323,7 +338,9 @@ function host(event) {
     let drawnCards = [];
     let allegedWinnerID = null;
     let started = false;
-    
+    let maxPlayers = 0;
+    let startTime = 0;
+
     const continueGame = document.createElement("button");
 
     const restartGame = document.createElement("button");
@@ -397,8 +414,9 @@ function host(event) {
             winCondition[n].disabled = true;
         }
     }
-    
+
     function startGame() {
+        startTime = new Date().getTime();
         started = true;
         shuffleDeck();
         drawnCards = [];
@@ -548,8 +566,21 @@ function host(event) {
         
     }
 
+    function gtmEndGameUpdate() {
+        let timeNow = new Date().getTime();
+
+        window.dataLayer.push({
+        'event' : 'custom.end',
+        'custom.deck' : currentDeck,
+        'custom.elapsedTime' : timeNow - startTime,
+        });
+    }
+    
     function endGame() {
         started = false;
+
+        gtmEndGameUpdate();
+
         renderCard(true);
 
         for (r=0; r < gameInfo.playerList.length; r++) {
@@ -681,6 +712,10 @@ function host(event) {
             _("invite").remove(_("invite"));
         }
         gameInfo.playerList.push(player);
+        let numberOfPLayers = gameInfo.playerList.length;
+        if (maxPlayers < numberOfPLayers) {
+            maxPlayers = numberOfPLayers
+        }
     });
     
     socket.on ("board claim", function(claimedBoard, nickname, id) {
